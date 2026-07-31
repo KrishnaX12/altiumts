@@ -98,6 +98,8 @@ writing Altium files.
 - [ ] Add synthetic fixture generators for cases that cannot be redistributed.
 - [ ] Add minimal one-feature fixtures for each entity or encoding.
 - [x] Add a multi-megabyte real-world stress-test fixture.
+- [x] Add a 60 MB, 400,000-plus-record multilayer production-board fixture and
+      exercise it in strict validation and SVG snapshot tests.
 - [ ] Add an anonymization tool for private customer fixtures.
 - [x] Add a corpus inventory script that reports formats, versions, and record
       and stream counts.
@@ -795,6 +797,7 @@ writing Altium files.
 - [x] Add `bun-match-svg` visual regression infrastructure.
 - [x] Add SVG snapshots for every imported PCB and schematic reference.
 - [x] Add full-PCB and per-layer visual snapshots.
+- [x] Add a complete top-layer snapshot for the TI TMDS62LEVM production board.
 - [x] Add board-coordinate `viewBox` crops for focused PCB snapshots.
 - [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
 - [x] Add focused snapshots for rotated binary fills.
@@ -860,6 +863,7 @@ writing Altium files.
 
 - [x] Establish baseline parse/serialize benchmarks.
 - [ ] Benchmark small, medium, and very large boards.
+- [x] Include a very large production board in the repeatable benchmark corpus.
 - [ ] Benchmark large schematic and PCB libraries.
 - [ ] Avoid copying entire binary buffers unnecessarily.
 - [x] Use bounded views/slices for record payloads.

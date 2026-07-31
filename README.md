@@ -268,8 +268,8 @@ console.log(result.validation, result.changeSet)
 
 ## Reference files
 
-Download the pinned SimpleFOC Mini, SimpleFOC Shield, Hyperpolyglot, and Elk Pi
-Altium PCB/schematic references:
+Download the pinned SimpleFOC Mini, SimpleFOC Shield, Hyperpolyglot, Elk Pi,
+Novena, and TI TMDS62LEVM Altium PCB/schematic references:
 
 ```sh
 bun run download-references
@@ -277,6 +277,11 @@ bun run inventory-references
 bun run inventory-schema
 bun run benchmark
 ```
+
+The TI fixture is extracted from the official nested SPRCAL9 Rev. B archive.
+At 60.5 MB and 424,275 decoded records, it exercises large multilayer-board
+parsing, strict validation, board contours, polygon cutouts, and full top-layer
+SVG rendering in CI.
 
 Then run the complete suite:
 

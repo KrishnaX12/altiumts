@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test"
 import {
+  isAltiumPcbCopperLayerName,
   isKnownAltiumPcbLayerName,
   normalizeAltiumPcbLayerName,
   parseAltiumBinaryPcbDoc,
@@ -25,6 +26,26 @@ test("normalizes verified PCB layer naming variants", () => {
   }
   expect(isKnownAltiumPcbLayerName("MID-LAYER31")).toBeFalse()
   expect(isKnownAltiumPcbLayerName("LAYER123")).toBeFalse()
+  expect(isAltiumPcbCopperLayerName("MID-LAYER14")).toBeTrue()
+  expect(isAltiumPcbCopperLayerName("MECHANICAL16")).toBeFalse()
+})
+
+test("allows zero-width artwork but rejects zero-width copper", () => {
+  const document = parseAltiumPcbDoc(
+    [
+      "|RECORD=Board",
+      "|RECORD=Track|LAYER=MECHANICAL16|X1=0mil|Y1=0mil|X2=10mil|Y2=0mil|WIDTH=0mil",
+      "|RECORD=Track|LAYER=TOP|X1=0mil|Y1=10mil|X2=10mil|Y2=10mil|WIDTH=0mil",
+      "|RECORD=Track|LAYER=FUTURELAYER|X1=0mil|Y1=20mil|X2=10mil|Y2=20mil|WIDTH=0mil",
+    ].join("\n"),
+  )
+  const widthIssues = validateAltiumDocument(document, {
+    profile: "strict",
+  }).issues.filter(({ code }) => code === "PCB_TRACK_WIDTH_INVALID")
+  expect(widthIssues).toHaveLength(2)
+  expect(
+    widthIssues.every(({ context }) => context?.recordKind === "Track"),
+  ).toBeTrue()
 })
 
 test("validates primitive layer references against standard and stack names", () => {

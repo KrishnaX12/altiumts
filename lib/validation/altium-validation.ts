@@ -11,7 +11,9 @@ import type {
   AltiumDiagnosticSeverity,
 } from "../diagnostics/altium-diagnostic"
 import { AltiumIniDocument, AltiumIniSectionLine } from "../ini/altium-ini"
+import type { AltiumPcbLayerStack } from "../pcb-layer-stack"
 import {
+  isAltiumPcbCopperLayerName,
   isAltiumPcbNoLayerSentinel,
   isKnownAltiumPcbLayerName,
 } from "../pcb-layers"
@@ -225,8 +227,9 @@ function validatePcbDocument(
     }
   }
 
+  const layerStack = document.board?.layerStack
   for (const record of document.records) {
-    validatePcbRecord(record, profile, report)
+    validatePcbRecord(record, profile, report, layerStack)
   }
 }
 
@@ -272,6 +275,7 @@ function validatePcbRecord(
   record: AltiumRecord,
   profile: AltiumValidationProfile,
   report: (issue: AltiumValidationIssue) => void,
+  layerStack?: AltiumPcbLayerStack,
 ): void {
   const required = (
     condition: boolean,
@@ -295,10 +299,16 @@ function validatePcbRecord(
       "PCB_TRACK_ENDPOINT_MISSING",
       "Track is missing a valid start or end point",
     )
+    const widthMils = record.widthMils
+    const zeroWidthArtwork =
+      widthMils === 0 &&
+      record.layer !== undefined &&
+      isKnownAltiumPcbLayerName(record.layer, layerStack) &&
+      !isAltiumPcbCopperLayerName(record.layer, layerStack)
     required(
-      (record.widthMils ?? 0) > 0,
+      (widthMils !== undefined && widthMils > 0) || zeroWidthArtwork,
       "PCB_TRACK_WIDTH_INVALID",
-      "Track width must be greater than zero",
+      "Copper or unclassified track width must be greater than zero",
     )
     return
   }
