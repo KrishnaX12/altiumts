@@ -2,6 +2,7 @@ import { expect, test } from "bun:test"
 import {
   AltiumDiagnosticCollector,
   AltiumField,
+  AltiumMeasurement,
   AltiumNetRecord,
   AltiumPcbDoc,
   AltiumSyntaxError,
@@ -81,6 +82,7 @@ test("accepts normalized measurement, point, size, and angle inputs", () => {
   expect(record.getCaseInsensitive("X")).toBe("20mil")
   expect(record.getCaseInsensitive("YSIZE")).toBe("50mil")
   expect(record.getNumber("ROTATION")).toBe(270)
+  expect(AltiumMeasurement.parse(`9${" ".repeat(100_000)}!`)).toBeUndefined()
 })
 
 test("preserves UTF-16 and Windows-1252 source bytes and edit encodings", () => {

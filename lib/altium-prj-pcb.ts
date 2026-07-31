@@ -237,7 +237,7 @@ export function resolveAltiumProjectPath(
 ): string {
   if (isAbsoluteAltiumPath(documentPath)) return normalizePath(documentPath)
   const separator = /\\/u.test(baseDirectory) ? "\\" : "/"
-  const combined = `${baseDirectory.replace(/[\\/]+$/u, "")}${separator}${documentPath}`
+  const combined = `${trimTrailingPathSeparators(baseDirectory)}${separator}${documentPath}`
   return normalizePath(combined, separator)
 }
 
@@ -259,11 +259,21 @@ function normalizePath(path: string, preferredSeparator?: "/" | "\\"): string {
     if (part === ".." && normalized.length > 0) normalized.pop()
     else if (part !== "..") normalized.push(part)
   }
-  const normalizedPrefix = prefix.replace(/[\\/]+$/u, "")
+  const normalizedPrefix = trimTrailingPathSeparators(prefix)
   const suffix = normalized.join(separator)
   if (prefix === "/") return `/${suffix}`
   if (!normalizedPrefix) return suffix
   return suffix ? `${normalizedPrefix}${separator}${suffix}` : normalizedPrefix
+}
+
+function trimTrailingPathSeparators(path: string): string {
+  let end = path.length
+  while (end > 0) {
+    const character = path[end - 1]
+    if (character !== "/" && character !== "\\") break
+    end--
+  }
+  return path.slice(0, end)
 }
 
 function inferAltiumDocumentKind(path: string): string | undefined {

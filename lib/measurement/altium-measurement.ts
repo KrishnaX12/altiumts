@@ -31,7 +31,7 @@ const MILS_PER_UNIT: Readonly<Record<string, number>> = {
 }
 
 const MEASUREMENT_PATTERN =
-  /^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*([a-z]+)?\s*$/iu
+  /^([+-]?(?:\d+\.\d*|\d+|\.\d+)(?:e[+-]?\d+)?)([a-z]+)?$/iu
 
 export class AltiumMeasurement {
   readonly unit?: AltiumMeasurementUnit
@@ -50,7 +50,7 @@ export class AltiumMeasurement {
   }
 
   static parse(raw: string): AltiumMeasurement | undefined {
-    const match = MEASUREMENT_PATTERN.exec(raw)
+    const match = MEASUREMENT_PATTERN.exec(raw.trim())
     if (!match?.[1]) return undefined
     const value = Number(match[1])
     if (!Number.isFinite(value)) return undefined
