@@ -1,4 +1,4 @@
-import type { AltiumPcbDoc } from "../altium-pcb-doc"
+import type { AltiumPcbDocument } from "../altium-pcb-document"
 import type { AltiumRecord } from "../records/altium-record"
 import {
   getPcbMeasurement,
@@ -8,7 +8,7 @@ import {
 import type { SvgBounds, SvgPoint } from "./svg-types"
 import { boundsFromPoints, expandBounds, mergeBounds } from "./svg-utils"
 
-export function getPcbBoardOutline(document: AltiumPcbDoc): SvgPoint[] {
+export function getPcbBoardOutline(document: AltiumPcbDocument): SvgPoint[] {
   for (const boardRecord of document.getRecordsByKind("Board")) {
     const points = getPcbVertexPoints(boardRecord)
     if (points.length >= 3) return points
@@ -16,7 +16,7 @@ export function getPcbBoardOutline(document: AltiumPcbDoc): SvgPoint[] {
   return []
 }
 
-export function getPcbDocumentBounds(document: AltiumPcbDoc): SvgBounds {
+export function getPcbDocumentBounds(document: AltiumPcbDocument): SvgBounds {
   const outlineBounds = boundsFromPoints(getPcbBoardOutline(document))
   if (outlineBounds) return outlineBounds
 
@@ -50,12 +50,12 @@ export function getPcbRecordBounds(
     const x = getPcbMeasurement(record, "X")
     const y = getPcbMeasurement(record, "Y")
     const width =
-      parsePcbMeasurement(record.get("XSIZE")) ??
-      parsePcbMeasurement(record.get("TOPXSIZE")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("XSIZE")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("TOPXSIZE")) ??
       20
     const height =
-      parsePcbMeasurement(record.get("YSIZE")) ??
-      parsePcbMeasurement(record.get("TOPYSIZE")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("YSIZE")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("TOPYSIZE")) ??
       width
     return {
       minX: x - width / 2,
@@ -69,8 +69,8 @@ export function getPcbRecordBounds(
     const x = getPcbMeasurement(record, "X")
     const y = getPcbMeasurement(record, "Y")
     const diameter =
-      parsePcbMeasurement(record.get("DIAMETER")) ??
-      parsePcbMeasurement(record.get("TOPLAYERSIZE")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
+      parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
       20
     return {
       minX: x - diameter / 2,

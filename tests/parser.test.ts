@@ -71,4 +71,13 @@ describe("parseAltiumPcbDoc", () => {
       "Expected an Altium Board root record, got none",
     )
   })
+
+  test("decodes embedded UTF-8 fields from Windows-1252 text", () => {
+    const document = parseAltiumPcbDoc(
+      "|RECORD=Board\r\n|RECORD=Text|TEXT=Comment|%UTF8%TEXT=10kÎ©",
+    )
+
+    expect(document.records[1]?.get("%UTF8%TEXT")).toBe("10kÎ©")
+    expect(document.records[1]?.getDecoded("TEXT")).toBe("10kΩ")
+  })
 })

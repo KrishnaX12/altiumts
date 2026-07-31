@@ -39,6 +39,20 @@ export class AltiumRecord extends AltiumLine {
     return this.fields.find((field) => field.key === key)?.value
   }
 
+  getCaseInsensitive(key: string): string | undefined {
+    const normalizedKey = key.toUpperCase()
+    return this.fields.find(
+      (field) => field.key.toUpperCase() === normalizedKey,
+    )?.value
+  }
+
+  getDecoded(key: string): string | undefined {
+    const utf8Value = this.getCaseInsensitive(`%UTF8%${key}`)
+    return utf8Value === undefined
+      ? this.getCaseInsensitive(key)
+      : decodeEmbeddedUtf8Mojibake(utf8Value)
+  }
+
   getAll(key: string): string[] {
     return this.fields
       .filter((field) => field.key === key)
@@ -46,20 +60,20 @@ export class AltiumRecord extends AltiumLine {
   }
 
   getBoolean(key: string): boolean | undefined {
-    const value = this.get(key)?.toUpperCase()
+    const value = this.getCaseInsensitive(key)?.toUpperCase()
     if (value === "TRUE" || value === "T") return true
     if (value === "FALSE" || value === "F") return false
     return undefined
   }
 
   getNumber(key: string): number | undefined {
-    const value = this.get(key)
+    const value = this.getCaseInsensitive(key)
     if (value === undefined || !isPlainNumber(value)) return undefined
     return Number(value)
   }
 
   getMeasurement(key: string): AltiumMeasurement | undefined {
-    const value = this.get(key)
+    const value = this.getCaseInsensitive(key)
     if (value === undefined) return undefined
 
     const match =
@@ -103,4 +117,61 @@ export class AltiumRecord extends AltiumLine {
 
 function isPlainNumber(value: string): boolean {
   return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/iu.test(value.trim())
+}
+
+const WINDOWS_1252_SPECIAL_BYTES = new Map<string, number>([
+  ["€", 0x80],
+  ["‚", 0x82],
+  ["ƒ", 0x83],
+  ["„", 0x84],
+  ["…", 0x85],
+  ["†", 0x86],
+  ["‡", 0x87],
+  ["ˆ", 0x88],
+  ["‰", 0x89],
+  ["Š", 0x8a],
+  ["‹", 0x8b],
+  ["Œ", 0x8c],
+  ["Ž", 0x8e],
+  ["‘", 0x91],
+  ["’", 0x92],
+  ["“", 0x93],
+  ["”", 0x94],
+  ["•", 0x95],
+  ["–", 0x96],
+  ["—", 0x97],
+  ["˜", 0x98],
+  ["™", 0x99],
+  ["š", 0x9a],
+  ["›", 0x9b],
+  ["œ", 0x9c],
+  ["ž", 0x9e],
+  ["Ÿ", 0x9f],
+])
+
+/**
+ * ASCII Altium files can store UTF-8 bytes inside `%UTF8%` fields while the
+ * surrounding file requires Windows-1252 decoding. Undo that one layer of
+ * mojibake when the value maps back to a valid UTF-8 byte sequence.
+ */
+function decodeEmbeddedUtf8Mojibake(value: string): string {
+  const bytes: number[] = []
+  for (const character of value) {
+    const specialByte = WINDOWS_1252_SPECIAL_BYTES.get(character)
+    if (specialByte !== undefined) {
+      bytes.push(specialByte)
+      continue
+    }
+    const codePoint = character.codePointAt(0)
+    if (codePoint === undefined || codePoint > 0xff) return value
+    bytes.push(codePoint)
+  }
+
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(
+      Uint8Array.from(bytes),
+    )
+  } catch {
+    return value
+  }
 }

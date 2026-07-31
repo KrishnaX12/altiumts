@@ -14,6 +14,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tscircuit/altiumts"
@@ -24,9 +27,10 @@
     "download-references": "bun run scripts/download-references.ts",
     "format": "biome format --write .",
     "format:check": "biome format .",
+    "inventory-references": "bun run scripts/inventory-references.ts",
     "lint": "biome check .",
     "test": "bun test",
-    "test:update-svg": "bun test --update-snapshots tests/svg",
+    "test:update-svg": "BUN_UPDATE_SNAPSHOTS=1 bun test tests/svg",
     "typecheck": "bunx tsc --noEmit"
   },
   "devDependencies": {

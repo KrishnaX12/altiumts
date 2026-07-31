@@ -14,9 +14,14 @@ export function parseAltiumAscii(
   source: string,
   options: ParseAltiumOptions = {},
 ): AltiumLine[] {
-  return splitLines(source).map(({ content, terminator }, index) =>
+  const hasBom = source.startsWith("\uFEFF")
+  const content = hasBom ? source.slice(1) : source
+  const lines = splitLines(content).map(({ content, terminator }, index) =>
     parseLine(content, terminator, index + 1, options),
   )
+  return hasBom
+    ? [new AltiumRawLine({ raw: "\uFEFF", terminator: "" }), ...lines]
+    : lines
 }
 
 function parseLine(

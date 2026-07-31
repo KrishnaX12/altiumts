@@ -34,7 +34,7 @@ export function recordAppliesToLayers(
   if (!requestedLayers || requestedLayers.length === 0) return true
 
   const normalizedRequested = new Set(requestedLayers.map(normalizeLayerName))
-  const recordLayer = record.get("LAYER")
+  const recordLayer = record.getCaseInsensitive("LAYER")
   if (recordLayer) {
     const normalizedRecordLayer = normalizeLayerName(recordLayer)
     if (normalizedRequested.has(normalizedRecordLayer)) return true
