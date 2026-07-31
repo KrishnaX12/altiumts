@@ -61,7 +61,7 @@ export function serializeAltiumPcbToSvg(
     )
     .filter((record) => {
       if (!options.viewBox) return true
-      const recordBounds = getPcbRecordBounds(record)
+      const recordBounds = getPcbRecordBounds(record, options.layers)
       return !recordBounds || boundsIntersect(recordBounds, bounds)
     })
     .toSorted(

@@ -264,7 +264,7 @@ function parsePadStream(
         recordOffset,
       )
     }
-    records.push(decodePad(name, geometry))
+    records.push(decodePad(name, geometry, subrecords[5]))
   }
 
   if (
@@ -587,7 +587,11 @@ function decodeRegion(
   return record
 }
 
-function decodePad(name: string, payload: Uint8Array): AltiumPadRecord {
+function decodePad(
+  name: string,
+  payload: Uint8Array,
+  stackPayload: Uint8Array | undefined,
+): AltiumPadRecord {
   const view = new DataView(
     payload.buffer,
     payload.byteOffset,
@@ -595,33 +599,113 @@ function decodePad(name: string, payload: Uint8Array): AltiumPadRecord {
   )
   const shapeId = view.getUint8(49)
   const flags = view.getUint8(1)
+  const padMode = view.getUint8(62)
+  const items = [
+    field("RECORD", "Pad"),
+    field("NAME", name),
+    field("LAYER", getAltiumPcbLayerName(view.getUint8(0))),
+    field("LOCKED", booleanText((flags & 0x04) === 0)),
+    field("TENTEDTOP", booleanText((flags & 0x20) !== 0)),
+    field("TENTEDBOTTOM", booleanText((flags & 0x40) !== 0)),
+    field("NET", String(view.getUint16(3, true))),
+    field("COMPONENT", String(view.getUint16(7, true))),
+    measurementField("X", view.getInt32(13, true)),
+    measurementField("Y", view.getInt32(17, true)),
+    measurementField("XSIZE", view.getInt32(21, true)),
+    measurementField("YSIZE", view.getInt32(25, true)),
+    measurementField("MIDXSIZE", view.getInt32(29, true)),
+    measurementField("MIDYSIZE", view.getInt32(33, true)),
+    measurementField("BOTTOMXSIZE", view.getInt32(37, true)),
+    measurementField("BOTTOMYSIZE", view.getInt32(41, true)),
+    measurementField("HOLESIZE", view.getInt32(45, true)),
+    field("SHAPE", getAltiumPadShapeName(shapeId)),
+    field("MIDSHAPE", getAltiumPadShapeName(view.getUint8(50))),
+    field("BOTTOMSHAPE", getAltiumPadShapeName(view.getUint8(51))),
+    field("ROTATION", formatNumber(view.getFloat64(52, true))),
+    field("PLATED", view.getUint8(60) === 0 ? "FALSE" : "TRUE"),
+    field("PADMODE", String(padMode)),
+    field("PADSTACKMODE", getAltiumPadModeName(padMode)),
+    measurementField("PASTEMASKEXPANSION_MANUAL", view.getInt32(86, true)),
+    measurementField("SOLDERMASKEXPANSION_MANUAL", view.getInt32(90, true)),
+    field("PASTEMASKEXPANSIONMODE", getAltiumModeName(view.getUint8(101))),
+    field("SOLDERMASKEXPANSIONMODE", getAltiumModeName(view.getUint8(102))),
+  ]
+
+  if (payload.byteLength >= 114) {
+    items.push(field("HOLEROTATION", formatNumber(view.getFloat64(106, true))))
+  }
+  if (payload.byteLength >= 120) {
+    items.push(
+      field("TOLAYER", getAltiumPcbLayerName(view.getUint8(114))),
+      field("FROMLAYER", getAltiumPcbLayerName(view.getUint8(117))),
+    )
+  }
+  if (stackPayload && stackPayload.byteLength >= 596) {
+    items.push(...decodePadStackFields(stackPayload))
+  }
+
   return new AltiumPadRecord({
-    items: [
-      field("RECORD", "Pad"),
-      field("NAME", name),
-      field("LAYER", getAltiumPcbLayerName(view.getUint8(0))),
-      field("LOCKED", booleanText((flags & 0x04) === 0)),
-      field("TENTEDTOP", booleanText((flags & 0x20) !== 0)),
-      field("TENTEDBOTTOM", booleanText((flags & 0x40) !== 0)),
-      field("NET", String(view.getUint16(3, true))),
-      field("COMPONENT", String(view.getUint16(7, true))),
-      measurementField("X", view.getInt32(13, true)),
-      measurementField("Y", view.getInt32(17, true)),
-      measurementField("XSIZE", view.getInt32(21, true)),
-      measurementField("YSIZE", view.getInt32(25, true)),
-      measurementField("MIDXSIZE", view.getInt32(29, true)),
-      measurementField("MIDYSIZE", view.getInt32(33, true)),
-      measurementField("BOTTOMXSIZE", view.getInt32(37, true)),
-      measurementField("BOTTOMYSIZE", view.getInt32(41, true)),
-      measurementField("HOLESIZE", view.getInt32(45, true)),
-      field("SHAPE", getAltiumPadShapeName(shapeId)),
-      field("MIDSHAPE", getAltiumPadShapeName(view.getUint8(50))),
-      field("BOTTOMSHAPE", getAltiumPadShapeName(view.getUint8(51))),
-      field("ROTATION", formatNumber(view.getFloat64(52, true))),
-      field("PLATED", view.getUint8(60) === 0 ? "FALSE" : "TRUE"),
-      field("PADMODE", String(view.getUint8(62))),
-    ],
+    items,
   })
+}
+
+function decodePadStackFields(payload: Uint8Array): AltiumField[] {
+  const view = new DataView(
+    payload.buffer,
+    payload.byteOffset,
+    payload.byteLength,
+  )
+  const fields = [
+    field("STACKDATALENGTH", String(payload.byteLength)),
+    field("HOLETYPE", String(view.getUint8(262))),
+    field("HOLESHAPE", getAltiumPadHoleShapeName(view.getUint8(262))),
+    measurementField("SLOTLENGTH", view.getInt32(263, true)),
+    field("SLOTROTATION", formatNumber(view.getFloat64(267, true))),
+  ]
+  if (payload.byteLength > 596) {
+    fields.push(field("UNPARSEDSTACKBYTES", String(payload.byteLength - 596)))
+  }
+
+  for (let ordinal = 0; ordinal < 32; ordinal++) {
+    fields.push(
+      measurementField(
+        `LAYER${ordinal}HOLEXOFFSET`,
+        view.getInt32(275 + ordinal * 4, true),
+      ),
+      measurementField(
+        `LAYER${ordinal}HOLEYOFFSET`,
+        view.getInt32(403 + ordinal * 4, true),
+      ),
+      field(
+        `LAYER${ordinal}ALTSHAPE`,
+        getAltiumPadAlternateShapeName(view.getUint8(532 + ordinal)),
+      ),
+      field(
+        `LAYER${ordinal}CORNERRADIUS`,
+        String(view.getUint8(564 + ordinal)),
+      ),
+    )
+  }
+
+  for (let innerIndex = 0; innerIndex < 29; innerIndex++) {
+    const ordinal = innerIndex + 2
+    fields.push(
+      measurementField(
+        `LAYER${ordinal}XSIZE`,
+        view.getInt32(innerIndex * 4, true),
+      ),
+      measurementField(
+        `LAYER${ordinal}YSIZE`,
+        view.getInt32(116 + innerIndex * 4, true),
+      ),
+      field(
+        `LAYER${ordinal}SHAPE`,
+        getAltiumPadShapeName(view.getUint8(232 + innerIndex)),
+      ),
+    )
+  }
+
+  return fields
 }
 
 function readSubrecord(
@@ -730,6 +814,36 @@ function getAltiumPadShapeName(shapeId: number): string {
   if (shapeId === 2) return "RECTANGLE"
   if (shapeId === 3) return "OCTAGONAL"
   return `SHAPE${shapeId}`
+}
+
+function getAltiumPadAlternateShapeName(shapeId: number): string {
+  if (shapeId === 0) return "DEFAULT"
+  if (shapeId === 1) return "ROUND"
+  if (shapeId === 2) return "RECTANGLE"
+  if (shapeId === 3) return "OCTAGONAL"
+  if (shapeId === 9) return "ROUNDRECT"
+  return `ALTSHAPE${shapeId}`
+}
+
+function getAltiumPadHoleShapeName(shapeId: number): string {
+  if (shapeId === 0) return "ROUND"
+  if (shapeId === 1) return "SQUARE"
+  if (shapeId === 2) return "SLOT"
+  return `HOLESHAPE${shapeId}`
+}
+
+function getAltiumPadModeName(mode: number): string {
+  if (mode === 0) return "SIMPLE"
+  if (mode === 1) return "TOP_MIDDLE_BOTTOM"
+  if (mode === 2) return "FULL_STACK"
+  return `PADMODE${mode}`
+}
+
+function getAltiumModeName(mode: number): string {
+  if (mode === 0) return "None"
+  if (mode === 1) return "Rule"
+  if (mode === 2) return "Manual"
+  return `Mode${mode}`
 }
 
 function field(key: string, value: string): AltiumField {

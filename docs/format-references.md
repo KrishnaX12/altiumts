@@ -7,9 +7,10 @@ available format research. Code must not be copied from incompatible licenses.
 
 - [Microsoft Compound Binary File specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/53989ce4-7b05-4f8d-829b-d08d6148375b)
   for OLE/CFB header, allocation-table, directory, and mini-stream behavior.
-- [KiCad Altium binary parser source](https://gitlab.com/kicad/code/kicad/-/blob/master/pcbnew/plugins/altium/altium_binary_parser.cpp)
-  for cross-checking property framing, string encodings, and bounded reader
-  behavior.
+- [KiCad Altium PCB parser source](https://github.com/KiCad/kicad-source-mirror/blob/master/pcbnew/pcb_io/altium/altium_parser_pcb.cpp)
+  and [PCB importer](https://github.com/KiCad/kicad-source-mirror/blob/master/pcbnew/pcb_io/altium/altium_pcb.cpp)
+  for cross-checking property framing, string encodings, bounded reader
+  behavior, and extended pad-stack field interpretation.
 
 ## Corpus and structural references
 

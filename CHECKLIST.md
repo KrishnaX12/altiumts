@@ -269,13 +269,15 @@ writing Altium files.
 - [x] Add `AltiumPadRecord`.
 - [ ] Model pad names/numbers and ownership.
 - [ ] Model through-hole, SMD, connector, and test-point behavior.
-- [ ] Model top, middle, bottom, and full-stack shapes.
-- [ ] Model rounded rectangle, octagonal, custom, and region-based shapes.
+- [x] Model simple and top/middle/bottom pad-stack shapes.
+- [ ] Verify full-stack pad geometry against a real `PADMODE=2` fixture.
+- [x] Model round, rectangle, rounded-rectangle, and octagonal shapes.
+- [ ] Model custom and region-based shapes.
 - [x] Render asymmetric round pads as rotated obround/stadium shapes.
-- [ ] Model X/Y size by layer.
-- [ ] Model hole size and hole shape.
-- [ ] Model slot length and rotation.
-- [ ] Model plated and non-plated holes.
+- [x] Model X/Y size by layer.
+- [x] Model hole size and round, square, and slot shapes.
+- [x] Model slot length and rotation.
+- [x] Model plated and non-plated holes.
 - [ ] Model paste and solder-mask expansions.
 - [ ] Model thermal relief settings.
 - [ ] Model local stack/mode flags.
@@ -769,6 +771,7 @@ writing Altium files.
 - [x] Add SVG snapshots for every imported PCB and schematic reference.
 - [x] Add full-PCB and per-layer visual snapshots.
 - [x] Add board-coordinate `viewBox` crops for focused PCB snapshots.
+- [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.
