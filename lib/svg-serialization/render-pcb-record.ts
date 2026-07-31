@@ -2,6 +2,7 @@ import type { AltiumRecord } from "../records/altium-record"
 import {
   decodeAltiumWideString,
   getPcbMeasurement,
+  getPcbRegionContours,
   getPcbVertexPoints,
   parsePcbMeasurement,
 } from "./altium-values"
@@ -49,11 +50,19 @@ export function renderPcbRecord(
     return renderVia(record, viewport, options, metadata)
   }
 
-  if (kind === "Region" || kind === "Polygon") {
+  if (kind === "Region") {
+    const contours = getPcbRegionContours(record)
+    if (contours.length === 0) return undefined
+    const path = contours
+      .map((contour) => pointsToClosedPath(contour, viewport))
+      .join(" ")
+    return `<path ${metadata} d="${path}" fill="${color}" fill-opacity="0.32" fill-rule="evenodd" stroke="${color}" stroke-width="1.5"/>`
+  }
+
+  if (kind === "Polygon") {
     const points = getPcbVertexPoints(record)
     if (points.length < 3) return undefined
-    const opacity = kind === "Region" ? 0.32 : 0.16
-    return `<polygon ${metadata} points="${pointsToSvg(points, viewport)}" fill="${color}" fill-opacity="${opacity}" stroke="${color}" stroke-width="1.5"/>`
+    return `<polygon ${metadata} points="${pointsToSvg(points, viewport)}" fill="${color}" fill-opacity="0.16" stroke="${color}" stroke-width="1.5"/>`
   }
 
   if (kind === "Fill") {
@@ -76,7 +85,20 @@ export function renderPcbRecord(
     const height = Math.max(getPcbMeasurement(record, "HEIGHT", 30), 3)
     const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
     const mirror = record.getBoolean("MIRROR") ? -1 : 1
-    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="${formatSvgNumber(height)}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${escapeXml(normalizedText)}</text>`
+    const fontName = record.getDecoded("FONTNAME") || "Arial"
+    const fontWeight = record.getBoolean("BOLD") ? "bold" : "normal"
+    const fontStyle = record.getBoolean("ITALIC") ? "italic" : "normal"
+    const lines = normalizedText.split("\n")
+    const textContent =
+      lines.length === 1
+        ? escapeXml(normalizedText)
+        : lines
+            .map(
+              (line, index) =>
+                `<tspan x="0" dy="${index === 0 ? "0" : formatSvgNumber(height * 1.2)}">${escapeXml(line)}</tspan>`,
+            )
+            .join("")
+    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="${escapeXml(fontName)}, sans-serif" font-size="${formatSvgNumber(height)}" font-weight="${fontWeight}" font-style="${fontStyle}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${textContent}</text>`
   }
 
   if (kind === "Component" && options.showComponentOrigins) {
@@ -86,6 +108,16 @@ export function renderPcbRecord(
   }
 
   return undefined
+}
+
+function pointsToClosedPath(points: SvgPoint[], viewport: SvgViewport): string {
+  return points
+    .map((point, index) => {
+      const command = index === 0 ? "M" : "L"
+      return `${command} ${formatSvgNumber(viewport.toX(point.x))} ${formatSvgNumber(viewport.toY(point.y))}`
+    })
+    .concat("Z")
+    .join(" ")
 }
 
 function renderPad(
@@ -107,10 +139,21 @@ function renderPad(
     width
   const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
   const shape = record.getCaseInsensitive("SHAPE")?.toUpperCase() ?? "ROUND"
-  const body =
-    shape === "ROUND" || shape === "CIRCLE"
-      ? `<ellipse cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" rx="${formatSvgNumber(width / 2)}" ry="${formatSvgNumber(height / 2)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
-      : `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(shape.includes("ROUND") ? Math.min(width, height) * 0.18 : 0)}" fill="${color}" stroke="#111827" stroke-width="1" transform="rotate(${formatSvgNumber(-rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"/>`
+  const transform =
+    rotation === 0
+      ? ""
+      : ` transform="rotate(${formatSvgNumber(-rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
+  let body: string
+  if (shape === "ROUND" || shape === "CIRCLE") {
+    if (Math.abs(width - height) < 0.0001) {
+      body = `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(width / 2)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+    } else {
+      const radius = Math.min(width, height) / 2
+      body = `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" ry="${formatSvgNumber(radius)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+    }
+  } else {
+    body = `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(shape.includes("ROUND") ? Math.min(width, height) * 0.18 : 0)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+  }
   const holeSize = getPcbMeasurement(record, "HOLESIZE")
   const hole =
     options.showHoles !== false && holeSize > 0

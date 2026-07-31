@@ -69,6 +69,8 @@ if (document instanceof AltiumBinaryPcbDoc) {
     document.tracks.length,
     document.arcs.length,
     document.vias.length,
+    document.regions.length,
+    document.texts.length,
   )
 }
 
@@ -79,8 +81,9 @@ if (document instanceof AltiumSchDoc) {
 
 Binary `.PcbDoc` parsing currently inventories every CFB storage family,
 decodes common property streams, and creates semantic records for pads, tracks,
-arcs, and vias. Binary `.SchDoc` parsing decodes its framed `FileHeader`
-property records, `%UTF8%` fields, and owner indexes.
+arcs, vias, polygon-fill regions with contour holes, and wide-string-backed
+text. Binary `.SchDoc` parsing decodes its framed `FileHeader` property
+records, `%UTF8%` fields, and owner indexes.
 
 ## Render SVG previews
 
@@ -102,6 +105,13 @@ await writeFile(
   "board-top.svg",
   serializeAltiumPcbLayerToSvg(board, "TOP"),
 )
+await writeFile(
+  "board-top-detail.svg",
+  serializeAltiumPcbLayerToSvg(board, "TOP", {
+    // Lower-left origin and dimensions in normalized Altium board units.
+    viewBox: { x: 4200, y: 2500, width: 1200, height: 900 },
+  }),
+)
 ```
 
 `serializeAltiumSheetToSvg()` accepts `AltiumSchDoc`, `AltiumPcbDoc`, or the
@@ -109,7 +119,12 @@ lines returned by `parseAltiumAscii()`. The PCB serializers accept either
 ASCII or binary PCB documents. PCB rendering currently prioritizes outlines,
 tracks, arcs, pads, vias, regions, polygons, fills, and text. The renderer is
 intentionally source-model based, so visual snapshot differences expose parser
-or geometry regressions directly.
+or geometry regressions directly. A PCB `viewBox` crops in board coordinates,
+uses no implicit margin, and omits primitives that cannot intersect the crop;
+this keeps focused visual tests small and makes dense features easier to
+inspect. Component designator/comment text follows the parent component's
+`NAMEON` and `COMMENTON` visibility flags; pass `{ showHidden: true }` when
+debugging hidden source text.
 
 ## API
 
@@ -170,11 +185,12 @@ generated `.snap.svg` visual baselines are committed and compared with
 
 Binary support is currently read-only: untouched documents can return their
 original bytes, but edits are not serialized back into CFB streams. The PCB
-parser does not yet semantically decode text, fills, regions, primitive
-polygons, component bodies, or embedded 3D models. Per-layer full-stack pad
-details beyond the top/middle/bottom shape model also remain pending. Those
-streams remain available through `AltiumCompoundFile` and appear in stream
-summaries.
+parser now distinguishes source shape-based regions from generated region-fill
+caches and decodes board cutout regions. It does not yet semantically decode
+fills, component bodies, dimensions, or embedded 3D models. Text barcode/frame
+metadata and per-layer full-stack pad details beyond the top/middle/bottom shape
+model also remain pending. Those streams remain available through
+`AltiumCompoundFile` and appear in stream summaries.
 
 Schematic property records are parsed generically and visualized, but the
 numeric record IDs do not yet have a complete typed semantic model. Library,
