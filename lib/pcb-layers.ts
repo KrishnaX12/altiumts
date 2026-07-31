@@ -58,6 +58,35 @@ export function isKnownAltiumPcbLayerName(
   )
 }
 
+export function isAltiumPcbCopperLayerName(
+  layer: string,
+  stack?: AltiumPcbLayerStack,
+): boolean {
+  const normalized = normalizeAltiumPcbLayerName(layer)
+  if (
+    normalized === "TOP" ||
+    normalized === "TOPLAYER" ||
+    normalized === "BOTTOM" ||
+    normalized === "BOTTOMLAYER" ||
+    normalized === "MULTILAYER" ||
+    matchesNumberedLayer(normalized, "MID", 30) ||
+    matchesNumberedLayer(normalized, "MIDLAYER", 30) ||
+    matchesNumberedLayer(normalized, "PLANE", 16) ||
+    matchesNumberedLayer(normalized, "INTERNALPLANE", 16)
+  ) {
+    return true
+  }
+
+  const entry = stack?.entries.find(
+    ({ name }) =>
+      name !== undefined && normalizeAltiumPcbLayerName(name) === normalized,
+  )
+  const layerId = Number(entry?.layerId)
+  if (!Number.isSafeInteger(layerId) || layerId < 0) return false
+  const family = Math.floor(layerId / 0x1_0000)
+  return family === 0x100 || family === 0x101
+}
+
 export function isAltiumPcbNoLayerSentinel(layer: string): boolean {
   const normalized = normalizeAltiumPcbLayerName(layer)
   return normalized === "LAYER255" || normalized === "NOLAYER"

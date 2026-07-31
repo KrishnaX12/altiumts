@@ -1,13 +1,23 @@
 import { createHash } from "node:crypto"
 import { mkdir, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
+import { unzipSync } from "fflate"
 
-type ReferenceSpec = {
+type DirectReferenceSpec = {
   filename: string
   sha256: string
   source: string
   url: string
 }
+
+type NestedZipReferenceSpec = DirectReferenceSpec & {
+  archiveSha256: string
+  nestedArchivePath: string
+  nestedArchiveSha256: string
+  nestedFilePath: string
+}
+
+type ReferenceSpec = DirectReferenceSpec | NestedZipReferenceSpec
 
 const references: ReferenceSpec[] = [
   {
@@ -73,6 +83,19 @@ const references: ReferenceSpec[] = [
       "KiCad/kicad-source-mirror@c2a91caacf90b4d07261658ef44c0230116e667b (GPL-3.0-or-later mirror; Novena open-hardware fixture)",
     url: "https://raw.githubusercontent.com/KiCad/kicad-source-mirror/c2a91caacf90b4d07261658ef44c0230116e667b/qa/data/pcbnew/plugins/altium/eDP_adapter_dvt1_source/eDP_adapter_dvt1.PcbDoc",
   },
+  {
+    archiveSha256:
+      "40e6c4d0bea5381bf7b4e0ef26ec4ec9adae156be308e4a3838bd344972b7615",
+    filename: "ti-tmds62levm-rev-b.PcbDoc",
+    nestedArchivePath:
+      "TMDS62LEVM Design File Package Altium (Rev. B)/PROC180/PROC181E1_1/3_BoardFile/Altium/PROC181E1-1_PRJPCB.zip",
+    nestedArchiveSha256:
+      "636a654aa21de431d5c80519c5b8910a9e0e629cba5216dc3b1cbb4b0e598532",
+    nestedFilePath: "PROC181E1-1_BRD_11_3.pcbdoc",
+    sha256: "8444ad8456ff028b7aa11389362ba2fbc01291e87ff46e394576cb044c3612fc",
+    source: "Texas Instruments TMDS62LEVM design files SPRCAL9 Rev. B",
+    url: "https://www.ti.com/lit/zip/sprcal9",
+  },
 ]
 
 const referencesDirectory = resolve(import.meta.dir, "..", "references")
@@ -85,17 +108,66 @@ async function downloadReference(reference: ReferenceSpec): Promise<void> {
     )
   }
 
-  const bytes = new Uint8Array(await response.arrayBuffer())
-  const actualHash = createHash("sha256").update(bytes).digest("hex")
-  if (actualHash !== reference.sha256) {
-    throw new Error(
-      `${reference.filename} SHA-256 mismatch: expected ${reference.sha256}, got ${actualHash}`,
-    )
-  }
+  const downloadedBytes = new Uint8Array(await response.arrayBuffer())
+  const bytes =
+    "nestedArchivePath" in reference
+      ? extractNestedReference(downloadedBytes, reference)
+      : downloadedBytes
+  verifySha256(reference.filename, bytes, reference.sha256)
   await writeFile(resolve(referencesDirectory, reference.filename), bytes)
   console.log(
     `Saved ${reference.filename} (${bytes.byteLength} bytes) from ${reference.source}`,
   )
+}
+
+function extractNestedReference(
+  archiveBytes: Uint8Array,
+  reference: NestedZipReferenceSpec,
+): Uint8Array {
+  verifySha256(
+    `${reference.filename} outer archive`,
+    archiveBytes,
+    reference.archiveSha256,
+  )
+  const nestedArchive = getOnlyExtractedEntry(
+    unzipSync(archiveBytes, {
+      filter: ({ name }) => name === reference.nestedArchivePath,
+    }),
+    reference.nestedArchivePath,
+  )
+  verifySha256(
+    `${reference.filename} nested archive`,
+    nestedArchive,
+    reference.nestedArchiveSha256,
+  )
+  return getOnlyExtractedEntry(
+    unzipSync(nestedArchive, {
+      filter: ({ name }) => name === reference.nestedFilePath,
+    }),
+    reference.nestedFilePath,
+  )
+}
+
+function getOnlyExtractedEntry(
+  entries: Record<string, Uint8Array>,
+  expectedPath: string,
+): Uint8Array {
+  const entry = entries[expectedPath]
+  if (!entry) throw new Error(`ZIP archive does not contain ${expectedPath}`)
+  return entry
+}
+
+function verifySha256(
+  label: string,
+  bytes: Uint8Array,
+  expectedHash: string,
+): void {
+  const actualHash = createHash("sha256").update(bytes).digest("hex")
+  if (actualHash !== expectedHash) {
+    throw new Error(
+      `${label} SHA-256 mismatch: expected ${expectedHash}, got ${actualHash}`,
+    )
+  }
 }
 
 await mkdir(referencesDirectory, { recursive: true })

@@ -25,6 +25,10 @@ minor release and are called out explicitly.
   Pi visual snapshot.
 - Added normalized PCB layer-name helpers and primitive layer-reference
   validation across standard, legacy, and document stack-specific names.
+- Added the official TI TMDS62LEVM Rev. B design as a hash-pinned, nested ZIP
+  stress fixture, with strict validation and a complete top-layer SVG snapshot.
+  Zero-width non-copper artwork is now accepted while copper and unclassified
+  zero-width tracks remain validation errors.
 - Added compatibility metadata, incremental ASCII parsing/serialization, and
   binary source-payload retention.
 - Added validated PCB edit transactions, undoable/conflict-checked change
