@@ -51,6 +51,18 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return this.propertyRecords.get("Components6") ?? []
   }
 
+  get componentBodies(): AltiumRecord[] {
+    return (
+      this.primitiveRecords.get("ShapeBasedComponentBodies6") ??
+      this.primitiveRecords.get("ComponentBodies6") ??
+      []
+    )
+  }
+
+  get legacyComponentBodies(): AltiumRecord[] {
+    return this.primitiveRecords.get("ComponentBodies6") ?? []
+  }
+
   get nets(): AltiumRecord[] {
     return this.propertyRecords.get("Nets6") ?? []
   }

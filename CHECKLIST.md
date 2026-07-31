@@ -346,9 +346,9 @@ writing Altium files.
 
 ### Models, bodies, rooms, and embedded content
 
-- [ ] Add `AltiumComponentBodyRecord`.
+- [x] Add `AltiumComponentBodyRecord`.
 - [ ] Model 3D body type, position, rotation, standoff, and opacity.
-- [ ] Model extruded body outlines.
+- [x] Model extruded body outlines.
 - [ ] Model linked and embedded STEP model references.
 - [ ] Model generic 3D model metadata.
 - [ ] Extract embedded model blobs without loading them eagerly.
@@ -495,7 +495,7 @@ writing Altium files.
 - [x] Implement polygon property stream parsing; binary polygon primitives and
       pours remain pending.
 - [ ] Implement dimension stream parsing.
-- [ ] Implement component-body stream parsing.
+- [x] Implement component-body stream parsing.
 - [ ] Implement model metadata and embedded model stream parsing.
 - [x] Implement wide-string table parsing.
 - [x] Resolve stream-local string/index tables.
@@ -773,6 +773,7 @@ writing Altium files.
 - [x] Add board-coordinate `viewBox` crops for focused PCB snapshots.
 - [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
 - [x] Add focused snapshots for rotated binary fills.
+- [x] Add an isolated mechanical-layer snapshot for component-body contours.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.

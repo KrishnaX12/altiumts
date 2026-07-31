@@ -10,6 +10,7 @@ test("renders the complete binary Elk Pi PCB", async () => {
   })
 
   expect(svg).toContain('data-record="Region"')
+  expect(svg).toContain('data-record="ComponentBody"')
   expect(svg).toContain('data-record="Text"')
   expect(svg).toContain('fill-rule="evenodd"')
   expect(svg).toContain(">DOUT</text>")

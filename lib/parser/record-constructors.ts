@@ -1,5 +1,6 @@
 import { AltiumArcRecord } from "../records/altium-arc-record"
 import { AltiumBoardRecord } from "../records/altium-board-record"
+import { AltiumComponentBodyRecord } from "../records/altium-component-body-record"
 import { AltiumComponentRecord } from "../records/altium-component-record"
 import { AltiumFillRecord } from "../records/altium-fill-record"
 import { AltiumNetRecord } from "../records/altium-net-record"
@@ -19,6 +20,8 @@ export const recordConstructors = new Map<string, AltiumRecordConstructor>([
   ["Arc", AltiumArcRecord],
   ["Board", AltiumBoardRecord],
   ["BoardRegion", AltiumRegionRecord],
+  ["ComponentBody", AltiumComponentBodyRecord],
+  ["ComponentBodyLegacy", AltiumComponentBodyRecord],
   ["Component", AltiumComponentRecord],
   ["Fill", AltiumFillRecord],
   ["Net", AltiumNetRecord],
