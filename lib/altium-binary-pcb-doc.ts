@@ -1,18 +1,36 @@
 import { AltiumEmbeddedModel } from "./altium-embedded-model"
 import { AltiumNode } from "./base/altium-node"
 import type { AltiumCompoundFile } from "./compound-file/altium-compound-file"
+import { AltiumSerializationError } from "./errors/altium-error"
+import type { AltiumBounds } from "./geometry/altium-geometry"
 import {
+  type AltiumPcbConnectivityGraph,
+  getPcbComponentBounds,
+  getPcbConnectivityGraph,
+} from "./pcb-connectivity"
+import {
+  type AltiumPcbDocumentIndex,
   getPcbComponentByIndex,
+  getPcbDocumentIndex,
   getPcbNetByIndex,
+  getPcbPolygonByIndex,
   getPcbRecordComponent,
   getPcbRecordNet,
+  getPcbRecordPolygon,
+  getPcbRecordRule,
+  getPcbRecordsForPolygon,
+  getPcbRecordsForRule,
   getPcbRecordsOnNet,
   getPcbRecordsOwnedByComponent,
+  getPcbRuleByIndex,
 } from "./pcb-reference-resolution"
+import type { AltiumBoardRecord } from "./records/altium-board-record"
 import type { AltiumComponentRecord } from "./records/altium-component-record"
 import type { AltiumModelRecord } from "./records/altium-model-record"
 import type { AltiumNetRecord } from "./records/altium-net-record"
+import type { AltiumPolygonRecord } from "./records/altium-polygon-record"
 import type { AltiumRecord } from "./records/altium-record"
+import type { AltiumRuleRecord } from "./records/altium-rule-record"
 
 export interface AltiumPcbStreamSummary {
   dataSize?: number
@@ -41,7 +59,7 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     streamSummaries: AltiumPcbStreamSummary[]
     wideStrings?: ReadonlyMap<number, string>
   }) {
-    super()
+    super({ sourceLocation: { byteOffset: 0, streamPath: "/" } })
     this.compoundFile = init.compoundFile
     this.primitiveRecords = init.primitiveRecords
     this.propertyRecords = init.propertyRecords
@@ -51,6 +69,8 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
       const stream = this.compoundFile.getStream(["Models", String(index)])
       return stream ? [new AltiumEmbeddedModel({ index, record, stream })] : []
     })
+    this.adoptChildren([this.compoundFile, ...this.records])
+    this.clearDirty(true)
   }
 
   get records(): AltiumRecord[] {
@@ -60,8 +80,10 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     ].flat()
   }
 
-  get board(): AltiumRecord | undefined {
-    return this.propertyRecords.get("Board6")?.[0]
+  get board(): AltiumBoardRecord | undefined {
+    return this.propertyRecords.get("Board6")?.[0] as
+      | AltiumBoardRecord
+      | undefined
   }
 
   get components(): AltiumComponentRecord[] {
@@ -85,12 +107,37 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return (this.propertyRecords.get("Nets6") ?? []) as AltiumNetRecord[]
   }
 
+  get index(): AltiumPcbDocumentIndex {
+    return getPcbDocumentIndex(this)
+  }
+
+  get connectivity(): AltiumPcbConnectivityGraph {
+    return getPcbConnectivityGraph(this)
+  }
+
+  get polygons(): AltiumPolygonRecord[] {
+    return (this.propertyRecords.get("Polygons6") ??
+      []) as AltiumPolygonRecord[]
+  }
+
+  get rules(): AltiumRuleRecord[] {
+    return (this.propertyRecords.get("Rules6") ?? []) as AltiumRuleRecord[]
+  }
+
   getComponentByIndex(index: number): AltiumComponentRecord | undefined {
     return getPcbComponentByIndex(this, index)
   }
 
   getNetByIndex(index: number): AltiumNetRecord | undefined {
     return getPcbNetByIndex(this, index)
+  }
+
+  getPolygonByIndex(index: number): AltiumPolygonRecord | undefined {
+    return getPcbPolygonByIndex(this, index)
+  }
+
+  getRuleByIndex(index: number): AltiumRuleRecord | undefined {
+    return getPcbRuleByIndex(this, index)
   }
 
   getComponentForRecord(
@@ -103,6 +150,14 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return getPcbRecordNet(this, record)
   }
 
+  getPolygonForRecord(record: AltiumRecord): AltiumPolygonRecord | undefined {
+    return getPcbRecordPolygon(this, record)
+  }
+
+  getRuleForRecord(record: AltiumRecord): AltiumRuleRecord | undefined {
+    return getPcbRecordRule(this, record)
+  }
+
   getRecordsOwnedByComponent(
     component: number | AltiumComponentRecord,
   ): AltiumRecord[] {
@@ -111,6 +166,29 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
 
   getRecordsOnNet(net: number | AltiumNetRecord): AltiumRecord[] {
     return getPcbRecordsOnNet(this, net)
+  }
+
+  getRecordsForPolygon(polygon: number | AltiumPolygonRecord): AltiumRecord[] {
+    return getPcbRecordsForPolygon(this, polygon)
+  }
+
+  getRecordsForRule(rule: number | AltiumRuleRecord): AltiumRecord[] {
+    return getPcbRecordsForRule(this, rule)
+  }
+
+  getRecordsByLayer(layer: string): AltiumRecord[] {
+    return [...(this.index.byLayer.get(layer.toUpperCase()) ?? [])]
+  }
+
+  getComponentBounds(
+    component: number | AltiumComponentRecord,
+    layers?: string[],
+  ): AltiumBounds | undefined {
+    return getPcbComponentBounds(this, component, layers)
+  }
+
+  getRecordByUniqueId(uniqueId: string): AltiumRecord | undefined {
+    return this.index.getRecordByUniqueId(uniqueId)
   }
 
   get models(): AltiumModelRecord[] {
@@ -204,6 +282,11 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
   }
 
   getBytes(): Uint8Array {
+    if (this.isDirty) {
+      throw new AltiumSerializationError(
+        "Modified binary PCB documents cannot yet be serialized safely",
+      )
+    }
     return this.compoundFile.getBytes()
   }
 
