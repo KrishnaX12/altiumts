@@ -144,6 +144,10 @@ directly, along with round, square, and slotted holes.
   body's stored 3D rotation, and `getDecompressedBytes()` extracts the
   corresponding zlib-compressed STEP payload with a configurable output-size
   limit.
+- PCB documents resolve component and net indexes through
+  `getComponentForRecord()`, `getNetForRecord()`,
+  `getRecordsOwnedByComponent()`, and `getRecordsOnNet()`. The SVG serializer
+  accepts `componentIndices` and `netIndices` for focused debugging renders.
 - `parseAltiumBinaryPcbDoc(bytes, options?)` parses a binary `.PcbDoc`.
 - `parseAltiumCompoundFile(bytes, options?)` exposes a bounded, read-only
   OLE/CFB tree.

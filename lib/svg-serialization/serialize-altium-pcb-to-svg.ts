@@ -1,4 +1,8 @@
 import type { AltiumPcbDocument } from "../altium-pcb-document"
+import {
+  getPcbRecordComponentIndex,
+  getPcbRecordNetIndex,
+} from "../pcb-reference-resolution"
 import type { AltiumRecord } from "../records/altium-record"
 import {
   getPcbBoardOutline,
@@ -55,6 +59,7 @@ export function serializeAltiumPcbToSvg(
 
   const records = document.records
     .filter((record) => recordAppliesToLayers(record, options.layers))
+    .filter((record) => recordAppliesToReferences(document, record, options))
     .filter(
       (record) =>
         options.showHidden === true ||
@@ -90,6 +95,31 @@ export function serializeAltiumPcbToSvg(
     title: options.title ?? `Altium PCB${layerTitle}`,
     viewport,
   })
+}
+
+function recordAppliesToReferences(
+  document: AltiumPcbDocument,
+  record: AltiumRecord,
+  options: AltiumPcbSvgOptions,
+): boolean {
+  if (options.componentIndices?.length) {
+    const componentIndex = getPcbRecordComponentIndex(document, record)
+    if (
+      componentIndex === undefined ||
+      !options.componentIndices.includes(componentIndex)
+    ) {
+      return false
+    }
+  }
+
+  if (options.netIndices?.length) {
+    const netIndex = getPcbRecordNetIndex(document, record)
+    if (netIndex === undefined || !options.netIndices.includes(netIndex)) {
+      return false
+    }
+  }
+
+  return true
 }
 
 function createComponentLookup(
