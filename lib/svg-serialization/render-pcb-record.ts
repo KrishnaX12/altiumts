@@ -7,6 +7,7 @@ import {
   parsePcbMeasurement,
 } from "./altium-values"
 import { getPcbLayerColor } from "./pcb-layer"
+import { getPcbPadGeometry } from "./pcb-pad-geometry"
 import type { AltiumPcbSvgOptions, SvgPoint, SvgViewport } from "./svg-types"
 import { escapeXml, formatSvgNumber, pointsToSvg } from "./svg-utils"
 
@@ -127,39 +128,116 @@ function renderPad(
   metadata: string,
   color: string,
 ): string {
-  const x = viewport.toX(getPcbMeasurement(record, "X"))
-  const y = viewport.toY(getPcbMeasurement(record, "Y"))
-  const width =
-    parsePcbMeasurement(record.getCaseInsensitive("XSIZE")) ??
-    parsePcbMeasurement(record.getCaseInsensitive("TOPXSIZE")) ??
-    20
-  const height =
-    parsePcbMeasurement(record.getCaseInsensitive("YSIZE")) ??
-    parsePcbMeasurement(record.getCaseInsensitive("TOPYSIZE")) ??
-    width
-  const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
-  const shape = record.getCaseInsensitive("SHAPE")?.toUpperCase() ?? "ROUND"
+  const geometry = getPcbPadGeometry(record, options.layers)
+  const x = viewport.toX(geometry.x)
+  const y = viewport.toY(geometry.y)
   const transform =
-    rotation === 0
+    geometry.rotation === 0
       ? ""
-      : ` transform="rotate(${formatSvgNumber(-rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
+      : ` transform="rotate(${formatSvgNumber(-geometry.rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
   let body: string
-  if (shape === "ROUND" || shape === "CIRCLE") {
-    if (Math.abs(width - height) < 0.0001) {
-      body = `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(width / 2)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+  if (geometry.shape === "ROUND" || geometry.shape === "CIRCLE") {
+    if (Math.abs(geometry.width - geometry.height) < 0.0001) {
+      body = `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(geometry.width / 2)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
     } else {
-      const radius = Math.min(width, height) / 2
-      body = `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" ry="${formatSvgNumber(radius)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+      const radius = Math.min(geometry.width, geometry.height) / 2
+      body = renderRoundedRect(
+        x,
+        y,
+        geometry.width,
+        geometry.height,
+        radius,
+        color,
+      )
     }
+  } else if (
+    geometry.shape === "ROUNDRECT" ||
+    geometry.shape === "ROUNDEDRECTANGLE"
+  ) {
+    body = renderRoundedRect(
+      x,
+      y,
+      geometry.width,
+      geometry.height,
+      geometry.cornerRadius || Math.min(geometry.width, geometry.height) * 0.18,
+      color,
+    )
+  } else if (geometry.shape === "OCTAGONAL" || geometry.shape === "OCTAGON") {
+    body = renderOctagonalPad(x, y, geometry.width, geometry.height, color)
   } else {
-    body = `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(shape.includes("ROUND") ? Math.min(width, height) * 0.18 : 0)}" fill="${color}" stroke="#111827" stroke-width="1"${transform}/>`
+    body = `<rect x="${formatSvgNumber(x - geometry.width / 2)}" y="${formatSvgNumber(y - geometry.height / 2)}" width="${formatSvgNumber(geometry.width)}" height="${formatSvgNumber(geometry.height)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
   }
-  const holeSize = getPcbMeasurement(record, "HOLESIZE")
+
   const hole =
-    options.showHoles !== false && holeSize > 0
-      ? `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
+    options.showHoles !== false && geometry.holeSize > 0
+      ? renderPadHole(geometry, x, y)
       : ""
-  return `<g ${metadata}>${body}${hole}</g>`
+  const padName = record.getDecoded("NAME")
+  const nameMetadata = padName ? ` data-pad-name="${escapeXml(padName)}"` : ""
+  const padMode = record.getCaseInsensitive("PADSTACKMODE")
+  const modeMetadata = padMode
+    ? ` data-pad-stack-mode="${escapeXml(padMode)}"`
+    : ""
+  return `<g ${metadata}${nameMetadata} data-pad-shape="${escapeXml(geometry.shape)}" data-pad-stack-layer="${geometry.layerOrdinal}"${modeMetadata} data-plated="${geometry.plated}"${transform}>${body}${hole}</g>`
+}
+
+function renderRoundedRect(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radius: number,
+  color: string,
+): string {
+  return `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" ry="${formatSvgNumber(radius)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+}
+
+function renderOctagonalPad(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  color: string,
+): string {
+  const halfWidth = width / 2
+  const halfHeight = height / 2
+  const chamfer = Math.min(width, height) / 4
+  const points = [
+    `${formatSvgNumber(x - halfWidth + chamfer)},${formatSvgNumber(y - halfHeight)}`,
+    `${formatSvgNumber(x + halfWidth - chamfer)},${formatSvgNumber(y - halfHeight)}`,
+    `${formatSvgNumber(x + halfWidth)},${formatSvgNumber(y - halfHeight + chamfer)}`,
+    `${formatSvgNumber(x + halfWidth)},${formatSvgNumber(y + halfHeight - chamfer)}`,
+    `${formatSvgNumber(x + halfWidth - chamfer)},${formatSvgNumber(y + halfHeight)}`,
+    `${formatSvgNumber(x - halfWidth + chamfer)},${formatSvgNumber(y + halfHeight)}`,
+    `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y + halfHeight - chamfer)}`,
+    `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y - halfHeight + chamfer)}`,
+  ].join(" ")
+  return `<polygon points="${points}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+}
+
+function renderPadHole(
+  geometry: ReturnType<typeof getPcbPadGeometry>,
+  padX: number,
+  padY: number,
+): string {
+  const x = padX + geometry.holeOffsetX
+  const y = padY - geometry.holeOffsetY
+  const stroke = geometry.plated ? "" : ' stroke="#f8fafc" stroke-width="1.5"'
+
+  if (geometry.holeShape === "SLOT") {
+    const length = Math.max(geometry.slotLength, geometry.holeSize)
+    const transform =
+      geometry.holeRotation === 0
+        ? ""
+        : ` transform="rotate(${formatSvgNumber(-geometry.holeRotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
+    return `<rect data-hole-shape="SLOT" x="${formatSvgNumber(x - length / 2)}" y="${formatSvgNumber(y - geometry.holeSize / 2)}" width="${formatSvgNumber(length)}" height="${formatSvgNumber(geometry.holeSize)}" rx="${formatSvgNumber(geometry.holeSize / 2)}" ry="${formatSvgNumber(geometry.holeSize / 2)}" fill="#111827"${stroke}${transform}/>`
+  }
+
+  if (geometry.holeShape === "SQUARE") {
+    return `<rect data-hole-shape="SQUARE" x="${formatSvgNumber(x - geometry.holeSize / 2)}" y="${formatSvgNumber(y - geometry.holeSize / 2)}" width="${formatSvgNumber(geometry.holeSize)}" height="${formatSvgNumber(geometry.holeSize)}" fill="#111827"${stroke}/>`
+  }
+
+  return `<circle data-hole-shape="ROUND" cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(geometry.holeSize / 2)}" fill="#111827"${stroke}/>`
 }
 
 function renderVia(

@@ -77,6 +77,21 @@ test("detects and parses binary PCB properties and primitive streams", async () 
     unit: "mil",
     value: 39.3701,
   })
+  expect(document.pads[0]?.getCaseInsensitive("PADSTACKMODE")).toBe(
+    "TOP_MIDDLE_BOTTOM",
+  )
+  expect(document.pads[255]?.getCaseInsensitive("HOLESHAPE")).toBe("SLOT")
+  expect(document.pads[255]?.getMeasurement("SLOTLENGTH")).toEqual({
+    unit: "mil",
+    value: 59.0551,
+  })
+  expect(document.pads[255]?.getNumber("SLOTROTATION")).toBe(0)
+  expect(document.pads[255]?.getNumber("UNPARSEDSTACKBYTES")).toBe(55)
+  expect(document.pads[257]?.getBoolean("PLATED")).toBeFalse()
+  expect(document.pads[834]?.getCaseInsensitive("LAYER0ALTSHAPE")).toBe(
+    "ROUNDRECT",
+  )
+  expect(document.pads[834]?.getNumber("LAYER0CORNERRADIUS")).toBe(50)
   expect(document.vias[0]?.getCaseInsensitive("STARTLAYER")).toBe("TOP")
   expect(document.vias[0]?.getCaseInsensitive("ENDLAYER")).toBe("BOTTOM")
   expect(document.vias[0]?.getNumber("NET")).toBe(370)
