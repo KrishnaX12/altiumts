@@ -1,7 +1,17 @@
 import { AltiumEmbeddedModel } from "./altium-embedded-model"
 import { AltiumNode } from "./base/altium-node"
 import type { AltiumCompoundFile } from "./compound-file/altium-compound-file"
+import {
+  getPcbComponentByIndex,
+  getPcbNetByIndex,
+  getPcbRecordComponent,
+  getPcbRecordNet,
+  getPcbRecordsOnNet,
+  getPcbRecordsOwnedByComponent,
+} from "./pcb-reference-resolution"
+import type { AltiumComponentRecord } from "./records/altium-component-record"
 import type { AltiumModelRecord } from "./records/altium-model-record"
+import type { AltiumNetRecord } from "./records/altium-net-record"
 import type { AltiumRecord } from "./records/altium-record"
 
 export interface AltiumPcbStreamSummary {
@@ -54,8 +64,9 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return this.propertyRecords.get("Board6")?.[0]
   }
 
-  get components(): AltiumRecord[] {
-    return this.propertyRecords.get("Components6") ?? []
+  get components(): AltiumComponentRecord[] {
+    return (this.propertyRecords.get("Components6") ??
+      []) as AltiumComponentRecord[]
   }
 
   get componentBodies(): AltiumRecord[] {
@@ -70,8 +81,36 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return this.primitiveRecords.get("ComponentBodies6") ?? []
   }
 
-  get nets(): AltiumRecord[] {
-    return this.propertyRecords.get("Nets6") ?? []
+  get nets(): AltiumNetRecord[] {
+    return (this.propertyRecords.get("Nets6") ?? []) as AltiumNetRecord[]
+  }
+
+  getComponentByIndex(index: number): AltiumComponentRecord | undefined {
+    return getPcbComponentByIndex(this, index)
+  }
+
+  getNetByIndex(index: number): AltiumNetRecord | undefined {
+    return getPcbNetByIndex(this, index)
+  }
+
+  getComponentForRecord(
+    record: AltiumRecord,
+  ): AltiumComponentRecord | undefined {
+    return getPcbRecordComponent(this, record)
+  }
+
+  getNetForRecord(record: AltiumRecord): AltiumNetRecord | undefined {
+    return getPcbRecordNet(this, record)
+  }
+
+  getRecordsOwnedByComponent(
+    component: number | AltiumComponentRecord,
+  ): AltiumRecord[] {
+    return getPcbRecordsOwnedByComponent(this, component)
+  }
+
+  getRecordsOnNet(net: number | AltiumNetRecord): AltiumRecord[] {
+    return getPcbRecordsOnNet(this, net)
   }
 
   get models(): AltiumModelRecord[] {

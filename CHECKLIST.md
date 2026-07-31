@@ -238,15 +238,15 @@ writing Altium files.
 ### Connectivity
 
 - [x] Add `AltiumNetRecord`.
-- [ ] Model net IDs/indexes and names.
+- [x] Model net IDs/indexes and names.
 - [ ] Model net classes.
 - [ ] Model differential-pair definitions.
 - [ ] Model from-to connectivity records.
 - [ ] Model connection/ratsnest records.
-- [ ] Resolve primitive net indexes to `AltiumNetRecord` references.
-- [ ] Resolve component ownership indexes.
+- [x] Resolve primitive net indexes to `AltiumNetRecord` references.
+- [x] Resolve component ownership indexes.
 - [ ] Resolve polygon and rule indexes.
-- [ ] Preserve dangling or invalid indexes.
+- [x] Preserve dangling or invalid indexes.
 - [ ] Add connectivity graph construction.
 - [ ] Add helpers for querying connected primitives.
 
@@ -261,8 +261,8 @@ writing Altium files.
 - [ ] Model component variants and fitted/not-fitted state.
 - [ ] Model component rooms and classes.
 - [ ] Model union/group membership.
-- [ ] Model component body ownership.
-- [ ] Resolve owned pads, text, tracks, arcs, fills, and regions.
+- [x] Model component body ownership.
+- [x] Resolve owned pads, text, tracks, arcs, fills, and regions.
 - [ ] Add ergonomic component-bounds helpers.
 
 ### Pads
@@ -777,6 +777,7 @@ writing Altium files.
 - [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
 - [x] Add focused snapshots for rotated binary fills.
 - [x] Add an isolated mechanical-layer snapshot for component-body contours.
+- [x] Add component-owned and net-isolated PCB snapshots.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.
