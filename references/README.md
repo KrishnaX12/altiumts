@@ -25,11 +25,12 @@ Run `bun run download-references` to download:
   [`KiCad/kicad-source-mirror`](https://github.com/KiCad/kicad-source-mirror)
   QA corpus, pinned to commit
   `c2a91caacf90b4d07261658ef44c0230116e667b`.
-- `ti-tmds62levm-rev-b.PcbDoc` from the official Texas Instruments
+- `ti-tmds62levm-rev-b.PcbDoc` and all 57 sheets under
+  `ti-tmds62levm-rev-b/*.SchDoc` from the official Texas Instruments
   [TMDS62LEVM design file package](https://www.ti.com/tool/TMDS62LEVM),
   SPRCAL9 Rev. B. The script verifies the outer ZIP, nested Altium project ZIP,
-  and extracted PCB independently. TI's archive notice and website terms apply
-  to this downloaded fixture.
+  extracted PCB, and every extracted schematic independently. TI's archive
+  notice and website terms apply to these downloaded fixtures.
 
 Downloaded `.PcbDoc` and `.SchDoc` files are ignored by git. Each imported
 file has a corresponding SVG visual snapshot test. The download script stores

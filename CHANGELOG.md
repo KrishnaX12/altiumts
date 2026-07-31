@@ -29,6 +29,10 @@ minor release and are called out explicitly.
   stress fixture, with strict validation and a complete top-layer SVG snapshot.
   Zero-width non-copper artwork is now accepted while copper and unclassified
   zero-width tracks remain validation errors.
+- Added all 57 TI TMDS62LEVM binary schematic sheets as hash-verified fixtures
+  with strict parse/round-trip checks and named SVG snapshots. Schematic SVGs
+  now render embedded images, font-table sizing, line and text-frame records,
+  No-ERC markers, paper borders, and paper-bound clipping.
 - Added compatibility metadata, incremental ASCII parsing/serialization, and
   binary source-payload retention.
 - Added validated PCB edit transactions, undoable/conflict-checked change

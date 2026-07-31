@@ -77,6 +77,9 @@ export class AltiumSchEllipticalArcRecord extends AltiumSchematicRecord {
 export class AltiumSchArcRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-arc-record"
 }
+export class AltiumSchLineRecord extends AltiumSchematicRecord {
+  override readonly type = "schematic-line-record"
+}
 export class AltiumSchRectangleRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-rectangle-record"
 }
@@ -115,6 +118,15 @@ export class AltiumSchBusRecord extends AltiumSchematicRecord {
 }
 export class AltiumSchWireRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-wire-record"
+}
+export class AltiumSchNoErcRecord extends AltiumSchematicRecord {
+  override readonly type = "schematic-no-erc-record"
+}
+export class AltiumSchTextFrameRecord extends AltiumSchematicRecord {
+  override readonly type = "schematic-text-frame-record"
+  get text(): string | undefined {
+    return getFirstDecoded(this, "TEXT")
+  }
 }
 export class AltiumSchJunctionRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-junction-record"

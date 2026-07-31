@@ -1,6 +1,7 @@
 export * from "./altium-binary-pcb-doc"
 export * from "./altium-document"
 export * from "./altium-embedded-model"
+export * from "./altium-embedded-schematic-image"
 export * from "./altium-out-job"
 export * from "./altium-pcb-doc"
 export * from "./altium-pcb-document"

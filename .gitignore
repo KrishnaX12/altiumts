@@ -9,3 +9,5 @@ coverage
 .env.*
 references/*.PcbDoc
 references/*.SchDoc
+references/**/*.PcbDoc
+references/**/*.SchDoc
