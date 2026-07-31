@@ -565,9 +565,12 @@ writing Altium files.
 - [x] Implement templates.
 - [ ] Implement hyperlinks.
 - [x] Implement implementation-list and model-link records.
-- [ ] Implement alternate graphical modes and multipart components.
+- [x] Select and render the active part of multipart components.
+- [ ] Implement alternate graphical display modes.
 - [ ] Implement hidden pins and pin electrical types.
-- [ ] Implement pin name/designator text positioning.
+- [x] Implement pin name/designator text positioning.
+- [x] Render schematic text and net-label orientation with all nine Altium
+      justification modes.
 - [x] Implement unique-ID and ownership reference resolution.
 - [x] Implement hierarchical document links.
 - [ ] Implement multichannel/repeated-sheet metadata.
