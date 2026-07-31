@@ -1,0 +1,779 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="769" viewBox="0 0 2161.4 1661.4" role="img" aria-label="TI TMDS62LEVM Rev. B schematic sheet 40" class="altium-sheet" data-renderer="altiumts">
+  <title>TI TMDS62LEVM Rev. B schematic sheet 40</title>
+  <rect width="100%" height="100%" fill="#e2e8f0"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <defs><clipPath id="altium-sheet-paper"><rect x="70.7" y="70.7" width="2020" height="1520"/></clipPath></defs>
+    <g data-record="SheetBorder" fill="#fffef8" stroke="#334155" stroke-width="1"><rect x="70.7" y="70.7" width="2020" height="1520"/><rect x="80.7" y="80.7" width="2000" height="1500" fill="none"/><path d="M 414.0333 70.7 V 80.7 M 414.0333 1580.7 V 1590.7"/><path d="M 747.3667 70.7 V 80.7 M 747.3667 1580.7 V 1590.7"/><path d="M 1080.7 70.7 V 80.7 M 1080.7 1580.7 V 1590.7"/><path d="M 1414.0333 70.7 V 80.7 M 1414.0333 1580.7 V 1590.7"/><path d="M 1747.3667 70.7 V 80.7 M 1747.3667 1580.7 V 1590.7"/><path d="M 70.7 455.7 H 80.7 M 2080.7 455.7 H 2090.7"/><path d="M 70.7 830.7 H 80.7 M 2080.7 830.7 H 2090.7"/><path d="M 70.7 1205.7 H 80.7 M 2080.7 1205.7 H 2090.7"/></g>
+    <g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">
+    <polyline data-record="27" points="920.7,1190.7 920.7,1170.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="731.7,1230.7 710.7,1230.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1020.7 1240.7) rotate(0)">AUD_RSTn</text>
+    <polyline data-record="27" points="890.7,1120.7 890.7,1110.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="840.7,1250.7 710.7,1250.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(870.7 740.7) rotate(0)">AUD_RSTn</text>
+    <polyline data-record="27" points="940.7,740.7 850.7,740.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1060.7,910.7 1060.7,890.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1210.7,510.7 1210.7,500.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,560.7 910.7,560.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,580.7 910.7,580.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,790.7 920.7,790.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,820.7 710.7,820.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,810.7 720.7,810.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1640.7 1230.7) rotate(0)">MFP0</text>
+    <polyline data-record="27" points="1680.7,1230.7 1540.7,1230.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1640.7 1240.7) rotate(0)">MFP1</text>
+    <polyline data-record="27" points="1680.7,1240.7 1590.7,1240.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1540.7,1150.7 1540.7,1140.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(510.7 480.7) rotate(0)">LINE1L+</text>
+    <polyline data-record="27" points="610.7,480.7 410.7,480.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(710.7 480.7) rotate(0)">LINE1L+_C</text>
+    <polyline data-record="27" points="940.7,480.7 640.7,480.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(710.7 520.7) rotate(0)">LINE1R+_C</text>
+    <polyline data-record="27" points="940.7,520.7 640.7,520.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(500.7 520.7) rotate(0)">LINE1R+</text>
+    <polyline data-record="27" points="1230.7,300.7 1230.7,280.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1190.7,280.7 1190.7,270.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1420.7,300.7 1420.7,280.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1380.7,280.7 1380.7,270.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1670.7 540.7) rotate(0)">HPLOUT</text>
+    <polyline data-record="27" points="1740.7,540.7 1420.7,540.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1470.7 580.7) rotate(0)">HPROUT</text>
+    <polyline data-record="27" points="1230.7,550.7 1180.7,550.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1230.7,590.7 1180.7,590.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1230.7,740.7 1180.7,740.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1230.7,750.7 1180.7,750.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1190.7 770.7) rotate(0)">MFP0</text>
+    <polyline data-record="27" points="1230.7,770.7 1180.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1190.7 780.7) rotate(0)">MFP1</text>
+    <polyline data-record="27" points="1230.7,780.7 1180.7,780.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1190.7 790.7) rotate(0)">MFP2</text>
+    <polyline data-record="27" points="1230.7,790.7 1180.7,790.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1190.7 800.7) rotate(0)">MFP3</text>
+    <polyline data-record="27" points="1230.7,800.7 1180.7,800.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1310.7 580.7) rotate(0)">HPROUT_C</text>
+    <polyline data-record="27" points="1390.7,580.7 1180.7,580.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="780.7,270.7 740.7,270.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1310.7 540.7) rotate(0)">HPLOUT_C</text>
+    <polyline data-record="27" points="1390.7,540.7 1180.7,540.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1030.7,1260.7 1030.7,1240.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1030.7,1330.7 1030.7,1310.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="820.7,1260.7 820.7,1230.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="890.7,1340.7 890.7,1320.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,790.7 770.7,790.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1590.7,840.7 1560.7,840.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1220.7 840.7) rotate(0)">AUDIO_MSTRCLK</text>
+    <polyline data-record="27" points="1510.7,840.7 1180.7,840.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,810.7 920.7,810.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,820.7 920.7,820.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="800.7,1160.7 800.7,1150.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1290.7,350.7 1260.7,350.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(710.7 650.7) rotate(0)">MIC_IN</text>
+    <polyline data-record="27" points="940.7,650.7 890.7,650.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,710.7 910.7,710.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1670.7 480.7) rotate(0)">MIC_IN</text>
+    <polyline data-record="27" points="1740.7,480.7 1660.7,480.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1670.7 520.7) rotate(0)">HPROUT</text>
+    <polyline data-record="27" points="1630.7,740.7 1630.7,730.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1670.7,760.7 1670.7,730.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1570.7,780.7 1570.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="800.7,1230.7 781.7,1230.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1670.7,940.7 1670.7,920.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,760.7 920.7,760.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,770.7 920.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,780.7 920.7,780.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,760.7 800.7,760.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,770.7 790.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,780.7 780.7,780.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <g data-record="2"><line x1="400.7" y1="460.7" x2="410.7" y2="460.7" stroke="#1f2937" stroke-width="1"/><circle cx="400.7" cy="460.7" r="1.2" fill="#1f2937"/><text x="413.7" y="458.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="395.7" cy="460.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(364.7 460.7) rotate(0)">TP213</text>
+    <g data-record="2"><line x1="710.7" y1="300.7" x2="720.7" y2="300.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="300.7" r="1.2" fill="#1f2937"/><text x="723.7" y="298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="710.7" y1="310.7" x2="720.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="723.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="710.7" y1="300.7" x2="710.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="701.7" y1="307.7" x2="719.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="701.7" y1="302.7" x2="719.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="710.7" y1="310.7" x2="710.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(717.7 327.8538) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(710.7 300.1615) rotate(-180)">C176</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(710.7 331.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="1240.7" y1="590.7" x2="1250.7" y2="590.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="590.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="588.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="590.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 590.7) rotate(0)">TP205</text>
+    <g data-record="2"><line x1="1240.7" y1="740.7" x2="1250.7" y2="740.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="740.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="738.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="740.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 740.7) rotate(0)">TP114</text>
+    <g data-record="2"><line x1="400.7" y1="480.7" x2="410.7" y2="480.7" stroke="#1f2937" stroke-width="1"/><circle cx="400.7" cy="480.7" r="1.2" fill="#1f2937"/><text x="413.7" y="478.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="395.7" cy="480.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(364.7 480.7) rotate(0)">TP215</text>
+    <g data-record="2"><line x1="620.7" y1="520.7" x2="630.7" y2="520.7" stroke="#1f2937" stroke-width="1"/><circle cx="620.7" cy="520.7" r="1.2" fill="#1f2937"/><text x="633.7" y="518.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="630.7" y1="520.7" x2="640.7" y2="520.7" stroke="#1f2937" stroke-width="1"/><circle cx="630.7" cy="520.7" r="1.2" fill="#1f2937"/><text x="643.7" y="518.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="620.7" y1="520.7" x2="622.7" y2="520.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="627.7" y1="529.7" x2="627.7" y2="511.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="622.7" y1="529.7" x2="622.7" y2="511.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="630.7" y1="520.7" x2="627.7" y2="520.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(620.7 538.7) rotate(0)">50V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(600.7 520.7) rotate(0)">C189</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(630.7 520.7) rotate(0)">0.1uF</text>
+    <g data-record="2"><line x1="880.7" y1="810.7" x2="890.7" y2="810.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="810.7" r="1.2" fill="#1f2937"/><text x="893.7" y="808.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="810.7" x2="920.7" y2="810.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="810.7" r="1.2" fill="#1f2937"/><text x="923.7" y="808.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="810.7" x2="883.7" y2="807.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="807.7" x2="889.7" y2="813.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="813.7" x2="895.7" y2="807.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="807.7" x2="901.7" y2="813.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="813.7" x2="907.7" y2="807.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="807.7" x2="910.7" y2="810.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 810.7) rotate(0)">R283</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 810.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="1320.7" y1="310.7" x2="1330.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1320.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1333.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1320.7" y1="320.7" x2="1330.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1320.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1333.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1320.7" y1="310.7" x2="1320.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1311.7" y1="317.7" x2="1329.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1311.7" y1="312.7" x2="1329.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1320.7" y1="320.7" x2="1320.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1327.7 337.8538) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1320.7 310.1615) rotate(-180)">C171</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1320.7 341.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="710.7" y1="730.7" x2="720.7" y2="730.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="730.7" r="1.2" fill="#1f2937"/><text x="723.7" y="728.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="705.7" cy="730.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(674.7 730.7) rotate(0)">TP207</text>
+    <g data-record="2"><line x1="870.7" y1="710.7" x2="880.7" y2="710.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="710.7" r="1.2" fill="#1f2937"/><text x="883.7" y="708.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="900.7" y1="710.7" x2="910.7" y2="710.7" stroke="#1f2937" stroke-width="1"/><circle cx="900.7" cy="710.7" r="1.2" fill="#1f2937"/><text x="913.7" y="708.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="870.7" y1="710.7" x2="873.7" y2="707.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="873.7" y1="707.7" x2="879.7" y2="713.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="879.7" y1="713.7" x2="885.7" y2="707.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="885.7" y1="707.7" x2="891.7" y2="713.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="891.7" y1="713.7" x2="897.7" y2="707.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="897.7" y1="707.7" x2="900.7" y2="710.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(840.7 710.7) rotate(0)">R276</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(900.7 710.7) rotate(0)">2.2K_1%</text>
+    <g data-record="2"><line x1="880.7" y1="770.7" x2="890.7" y2="770.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="770.7" r="1.2" fill="#1f2937"/><text x="893.7" y="768.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="770.7" x2="920.7" y2="770.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="770.7" r="1.2" fill="#1f2937"/><text x="923.7" y="768.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="770.7" x2="883.7" y2="767.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="767.7" x2="889.7" y2="773.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="773.7" x2="895.7" y2="767.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="767.7" x2="901.7" y2="773.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="773.7" x2="907.7" y2="767.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="767.7" x2="910.7" y2="770.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 770.7) rotate(0)">R585</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 770.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="1630.7" y1="750.7" x2="1640.7" y2="750.7" stroke="#1f2937" stroke-width="1"/><circle cx="1630.7" cy="750.7" r="1.2" fill="#1f2937"/><text x="1643.7" y="748.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1630.7" y1="760.7" x2="1640.7" y2="760.7" stroke="#1f2937" stroke-width="1"/><circle cx="1630.7" cy="760.7" r="1.2" fill="#1f2937"/><text x="1643.7" y="758.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1630.7" y1="750.7" x2="1630.7" y2="752.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1639.7" y1="757.7" x2="1621.7" y2="757.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1639.7" y1="752.7" x2="1621.7" y2="752.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1630.7" y1="760.7" x2="1630.7" y2="757.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1640.7 777.7) rotate(0)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1640.7 750.7) rotate(0)">C169</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1640.7 770.7) rotate(0)">0.1uF</text>
+    <g data-record="2"><line x1="870.7" y1="1230.7" x2="900.7" y2="1230.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="1230.7" r="1.2" fill="#1f2937"/><text x="903.7" y="1228.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 A</text></g>
+    <g data-record="2"><line x1="870.7" y1="1250.7" x2="900.7" y2="1250.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="1250.7" r="1.2" fill="#1f2937"/><text x="903.7" y="1248.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 B</text></g>
+    <g data-record="2"><line x1="920.7" y1="1240.7" x2="950.7" y2="1240.7" stroke="#1f2937" stroke-width="1"/><circle cx="920.7" cy="1240.7" r="1.2" fill="#1f2937"/><text x="953.7" y="1238.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">4 Y</text></g>
+    <g data-record="2"><line x1="890.7" y1="1260.7" x2="920.7" y2="1260.7" stroke="#1f2937" stroke-width="1"/><circle cx="890.7" cy="1260.7" r="1.2" fill="#1f2937"/><text x="923.7" y="1258.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 GND</text></g>
+    <g data-record="2"><line x1="890.7" y1="1220.7" x2="920.7" y2="1220.7" stroke="#1f2937" stroke-width="1"/><circle cx="890.7" cy="1220.7" r="1.2" fill="#1f2937"/><text x="923.7" y="1218.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">5 VCC</text></g>
+    <line data-record="13" x1="880.7" y1="1227.7" x2="880.7" y2="1253.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="880.7" y1="1227.7" x2="898.7" y2="1227.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="880.7" y1="1253.7" x2="899.7" y2="1253.7" stroke="#000bff" stroke-width="1"/>
+    <polyline data-record="11" points="899.6767,1253.5488 897.9957,1253.6966 896.3097,1253.6254 894.6471,1253.3364 893.036,1252.8345 891.5034,1252.1281 890.0753,1251.2292 888.7756,1250.1528 887.6264,1248.9172 886.6468,1247.5431 885.8535,1246.0536 885.2599,1244.474 884.8758,1242.8308 884.7078,1241.1517 884.7588,1239.4649 885.0278,1237.799 885.5104,1236.1819 886.1983,1234.641 887.0801,1233.2022 888.1408,1231.8897 889.3625,1230.7257 890.7248,1229.7298 892.2046,1228.9186 893.777,1228.3061 895.4155,1227.9023 897.0924,1227.7142 898.7797,1227.7449" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <line data-record="13" x1="910.7" y1="1240.7" x2="920.7" y2="1240.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="870.7" y1="1230.7" x2="880.7" y2="1230.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="870.7" y1="1250.7" x2="880.7" y2="1250.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="890.7" y1="1227.7" x2="890.7" y2="1220.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="890.7" y1="1253.7" x2="890.7" y2="1260.7" stroke="#000bff" stroke-width="1"/>
+    <rect data-record="14" x="870.7" y="1220.7" width="50" height="40" rx="0" fill="#ffffb0" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(860.7 1220.7) rotate(0)">U65</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(900.7 1280.7) rotate(0)">SN74LVC1G08DBVRE4</text>
+    <g data-record="2"><line x1="1810.7" y1="360.7" x2="1820.7" y2="360.7" stroke="#1f2937" stroke-width="1"/><circle cx="1810.7" cy="360.7" r="1.2" fill="#1f2937"/><text x="1823.7" y="358.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1840.7" y1="360.7" x2="1850.7" y2="360.7" stroke="#1f2937" stroke-width="1"/><circle cx="1840.7" cy="360.7" r="1.2" fill="#1f2937"/><text x="1853.7" y="358.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1810.7" y1="360.7" x2="1813.7" y2="357.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1813.7" y1="357.7" x2="1819.7" y2="363.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1819.7" y1="363.7" x2="1825.7" y2="357.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1825.7" y1="357.7" x2="1831.7" y2="363.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1831.7" y1="363.7" x2="1837.7" y2="357.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1837.7" y1="357.7" x2="1840.7" y2="360.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1790.7 360.7) rotate(0)">R246</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1840.7 360.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="870.7" y1="300.7" x2="880.7" y2="300.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="300.7" r="1.2" fill="#1f2937"/><text x="883.7" y="298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="870.7" y1="310.7" x2="880.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="883.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="870.7" y1="300.7" x2="870.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="861.7" y1="307.7" x2="879.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="861.7" y1="302.7" x2="879.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="870.7" y1="310.7" x2="870.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(877.7 331.8538) rotate(-180)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(868.7 300.1615) rotate(-180)">C162</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(868.7 328.3923) rotate(-180)">10uF</text>
+    <g data-record="2"><line x1="741.7" y1="1230.7" x2="751.7" y2="1230.7" stroke="#1f2937" stroke-width="1"/><circle cx="741.7" cy="1230.7" r="1.2" fill="#1f2937"/><text x="754.7" y="1228.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="771.7" y1="1230.7" x2="781.7" y2="1230.7" stroke="#1f2937" stroke-width="1"/><circle cx="771.7" cy="1230.7" r="1.2" fill="#1f2937"/><text x="784.7" y="1228.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="741.7" y1="1230.7" x2="744.7" y2="1227.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="744.7" y1="1227.7" x2="750.7" y2="1233.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="750.7" y1="1233.7" x2="756.7" y2="1227.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="756.7" y1="1227.7" x2="762.7" y2="1233.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="762.7" y1="1233.7" x2="768.7" y2="1227.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="768.7" y1="1227.7" x2="771.7" y2="1230.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(711.7 1230.7) rotate(0)">R295</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(778.7 1230.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="1810.7" y1="280.7" x2="1820.7" y2="280.7" stroke="#1f2937" stroke-width="1"/><circle cx="1810.7" cy="280.7" r="1.2" fill="#1f2937"/><text x="1823.7" y="278.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1840.7" y1="280.7" x2="1850.7" y2="280.7" stroke="#1f2937" stroke-width="1"/><circle cx="1840.7" cy="280.7" r="1.2" fill="#1f2937"/><text x="1853.7" y="278.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1810.7" y1="280.7" x2="1813.7" y2="277.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1813.7" y1="277.7" x2="1819.7" y2="283.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1819.7" y1="283.7" x2="1825.7" y2="277.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1825.7" y1="277.7" x2="1831.7" y2="283.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1831.7" y1="283.7" x2="1837.7" y2="277.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1837.7" y1="277.7" x2="1840.7" y2="280.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1790.7 280.7) rotate(0)">R250</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1840.7 280.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="820.7" y1="1300.7" x2="830.7" y2="1300.7" stroke="#1f2937" stroke-width="1"/><circle cx="820.7" cy="1300.7" r="1.2" fill="#1f2937"/><text x="833.7" y="1298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="820.7" y1="1270.7" x2="830.7" y2="1270.7" stroke="#1f2937" stroke-width="1"/><circle cx="820.7" cy="1270.7" r="1.2" fill="#1f2937"/><text x="833.7" y="1268.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="820.7" y1="1300.7" x2="817.7" y2="1297.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="817.7" y1="1297.7" x2="823.7" y2="1291.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="823.7" y1="1291.7" x2="817.7" y2="1285.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="817.7" y1="1285.7" x2="823.7" y2="1279.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="823.7" y1="1279.7" x2="817.7" y2="1273.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="817.7" y1="1273.7" x2="820.7" y2="1270.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(830.7 1280.7) rotate(0)">R293</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(830.7 1290.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1400.7" y1="580.7" x2="1410.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="1400.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="1413.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1410.7" y1="580.7" x2="1420.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="1410.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="1423.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1400.7" y1="580.7" x2="1402.7" y2="580.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1407.7" y1="589.7" x2="1407.7" y2="571.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1402.7" y1="589.7" x2="1402.7" y2="571.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1410.7" y1="580.7" x2="1407.7" y2="580.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1400.7 598.7) rotate(0)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1380.7 580.7) rotate(0)">C172</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1410.7 580.7) rotate(0)">47uF</text>
+    <g data-record="2"><line x1="1150.7" y1="540.7" x2="1180.7" y2="540.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="540.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="538.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">18 HPLOUT</text></g>
+    <g data-record="2"><line x1="1150.7" y1="550.7" x2="1180.7" y2="550.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="550.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="548.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">19 HPLCOM</text></g>
+    <g data-record="2"><line x1="970.7" y1="500.7" x2="1000.7" y2="500.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="500.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="498.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">4 LINE1L-</text></g>
+    <g data-record="2"><line x1="970.7" y1="520.7" x2="1000.7" y2="520.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="520.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="518.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">5 LINE1R+</text></g>
+    <g data-record="2"><line x1="970.7" y1="710.7" x2="1000.7" y2="710.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="710.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="708.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">13 MICBIAS</text></g>
+    <g data-record="2"><line x1="970.7" y1="770.7" x2="1000.7" y2="770.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="770.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="768.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">39 WCLK</text></g>
+    <g data-record="2"><line x1="970.7" y1="790.7" x2="1000.7" y2="790.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="790.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="788.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">41 DOUT</text></g>
+    <g data-record="2"><line x1="1150.7" y1="840.7" x2="1180.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">37 MCLK</text></g>
+    <g data-record="2"><line x1="970.7" y1="810.7" x2="1000.7" y2="810.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="810.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="808.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 SDA</text></g>
+    <g data-record="2"><line x1="1150.7" y1="700.7" x2="1180.7" y2="700.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="700.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="698.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">31 RIGHT_LO+</text></g>
+    <g data-record="2"><line x1="1150.7" y1="660.7" x2="1180.7" y2="660.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="660.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="658.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">29 LEFT_LO+</text></g>
+    <g data-record="2"><line x1="1150.7" y1="680.7" x2="1180.7" y2="680.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="680.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="678.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">30 LEFT_LO-</text></g>
+    <g data-record="2"><line x1="970.7" y1="780.7" x2="1000.7" y2="780.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="780.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="778.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">40 DIN</text></g>
+    <g data-record="2"><line x1="970.7" y1="560.7" x2="1000.7" y2="560.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="560.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="558.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">7 LINE2L+</text></g>
+    <g data-record="2"><line x1="970.7" y1="540.7" x2="1000.7" y2="540.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="540.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="538.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">6 LINE1R-</text></g>
+    <g data-record="2"><line x1="1150.7" y1="590.7" x2="1180.7" y2="590.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="590.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="588.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">22 HPRCOM</text></g>
+    <g data-record="2"><line x1="1150.7" y1="580.7" x2="1180.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">23 HPROUT</text></g>
+    <g data-record="2"><line x1="970.7" y1="580.7" x2="1000.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">8 LINE2L-</text></g>
+    <g data-record="2"><line x1="1150.7" y1="390.7" x2="1180.7" y2="390.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="390.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="388.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">16 DRVDD.1</text></g>
+    <g data-record="2"><line x1="1150.7" y1="400.7" x2="1180.7" y2="400.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="400.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="398.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">17 DRVDD.2</text></g>
+    <g data-record="2"><line x1="1150.7" y1="470.7" x2="1180.7" y2="470.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="470.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="468.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">25 AVDD_DAC</text></g>
+    <g data-record="2"><line x1="1150.7" y1="500.7" x2="1180.7" y2="500.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="500.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="498.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">15 AVSS_ADC</text></g>
+    <g data-record="2"><line x1="1150.7" y1="490.7" x2="1180.7" y2="490.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="490.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="488.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">26 AVSS_DAC</text></g>
+    <g data-record="2"><line x1="970.7" y1="740.7" x2="1000.7" y2="740.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="740.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="738.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">33 R\E\S\E\T\</text></g>
+    <g data-record="2"><line x1="1150.7" y1="410.7" x2="1180.7" y2="410.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="410.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="408.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">24 DRVDD.3</text></g>
+    <g data-record="2"><line x1="970.7" y1="430.7" x2="1000.7" y2="430.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="430.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="428.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">42 DVSS</text></g>
+    <g data-record="2"><line x1="970.7" y1="450.7" x2="1000.7" y2="450.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="450.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="448.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">44 IOVDD</text></g>
+    <g data-record="2"><line x1="1150.7" y1="720.7" x2="1180.7" y2="720.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="720.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="718.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">32 RIGHT_LO-</text></g>
+    <g data-record="2"><line x1="970.7" y1="820.7" x2="1000.7" y2="820.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="820.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="818.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 SCL</text></g>
+    <g data-record="2"><line x1="970.7" y1="480.7" x2="1000.7" y2="480.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="480.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="478.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 LINE1L+</text></g>
+    <g data-record="2"><line x1="970.7" y1="760.7" x2="1000.7" y2="760.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="760.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="758.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">38 BCLK</text></g>
+    <g data-record="2"><line x1="1060.7" y1="860.7" x2="1090.7" y2="860.7" stroke="#1f2937" stroke-width="1"/><circle cx="1060.7" cy="860.7" r="1.2" fill="#1f2937"/><text x="1093.7" y="858.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">49 TPAD</text></g>
+    <g data-record="2"><line x1="970.7" y1="650.7" x2="1000.7" y2="650.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="650.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="648.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">14 MIC3R</text></g>
+    <g data-record="2"><line x1="970.7" y1="670.7" x2="1000.7" y2="670.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="670.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="668.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">11 MIC3L</text></g>
+    <g data-record="2"><line x1="970.7" y1="410.7" x2="1000.7" y2="410.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="410.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="408.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">36 DVDD.1</text></g>
+    <g data-record="2"><line x1="1150.7" y1="430.7" x2="1180.7" y2="430.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="430.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="428.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">20 DRVSS.1</text></g>
+    <g data-record="2"><line x1="1150.7" y1="440.7" x2="1180.7" y2="440.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="440.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="438.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">21 DRVSS.2</text></g>
+    <g data-record="2"><line x1="1150.7" y1="620.7" x2="1180.7" y2="620.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="620.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="618.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">27 MONO_LO+</text></g>
+    <g data-record="2"><line x1="1150.7" y1="630.7" x2="1180.7" y2="630.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="630.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="628.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">28 MONO_LO-</text></g>
+    <g data-record="2"><line x1="1150.7" y1="750.7" x2="1180.7" y2="750.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="750.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="748.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">34 GPIO2</text></g>
+    <g data-record="2"><line x1="1150.7" y1="740.7" x2="1180.7" y2="740.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="740.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="738.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">35 GPIO1</text></g>
+    <g data-record="2"><line x1="970.7" y1="840.7" x2="1000.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">43 SELECT</text></g>
+    <g data-record="2"><line x1="1150.7" y1="770.7" x2="1180.7" y2="770.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="770.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="768.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">45 MFP0</text></g>
+    <g data-record="2"><line x1="1150.7" y1="780.7" x2="1180.7" y2="780.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="780.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="778.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">46 MFP1</text></g>
+    <g data-record="2"><line x1="1150.7" y1="790.7" x2="1180.7" y2="790.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="790.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="788.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">47 MFP2</text></g>
+    <g data-record="2"><line x1="1150.7" y1="800.7" x2="1180.7" y2="800.7" stroke="#1f2937" stroke-width="1"/><circle cx="1150.7" cy="800.7" r="1.2" fill="#1f2937"/><text x="1183.7" y="798.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">48 MFP3</text></g>
+    <g data-record="2"><line x1="970.7" y1="690.7" x2="1000.7" y2="690.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="690.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="688.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">12 MICDET</text></g>
+    <g data-record="2"><line x1="970.7" y1="600.7" x2="1000.7" y2="600.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="600.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="598.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">9 LINE2R+</text></g>
+    <g data-record="2"><line x1="970.7" y1="620.7" x2="1000.7" y2="620.7" stroke="#1f2937" stroke-width="1"/><circle cx="970.7" cy="620.7" r="1.2" fill="#1f2937"/><text x="1003.7" y="618.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">10 LINE2R-</text></g>
+    <rect data-record="14" x="970.7" y="380.7" width="180" height="480" rx="0" fill="#ffffb0" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(980.7 380.7) rotate(0)">U60</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(940.7 880.7) rotate(0)">TLV320AIC3106IRGZT</text>
+    <g data-record="2"><line x1="880.7" y1="760.7" x2="890.7" y2="760.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="760.7" r="1.2" fill="#1f2937"/><text x="893.7" y="758.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="760.7" x2="920.7" y2="760.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="760.7" r="1.2" fill="#1f2937"/><text x="923.7" y="758.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="760.7" x2="883.7" y2="757.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="757.7" x2="889.7" y2="763.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="763.7" x2="895.7" y2="757.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="757.7" x2="901.7" y2="763.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="763.7" x2="907.7" y2="757.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="757.7" x2="910.7" y2="760.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 760.7) rotate(0)">R582</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 760.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="1240.7" y1="790.7" x2="1250.7" y2="790.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="790.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="788.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="790.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 790.7) rotate(0)">TP209</text>
+    <g data-record="2"><line x1="900.7" y1="560.7" x2="910.7" y2="560.7" stroke="#1f2937" stroke-width="1"/><circle cx="900.7" cy="560.7" r="1.2" fill="#1f2937"/><text x="913.7" y="558.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="895.7" cy="560.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(864.7 560.7) rotate(0)">TP212</text>
+    <g data-record="2"><line x1="800.7" y1="1200.7" x2="810.7" y2="1200.7" stroke="#1f2937" stroke-width="1"/><circle cx="800.7" cy="1200.7" r="1.2" fill="#1f2937"/><text x="813.7" y="1198.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="800.7" y1="1170.7" x2="810.7" y2="1170.7" stroke="#1f2937" stroke-width="1"/><circle cx="800.7" cy="1170.7" r="1.2" fill="#1f2937"/><text x="813.7" y="1168.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="800.7" y1="1200.7" x2="797.7" y2="1197.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="797.7" y1="1197.7" x2="803.7" y2="1191.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="803.7" y1="1191.7" x2="797.7" y2="1185.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="797.7" y1="1185.7" x2="803.7" y2="1179.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="803.7" y1="1179.7" x2="797.7" y2="1173.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="797.7" y1="1173.7" x2="800.7" y2="1170.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(810.7 1180.7) rotate(0)">R294</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(810.7 1190.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1540.7" y1="1260.7" x2="1550.7" y2="1260.7" stroke="#1f2937" stroke-width="1"/><circle cx="1540.7" cy="1260.7" r="1.2" fill="#1f2937"/><text x="1553.7" y="1258.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1540.7" y1="1290.7" x2="1550.7" y2="1290.7" stroke="#1f2937" stroke-width="1"/><circle cx="1540.7" cy="1290.7" r="1.2" fill="#1f2937"/><text x="1553.7" y="1288.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1540.7" y1="1260.7" x2="1537.7" y2="1263.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1263.7" x2="1543.7" y2="1269.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1543.7" y1="1269.7" x2="1537.7" y2="1275.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1275.7" x2="1543.7" y2="1281.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1543.7" y1="1281.7" x2="1537.7" y2="1287.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1287.7" x2="1540.7" y2="1290.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1550.7 1270.7) rotate(0)">R590</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1550.7 1280.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="620.7" y1="480.7" x2="630.7" y2="480.7" stroke="#1f2937" stroke-width="1"/><circle cx="620.7" cy="480.7" r="1.2" fill="#1f2937"/><text x="633.7" y="478.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="630.7" y1="480.7" x2="640.7" y2="480.7" stroke="#1f2937" stroke-width="1"/><circle cx="630.7" cy="480.7" r="1.2" fill="#1f2937"/><text x="643.7" y="478.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="620.7" y1="480.7" x2="622.7" y2="480.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="627.7" y1="489.7" x2="627.7" y2="471.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="622.7" y1="489.7" x2="622.7" y2="471.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="630.7" y1="480.7" x2="627.7" y2="480.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(620.7 498.7) rotate(0)">50V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(600.7 480.7) rotate(0)">C188</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(630.7 480.7) rotate(0)">0.1uF</text>
+    <g data-record="2"><line x1="740.7" y1="300.7" x2="750.7" y2="300.7" stroke="#1f2937" stroke-width="1"/><circle cx="740.7" cy="300.7" r="1.2" fill="#1f2937"/><text x="753.7" y="298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="740.7" y1="310.7" x2="750.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="740.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="753.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="740.7" y1="300.7" x2="740.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="731.7" y1="307.7" x2="749.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="731.7" y1="302.7" x2="749.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="740.7" y1="310.7" x2="740.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(747.7 324.8538) rotate(-180)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(738.7 300.1615) rotate(-180)">C175</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(738.7 328.3923) rotate(-180)">10uF</text>
+    <g data-record="2"><line x1="900.7" y1="580.7" x2="910.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="900.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="913.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="895.7" cy="580.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(864.7 580.7) rotate(0)">TP210</text>
+    <g data-record="2"><line x1="1540.7" y1="1180.7" x2="1550.7" y2="1180.7" stroke="#1f2937" stroke-width="1"/><circle cx="1540.7" cy="1180.7" r="1.2" fill="#1f2937"/><text x="1553.7" y="1178.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1540.7" y1="1210.7" x2="1550.7" y2="1210.7" stroke="#1f2937" stroke-width="1"/><circle cx="1540.7" cy="1210.7" r="1.2" fill="#1f2937"/><text x="1553.7" y="1208.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1540.7" y1="1180.7" x2="1537.7" y2="1183.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1183.7" x2="1543.7" y2="1189.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1543.7" y1="1189.7" x2="1537.7" y2="1195.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1195.7" x2="1543.7" y2="1201.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1543.7" y1="1201.7" x2="1537.7" y2="1207.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1537.7" y1="1207.7" x2="1540.7" y2="1210.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1550.7 1190.7) rotate(0)">R268</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1550.7 1200.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1570.7" y1="750.7" x2="1580.7" y2="750.7" stroke="#1f2937" stroke-width="1"/><circle cx="1570.7" cy="750.7" r="1.2" fill="#1f2937"/><text x="1583.7" y="748.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1570.7" y1="760.7" x2="1580.7" y2="760.7" stroke="#1f2937" stroke-width="1"/><circle cx="1570.7" cy="760.7" r="1.2" fill="#1f2937"/><text x="1583.7" y="758.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1560.7" y1="750.7" x2="1580.7" y2="750.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1570.7" y1="754.7" x2="1570.7" y2="760.7" stroke="#000bff" stroke-width="1"/>
+    <polyline data-record="11" points="1580.4555,758.0181 1579.3844,757.262 1578.2551,756.5961 1577.075,756.0249 1575.8522,755.5522 1574.5947,755.1813 1573.3111,754.9145 1572.0099,754.7537 1570.7,754.7" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="11" points="1570.7,754.7 1569.3901,754.7537 1568.0889,754.9145 1566.8053,755.1813 1565.5478,755.5522 1564.325,756.0249 1563.1449,756.5961 1562.0156,757.262 1560.9445,758.0181" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1590.7 777.7) rotate(0)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1589.7 760.7) rotate(0)">C170</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1589.7 769.7) rotate(0)">1uF</text>
+    <g data-record="2"><line x1="920.7" y1="1150.7" x2="930.7" y2="1150.7" stroke="#1f2937" stroke-width="1"/><circle cx="920.7" cy="1150.7" r="1.2" fill="#1f2937"/><text x="933.7" y="1148.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="920.7" y1="1160.7" x2="930.7" y2="1160.7" stroke="#1f2937" stroke-width="1"/><circle cx="920.7" cy="1160.7" r="1.2" fill="#1f2937"/><text x="933.7" y="1158.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="920.7" y1="1150.7" x2="920.7" y2="1152.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="911.7" y1="1157.7" x2="929.7" y2="1157.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="911.7" y1="1152.7" x2="929.7" y2="1152.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="920.7" y1="1160.7" x2="920.7" y2="1157.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(937.7 1184.8539) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(930.7 1150.1615) rotate(-180)">C192</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(930.7 1181.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="880.7" y1="790.7" x2="890.7" y2="790.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="790.7" r="1.2" fill="#1f2937"/><text x="893.7" y="788.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="790.7" x2="920.7" y2="790.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="790.7" r="1.2" fill="#1f2937"/><text x="923.7" y="788.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="790.7" x2="883.7" y2="787.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="787.7" x2="889.7" y2="793.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="793.7" x2="895.7" y2="787.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="787.7" x2="901.7" y2="793.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="793.7" x2="907.7" y2="787.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="787.7" x2="910.7" y2="790.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 790.7) rotate(0)">R263</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 790.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="400.7" y1="500.7" x2="410.7" y2="500.7" stroke="#1f2937" stroke-width="1"/><circle cx="400.7" cy="500.7" r="1.2" fill="#1f2937"/><text x="413.7" y="498.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="395.7" cy="500.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(364.7 500.7) rotate(0)">TP214</text>
+    <g data-record="2"><line x1="710.7" y1="720.7" x2="720.7" y2="720.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="720.7" r="1.2" fill="#1f2937"/><text x="723.7" y="718.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="705.7" cy="720.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(674.7 720.7) rotate(0)">TP206</text>
+    <g data-record="2"><line x1="710.7" y1="740.7" x2="720.7" y2="740.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="740.7" r="1.2" fill="#1f2937"/><text x="723.7" y="738.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="705.7" cy="740.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(674.7 740.7) rotate(0)">TP204</text>
+    <g data-record="2"><line x1="1240.7" y1="800.7" x2="1250.7" y2="800.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="800.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="798.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="800.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 800.7) rotate(0)">TP211</text>
+    <g data-record="2"><line x1="710.7" y1="710.7" x2="720.7" y2="710.7" stroke="#1f2937" stroke-width="1"/><circle cx="710.7" cy="710.7" r="1.2" fill="#1f2937"/><text x="723.7" y="708.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="705.7" cy="710.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(674.7 710.7) rotate(0)">TP203</text>
+    <g data-record="2"><line x1="1230.7" y1="310.7" x2="1240.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1230.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1243.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1230.7" y1="320.7" x2="1240.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1230.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1243.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1230.7" y1="310.7" x2="1230.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1239.7" y1="317.7" x2="1221.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1239.7" y1="312.7" x2="1221.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1230.7" y1="320.7" x2="1230.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1237.7 334.8538) rotate(-180)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1230.7 310.1615) rotate(-180)">C476</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1230.7 338.3923) rotate(-180)">10uF</text>
+    <g data-record="2"><line x1="830.7" y1="570.7" x2="840.7" y2="570.7" stroke="#1f2937" stroke-width="1"/><circle cx="830.7" cy="570.7" r="1.2" fill="#1f2937"/><text x="843.7" y="568.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="830.7" y1="580.7" x2="840.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="830.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="843.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="830.7" y1="570.7" x2="830.7" y2="572.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="821.7" y1="577.7" x2="839.7" y2="577.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="821.7" y1="572.7" x2="839.7" y2="572.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="830.7" y1="580.7" x2="830.7" y2="577.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(847.7 594.8539) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(840.7 570.1615) rotate(-180)">C479</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(840.7 601.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="1420.7" y1="310.7" x2="1430.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1420.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1433.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1420.7" y1="320.7" x2="1430.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1420.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1433.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1420.7" y1="310.7" x2="1420.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1429.7" y1="317.7" x2="1411.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1429.7" y1="312.7" x2="1411.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1420.7" y1="320.7" x2="1420.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1427.7 334.8538) rotate(-180)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1420.7 310.1615) rotate(-180)">C163</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1420.7 338.3923) rotate(-180)">10uF</text>
+    <g data-record="2"><line x1="1590.7" y1="1180.7" x2="1600.7" y2="1180.7" stroke="#1f2937" stroke-width="1"/><circle cx="1590.7" cy="1180.7" r="1.2" fill="#1f2937"/><text x="1603.7" y="1178.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1590.7" y1="1210.7" x2="1600.7" y2="1210.7" stroke="#1f2937" stroke-width="1"/><circle cx="1590.7" cy="1210.7" r="1.2" fill="#1f2937"/><text x="1603.7" y="1208.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1590.7" y1="1180.7" x2="1587.7" y2="1183.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1183.7" x2="1593.7" y2="1189.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1593.7" y1="1189.7" x2="1587.7" y2="1195.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1195.7" x2="1593.7" y2="1201.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1593.7" y1="1201.7" x2="1587.7" y2="1207.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1207.7" x2="1590.7" y2="1210.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1600.7 1190.7) rotate(0)">R272</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1600.7 1200.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1240.7" y1="550.7" x2="1250.7" y2="550.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="550.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="548.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="550.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 550.7) rotate(0)">TP208</text>
+    <g data-record="2"><line x1="1730.7" y1="840.7" x2="1760.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="1730.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1763.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 OE/NC</text></g>
+    <g data-record="2"><line x1="1670.7" y1="890.7" x2="1700.7" y2="890.7" stroke="#1f2937" stroke-width="1"/><circle cx="1670.7" cy="890.7" r="1.2" fill="#1f2937"/><text x="1703.7" y="888.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 GND</text></g>
+    <g data-record="2"><line x1="1620.7" y1="840.7" x2="1650.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="1620.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1653.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 OUT</text></g>
+    <g data-record="2"><line x1="1670.7" y1="830.7" x2="1700.7" y2="830.7" stroke="#1f2937" stroke-width="1"/><circle cx="1670.7" cy="830.7" r="1.2" fill="#1f2937"/><text x="1703.7" y="828.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">4 VDD</text></g>
+    <rect data-record="14" x="1620.7" y="830.7" width="110" height="60" rx="0" fill="#ffffb0" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1680.7 897.7) rotate(0)">LMK6CE012288CDLFT</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1620.7 830.7) rotate(0)">U59</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1610.7 900.7) rotate(0)">12.288MHz</text>
+    <g data-record="2"><line x1="1770.7" y1="480.7" x2="1800.7" y2="480.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="480.7" r="1.2" fill="#1f2937"/><text x="1803.7" y="478.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1770.7" y1="500.7" x2="1800.7" y2="500.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="500.7" r="1.2" fill="#1f2937"/><text x="1803.7" y="498.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">4 4</text></g>
+    <g data-record="2"><line x1="1770.7" y1="520.7" x2="1800.7" y2="520.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="520.7" r="1.2" fill="#1f2937"/><text x="1803.7" y="518.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 3</text></g>
+    <g data-record="2"><line x1="1770.7" y1="540.7" x2="1800.7" y2="540.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="540.7" r="1.2" fill="#1f2937"/><text x="1803.7" y="538.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1774.7" y1="480.7" x2="1840.7" y2="480.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1770.7" y1="480.7" x2="1774.7" y2="480.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1770.7" y1="520.7" x2="1776.7" y2="520.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1770.7" y1="540.7" x2="1801.7" y2="540.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1840.7" y1="480.7" x2="1840.7" y2="491.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1821.7" y1="500.7" x2="1827.7" y2="508.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1827.7" y1="508.7" x2="1834.7" y2="500.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1770.7" y1="500.7" x2="1821.7" y2="500.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1775.7" y1="520.7" x2="1807.7" y2="520.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1807.7" y1="520.7" x2="1813.7" y2="528.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1813.7" y1="528.7" x2="1820.7" y2="520.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1807.7" y1="532.7" x2="1814.7" y2="540.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1801.7" y1="540.7" x2="1807.7" y2="532.7" stroke="#000bff" stroke-width="1"/>
+    <rect data-record="14" x="1770.7" y="470.7" width="80" height="80" rx="0" fill="#ffffb0" stroke="#000bff" stroke-width="1"/>
+    <rect data-record="14" x="1837.7" y="491.7" width="6" height="29" rx="0" fill="#ffffb0" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1770.7 470.7) rotate(0)">J20</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1770.7 560.7) rotate(0)">CON_AUDIOJACK4_SJ-43514-SMT</text>
+    <g data-record="2"><line x1="1290.7" y1="310.7" x2="1300.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1290.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1303.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1290.7" y1="320.7" x2="1300.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1290.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1303.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1290.7" y1="310.7" x2="1290.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1281.7" y1="317.7" x2="1299.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1281.7" y1="312.7" x2="1299.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1290.7" y1="320.7" x2="1290.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1297.7 334.8538) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1290.7 310.1615) rotate(-180)">C475</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1290.7 341.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="1260.7" y1="310.7" x2="1270.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1260.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1273.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1260.7" y1="320.7" x2="1270.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1260.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1273.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1260.7" y1="310.7" x2="1260.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1269.7" y1="317.7" x2="1251.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1269.7" y1="312.7" x2="1251.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1260.7" y1="320.7" x2="1260.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1267.7 334.8538) rotate(-180)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1260.7 310.1615) rotate(-180)">C167</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1260.7 338.3923) rotate(-180)">10uF</text>
+    <g data-record="2"><line x1="1240.7" y1="750.7" x2="1250.7" y2="750.7" stroke="#1f2937" stroke-width="1"/><circle cx="1240.7" cy="750.7" r="1.2" fill="#1f2937"/><text x="1253.7" y="748.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 TP</text></g>
+    <ellipse data-record="8" cx="1245.7" cy="750.7" rx="5" ry="5" fill="none" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1250.7 750.7) rotate(0)">TP113</text>
+    <g data-record="2"><line x1="1590.7" y1="1260.7" x2="1600.7" y2="1260.7" stroke="#1f2937" stroke-width="1"/><circle cx="1590.7" cy="1260.7" r="1.2" fill="#1f2937"/><text x="1603.7" y="1258.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1590.7" y1="1290.7" x2="1600.7" y2="1290.7" stroke="#1f2937" stroke-width="1"/><circle cx="1590.7" cy="1290.7" r="1.2" fill="#1f2937"/><text x="1603.7" y="1288.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1590.7" y1="1260.7" x2="1587.7" y2="1263.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1263.7" x2="1593.7" y2="1269.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1593.7" y1="1269.7" x2="1587.7" y2="1275.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1275.7" x2="1593.7" y2="1281.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1593.7" y1="1281.7" x2="1587.7" y2="1287.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1587.7" y1="1287.7" x2="1590.7" y2="1290.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1600.7 1270.7) rotate(0)">R592</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1600.7 1280.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1450.7" y1="310.7" x2="1460.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="1450.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="1463.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1450.7" y1="320.7" x2="1460.7" y2="320.7" stroke="#1f2937" stroke-width="1"/><circle cx="1450.7" cy="320.7" r="1.2" fill="#1f2937"/><text x="1463.7" y="318.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1450.7" y1="310.7" x2="1450.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1441.7" y1="317.7" x2="1459.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1441.7" y1="312.7" x2="1459.7" y2="312.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1450.7" y1="320.7" x2="1450.7" y2="317.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1457.7 337.8538) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1450.7 310.1615) rotate(-180)">C168</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1450.7 341.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="790.7" y1="570.7" x2="800.7" y2="570.7" stroke="#1f2937" stroke-width="1"/><circle cx="790.7" cy="570.7" r="1.2" fill="#1f2937"/><text x="803.7" y="568.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="790.7" y1="580.7" x2="800.7" y2="580.7" stroke="#1f2937" stroke-width="1"/><circle cx="790.7" cy="580.7" r="1.2" fill="#1f2937"/><text x="803.7" y="578.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="790.7" y1="570.7" x2="790.7" y2="572.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="781.7" y1="577.7" x2="799.7" y2="577.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="781.7" y1="572.7" x2="799.7" y2="572.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="790.7" y1="580.7" x2="790.7" y2="577.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(807.7 594.8539) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(800.7 560.1615) rotate(-180)">C480</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(800.7 601.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="1400.7" y1="540.7" x2="1410.7" y2="540.7" stroke="#1f2937" stroke-width="1"/><circle cx="1400.7" cy="540.7" r="1.2" fill="#1f2937"/><text x="1413.7" y="538.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1410.7" y1="540.7" x2="1420.7" y2="540.7" stroke="#1f2937" stroke-width="1"/><circle cx="1410.7" cy="540.7" r="1.2" fill="#1f2937"/><text x="1423.7" y="538.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1400.7" y1="540.7" x2="1402.7" y2="540.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1407.7" y1="549.7" x2="1407.7" y2="531.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1402.7" y1="549.7" x2="1402.7" y2="531.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1410.7" y1="540.7" x2="1407.7" y2="540.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1400.7 558.7) rotate(0)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1380.7 540.7) rotate(0)">C174</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1410.7 540.7) rotate(0)">47uF</text>
+    <g data-record="2"><line x1="870.7" y1="650.7" x2="880.7" y2="650.7" stroke="#1f2937" stroke-width="1"/><circle cx="870.7" cy="650.7" r="1.2" fill="#1f2937"/><text x="883.7" y="648.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="880.7" y1="650.7" x2="890.7" y2="650.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="650.7" r="1.2" fill="#1f2937"/><text x="893.7" y="648.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="870.7" y1="650.7" x2="872.7" y2="650.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="877.7" y1="659.7" x2="877.7" y2="641.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="872.7" y1="659.7" x2="872.7" y2="641.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="880.7" y1="650.7" x2="877.7" y2="650.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(870.7 668.7) rotate(0)">10V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 650.7) rotate(0)">C182</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(880.7 650.7) rotate(0)">0.47uF</text>
+    <g data-record="2"><line x1="1030.7" y1="1300.7" x2="1040.7" y2="1300.7" stroke="#1f2937" stroke-width="1"/><circle cx="1030.7" cy="1300.7" r="1.2" fill="#1f2937"/><text x="1043.7" y="1298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1030.7" y1="1270.7" x2="1040.7" y2="1270.7" stroke="#1f2937" stroke-width="1"/><circle cx="1030.7" cy="1270.7" r="1.2" fill="#1f2937"/><text x="1043.7" y="1268.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1030.7" y1="1300.7" x2="1027.7" y2="1297.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1027.7" y1="1297.7" x2="1033.7" y2="1291.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1033.7" y1="1291.7" x2="1027.7" y2="1285.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1027.7" y1="1285.7" x2="1033.7" y2="1279.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1033.7" y1="1279.7" x2="1027.7" y2="1273.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1027.7" y1="1273.7" x2="1030.7" y2="1270.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1040.7 1280.7) rotate(0)">R290</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1040.7 1290.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="1520.7" y1="840.7" x2="1530.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="1520.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1533.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1550.7" y1="840.7" x2="1560.7" y2="840.7" stroke="#1f2937" stroke-width="1"/><circle cx="1550.7" cy="840.7" r="1.2" fill="#1f2937"/><text x="1563.7" y="838.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1520.7" y1="840.7" x2="1523.7" y2="837.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1523.7" y1="837.7" x2="1529.7" y2="843.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1529.7" y1="843.7" x2="1535.7" y2="837.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1535.7" y1="837.7" x2="1541.7" y2="843.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1541.7" y1="843.7" x2="1547.7" y2="837.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1547.7" y1="837.7" x2="1550.7" y2="840.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1500.7 840.7) rotate(0)">R260</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1550.7 840.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="880.7" y1="780.7" x2="890.7" y2="780.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="780.7" r="1.2" fill="#1f2937"/><text x="893.7" y="778.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="780.7" x2="920.7" y2="780.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="780.7" r="1.2" fill="#1f2937"/><text x="923.7" y="778.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="780.7" x2="883.7" y2="777.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="777.7" x2="889.7" y2="783.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="783.7" x2="895.7" y2="777.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="777.7" x2="901.7" y2="783.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="783.7" x2="907.7" y2="777.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="777.7" x2="910.7" y2="780.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 780.7) rotate(0)">R586</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 780.7) rotate(0)">0E</text>
+    <g data-record="2"><line x1="1770.7" y1="780.7" x2="1780.7" y2="780.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="780.7" r="1.2" fill="#1f2937"/><text x="1783.7" y="778.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="1770.7" y1="810.7" x2="1780.7" y2="810.7" stroke="#1f2937" stroke-width="1"/><circle cx="1770.7" cy="810.7" r="1.2" fill="#1f2937"/><text x="1783.7" y="808.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="1770.7" y1="780.7" x2="1773.7" y2="783.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1773.7" y1="783.7" x2="1767.7" y2="789.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1767.7" y1="789.7" x2="1773.7" y2="795.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1773.7" y1="795.7" x2="1767.7" y2="801.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1767.7" y1="801.7" x2="1773.7" y2="807.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="1773.7" y1="807.7" x2="1770.7" y2="810.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1780.7 790.7) rotate(0)">R253</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1780.7 800.7) rotate(0)">10K</text>
+    <g data-record="2"><line x1="840.7" y1="300.7" x2="850.7" y2="300.7" stroke="#1f2937" stroke-width="1"/><circle cx="840.7" cy="300.7" r="1.2" fill="#1f2937"/><text x="853.7" y="298.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="840.7" y1="310.7" x2="850.7" y2="310.7" stroke="#1f2937" stroke-width="1"/><circle cx="840.7" cy="310.7" r="1.2" fill="#1f2937"/><text x="853.7" y="308.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="840.7" y1="300.7" x2="840.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="831.7" y1="307.7" x2="849.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="831.7" y1="302.7" x2="849.7" y2="302.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="840.7" y1="310.7" x2="840.7" y2="307.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(847.7 334.8538) rotate(-180)">16V</text>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(840.7 300.1615) rotate(-180)">C166</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(840.7 331.9308) rotate(-180)">0.1uF</text>
+    <g data-record="2"><line x1="880.7" y1="820.7" x2="890.7" y2="820.7" stroke="#1f2937" stroke-width="1"/><circle cx="880.7" cy="820.7" r="1.2" fill="#1f2937"/><text x="893.7" y="818.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
+    <g data-record="2"><line x1="910.7" y1="820.7" x2="920.7" y2="820.7" stroke="#1f2937" stroke-width="1"/><circle cx="910.7" cy="820.7" r="1.2" fill="#1f2937"/><text x="923.7" y="818.7" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
+    <line data-record="13" x1="880.7" y1="820.7" x2="883.7" y2="817.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="883.7" y1="817.7" x2="889.7" y2="823.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="889.7" y1="823.7" x2="895.7" y2="817.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="895.7" y1="817.7" x2="901.7" y2="823.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="901.7" y1="823.7" x2="907.7" y2="817.7" stroke="#000bff" stroke-width="1"/>
+    <line data-record="13" x1="907.7" y1="817.7" x2="910.7" y2="820.7" stroke="#000bff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(850.7 820.7) rotate(0)">R281</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910.7 820.7) rotate(0)">0E</text>
+    <g data-record="17"><path d="M 1720.7 260.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1727.7" y="257.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 1910.7 260.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1917.7" y="257.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_SYS</text></g>
+    <g data-record="17"><path d="M 1190.7 270.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1197.7" y="267.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 900.7 460.7 l -5 -7 h 10 Z" fill="#800000"/><text x="907.7" y="457.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 860.7 890.7 l -5 -7 h 10 Z" fill="#800000"/><text x="867.7" y="887.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1380.7 270.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1387.7" y="267.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 840.7 350.7 l -5 -7 h 10 Z" fill="#800000"/><text x="847.7" y="347.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 780.7 260.7 l -5 -7 h 10 Z" fill="#800000"/><text x="787.7" y="257.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 710.7 350.7 l -5 -7 h 10 Z" fill="#800000"/><text x="717.7" y="347.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 920.7 1190.7 l -5 -7 h 10 Z" fill="#800000"/><text x="927.7" y="1187.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 890.7 1340.7 l -5 -7 h 10 Z" fill="#800000"/><text x="897.7" y="1337.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1720.7 340.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1727.7" y="337.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_1V8_AUD</text></g>
+    <g data-record="17"><path d="M 1910.7 340.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1917.7" y="337.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC1V8_SYS</text></g>
+    <g data-record="17"><path d="M 910.7 260.7 l -5 -7 h 10 Z" fill="#800000"/><text x="917.7" y="257.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_1V8_AUD</text></g>
+    <g data-record="17"><path d="M 1540.7 1140.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1547.7" y="1137.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 1540.7 1330.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1547.7" y="1327.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 890.7 1110.7 l -5 -7 h 10 Z" fill="#800000"/><text x="897.7" y="1107.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 800.7 1150.7 l -5 -7 h 10 Z" fill="#800000"/><text x="807.7" y="1147.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 1030.7 1330.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1037.7" y="1327.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1570.7 790.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1577.7" y="787.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1670.7 720.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1677.7" y="717.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">VCC_3V3_AUD</text></g>
+    <g data-record="17"><path d="M 1060.7 910.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1067.7" y="907.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1450.7 360.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1457.7" y="357.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1320.7 360.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1327.7" y="357.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1210.7 510.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1217.7" y="507.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 470.7 440.7 l -5 -7 h 10 Z" fill="#800000"/><text x="477.7" y="437.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 790.7 620.7 l -5 -7 h 10 Z" fill="#800000"/><text x="797.7" y="617.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1600.7 480.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1607.7" y="477.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="17"><path d="M 1670.7 940.7 l -5 -7 h 10 Z" fill="#800000"/><text x="1677.7" y="937.7" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">DGND</text></g>
+    <g data-record="18"><path d="M 654.7 1250.7 l 12.32 -5 h 43.68 v 10 h -43.68 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="682.7" y="1250.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">RESETSTATz</text></g>
+    <g data-record="18"><path d="M 640.7 1230.7 l 15.4 -5 h 54.6 v 10 h -54.6 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="675.7" y="1230.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">GPIO_AUD_RSTn</text></g>
+    <g data-record="18"><path d="M 646.7 820.7 l 14.08 -5 h 49.92 v 10 h -49.92 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="678.7" y="820.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">SOC_I2C1_SCL</text></g>
+    <g data-record="18"><path d="M 656.7 810.7 l 14.08 -5 h 49.92 v 10 h -49.92 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="688.7" y="810.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">SOC_I2C1_SDA</text></g>
+    <g data-record="18"><path d="M 652.7 790.7 l 17.16 -5 h 60.84 v 10 h -60.84 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="691.7" y="790.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">MCASP0_AXR1_AUD</text></g>
+    <g data-record="18"><path d="M 652.7 780.7 l 17.16 -5 h 60.84 v 10 h -60.84 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="691.7" y="780.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">MCASP0_AXR0_AUD</text></g>
+    <g data-record="18"><path d="M 652.7 770.7 l 17.16 -5 h 60.84 v 10 h -60.84 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="691.7" y="770.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">MCASP0_AFSX_AUD</text></g>
+    <g data-record="18"><path d="M 646.7 760.7 l 18.48 -5 h 65.52 v 10 h -65.52 Z" fill="#fff" stroke="#ff0000" stroke-width="1"/><text x="688.7" y="760.7" text-anchor="middle" dominant-baseline="central" fill="#ff0000" font-family="Times New Roman" font-size="8" font-style="normal" font-weight="normal" text-decoration="none">MCASP0_ACLKX_AUD</text></g>
+    <rect data-record="14" x="1280.7" y="1190.7" width="170" height="100" rx="0" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1280.7" y1="1210.7" x2="1450.7" y2="1210.7" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1280.7" y1="1230.7" x2="1450.7" y2="1230.7" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1280.7" y1="1250.7" x2="1450.7" y2="1250.7" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1280.7" y1="1270.7" x2="1450.7" y2="1270.7" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1320.7" y1="1190.7" x2="1320.7" y2="1290.7" stroke="#1f2937" stroke-width="1"/>
+    <line data-record="13" x1="1360.7" y1="1190.7" x2="1360.7" y2="1290.7" stroke="#1f2937" stroke-width="1"/>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1330.7 1209.7) rotate(0)">MFP1</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1290.7 1209.7) rotate(0)">MFP0</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1370.7 1209.7) rotate(0)">Device Address</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1300.7 1229.7) rotate(0)">0</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1340.7 1229.7) rotate(0)">0</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1300.7 1249.7) rotate(0)">0</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1340.7 1269.7) rotate(0)">0</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1340.7 1249.7) rotate(0)">1</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1300.7 1269.7) rotate(0)">1</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1300.7 1289.7) rotate(0)">1</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1340.7 1289.7) rotate(0)">1</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1390.7 1229.7) rotate(0)">0x18</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1390.7 1249.7) rotate(0)">0x19</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1390.7 1269.7) rotate(0)">0x1A</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1390.7 1289.7) rotate(0)">0x1B</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="21" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1310.7 1091.7) rotate(0)">CODEC I2C ADDRESS SELECTION</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Calibri" font-size="15" font-style="normal" font-weight="bold" text-decoration="none" dominant-baseline="central" transform="translate(910.7 905.7) rotate(0)">I2C ADDRESS: 0x1B</text>
+    <text data-record="4" x="0" y="0" fill="#0000ff" font-family="Calibri" font-size="40" font-style="normal" font-weight="bold" text-decoration="none" dominant-baseline="central" transform="translate(950.7 150.7) rotate(0)">AUDIO CODEC</text>
+    <text data-record="4" x="0" y="0" fill="#0000ff" font-family="Calibri" font-size="25" font-style="normal" font-weight="bold" text-decoration="none" dominant-baseline="central" transform="translate(790.7 1065.7) rotate(0)">AUDIO CODEC RESET</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="16" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(320.7 536.7) rotate(0)">Silk: LINE IN</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Courier New" font-size="16" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1740.7 586.7) rotate(0)">MIC + HEADPHONE</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial" font-size="11" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(1770.7 1551.7) rotate(0)">PROC181E1-1</text>
+    <g data-record="28"><defs><clipPath id="altium-text-frame-QTUMPMUY"><rect x="700.7" y="1270.7" width="115" height="24"/></clipPath></defs><text x="702.2" y="1284.2" fill="#1f2937" text-anchor="start" font-family="Courier New" font-size="12" font-style="normal" font-weight="normal" text-decoration="none" clip-path="url(#altium-text-frame-QTUMPMUY)"><tspan x="702.2" dy="0">R-Note :-</tspan></text></g>
+    <path data-record="22" d="M 1176.7 696.7 L 1184.7 704.7 M 1184.7 696.7 L 1176.7 704.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 1176.7 656.7 L 1184.7 664.7 M 1184.7 656.7 L 1176.7 664.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 1176.7 676.7 L 1184.7 684.7 M 1184.7 676.7 L 1176.7 684.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 1176.7 716.7 L 1184.7 724.7 M 1184.7 716.7 L 1176.7 724.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 936.7 666.7 L 944.7 674.7 M 944.7 666.7 L 936.7 674.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 1176.7 616.7 L 1184.7 624.7 M 1184.7 616.7 L 1176.7 624.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 1176.7 626.7 L 1184.7 634.7 M 1184.7 626.7 L 1176.7 634.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 936.7 596.7 L 944.7 604.7 M 944.7 596.7 L 936.7 604.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <path data-record="22" d="M 936.7 616.7 L 944.7 624.7 M 944.7 616.7 L 936.7 624.7" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <polyline data-record="27" points="920.7,1140.7 920.7,1120.7 890.7,1120.7 890.7,1190.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="820.7,1310.7 820.7,1320.7 890.7,1320.7 890.7,1290.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="840.7,1230.7 820.7,1230.7 800.7,1230.7 800.7,1210.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="950.7,1240.7 1030.7,1240.7 1080.7,1240.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1800.7,360.7 1720.7,360.7 1720.7,340.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1910.7,340.7 1910.7,360.7 1850.7,360.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1180.7,440.7 1210.7,440.7 1210.7,430.7 1180.7,430.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1180.7,490.7 1210.7,490.7 1210.7,440.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1180.7,500.7 1210.7,500.7 1210.7,490.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1800.7,280.7 1720.7,280.7 1720.7,260.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1910.7,260.7 1910.7,280.7 1850.7,280.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1260.7,300.7 1260.7,280.7 1230.7,280.7 1190.7,280.7 1190.7,390.7 1180.7,390.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1190.7,390.7 1190.7,400.7 1180.7,400.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="720.7,740.7 770.7,740.7 770.7,790.7 730.7,790.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="720.7,730.7 780.7,730.7 780.7,780.7 730.7,780.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="720.7,720.7 790.7,720.7 790.7,770.7 730.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="720.7,710.7 800.7,710.7 800.7,760.7 730.7,760.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1540.7,1170.7 1540.7,1150.7 1590.7,1150.7 1590.7,1170.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1540.7,1250.7 1540.7,1230.7 1540.7,1220.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1590.7,1250.7 1590.7,1240.7 1590.7,1220.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1540.7,1330.7 1540.7,1310.7 1540.7,1300.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1540.7,1310.7 1590.7,1310.7 1590.7,1300.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="470.7,440.7 470.7,420.7 430.7,420.7 430.7,460.7 410.7,460.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="610.7,520.7 480.7,520.7 480.7,500.7 410.7,500.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="790.7,620.7 790.7,610.7 790.7,590.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="830.7,590.7 830.7,610.7 790.7,610.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1290.7,300.7 1290.7,280.7 1260.7,280.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1320.7,350.7 1290.7,350.7 1290.7,330.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1260.7,330.7 1260.7,350.7 1230.7,350.7 1230.7,330.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,450.7 780.7,450.7 780.7,270.7 780.7,260.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="900.7,460.7 900.7,430.7 940.7,430.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="860.7,890.7 860.7,840.7 940.7,840.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1180.7,470.7 1380.7,470.7 1380.7,280.7 1420.7,280.7 1450.7,280.7 1450.7,300.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1450.7,360.7 1450.7,350.7 1450.7,330.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,500.7 790.7,500.7 790.7,560.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,540.7 830.7,540.7 830.7,560.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1450.7,350.7 1420.7,350.7 1420.7,330.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1740.7,520.7 1550.7,520.7 1550.7,580.7 1420.7,580.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,290.7 870.7,270.7 840.7,270.7 840.7,290.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="840.7,350.7 840.7,340.7 840.7,320.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="870.7,270.7 910.7,270.7 910.7,260.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="840.7,340.7 870.7,340.7 870.7,320.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,410.7 910.7,410.7 910.7,270.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="740.7,290.7 740.7,270.7 710.7,270.7 710.7,290.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="710.7,350.7 710.7,340.7 710.7,320.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="710.7,340.7 740.7,340.7 740.7,320.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1190.7,400.7 1190.7,410.7 1180.7,410.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1320.7,360.7 1320.7,350.7 1320.7,330.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1320.7,300.7 1320.7,280.7 1290.7,280.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="700.7,650.7 820.7,650.7 860.7,650.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="940.7,690.7 820.7,690.7 820.7,650.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="860.7,710.7 820.7,710.7 820.7,690.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1740.7,500.7 1640.7,500.7 1640.7,470.7 1600.7,470.7 1600.7,480.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1570.7,790.7 1570.7,780.7 1630.7,780.7 1630.7,770.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1570.7,740.7 1570.7,730.7 1630.7,730.7 1670.7,730.7 1670.7,720.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1770.7,770.7 1770.7,760.7 1670.7,760.7 1670.7,800.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <polyline data-record="27" points="1760.7,840.7 1770.7,840.7 1770.7,820.7" fill="none" stroke="#800040" stroke-width="1"/>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(750.7 1250.7) rotate(0)">RESETSTATz</text>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(770.7 810.7) rotate(0)">SOC_I2C1_SDA</text>
+    <text data-record="25" x="0" y="0" fill="#ff0000" font-family="Arial" font-size="7" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(770.7 820.7) rotate(0)">SOC_I2C1_SCL</text>
+    <circle data-record="29" cx="710.7" cy="340.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="740.7" cy="270.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="770.7" cy="790.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="780.7" cy="780.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="780.7" cy="270.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="790.7" cy="770.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="790.7" cy="610.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="800.7" cy="1230.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="800.7" cy="760.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="820.7" cy="1230.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="820.7" cy="690.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="820.7" cy="650.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="840.7" cy="340.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="870.7" cy="270.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="890.7" cy="1320.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="890.7" cy="1120.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="910.7" cy="270.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1030.7" cy="1240.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1190.7" cy="400.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1190.7" cy="390.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1190.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1210.7" cy="500.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1210.7" cy="490.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1210.7" cy="440.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1230.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1260.7" cy="350.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1260.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1290.7" cy="350.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1290.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1320.7" cy="350.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1380.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1420.7" cy="280.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1450.7" cy="350.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1540.7" cy="1310.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1540.7" cy="1230.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1540.7" cy="1150.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1570.7" cy="780.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1590.7" cy="1240.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1630.7" cy="730.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1670.7" cy="760.7" r="1.8" fill="#800000"/>
+    <circle data-record="29" cx="1670.7" cy="730.7" r="1.8" fill="#800000"/>
+    </g>
+  </g>
+</svg>

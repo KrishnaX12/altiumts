@@ -1,75 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="776" viewBox="0 0 1158.81 898.81" role="img" aria-label="Sample Schematic Sheet" class="altium-sheet" data-renderer="altiumts">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="813" viewBox="0 0 1070 870" role="img" aria-label="Sample Schematic Sheet" class="altium-sheet" data-renderer="altiumts">
   <title>Sample Schematic Sheet</title>
   <rect width="100%" height="100%" fill="#e2e8f0"/>
   <g stroke-linecap="round" stroke-linejoin="round">
-    <rect data-record="SheetBorder" x="37.905" y="60.905" width="1000" height="800" fill="#fffef8" stroke="#334155" stroke-width="1.5"/>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(843.905 830.905) rotate(0)">=sheetnumber</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(912.905 790.905) rotate(0)">=organization</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(912.905 800.905) rotate(0)">=address1</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(912.905 810.905) rotate(0)">=address2</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(912.905 820.905) rotate(0)">=address3</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(912.905 830.905) rotate(0)">=address4</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(869.905 830.905) rotate(0)">=sheettotal</text>
-    <text data-record="4" x="0" y="0" fill="#800000" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(685.905 796.905) rotate(0)">=title</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(764.905 816.905) rotate(0)">=documentnumber</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(856.905 816.905) rotate(0)">=revision</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(687.905 830.905) rotate(0)">=CurrentDate</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(772.905 830.905) rotate(0)">=CurrentTime</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(687.905 840.905) rotate(0)">=DocumentFullPathAndName</text>
-    <polyline data-record="6" points="1017.905,780.905 657.905,780.905 657.905,840.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="657.905,800.905 907.905,800.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="727.905,800.905 727.905,820.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="1017.905,830.905 657.905,830.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="817.905,800.905 817.905,830.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="1117.905,780.905 1017.905,780.905 1017.905,830.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(662.905 795.905) rotate(0)">Title</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(662.905 815.905) rotate(0)">Size:</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(732.905 815.905) rotate(0)">Number:</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(662.905 830.905) rotate(0)">Date:</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(662.905 840.905) rotate(0)">File:</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(822.905 815.905) rotate(0)">Revision:</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(822.905 830.905) rotate(0)">Sheet</text>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(856.905 830.905) rotate(0)">of</text>
-    <polyline data-record="6" points="907.905,780.905 907.905,830.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(747.905 830.905) rotate(0)">Time:</text>
-    <text data-record="4" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(687.905 816.905) rotate(0)">Letter</text>
-    <polyline data-record="6" points="657.905,820.905 907.905,820.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <polyline data-record="6" points="1017.905,830.905 1117.905,830.905" fill="none" stroke="#1f2937" stroke-width="1"/>
-    <g data-record="30"><rect x="1022.905" y="785.905" width="90" height="40" fill="#f1f5f9" stroke="#64748b"/><path d="M 1022.905 785.905 l 90 40 M 1112.905 785.905 l -90 40" stroke="#94a3b8"/></g>
-    <g data-record="2"><line x1="537.905" y1="350.905" x2="557.905" y2="350.905" stroke="#1f2937" stroke-width="1"/><circle cx="537.905" cy="350.905" r="1.2" fill="#1f2937"/><text x="560.905" y="348.905" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 D</text></g>
-    <g data-record="2"><line x1="517.905" y1="360.905" x2="537.905" y2="360.905" stroke="#1f2937" stroke-width="1"/><circle cx="517.905" cy="360.905" r="1.2" fill="#1f2937"/><text x="540.905" y="358.905" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 G</text></g>
-    <g data-record="2"><line x1="537.905" y1="370.905" x2="557.905" y2="370.905" stroke="#1f2937" stroke-width="1"/><circle cx="537.905" cy="370.905" r="1.2" fill="#1f2937"/><text x="560.905" y="368.905" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 S</text></g>
-    <polyline data-record="6" points="537.905,353.905 527.905,353.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="537.905,360.905 527.905,360.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="537.905,367.905 527.905,367.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="537.905,360.905 537.905,370.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="525.905,351.905 525.905,369.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="527.905,351.905 527.905,355.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="527.905,362.905 527.905,358.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="527.905,369.905 527.905,365.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="517.905,360.905 525.905,360.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polygon data-record="7" points="527.905,360.905 533.905,362.905 533.905,358.905" fill="#0000ff" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="537.905,353.905 537.905,350.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <polyline data-record="6" points="537.905,353.905 537.905,350.905" fill="none" stroke="#0000ff" stroke-width="1"/>
-    <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(540.905 359.905) rotate(0)">Q1</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(540.905 369.905) rotate(0)">MOSFET-N</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">M</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">@DESIGNATOR %1 %2 %3 %3 @MODEL ?LENGTH¦L=@LENGTH¦ ?WIDTH¦W=@WIDTH¦ ?&quot;DRAIN AREA&quot;¦AD=@&quot;DRAIN AREA&quot;¦ ?&quot;SOURCE AREA&quot;¦AS=@&quot;SOURCE AREA&quot;¦ ?&quot;DRAIN PERIMETER&quot;¦PD=@&quot;DRAIN PERIMETER&quot;¦ ?&quot;SOURCE PERIMETER&quot;¦PS=@&quot;SOURCE PERIMETER&quot;¦ ?NRD¦NRD=@NRD¦ ?NRS¦NRS=@NRS¦ &amp;&quot;STARTING CONDITION&quot; ?&quot;INITIAL D-S VOLTAGE&quot;¦IC=@&quot;INITIAL D-S VOLTAGE&quot;, @&quot;INITIAL G-S VOLTAGE&quot;, @&quot;INITIAL B-S VOLTAGE&quot;¦ ?TEMPERATURE¦TEMP=@TEMPERATURE¦</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Transistor</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">MOSFET</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Length</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Width</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Drain Area</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Source Area</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Drain Perimeter</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Source Perimeter</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Nrd</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Nrs</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Starting Condition</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Initial D-S Voltage</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Initial G-S Voltage</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Initial B-S Voltage</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(37.905 860.905) rotate(0)">Temperature</text>
-    <g data-record="209"><rect x="67.905" y="40.905" width="270" height="120" fill="#ffff96" stroke="#1f2937"/><text x="73.905" y="54.905" fill="#1f2937" font-family="Arial, sans-serif" font-size="9">This is a sample Altium project made by Jeremy Blum (@sciguy14 on GitHub). It is meant to serve as a representative example of the formattin</text></g>
+    <defs><clipPath id="altium-sheet-paper"><rect x="35" y="35" width="1000" height="800"/></clipPath></defs>
+    <g data-record="SheetBorder" fill="#fffef8" stroke="#334155" stroke-width="1"><rect x="35" y="35" width="1000" height="800"/><rect x="45" y="45" width="980" height="780" fill="none"/><path d="M 208.3333 35 V 45 M 208.3333 825 V 835"/><path d="M 371.6667 35 V 45 M 371.6667 825 V 835"/><path d="M 535 35 V 45 M 535 825 V 835"/><path d="M 698.3333 35 V 45 M 698.3333 825 V 835"/><path d="M 861.6667 35 V 45 M 861.6667 825 V 835"/><path d="M 35 240 H 45 M 1025 240 H 1035"/><path d="M 35 435 H 45 M 1025 435 H 1035"/><path d="M 35 630 H 45 M 1025 630 H 1035"/></g>
+    <g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(841 805) rotate(0)">=sheetnumber</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="italic" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910 765) rotate(0)">=organization</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="italic" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910 775) rotate(0)">=address1</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="italic" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910 785) rotate(0)">=address2</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="italic" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910 795) rotate(0)">=address3</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="italic" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(910 805) rotate(0)">=address4</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(867 805) rotate(0)">=sheettotal</text>
+    <text data-record="4" x="0" y="0" fill="#800000" font-family="Times New Roman" font-size="15" font-style="italic" font-weight="bold" text-decoration="none" dominant-baseline="central" transform="translate(683 771) rotate(0)">=title</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="12" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(762 791) rotate(0)">=documentnumber</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="12" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(854 791) rotate(0)">=revision</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(685 805) rotate(0)">=CurrentDate</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(770 805) rotate(0)">=CurrentTime</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(685 815) rotate(0)">=DocumentFullPathAndName</text>
+    <polyline data-record="6" points="1015,755 655,755 655,815" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="655,775 905,775" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="725,775 725,795" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="1015,805 655,805" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="815,775 815,805" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="1115,755 1015,755 1015,805" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(660 770) rotate(0)">Title</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(660 790) rotate(0)">Size:</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(730 790) rotate(0)">Number:</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(660 805) rotate(0)">Date:</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(660 815) rotate(0)">File:</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(820 790) rotate(0)">Revision:</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(820 805) rotate(0)">Sheet</text>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(854 805) rotate(0)">of</text>
+    <polyline data-record="6" points="905,755 905,805" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <text data-record="4" x="0" y="0" fill="#1f2937" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(745 805) rotate(0)">Time:</text>
+    <text data-record="4" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="12" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(685 791) rotate(0)">Letter</text>
+    <polyline data-record="6" points="655,795 905,795" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <polyline data-record="6" points="1015,805 1115,805" fill="none" stroke="#1f2937" stroke-width="1"/>
+    <g data-record="30"><rect x="1020" y="760" width="90" height="40" fill="#f1f5f9" stroke="#64748b"/><path d="M 1020 760 l 90 40 M 1110 760 l -90 40" stroke="#94a3b8"/></g>
+    <g data-record="2"><line x1="535" y1="325" x2="555" y2="325" stroke="#1f2937" stroke-width="1"/><circle cx="535" cy="325" r="1.2" fill="#1f2937"/><text x="558" y="323" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">1 D</text></g>
+    <g data-record="2"><line x1="515" y1="335" x2="535" y2="335" stroke="#1f2937" stroke-width="1"/><circle cx="515" cy="335" r="1.2" fill="#1f2937"/><text x="538" y="333" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">2 G</text></g>
+    <g data-record="2"><line x1="535" y1="345" x2="555" y2="345" stroke="#1f2937" stroke-width="1"/><circle cx="535" cy="345" r="1.2" fill="#1f2937"/><text x="558" y="343" fill="#1f2937" font-family="Arial, sans-serif" font-size="7">3 S</text></g>
+    <polyline data-record="6" points="535,328 525,328" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="535,335 525,335" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="535,342 525,342" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="535,335 535,345" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="523,326 523,344" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="525,326 525,330" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="525,337 525,333" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="525,344 525,340" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="515,335 523,335" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polygon data-record="7" points="525,335 531,337 531,333" fill="#0000ff" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="535,328 535,325" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <polyline data-record="6" points="535,328 535,325" fill="none" stroke="#0000ff" stroke-width="1"/>
+    <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(538 334) rotate(0)">Q1</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(538 344) rotate(0)">MOSFET-N</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">M</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">@DESIGNATOR %1 %2 %3 %3 @MODEL ?LENGTH¦L=@LENGTH¦ ?WIDTH¦W=@WIDTH¦ ?&quot;DRAIN AREA&quot;¦AD=@&quot;DRAIN AREA&quot;¦ ?&quot;SOURCE AREA&quot;¦AS=@&quot;SOURCE AREA&quot;¦ ?&quot;DRAIN PERIMETER&quot;¦PD=@&quot;DRAIN PERIMETER&quot;¦ ?&quot;SOURCE PERIMETER&quot;¦PS=@&quot;SOURCE PERIMETER&quot;¦ ?NRD¦NRD=@NRD¦ ?NRS¦NRS=@NRS¦ &amp;&quot;STARTING CONDITION&quot; ?&quot;INITIAL D-S VOLTAGE&quot;¦IC=@&quot;INITIAL D-S VOLTAGE&quot;, @&quot;INITIAL G-S VOLTAGE&quot;, @&quot;INITIAL B-S VOLTAGE&quot;¦ ?TEMPERATURE¦TEMP=@TEMPERATURE¦</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Transistor</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">MOSFET</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Length</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Width</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Drain Area</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Source Area</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Drain Perimeter</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Source Perimeter</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Nrd</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Nrs</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Starting Condition</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Initial D-S Voltage</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Initial G-S Voltage</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Initial B-S Voltage</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" dominant-baseline="central" transform="translate(35 835) rotate(0)">Temperature</text>
+    <g data-record="209"><rect x="65" y="15" width="270" height="120" fill="#ffff96" stroke="#1f2937"/><text x="71" y="29" fill="#1f2937" font-family="Arial, sans-serif" font-size="9">This is a sample Altium project made by Jeremy Blum (@sciguy14 on GitHub). It is meant to serve as a representative example of the formattin</text></g>
+    </g>
   </g>
 </svg>

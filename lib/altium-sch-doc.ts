@@ -1,3 +1,7 @@
+import {
+  type AltiumEmbeddedSchematicImage,
+  parseAltiumEmbeddedSchematicImages,
+} from "./altium-embedded-schematic-image"
 import type { AltiumLine } from "./base/altium-line"
 import { AltiumNode } from "./base/altium-node"
 import type { AltiumCompoundFile } from "./compound-file/altium-compound-file"
@@ -9,6 +13,7 @@ import {
 import { AltiumRecord } from "./records/altium-record"
 import {
   AltiumSchComponentRecord,
+  AltiumSchImageRecord,
   AltiumSchLabelRecord,
   AltiumSchNetLabelRecord,
   AltiumSchPinRecord,
@@ -32,6 +37,7 @@ export class AltiumSchDoc extends AltiumNode {
   override readonly type = "schematic-document"
 
   readonly compoundFile?: AltiumCompoundFile
+  readonly embeddedImages: AltiumEmbeddedSchematicImage[]
   readonly originalBytes?: Uint8Array
   readonly originalText?: string
   readonly sourceEncoding?: AltiumTextEncoding
@@ -63,6 +69,13 @@ export class AltiumSchDoc extends AltiumNode {
     this.originalText = init.originalText
     this.sourceEncoding = init.sourceEncoding
     this.sourceFormat = init.sourceFormat
+    this.embeddedImages = parseAltiumEmbeddedSchematicImages(
+      this.compoundFile?.getStream("/Storage"),
+      this.records.filter(
+        (record): record is AltiumSchImageRecord =>
+          record instanceof AltiumSchImageRecord,
+      ),
+    )
     this.adoptChildren([
       ...(this.compoundFile ? [this.compoundFile] : []),
       ...this._lines,
@@ -162,6 +175,12 @@ export class AltiumSchDoc extends AltiumNode {
 
   get sheetLinks(): AltiumSchematicSheetLink[] {
     return getSchematicSheetLinks(this)
+  }
+
+  getEmbeddedImageForRecord(
+    record: AltiumSchImageRecord,
+  ): AltiumEmbeddedSchematicImage | undefined {
+    return this.embeddedImages.find((image) => image.record === record)
   }
 
   getRecordsByKind(kind: string): AltiumRecord[] {

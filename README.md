@@ -117,8 +117,8 @@ directory. Hex dumps and allocations are bounded.
 
 ## Render SVG previews
 
-The SVG serialization module can render a complete PCB, one PCB layer, or a
-generic ASCII schematic sheet:
+The SVG serialization module can render a complete PCB, one PCB layer, or an
+ASCII/binary schematic sheet:
 
 ```ts
 import { readFile, writeFile } from "node:fs/promises"
@@ -156,6 +156,11 @@ tests small and makes dense features easier to inspect. Component
 designator/comment text follows the parent component's `NAMEON` and `COMMENTON`
 visibility flags; pass `{ showHidden: true }` when debugging hidden source
 text.
+
+Binary schematic rendering includes embedded images, Altium font-table sizes,
+ordinary graphic lines, text frames, No-ERC markers, and paper-bound clipping.
+Embedded Windows bitmaps are decoded with bounded allocation and emitted as
+portable PNG data URLs, keeping the generated SVG self-contained.
 
 Board cutouts are combined with the board outline using even-odd SVG fill.
 Polygon cutouts erase poured-region color before independent fills, tracks,
@@ -279,9 +284,10 @@ bun run benchmark
 ```
 
 The TI fixture is extracted from the official nested SPRCAL9 Rev. B archive.
-At 60.5 MB and 424,275 decoded records, it exercises large multilayer-board
-parsing, strict validation, board contours, polygon cutouts, and full top-layer
-SVG rendering in CI.
+Its 60.5 MB PCB and all 57 binary schematic sheets exercise large
+multilayer-board parsing, strict validation, board contours, polygon cutouts,
+embedded schematic images, exact untouched round trips, and PCB/schematic SVG
+rendering in CI.
 
 Then run the complete suite:
 
@@ -306,7 +312,9 @@ Altium rule evaluator, Circuit JSON conversion, and licensed Altium reopen
 tests are not implemented. Library headers are detected so callers receive an
 explicit unsupported-feature error instead of accidental document parsing.
 Unverified fields, trailing bytes, streams, embedded blobs, and unknown records
-are retained for inspection and exact untouched round trips.
+are retained for inspection and exact untouched round trips. Project-level
+variant fitted-state overlays and fully populated generated title blocks are
+not yet reconstructed when an individual `.SchDoc` is rendered in isolation.
 
 See [CHECKLIST.md](./CHECKLIST.md) for the implementation roadmap and
 [docs/format-references.md](./docs/format-references.md) for research sources.

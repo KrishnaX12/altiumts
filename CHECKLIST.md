@@ -547,15 +547,19 @@ writing Altium files.
 - [x] Implement buses.
 - [x] Implement ports and power ports.
 - [ ] Implement harness connectors, entries, and harness wires.
-- [ ] Implement No ERC markers.
+- [x] Implement No ERC markers.
 - [x] Implement parameter-set objects.
 - [x] Implement designators.
 - [x] Implement parameters.
 - [x] Implement arcs and elliptical arcs.
 - [x] Implement polylines and polygons.
+- [x] Implement ordinary schematic line primitives.
 - [x] Implement rectangles, rounded rectangles, and ellipses.
+- [x] Implement clipped, wrapped text-frame records.
 - [x] Implement notes.
 - [x] Implement image property records.
+- [x] Decode embedded schematic bitmap storage and render it as portable PNG
+      data in SVG previews.
 - [x] Implement sheet symbols and sheet entries.
 - [x] Implement sheet names and sheet filenames.
 - [x] Implement templates.
@@ -798,6 +802,8 @@ writing Altium files.
 - [x] Add SVG snapshots for every imported PCB and schematic reference.
 - [x] Add full-PCB and per-layer visual snapshots.
 - [x] Add a complete top-layer snapshot for the TI TMDS62LEVM production board.
+- [x] Add parse, strict-validation, exact-round-trip, and named SVG snapshots
+      for all 57 TI TMDS62LEVM schematic sheets.
 - [x] Add board-coordinate `viewBox` crops for focused PCB snapshots.
 - [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
 - [x] Add focused snapshots for rotated binary fills.

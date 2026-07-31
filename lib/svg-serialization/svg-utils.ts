@@ -40,7 +40,7 @@ export function createSvgDocument(init: {
 }): string {
   const { viewport } = init
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${formatSvgNumber(viewport.outputWidth)}" height="${formatSvgNumber(viewport.outputHeight)}" viewBox="0 0 ${formatSvgNumber(viewport.width)} ${formatSvgNumber(viewport.height)}" role="img" aria-label="${escapeXml(init.title)}" class="${escapeXml(init.className)}" data-renderer="altiumts">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${formatSvgNumber(viewport.outputWidth)}" height="${formatSvgNumber(viewport.outputHeight)}" viewBox="0 0 ${formatSvgNumber(viewport.width)} ${formatSvgNumber(viewport.height)}" role="img" aria-label="${escapeXml(init.title)}" class="${escapeXml(init.className)}" data-renderer="altiumts">`,
     `  <title>${escapeXml(init.title)}</title>`,
     `  <rect width="100%" height="100%" fill="${escapeXml(init.backgroundColor)}"/>`,
     '  <g stroke-linecap="round" stroke-linejoin="round">',

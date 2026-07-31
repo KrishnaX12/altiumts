@@ -3,6 +3,10 @@ import { AltiumSchDoc } from "../altium-sch-doc"
 import type { AltiumLine } from "../base/altium-line"
 import { AltiumRecord } from "../records/altium-record"
 import {
+  AltiumSchImageRecord,
+  type AltiumSchSheetRecord,
+} from "../records/altium-schematic-records"
+import {
   altiumColorToCss,
   getSchematicCoordinate,
   getSchematicIndexedPoints,
@@ -15,15 +19,17 @@ import type {
   SvgViewport,
 } from "./svg-types"
 import {
-  boundsFromPoints,
   createSvgDocument,
   createSvgViewport,
   escapeXml,
-  expandBounds,
   formatSvgNumber,
-  mergeBounds,
   pointsToSvg,
 } from "./svg-utils"
+
+interface SchematicRenderContext {
+  document?: AltiumSchDoc
+  sheetRecord?: AltiumSchSheetRecord
+}
 
 export function serializeAltiumSheetToSvg(
   source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
@@ -41,7 +47,9 @@ export function serializeAltiumSheetToSvg(
   const records = lines.filter(
     (line): line is AltiumRecord => line instanceof AltiumRecord,
   )
-  const sheetRecord = records.find((record) => record.recordKind === "31")
+  const sheetRecord = records.find(
+    (record): record is AltiumSchSheetRecord => record.recordKind === "31",
+  )
   const sheetWidth = Math.max(
     Number(sheetRecord?.getCaseInsensitive("CUSTOMX") ?? 1000),
     1,
@@ -56,26 +64,42 @@ export function serializeAltiumSheetToSvg(
     maxX: sheetWidth,
     maxY: sheetHeight,
   }
-  const contentBounds = records.reduce<SvgBounds | undefined>(
-    (bounds, record) => mergeBounds(bounds, getSchematicRecordBounds(record)),
-    undefined,
-  )
-  const bounds = mergeBounds(paperBounds, contentBounds) ?? paperBounds
-  const viewport = createSvgViewport(bounds, options)
+  // Altium can retain intentionally off-sheet annotations and helper objects.
+  // The paper rectangle, rather than all record geometry, defines the view.
+  const viewport = createSvgViewport(paperBounds, options)
   const content: string[] = []
+  const context: SchematicRenderContext = {
+    document: source instanceof AltiumSchDoc ? source : undefined,
+    sheetRecord,
+  }
+
+  const paperLeft = viewport.toX(0)
+  const paperTop = viewport.toY(sheetHeight)
+  const paperWidth = sheetWidth
+  const paperHeight = sheetHeight
+  content.push(
+    `<defs><clipPath id="altium-sheet-paper"><rect x="${formatSvgNumber(paperLeft)}" y="${formatSvgNumber(paperTop)}" width="${formatSvgNumber(paperWidth)}" height="${formatSvgNumber(paperHeight)}"/></clipPath></defs>`,
+  )
 
   if (options.showBorder !== false) {
-    const left = viewport.toX(0)
-    const top = viewport.toY(sheetHeight)
     content.push(
-      `<rect data-record="SheetBorder" x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(sheetWidth)}" height="${formatSvgNumber(sheetHeight)}" fill="#fffef8" stroke="#334155" stroke-width="1.5"/>`,
+      renderSchematicSheetBorder(
+        sheetRecord,
+        viewport,
+        sheetWidth,
+        sheetHeight,
+      ),
     )
   }
 
+  content.push(
+    '<g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">',
+  )
   for (const record of records) {
-    const rendered = renderSchematicRecord(record, viewport, options)
+    const rendered = renderSchematicRecord(record, viewport, options, context)
     if (rendered) content.push(rendered)
   }
+  content.push("</g>")
 
   return createSvgDocument({
     backgroundColor: options.backgroundColor ?? "#e2e8f0",
@@ -90,6 +114,7 @@ function renderSchematicRecord(
   record: AltiumRecord,
   viewport: SvgViewport,
   options: AltiumSheetSvgOptions,
+  context: SchematicRenderContext,
 ): string | undefined {
   const kind = record.recordKind
   const color = altiumColorToCss(record.getCaseInsensitive("COLOR"), "#1f2937")
@@ -108,6 +133,13 @@ function renderSchematicRecord(
       ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "none")
       : "none"
     return `<${tag} ${metadata} points="${pointsToSvg(points, viewport)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+  }
+
+  if (kind === "13") {
+    const location = getSchematicLocationIfPresent(record)
+    const corner = getSchematicCornerIfPresent(record)
+    if (!location || !corner) return undefined
+    return `<line ${metadata} x1="${formatSvgNumber(viewport.toX(location.x))}" y1="${formatSvgNumber(viewport.toY(location.y))}" x2="${formatSvgNumber(viewport.toX(corner.x))}" y2="${formatSvgNumber(viewport.toY(corner.y))}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
 
   if (kind === "10" || kind === "14") {
@@ -143,12 +175,21 @@ function renderSchematicRecord(
     return `<circle ${metadata} cx="${formatSvgNumber(viewport.toX(location.x))}" cy="${formatSvgNumber(viewport.toY(location.y))}" r="${formatSvgNumber(radius)}" fill="${color}"/>`
   }
 
+  if (kind === "22") {
+    const location = getSchematicLocation(record)
+    const x = viewport.toX(location.x)
+    const y = viewport.toY(location.y)
+    const radius = 4
+    return `<path ${metadata} d="M ${formatSvgNumber(x - radius)} ${formatSvgNumber(y - radius)} L ${formatSvgNumber(x + radius)} ${formatSvgNumber(y + radius)} M ${formatSvgNumber(x + radius)} ${formatSvgNumber(y - radius)} L ${formatSvgNumber(x - radius)} ${formatSvgNumber(y + radius)}" fill="none" stroke="${color}" stroke-width="1"/>`
+  }
+
   if (kind === "17") {
     const location = getSchematicLocation(record)
     const x = viewport.toX(location.x)
     const y = viewport.toY(location.y)
     const text = record.getDecoded("TEXT") ?? record.getDecoded("NAME") ?? ""
-    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l -5 -7 h 10 Z" fill="${color}"/><text x="${formatSvgNumber(x + 7)}" y="${formatSvgNumber(y - 3)}" fill="${color}" font-family="Arial, sans-serif" font-size="10">${escapeXml(text)}</text></g>`
+    const font = getSchematicFont(record, context.sheetRecord, 10)
+    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l -5 -7 h 10 Z" fill="${color}"/><text x="${formatSvgNumber(x + 7)}" y="${formatSvgNumber(y - 3)}" fill="${color}" ${font.attributes}>${escapeXml(text)}</text></g>`
   }
 
   if (kind === "18") {
@@ -157,7 +198,8 @@ function renderSchematicRecord(
     const y = viewport.toY(location.y)
     const width = Math.max(Number(record.getCaseInsensitive("WIDTH") ?? 16), 10)
     const name = record.getDecoded("NAME") ?? ""
-    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l ${formatSvgNumber(width * 0.22)} -5 h ${formatSvgNumber(width * 0.78)} v 10 h ${formatSvgNumber(-width * 0.78)} Z" fill="#fff" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${color}" font-family="Arial, sans-serif" font-size="8">${escapeXml(name)}</text></g>`
+    const font = getSchematicFont(record, context.sheetRecord, 8)
+    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l ${formatSvgNumber(width * 0.22)} -5 h ${formatSvgNumber(width * 0.78)} v 10 h ${formatSvgNumber(-width * 0.78)} Z" fill="#fff" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${color}" ${font.attributes}>${escapeXml(name)}</text></g>`
   }
 
   if (kind === "4" || kind === "25" || kind === "34" || kind === "41") {
@@ -172,8 +214,20 @@ function renderSchematicRecord(
       record.getDecoded("DESIGNATOR") ??
       ""
     if (!text) return undefined
-    const rotation = Number(record.getCaseInsensitive("ORIENTATION") ?? 0) * -90
-    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(rotation)})">${escapeXml(text)}</text>`
+    const font = getSchematicFont(record, context.sheetRecord, 9)
+    const rotation =
+      Number(record.getCaseInsensitive("ORIENTATION") ?? 0) * -90 -
+      font.rotation
+    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(rotation)})">${escapeXml(text)}</text>`
+  }
+
+  if (kind === "28") {
+    return renderSchematicTextFrame(
+      record,
+      viewport,
+      metadata,
+      context.sheetRecord,
+    )
   }
 
   if (kind === "30") {
@@ -183,6 +237,14 @@ function renderSchematicRecord(
     const top = viewport.toY(rectangle.maxY)
     const width = rectangle.maxX - rectangle.minX
     const height = rectangle.maxY - rectangle.minY
+    const embeddedImage =
+      record instanceof AltiumSchImageRecord
+        ? context.document?.getEmbeddedImageForRecord(record)
+        : undefined
+    if (embeddedImage) {
+      const dataUrl = embeddedImage.getDataUrl()
+      return `<image ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" xlink:href="${dataUrl}" preserveAspectRatio="${record.getBoolean("KEEPASPECT") === false ? "none" : "xMidYMid meet"}"/>`
+    }
     return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="#f1f5f9" stroke="#64748b"/><path d="M ${formatSvgNumber(left)} ${formatSvgNumber(top)} l ${formatSvgNumber(width)} ${formatSvgNumber(height)} M ${formatSvgNumber(left + width)} ${formatSvgNumber(top)} l ${formatSvgNumber(-width)} ${formatSvgNumber(height)}" stroke="#94a3b8"/></g>`
   }
 
@@ -247,39 +309,166 @@ function renderSchematicPin(
   return `<g ${metadata}><line x1="${formatSvgNumber(viewport.toX(location.x))}" y1="${formatSvgNumber(viewport.toY(location.y))}" x2="${formatSvgNumber(viewport.toX(end.x))}" y2="${formatSvgNumber(viewport.toY(end.y))}" stroke="${color}" stroke-width="1"/><circle cx="${formatSvgNumber(viewport.toX(location.x))}" cy="${formatSvgNumber(viewport.toY(location.y))}" r="1.2" fill="${color}"/>${label ? `<text x="${formatSvgNumber(viewport.toX(end.x) + 3)}" y="${formatSvgNumber(viewport.toY(end.y) - 2)}" fill="${color}" font-family="Arial, sans-serif" font-size="7">${escapeXml(label)}</text>` : ""}</g>`
 }
 
-function getSchematicRecordBounds(record: AltiumRecord): SvgBounds | undefined {
-  let bounds = boundsFromPoints(getSchematicIndexedPoints(record))
-  const location = getSchematicLocationIfPresent(record)
-  const corner = getSchematicCornerIfPresent(record)
+function renderSchematicSheetBorder(
+  sheetRecord: AltiumSchSheetRecord | undefined,
+  viewport: SvgViewport,
+  sheetWidth: number,
+  sheetHeight: number,
+): string {
+  const left = viewport.toX(0)
+  const top = viewport.toY(sheetHeight)
+  const margin = Math.max(
+    Number(sheetRecord?.getCaseInsensitive("CUSTOMMARGINWIDTH") ?? 10),
+    4,
+  )
+  const innerLeft = viewport.toX(margin)
+  const innerTop = viewport.toY(sheetHeight - margin)
+  const innerWidth = Math.max(sheetWidth - margin * 2, 1)
+  const innerHeight = Math.max(sheetHeight - margin * 2, 1)
+  const xZones = Math.max(
+    Math.round(Number(sheetRecord?.getCaseInsensitive("CUSTOMXZONES") ?? 6)),
+    1,
+  )
+  const yZones = Math.max(
+    Math.round(Number(sheetRecord?.getCaseInsensitive("CUSTOMYZONES") ?? 4)),
+    1,
+  )
+  const zoneMarks: string[] = []
 
-  if (location) {
-    bounds = mergeBounds(bounds, {
-      minX: location.x,
-      minY: location.y,
-      maxX: location.x,
-      maxY: location.y,
-    })
+  for (let index = 1; index < xZones; index++) {
+    const x = innerLeft + (innerWidth * index) / xZones
+    zoneMarks.push(
+      `<path d="M ${formatSvgNumber(x)} ${formatSvgNumber(top)} V ${formatSvgNumber(innerTop)} M ${formatSvgNumber(x)} ${formatSvgNumber(innerTop + innerHeight)} V ${formatSvgNumber(top + sheetHeight)}"/>`,
+    )
   }
-  if (corner) {
-    bounds = mergeBounds(bounds, {
-      minX: corner.x,
-      minY: corner.y,
-      maxX: corner.x,
-      maxY: corner.y,
-    })
+  for (let index = 1; index < yZones; index++) {
+    const y = innerTop + (innerHeight * index) / yZones
+    zoneMarks.push(
+      `<path d="M ${formatSvgNumber(left)} ${formatSvgNumber(y)} H ${formatSvgNumber(innerLeft)} M ${formatSvgNumber(innerLeft + innerWidth)} ${formatSvgNumber(y)} H ${formatSvgNumber(left + sheetWidth)}"/>`,
+    )
   }
 
-  const radius = getSchematicCoordinate(record, "RADIUS", 0)
-  if (location && radius > 0) {
-    bounds = mergeBounds(bounds, {
-      minX: location.x - radius,
-      minY: location.y - radius,
-      maxX: location.x + radius,
-      maxY: location.y + radius,
-    })
-  }
+  return `<g data-record="SheetBorder" fill="#fffef8" stroke="#334155" stroke-width="1"><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(sheetWidth)}" height="${formatSvgNumber(sheetHeight)}"/><rect x="${formatSvgNumber(innerLeft)}" y="${formatSvgNumber(innerTop)}" width="${formatSvgNumber(innerWidth)}" height="${formatSvgNumber(innerHeight)}" fill="none"/>${zoneMarks.join("")}</g>`
+}
 
-  return bounds ? expandBounds(bounds, 3) : undefined
+function renderSchematicTextFrame(
+  record: AltiumRecord,
+  viewport: SvgViewport,
+  metadata: string,
+  sheetRecord: AltiumSchSheetRecord | undefined,
+): string | undefined {
+  const rectangle = getSchematicRectangle(record)
+  if (!rectangle) return undefined
+  const text = decodeSchematicMultilineText(record.getDecoded("TEXT") ?? "")
+  if (!text) return undefined
+
+  const left = viewport.toX(rectangle.minX)
+  const top = viewport.toY(rectangle.maxY)
+  const width = rectangle.maxX - rectangle.minX
+  const height = rectangle.maxY - rectangle.minY
+  const font = getSchematicFont(record, sheetRecord, 9)
+  const margin = Math.max(getSchematicCoordinate(record, "TEXTMARGIN", 1), 0)
+  const availableWidth = Math.max(width - margin * 2, font.size)
+  const availableHeight = Math.max(height - margin * 2, font.size)
+  const lines = wrapSchematicText(text, availableWidth, font.size)
+  const lineHeight = font.size * 1.15
+  const visibleLines = lines.slice(
+    0,
+    Math.max(Math.floor(availableHeight / lineHeight), 1),
+  )
+  const alignment = Number(record.getCaseInsensitive("ALIGNMENT") ?? 1)
+  const anchor = alignment === 2 ? "middle" : alignment === 3 ? "end" : "start"
+  const x =
+    anchor === "middle"
+      ? left + width / 2
+      : anchor === "end"
+        ? left + width - margin
+        : left + margin
+  const color = altiumColorToCss(
+    record.getCaseInsensitive("TEXTCOLOR") ??
+      record.getCaseInsensitive("COLOR"),
+    "#1f2937",
+  )
+  const uniqueId = (record.getDecoded("UNIQUEID") ?? `${left}-${top}`).replace(
+    /[^a-z0-9_-]/giu,
+    "-",
+  )
+  const clipId = `altium-text-frame-${uniqueId}`
+  const tspans = visibleLines
+    .map(
+      (line, index) =>
+        `<tspan x="${formatSvgNumber(x)}" dy="${formatSvgNumber(index === 0 ? 0 : lineHeight)}">${escapeXml(line)}</tspan>`,
+    )
+    .join("")
+  const clip = record.getBoolean("CLIPTORECT") !== false
+
+  return `<g ${metadata}>${clip ? `<defs><clipPath id="${clipId}"><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}"/></clipPath></defs>` : ""}<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(top + margin + font.size)}" fill="${color}" text-anchor="${anchor}" ${font.attributes}${clip ? ` clip-path="url(#${clipId})"` : ""}>${tspans}</text></g>`
+}
+
+function getSchematicFont(
+  record: AltiumRecord,
+  sheetRecord: AltiumSchSheetRecord | undefined,
+  fallbackSize: number,
+): { attributes: string; rotation: number; size: number } {
+  const fontId = Math.max(
+    Math.round(Number(record.getCaseInsensitive("FONTID") ?? 1)),
+    1,
+  )
+  const size = Math.max(
+    Number(sheetRecord?.getCaseInsensitive(`SIZE${fontId}`) ?? fallbackSize),
+    1,
+  )
+  const family =
+    sheetRecord?.getDecoded(`FONTNAME${fontId}`) ?? "Arial, sans-serif"
+  const weight =
+    sheetRecord?.getBoolean(`BOLD${fontId}`) === true ? "bold" : "normal"
+  const style =
+    sheetRecord?.getBoolean(`ITALIC${fontId}`) === true ? "italic" : "normal"
+  const decoration =
+    sheetRecord?.getBoolean(`UNDERLINE${fontId}`) === true
+      ? "underline"
+      : "none"
+  const rotation = Number(
+    sheetRecord?.getCaseInsensitive(`ROTATION${fontId}`) ?? 0,
+  )
+  return {
+    attributes: `font-family="${escapeXml(family)}" font-size="${formatSvgNumber(size)}" font-style="${style}" font-weight="${weight}" text-decoration="${decoration}"`,
+    rotation: Number.isFinite(rotation) ? rotation : 0,
+    size,
+  }
+}
+
+function decodeSchematicMultilineText(text: string): string {
+  return text.replaceAll("~1", "\n").replaceAll("\\n", "\n")
+}
+
+function wrapSchematicText(
+  text: string,
+  maximumWidth: number,
+  fontSize: number,
+): string[] {
+  const maximumCharacters = Math.max(
+    Math.floor(maximumWidth / Math.max(fontSize * 0.6, 1)),
+    1,
+  )
+  return text.split("\n").flatMap((paragraph) => {
+    if (paragraph.length <= maximumCharacters) return [paragraph]
+    const words = paragraph.split(/\s+/u)
+    const lines: string[] = []
+    let line = ""
+    for (const word of words) {
+      if (!line) {
+        line = word
+      } else if (`${line} ${word}`.length <= maximumCharacters) {
+        line = `${line} ${word}`
+      } else {
+        lines.push(line)
+        line = word
+      }
+    }
+    if (line) lines.push(line)
+    return lines.length > 0 ? lines : [paragraph]
+  })
 }
 
 function getSchematicRectangle(record: AltiumRecord): SvgBounds | undefined {
