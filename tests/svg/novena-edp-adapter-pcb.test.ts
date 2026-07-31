@@ -10,6 +10,7 @@ test("renders the complete Novena eDP adapter binary PCB", async () => {
   })
 
   expect(svg).toContain('data-record="Fill"')
+  expect(svg).toContain('data-record="ComponentBody"')
   expect(svg).toContain('data-layer="TOPPASTE"')
   expect(svg).toContain('transform="rotate(-270')
   await expect(svg).toMatchSvgSnapshot(import.meta.path)

@@ -120,13 +120,14 @@ await writeFile(
 lines returned by `parseAltiumAscii()`. The PCB serializers accept either
 ASCII or binary PCB documents. PCB rendering currently prioritizes outlines,
 tracks, arcs, pads, vias, regions, polygons, fills, and text. The renderer is
-intentionally source-model based, so visual snapshot differences expose parser
-or geometry regressions directly. A PCB `viewBox` crops in board coordinates,
-uses no implicit margin, and omits primitives that cannot intersect the crop;
-this keeps focused visual tests small and makes dense features easier to
-inspect. Component designator/comment text follows the parent component's
-`NAMEON` and `COMMENTON` visibility flags; pass `{ showHidden: true }` when
-debugging hidden source text.
+intentionally source-model based and also renders shape-based component-body
+outlines, so visual snapshot differences expose parser or geometry regressions
+directly. A PCB `viewBox` crops in board coordinates, uses no implicit margin,
+and omits primitives that cannot intersect the crop; this keeps focused visual
+tests small and makes dense features easier to inspect. Component
+designator/comment text follows the parent component's `NAMEON` and `COMMENTON`
+visibility flags; pass `{ showHidden: true }` when debugging hidden source
+text.
 
 Single-layer PCB renders select the corresponding pad-stack geometry. Round,
 rectangular, rounded-rectangle, octagonal, and obround pads are rendered
@@ -138,6 +139,11 @@ directly, along with round, square, and slotted holes.
   `.PcbDoc`.
 - `parseAltiumSchDoc(source, options?)` parses ASCII or binary `.SchDoc`
   input.
+- Binary PCB documents expose typed `models` and `embeddedModels` collections.
+  `getEmbeddedModelForComponentBody()` resolves duplicate model IDs using the
+  body's stored 3D rotation, and `getDecompressedBytes()` extracts the
+  corresponding zlib-compressed STEP payload with a configurable output-size
+  limit.
 - `parseAltiumBinaryPcbDoc(bytes, options?)` parses a binary `.PcbDoc`.
 - `parseAltiumCompoundFile(bytes, options?)` exposes a bounded, read-only
   OLE/CFB tree.
@@ -192,13 +198,16 @@ generated `.snap.svg` visual baselines are committed and compared with
 Binary support is currently read-only: untouched documents can return their
 original bytes, but edits are not serialized back into CFB streams. The PCB
 parser now distinguishes source shape-based regions from generated region-fill
-caches and decodes board cutout regions and rotated rectangular fills. It does
-not yet semantically decode component bodies, dimensions, or embedded 3D
-models. Text barcode/frame metadata, custom region-based pad outlines, and the
-unverified trailing bytes in newer extended pad-stack subrecords remain
-pending. Full-stack `PADMODE=2` field decoding is implemented but still needs a
-real corpus fixture. Those source bytes and streams remain available through
-`AltiumCompoundFile` and appear in stream summaries.
+caches and decodes board cutout regions, rotated rectangular fills, and
+shape-based component-body outlines and their associated model properties. It
+also resolves and decompresses embedded STEP models on demand without eagerly
+materializing their compound streams. It does not yet semantically decode
+dimensions or resolve linked external model files. Text barcode/frame
+metadata, custom region-based pad outlines, and the unverified trailing bytes
+in newer extended pad-stack subrecords remain pending. Full-stack `PADMODE=2`
+field decoding is implemented but still needs a real corpus fixture. Those
+source bytes and streams remain available through `AltiumCompoundFile` and
+appear in stream summaries.
 
 Schematic property records are parsed generically and visualized, but the
 numeric record IDs do not yet have a complete typed semantic model. Library,

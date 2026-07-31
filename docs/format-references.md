@@ -10,7 +10,9 @@ available format research. Code must not be copied from incompatible licenses.
 - [KiCad Altium PCB parser source](https://github.com/KiCad/kicad-source-mirror/blob/master/pcbnew/pcb_io/altium/altium_parser_pcb.cpp)
   and [PCB importer](https://github.com/KiCad/kicad-source-mirror/blob/master/pcbnew/pcb_io/altium/altium_pcb.cpp)
   for cross-checking property framing, string encodings, bounded reader
-  behavior, and extended pad-stack field interpretation.
+  behavior, extended pad-stack field interpretation, and component-body model
+  metadata. The importer also confirms that `Models/Data` record order maps to
+  numeric `Models/<index>` streams containing zlib-compressed STEP data.
 
 ## Corpus and structural references
 

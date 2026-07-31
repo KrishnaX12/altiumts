@@ -60,6 +60,19 @@ export function renderPcbRecord(
     return `<path ${metadata} d="${path}" fill="${color}" fill-opacity="0.32" fill-rule="evenodd" stroke="${color}" stroke-width="1.5"/>`
   }
 
+  if (kind === "ComponentBody") {
+    const contours = getPcbRegionContours(record)
+    if (contours.length === 0) return undefined
+    const path = contours
+      .map((contour) => pointsToClosedPath(contour, viewport))
+      .join(" ")
+    const component = record.getCaseInsensitive("COMPONENT")
+    const componentMetadata = component
+      ? ` data-component="${escapeXml(component)}"`
+      : ""
+    return `<path ${metadata}${componentMetadata} d="${path}" fill="${color}" fill-opacity="0.08" fill-rule="evenodd" stroke="${color}" stroke-opacity="0.72" stroke-width="1.5"/>`
+  }
+
   if (kind === "Polygon") {
     const points = getPcbVertexPoints(record)
     if (points.length < 3) return undefined

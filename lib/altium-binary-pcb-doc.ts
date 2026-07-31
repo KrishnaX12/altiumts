@@ -1,5 +1,7 @@
+import { AltiumEmbeddedModel } from "./altium-embedded-model"
 import { AltiumNode } from "./base/altium-node"
 import type { AltiumCompoundFile } from "./compound-file/altium-compound-file"
+import type { AltiumModelRecord } from "./records/altium-model-record"
 import type { AltiumRecord } from "./records/altium-record"
 
 export interface AltiumPcbStreamSummary {
@@ -16,6 +18,7 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
   override readonly type = "binary-pcb-document"
 
   readonly compoundFile: AltiumCompoundFile
+  readonly embeddedModels: AltiumEmbeddedModel[]
   readonly primitiveRecords: ReadonlyMap<string, AltiumRecord[]>
   readonly propertyRecords: ReadonlyMap<string, AltiumRecord[]>
   readonly streamSummaries: AltiumPcbStreamSummary[]
@@ -34,6 +37,10 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     this.propertyRecords = init.propertyRecords
     this.streamSummaries = init.streamSummaries
     this.wideStrings = init.wideStrings ?? new Map()
+    this.embeddedModels = this.models.flatMap((record, index) => {
+      const stream = this.compoundFile.getStream(["Models", String(index)])
+      return stream ? [new AltiumEmbeddedModel({ index, record, stream })] : []
+    })
   }
 
   get records(): AltiumRecord[] {
@@ -51,8 +58,60 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return this.propertyRecords.get("Components6") ?? []
   }
 
+  get componentBodies(): AltiumRecord[] {
+    return (
+      this.primitiveRecords.get("ShapeBasedComponentBodies6") ??
+      this.primitiveRecords.get("ComponentBodies6") ??
+      []
+    )
+  }
+
+  get legacyComponentBodies(): AltiumRecord[] {
+    return this.primitiveRecords.get("ComponentBodies6") ?? []
+  }
+
   get nets(): AltiumRecord[] {
     return this.propertyRecords.get("Nets6") ?? []
+  }
+
+  get models(): AltiumModelRecord[] {
+    return (this.propertyRecords.get("Models") ?? []) as AltiumModelRecord[]
+  }
+
+  getModelsById(id: string): AltiumModelRecord[] {
+    const normalizedId = id.toUpperCase()
+    return this.models.filter(
+      (model) => model.getDecoded("ID")?.toUpperCase() === normalizedId,
+    )
+  }
+
+  getModelForComponentBody(body: AltiumRecord): AltiumModelRecord | undefined {
+    const id = body.getDecoded("MODELID")
+    if (!id) return undefined
+    const candidates = this.getModelsById(id)
+    if (candidates.length <= 1) return candidates[0]
+
+    return (
+      candidates.find(
+        (model) =>
+          sameNumber(
+            model.getNumber("ROTX"),
+            body.getNumber("MODEL.3D.ROTX"),
+          ) &&
+          sameNumber(
+            model.getNumber("ROTY"),
+            body.getNumber("MODEL.3D.ROTY"),
+          ) &&
+          sameNumber(model.getNumber("ROTZ"), body.getNumber("MODEL.3D.ROTZ")),
+      ) ?? candidates[0]
+    )
+  }
+
+  getEmbeddedModelForComponentBody(
+    body: AltiumRecord,
+  ): AltiumEmbeddedModel | undefined {
+    const model = this.getModelForComponentBody(body)
+    return this.embeddedModels.find((embedded) => embedded.record === model)
   }
 
   get tracks(): AltiumRecord[] {
@@ -116,4 +175,15 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
   override getString(): string {
     return this.records.map((record) => record.getString()).join("\n")
   }
+}
+
+function sameNumber(
+  left: number | undefined,
+  right: number | undefined,
+): boolean {
+  return (
+    left !== undefined &&
+    right !== undefined &&
+    Math.abs(left - right) < Number.EPSILON
+  )
 }

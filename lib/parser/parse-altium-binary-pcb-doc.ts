@@ -24,6 +24,7 @@ const PROPERTY_STREAM_RECORD_KINDS: Record<string, string> = {
   Classes6: "Class",
   Components6: "Component",
   FileVersionInfo: "FileVersionInfo",
+  Models: "Model",
   Nets6: "Net",
   Polygons6: "Polygon",
   SignalClasses: "SignalClass",
@@ -34,10 +35,12 @@ const PROPERTY_STREAM_RECORD_KINDS: Record<string, string> = {
 const PRIMITIVE_STREAM_FAMILIES = new Set([
   "Arcs6",
   "BoardRegions",
+  "ComponentBodies6",
   "Fills6",
   "Pads6",
   "Regions6",
   "ShapeBasedRegions6",
+  "ShapeBasedComponentBodies6",
   "Texts6",
   "Tracks6",
   "Vias6",
@@ -97,6 +100,7 @@ export function parseAltiumBinaryPcbDoc(
             recordKind,
             declaredRecordCount,
             options.maxPropertyRecordLength,
+            family === "Models",
           )
         : []
     const decodedPrimitives =
@@ -143,6 +147,7 @@ function parsePropertyRecordStream(
   recordKind: string,
   expectedRecordCount: number | undefined,
   maximumRecordLength = 16 * 1024 * 1024,
+  allowMissingLeadingDelimiter = false,
 ): AltiumRecord[] {
   if (bytes.byteLength === 0) return []
   const records: AltiumRecord[] = []
@@ -173,7 +178,7 @@ function parsePropertyRecordStream(
       )
     }
     const payload = bytes.subarray(offset, offset + length)
-    if (payload[0] !== 0x7c) {
+    if (payload[0] !== 0x7c && !allowMissingLeadingDelimiter) {
       throw new AltiumFormatDetectionError(
         `${recordKind} property record at offset ${lengthOffset} does not begin with "|"`,
       )

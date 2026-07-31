@@ -58,15 +58,29 @@ export abstract class AltiumCompoundEntry extends AltiumNode {
 export class AltiumCompoundStream extends AltiumCompoundEntry {
   override readonly type = "compound-stream"
 
-  readonly content: Uint8Array
+  private readonly contentSource: Uint8Array | (() => Uint8Array)
+  private loadedContent?: Uint8Array
 
   constructor(
     metadata: AltiumCompoundEntryMetadata,
     path: string[],
-    content: Uint8Array,
+    content: Uint8Array | (() => Uint8Array),
   ) {
     super(metadata, path)
-    this.content = content
+    this.contentSource = content
+    if (content instanceof Uint8Array) this.loadedContent = content
+  }
+
+  get content(): Uint8Array {
+    this.loadedContent ??=
+      typeof this.contentSource === "function"
+        ? this.contentSource()
+        : this.contentSource
+    return this.loadedContent
+  }
+
+  get isContentLoaded(): boolean {
+    return this.loadedContent !== undefined
   }
 
   override getChildren(): AltiumNode[] {

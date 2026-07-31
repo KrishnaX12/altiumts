@@ -20,6 +20,7 @@ import {
 } from "./svg-utils"
 
 const RECORD_PAINT_ORDER: Record<string, number> = {
+  ComponentBody: 5,
   Polygon: 10,
   Region: 20,
   Fill: 30,

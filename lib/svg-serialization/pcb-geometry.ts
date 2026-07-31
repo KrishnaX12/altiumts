@@ -98,7 +98,12 @@ export function getPcbRecordBounds(
     }
   }
 
-  if (kind === "Region" || kind === "Polygon" || kind === "Board") {
+  if (
+    kind === "ComponentBody" ||
+    kind === "Region" ||
+    kind === "Polygon" ||
+    kind === "Board"
+  ) {
     return boundsFromPoints(getPcbVertexPoints(record))
   }
 

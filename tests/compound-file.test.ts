@@ -19,9 +19,13 @@ test("reads regular and mini streams from binary Altium compound files", async (
   const pcb = parseAltiumCompoundFile(pcbBytes)
   expect(pcb.entries).toHaveLength(168)
   expect(pcb.streams).toHaveLength(122)
+  const embeddedModelStream = pcb.getStream("/Models/0")
+  expect(embeddedModelStream?.metadata.size).toBe(17_983)
+  expect(embeddedModelStream?.isContentLoaded).toBeFalse()
   expect(pcb.getStream("/Board6/Data")?.content).toHaveLength(156_985)
   expect(pcb.getStream("/Tracks6/Data")?.content).toHaveLength(581_148)
   expect(pcb.getStream("/Pads6/Data")?.content).toHaveLength(357_801)
+  expect(embeddedModelStream?.isContentLoaded).toBeFalse()
   expect(pcb.getBytes()).toEqual(pcbBytes)
 })
 

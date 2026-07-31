@@ -1,0 +1,481 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="721" viewBox="0 0 2102.0866 1515.4725" role="img" aria-label="Novena eDP adapter component bodies" class="altium-pcb" data-renderer="altiumts">
+  <title>Novena eDP adapter component bodies</title>
+  <rect width="100%" height="100%" fill="#071a16"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polygon data-record="BoardOutline" points="68.7598,1446.7126 1804.9802,1446.7126 1804.9802,1092.3819 1867.9723,1029.3898 2033.3267,1029.3898 2033.3267,68.7598 68.7598,68.7598 68.7598,1446.7126" fill="#123d32" stroke="#6ee7b7" stroke-width="3"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="102" d="M 1382.5404 635.689 L 1127.8149 380.9635 L 873.0894 635.689 L 1127.8149 890.4145 L 1382.5404 635.689 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="79" d="M 303.0118 387.6575 L 303.0117 104.1929 L 102.2243 104.1929 L 102.2243 387.6575 L 303.0118 387.6575 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="57" d="M 473.2873 113.0511 L 404.3897 113.0511 L 404.3897 150.4527 L 473.2873 150.4527 L 473.2873 113.0511 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="43" d="M 594.3503 265.6102 L 663.2479 265.6102 L 663.2479 228.2086 L 594.3503 228.2086 L 594.3503 265.6102 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="107" d="M 739.0354 264.626 L 807.933 264.626 L 807.933 227.2244 L 739.0354 227.2244 L 739.0354 264.626 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="77" d="M 204.5911 524.4749 L 204.5911 1361.0893 L 360.1047 1361.0893 L 360.1047 524.4749 L 204.5911 524.4749 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="0" d="M 472.3032 667.1849 L 515.61 667.1849 L 515.6101 643.563 L 472.3031 643.563 L 472.3032 667.1849 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="2" d="M 472.3031 710.4921 L 515.6101 710.4921 L 515.61 686.8702 L 472.3031 686.87 L 472.3031 710.4921 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="4" d="M 472.3031 753.7992 L 515.6101 753.7992 L 515.6101 730.1772 L 472.3031 730.1772 L 472.3031 753.7992 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="6" d="M 472.3031 797.1063 L 515.6101 797.1063 L 515.6101 773.4843 L 472.3031 773.4843 L 472.3031 797.1063 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="8" d="M 472.3032 840.4132 L 515.61 840.4132 L 515.6101 816.7913 L 472.3031 816.7913 L 472.3032 840.4132 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="10" d="M 472.3031 883.7205 L 515.6101 883.7205 L 515.6101 860.0985 L 472.3031 860.0985 L 472.3031 883.7205 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="12" d="M 454.5865 921.1221 L 454.5865 964.4291 L 478.2085 964.4291 L 478.2085 921.1221 L 454.5865 921.1221 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="24" d="M 738.9654 1006.7928 L 769.5881 976.1701 L 752.8848 959.4668 L 722.2621 990.0895 L 738.9654 1006.7928 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="28" d="M 707.4694 975.2968 L 738.0921 944.6741 L 721.3888 927.9708 L 690.7661 958.5935 L 707.4694 975.2968 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="22" d="M 689.8927 896.4746 L 659.27 927.0973 L 675.9733 943.8006 L 706.596 913.1779 L 689.8927 896.4746 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="20" d="M 658.3966 864.9786 L 627.7739 895.6013 L 644.4772 912.3046 L 675.0999 881.6819 L 658.3966 864.9786 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="98" d="M 525.4525 964.429 L 525.4526 921.1221 L 501.8306 921.1221 L 501.8306 964.4291 L 525.4525 964.429 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="26" d="M 568.7597 1222.3031 L 568.7597 1088.4449 L 462.4605 1088.4449 L 462.4605 1222.3031 L 568.7597 1222.3031 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="97" d="M 560.8857 1003.7992 L 517.5787 1003.7992 L 517.5787 1027.4212 L 560.8857 1027.4212 L 560.8857 1003.7992 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="42" d="M 615.0196 1178.996 L 615.0196 1135.689 L 591.3976 1135.689 L 591.3976 1178.996 L 615.0196 1178.996 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="104" d="M 588.4447 1395.5315 L 643.5629 1395.5315 L 643.5629 1277.4213 L 588.4447 1277.4213 L 588.4447 1395.5315 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="44" d="M 734.1141 1338.4448 L 734.1141 1295.1378 L 710.4921 1295.1378 L 710.4921 1338.4448 L 734.1141 1338.4448 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="99" d="M 728.2085 1230.1772 L 684.9015 1230.1772 L 684.9015 1253.7992 L 728.2085 1253.7992 L 728.2085 1230.1772 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="35" d="M 1138.8386 1240.0198 L 1138.8385 1283.3267 L 1162.4605 1283.3267 L 1162.4605 1240.0198 L 1138.8386 1240.0198 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="33" d="M 1036.4765 1240.0197 L 1036.4765 1283.3265 L 1060.0984 1283.3266 L 1060.0984 1240.0196 L 1036.4765 1240.0197 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="31" d="M 934.1141 1240.0196 L 934.1141 1283.3266 L 957.7361 1283.3266 L 957.7361 1240.0196 L 934.1141 1240.0196 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="29" d="M 835.6889 1240.0196 L 835.6889 1283.3266 L 859.3108 1283.3265 L 859.3109 1240.0196 L 835.6889 1240.0196 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="16" d="M 1190.1075 1138.357 L 1146.8005 1138.357 L 1146.8006 1161.9789 L 1190.1075 1161.979 L 1190.1075 1138.357 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="18" d="M 1247.0204 1161.9789 L 1290.3274 1161.979 L 1290.3275 1138.3568 L 1247.0203 1138.3569 L 1247.0204 1161.9789 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="78" d="M 1282.9329 1452.736 L 1752.2243 1452.7361 L 1752.2243 1194.744 L 1282.9329 1194.744 L 1282.9329 1452.736 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="13" d="M 1519.5471 1114.0354 L 1476.2401 1114.0354 L 1476.2401 1137.6574 L 1519.5471 1137.6574 L 1519.5471 1114.0354 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="21" d="M 1634.7046 1073.681 L 1634.7046 1004.7834 L 1597.303 1004.7834 L 1597.303 1073.681 L 1634.7046 1073.681 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="105" d="M 1553.0117 1094.3503 L 1474.2716 1094.3503 L 1474.2716 1015.6102 L 1553.0117 1015.6102 L 1553.0117 1094.3503 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="74" d="M 1423.0904 1064.8229 L 1423.0904 993.9567 L 1383.7204 993.9567 L 1383.7204 1064.8229 L 1423.0904 1064.8229 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="15" d="M 1548.0904 961.4763 L 1479.1928 961.4763 L 1479.1928 998.8779 L 1548.0904 998.8779 L 1548.0904 961.4763 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="73" d="M 1580.5708 816.7913 L 1580.5708 887.6575 L 1619.9408 887.6575 L 1619.9408 816.7913 L 1580.5708 816.7913 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="5" d="M 1545.1377 796.122 L 1458.5235 796.122 L 1458.5235 853.2086 L 1545.1377 853.2086 L 1545.1377 796.122 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="11" d="M 1376.8306 872.8937 L 1376.8306 941.7913 L 1414.2322 941.7913 L 1414.2322 872.8937 L 1376.8306 872.8937 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="100" d="M 1336.4762 919.1535 L 1293.1692 919.1535 L 1293.1692 942.7755 L 1336.4762 942.7755 L 1336.4762 919.1535 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="101" d="M 1236.0825 938.8386 L 1192.7755 938.8386 L 1192.7755 962.4606 L 1236.0825 962.4606 L 1236.0825 938.8386 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="52" d="M 1251.8307 895.5315 L 1295.1377 895.5315 L 1295.1377 871.9095 L 1251.8307 871.9095 L 1251.8307 895.5315 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="34" d="M 1328.5613 794.0836 L 1359.184 824.7063 L 1375.8873 808.003 L 1345.2646 777.3803 L 1328.5613 794.0836 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="30" d="M 1354.1519 757.6663 L 1384.7746 788.289 L 1401.4779 771.5857 L 1370.8552 740.963 L 1354.1519 757.6663 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="71" d="M 1529.3897 875.8465 L 1458.5235 875.8465 L 1458.5235 915.2165 L 1529.3897 915.2165 L 1529.3897 875.8465 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="3" d="M 1725.2559 786.2795 L 1656.3582 786.2795 L 1656.3582 823.6811 L 1725.2557 823.6812 L 1725.2559 786.2795 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="1" d="M 1725.2558 727.2244 L 1656.3583 727.2243 L 1656.3583 764.6261 L 1725.2558 764.626 L 1725.2558 727.2244 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="7" d="M 1863.0511 727.2243 L 1794.1535 727.2243 L 1794.1535 764.626 L 1863.0511 764.626 L 1863.0511 727.2243 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="39" d="M 1416.1308 682.974 L 1446.7535 652.3513 L 1430.0502 635.648 L 1399.4275 666.2707 L 1416.1308 682.974 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="72" d="M 1486.0826 698.6811 L 1690.807 698.6811 L 1690.8071 493.9565 L 1486.0825 493.9565 L 1486.0826 698.6811 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="58" d="M 1795.7281 541.2007 L 1719.744 541.2008 L 1719.744 659.311 L 1795.7281 659.3111 L 1795.7281 541.2007 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="103" d="M 1940.6496 570.8543 L 1818.6024 570.8543 L 1818.6024 692.9014 L 1940.6496 692.9014 L 1940.6496 570.8543 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="84" d="M 1932.933 513.6417 L 1976.2399 513.6416 L 1976.24 490.0197 L 1932.933 490.0197 L 1932.933 513.6417 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="82" d="M 1970.3346 578.6024 L 1970.3346 621.9094 L 1993.9566 621.9094 L 1993.9566 578.6024 L 1970.3346 578.6024 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="89" d="M 1696.7125 438.8386 L 1653.4055 438.8386 L 1653.4055 462.4607 L 1696.7124 462.4605 L 1696.7125 438.8386 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="90" d="M 1653.4056 415.2164 L 1696.7124 415.2165 L 1696.7125 391.5945 L 1653.4055 391.5946 L 1653.4056 415.2164 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="87" d="M 1389.0585 563.5998 L 1406.597 581.1383 L 1415.7839 571.9514 L 1398.2454 554.4129 L 1389.0585 563.5998 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="86" d="M 1380.2002 503.5604 L 1397.7387 521.0989 L 1406.9256 511.912 L 1389.3871 494.3735 L 1380.2002 503.5604 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="85" d="M 1314.2553 488.7966 L 1331.7938 506.3351 L 1340.9807 497.1482 L 1323.4422 479.6097 L 1314.2553 488.7966 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="83" d="M 1308.3498 415.962 L 1325.8883 433.5005 L 1335.0752 424.3136 L 1317.5367 406.7751 L 1308.3498 415.962 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="81" d="M 1241.4207 414.9777 L 1258.9592 432.5162 L 1268.1461 423.3293 L 1250.6076 405.7908 L 1241.4207 414.9777 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="53" d="M 1056.0344 934.8606 L 1025.4117 965.4833 L 1042.115 982.1866 L 1072.7377 951.5639 L 1056.0344 934.8606 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="54" d="M 1024.5384 903.3646 L 993.9157 933.9873 L 1010.619 950.6906 L 1041.2417 920.0679 L 1024.5384 903.3646 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="48" d="M 993.0423 871.8685 L 962.4196 902.4912 L 979.1229 919.1945 L 1009.7456 888.5718 L 993.0423 871.8685 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="51" d="M 923.1604 784.27 L 892.5377 814.8927 L 909.241 831.596 L 939.8637 800.9733 L 923.1604 784.27 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="49" d="M 879.8533 742.9315 L 849.2306 773.5542 L 865.9339 790.2575 L 896.5566 759.6348 L 879.8533 742.9315 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="47" d="M 840.4543 681.0345 L 809.8316 650.4118 L 793.1283 667.1151 L 823.751 697.7378 L 840.4543 681.0345 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="37" d="M 820.7282 542.185 L 777.4212 542.185 L 777.4212 565.807 L 820.7282 565.807 L 820.7282 542.185 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="93" d="M 975.4946 440.2396 L 957.9561 457.7781 L 967.143 466.965 L 984.6815 449.4265 L 975.4946 440.2396 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="91" d="M 1051.282 364.4522 L 1033.7435 381.9907 L 1042.9304 391.1776 L 1060.4689 373.6391 L 1051.282 364.4522 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="92" d="M 981.4001 362.4837 L 963.8616 380.0222 L 973.0485 389.2091 L 990.587 371.6706 L 981.4001 362.4837 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="94" d="M 900.6915 448.1137 L 883.153 465.6522 L 892.3399 474.8391 L 909.8784 457.3006 L 900.6915 448.1137 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="95" d="M 819.5052 494.5241 L 837.0437 476.9856 L 827.8568 467.7987 L 810.3183 485.3372 L 819.5052 494.5241 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="38" d="M 1108.1298 318.7598 L 1108.1298 275.4528 L 1084.5078 275.4528 L 1084.5078 318.7598 L 1108.1298 318.7598 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="36" d="M 1151.4369 318.7598 L 1151.4369 275.4528 L 1127.8149 275.4528 L 1127.8149 318.7598 L 1151.4369 318.7598 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="88" d="M 1275.8695 329.3478 L 1293.408 346.8863 L 1302.5949 337.6994 L 1285.0564 320.1609 L 1275.8695 329.3478 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="56" d="M 1194.744 335.4921 L 1194.744 292.1851 L 1171.122 292.1851 L 1171.122 335.4921 L 1194.744 335.4921 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="55" d="M 1238.0511 334.5078 L 1238.0511 291.2008 L 1214.4291 291.2008 L 1214.4291 334.5078 L 1238.0511 334.5078 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="17" d="M 1191.7913 253.7992 L 1235.0983 253.7992 L 1235.0983 230.1772 L 1191.7913 230.1772 L 1191.7913 253.7992 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="19" d="M 1375.8463 159.311 L 1306.9487 159.311 L 1306.9487 196.7126 L 1375.8463 196.7126 L 1375.8463 159.311 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="75" d="M 1379.7834 218.3662 L 1308.9172 218.3662 L 1308.9172 257.7362 L 1379.7834 257.7362 L 1379.7834 218.3662 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="70" d="M 1667.1851 234.1142 L 450.6496 234.1142 L 450.6495 88.4449 L 1667.185 88.4449 L 1667.1851 234.1142 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="23" d="M 1555.9645 400.4527 L 1487.0669 400.4527 L 1487.0669 363.0511 L 1555.9645 363.0511 L 1555.9645 400.4527 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="76" d="M 1494.9409 460.4921 L 1424.0747 460.4921 L 1424.0747 421.1221 L 1494.9409 421.1221 L 1494.9409 460.4921 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="27" d="M 1479.1928 519.5472 L 1410.2952 519.5472 L 1410.2952 482.1456 L 1479.1928 482.1456 L 1479.1928 519.5472 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="46" d="M 1292.2549 564.8638 L 1261.6322 534.2411 L 1278.3355 517.5378 L 1308.9582 548.1605 L 1292.2549 564.8638 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="40" d="M 1221.3887 493.9976 L 1190.766 463.3749 L 1207.4693 446.6716 L 1238.092 477.2943 L 1221.3887 493.9976 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="41" d="M 970.3755 557.8631 L 939.7528 588.4858 L 923.0495 571.7825 L 953.6722 541.1598 L 970.3755 557.8631 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="45" d="M 1041.2417 486.997 L 1010.619 517.6197 L 993.9157 500.9164 L 1024.5384 470.2937 L 1041.2417 486.997 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="50" d="M 1012.7273 789.2732 L 982.1046 758.6505 L 998.8079 741.9472 L 1029.4306 772.5699 L 1012.7273 789.2732 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="96" d="M 1088.3749 854.1519 L 1118.9976 884.7746 L 1102.2943 901.4779 L 1071.6716 870.8552 L 1088.3749 854.1519 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="25" d="M 1120.8552 822.6559 L 1151.4779 853.2786 L 1134.7746 869.9819 L 1104.1519 839.3592 L 1120.8552 822.6559 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="32" d="M 1209.2435 789.4987 L 1239.8662 758.876 L 1256.5695 775.5793 L 1225.9468 806.202 L 1209.2435 789.4987 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="9" d="M 1043.1692 982.1457 L 1086.4762 982.1457 L 1086.4762 1005.7677 L 1043.1692 1005.7677 L 1043.1692 982.1457 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="14" d="M 341.3975 965.4133 L 341.3975 896.5157 L 378.7991 896.5157 L 378.7991 965.4133 L 341.3975 965.4133 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="110" d="M 362.0669 848.2873 L 318.7598 848.2874 L 318.7598 824.6654 L 362.0667 824.6655 L 362.0669 848.2873 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="111" d="M 362.0668 801.0433 L 318.7597 801.0432 L 318.7599 777.4214 L 362.0668 777.4213 L 362.0668 801.0433 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="109" d="M 562.8543 1029.3896 L 519.5472 1029.3897 L 519.5472 1005.7677 L 562.8543 1005.7678 L 562.8543 1029.3896 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <path data-record="ComponentBody" data-layer="MECHANICAL13" data-component="108" d="M 485.0984 1378.7991 L 485.0983 1309.9016 L 447.6967 1309.9016 L 447.6966 1378.7991 L 485.0984 1378.7991 Z" fill="#ec4899" fill-opacity="0.08" fill-rule="evenodd" stroke="#ec4899" stroke-opacity="0.72" stroke-width="1.5"/>
+    <rect data-record="Fill" data-layer="MECHANICAL13" data-keepout="false" x="1749.7735" y="511.1481" width="15.8858" height="75.9842" fill="#ec4899" fill-opacity="0.6" transform="rotate(-270 1757.7164 549.1402)"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1127.8149" y1="380.9635" x2="1382.5404" y2="635.689" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="873.0894" y1="635.689" x2="1127.8149" y2="890.4145" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="873.0894" y1="635.689" x2="1127.8149" y2="380.9635" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1127.8149" y1="890.4145" x2="1382.5404" y2="635.689" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="404.3896" y1="113.0511" x2="473.2873" y2="113.0511" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="404.3896" y1="150.4525" x2="473.2873" y2="150.4526" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="404.3896" y1="150.4525" x2="404.3896" y2="113.0511" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="473.2873" y1="150.4526" x2="473.2873" y2="113.0511" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="594.3503" y1="265.6102" x2="663.248" y2="265.6102" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="594.3503" y1="228.2087" x2="663.248" y2="228.2088" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="663.248" y1="265.6102" x2="663.248" y2="228.2088" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="594.3503" y1="265.6102" x2="594.3503" y2="228.2087" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="739.0354" y1="264.626" x2="807.9331" y2="264.626" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="739.0354" y1="227.2245" x2="807.9331" y2="227.2246" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="807.9331" y1="264.626" x2="807.9331" y2="227.2246" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="739.0354" y1="264.626" x2="739.0354" y2="227.2245" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="643.563" x2="472.3032" y2="667.1849" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="667.185" x2="515.6102" y2="643.563" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="643.563" x2="515.6102" y2="643.563" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3032" y1="667.1849" x2="515.6102" y2="667.185" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="710.4921" x2="472.3031" y2="686.87" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="710.4922" x2="515.6102" y2="686.8701" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="686.87" x2="515.6102" y2="686.8701" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="710.4921" x2="515.6102" y2="710.4922" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="753.7992" x2="472.3031" y2="730.1772" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="753.7992" x2="515.6102" y2="730.1771" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="730.1772" x2="515.6102" y2="730.1771" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="753.7992" x2="515.6102" y2="753.7992" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="797.1063" x2="472.3031" y2="773.4843" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="797.1062" x2="515.6102" y2="773.4843" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="773.4843" x2="515.6102" y2="773.4843" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="797.1063" x2="515.6102" y2="797.1062" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="816.7913" x2="472.3032" y2="840.4132" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="840.4133" x2="515.6102" y2="816.7913" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="816.7913" x2="515.6102" y2="816.7913" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3032" y1="840.4132" x2="515.6102" y2="840.4133" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="883.7205" x2="472.3031" y2="860.0985" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="515.6102" y1="883.7206" x2="515.6102" y2="860.0985" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="860.0985" x2="515.6102" y2="860.0985" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="472.3031" y1="883.7205" x2="515.6102" y2="883.7206" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="454.5865" y1="921.1221" x2="478.2085" y2="921.1221" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="454.5866" y1="964.4292" x2="478.2084" y2="964.4292" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="478.2084" y1="964.4292" x2="478.2085" y2="921.1221" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="454.5865" y1="921.1221" x2="454.5866" y2="964.4292" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="722.2621" y1="990.0895" x2="738.9654" y2="1006.7928" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="752.8849" y1="959.4668" x2="769.5881" y2="976.17" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="722.2621" y1="990.0895" x2="752.8849" y2="959.4668" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="738.9654" y1="1006.7928" x2="769.5881" y2="976.17" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="690.7661" y1="958.5935" x2="707.4694" y2="975.2968" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="721.3889" y1="927.9708" x2="738.0921" y2="944.674" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="690.7661" y1="958.5935" x2="721.3889" y2="927.9708" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="707.4694" y1="975.2968" x2="738.0921" y2="944.674" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="689.8927" y1="896.4746" x2="706.596" y2="913.1779" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="659.27" y1="927.0974" x2="675.9732" y2="943.8006" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="675.9732" y1="943.8006" x2="706.596" y2="913.1779" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="659.27" y1="927.0974" x2="689.8927" y2="896.4746" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="658.3966" y1="864.9786" x2="675.0999" y2="881.6819" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="627.7739" y1="895.6014" x2="644.4771" y2="912.3046" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="644.4771" y1="912.3046" x2="675.0999" y2="881.6819" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="627.7739" y1="895.6014" x2="658.3966" y2="864.9786" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="525.4525" y1="964.429" x2="525.4525" y2="921.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="501.8305" y1="964.429" x2="501.8305" y2="921.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="501.8305" y1="921.122" x2="525.4525" y2="921.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="501.8305" y1="964.429" x2="525.4525" y2="964.429" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="568.7597" y1="1222.3031" x2="568.7597" y2="1088.4449" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="462.4605" y1="1222.3031" x2="462.4605" y2="1088.4449" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="462.4605" y1="1088.4449" x2="568.7597" y2="1088.4449" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="462.4605" y1="1222.3031" x2="568.7597" y2="1222.3031" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="517.5786" y1="1003.7993" x2="560.8857" y2="1003.7992" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="517.5786" y1="1027.4213" x2="560.8856" y2="1027.4213" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="517.5786" y1="1027.4213" x2="517.5786" y2="1003.7993" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="560.8856" y1="1027.4213" x2="560.8857" y2="1003.7992" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="591.3976" y1="1178.996" x2="615.0196" y2="1178.996" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="591.3977" y1="1135.6889" x2="615.0195" y2="1135.6889" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="591.3976" y1="1178.996" x2="591.3977" y2="1135.6889" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="615.0195" y1="1135.6889" x2="615.0196" y2="1178.996" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="588.4448" y1="1395.5315" x2="643.5629" y2="1395.5315" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="588.4448" y1="1277.4213" x2="643.5629" y2="1277.4213" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="643.5629" y1="1395.5315" x2="643.5629" y2="1277.4213" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="588.4448" y1="1395.5315" x2="588.4448" y2="1277.4213" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="710.4921" y1="1338.4448" x2="734.1141" y2="1338.4448" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="710.4922" y1="1295.1377" x2="734.114" y2="1295.1377" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="710.4921" y1="1338.4448" x2="710.4922" y2="1295.1377" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="734.114" y1="1295.1377" x2="734.1141" y2="1338.4448" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="684.9014" y1="1230.1773" x2="728.2085" y2="1230.1772" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="684.9014" y1="1253.7993" x2="728.2084" y2="1253.7993" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="684.9014" y1="1253.7993" x2="684.9014" y2="1230.1773" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="728.2084" y1="1253.7993" x2="728.2085" y2="1230.1772" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1138.8386" y1="1240.0198" x2="1162.4605" y2="1240.0198" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1138.8385" y1="1283.3268" x2="1162.4605" y2="1283.3268" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1162.4605" y1="1283.3268" x2="1162.4605" y2="1240.0198" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1138.8385" y1="1283.3268" x2="1138.8386" y2="1240.0198" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1036.4765" y1="1240.0197" x2="1060.0984" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1036.4764" y1="1283.3267" x2="1060.0984" y2="1283.3267" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1060.0984" y1="1283.3267" x2="1060.0984" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1036.4764" y1="1283.3267" x2="1036.4765" y2="1240.0197" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="934.1141" y1="1240.0196" x2="957.7361" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="934.1141" y1="1283.3267" x2="957.736" y2="1283.3267" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="957.736" y1="1283.3267" x2="957.7361" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="934.1141" y1="1283.3267" x2="934.1141" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="835.6889" y1="1240.0196" x2="859.3109" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="835.6888" y1="1283.3267" x2="859.3109" y2="1283.3267" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="859.3109" y1="1283.3267" x2="859.3109" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="835.6888" y1="1283.3267" x2="835.6889" y2="1240.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1190.1075" y1="1161.979" x2="1190.1075" y2="1138.357" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1146.8004" y1="1161.979" x2="1146.8004" y2="1138.3571" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1146.8004" y1="1161.979" x2="1190.1075" y2="1161.979" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1146.8004" y1="1138.3571" x2="1190.1075" y2="1138.357" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1247.0203" y1="1138.3569" x2="1247.0204" y2="1161.9789" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1290.3274" y1="1161.9789" x2="1290.3274" y2="1138.357" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1247.0203" y1="1138.3569" x2="1290.3274" y2="1138.357" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1247.0204" y1="1161.9789" x2="1290.3274" y2="1161.9789" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1519.5471" y1="1137.6574" x2="1519.5471" y2="1114.0354" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1476.24" y1="1137.6573" x2="1476.24" y2="1114.0355" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1476.24" y1="1137.6573" x2="1519.5471" y2="1137.6574" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1476.24" y1="1114.0355" x2="1519.5471" y2="1114.0354" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1634.7046" y1="1073.681" x2="1634.7046" y2="1004.7833" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1597.3031" y1="1073.681" x2="1597.3032" y2="1004.7833" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1597.3032" y1="1004.7833" x2="1634.7046" y2="1004.7833" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1597.3031" y1="1073.681" x2="1634.7046" y2="1073.681" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1383.7204" y1="1064.8228" x2="1423.0905" y2="1064.8228" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1383.7204" y1="993.9567" x2="1423.0905" y2="993.9567" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1383.7204" y1="1064.8228" x2="1383.7204" y2="993.9567" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1423.0905" y1="1064.8228" x2="1423.0905" y2="993.9567" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1479.1927" y1="961.4763" x2="1548.0904" y2="961.4763" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1479.1927" y1="998.8777" x2="1548.0904" y2="998.8778" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1479.1927" y1="998.8777" x2="1479.1927" y2="961.4763" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1548.0904" y1="998.8778" x2="1548.0904" y2="961.4763" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1580.5707" y1="816.7914" x2="1619.9408" y2="816.7914" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1580.5707" y1="887.6575" x2="1619.9408" y2="887.6575" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1619.9408" y1="887.6575" x2="1619.9408" y2="816.7914" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1580.5707" y1="887.6575" x2="1580.5707" y2="816.7914" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5234" y1="796.122" x2="1545.1376" y2="796.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5234" y1="853.2086" x2="1545.1376" y2="853.2086" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5234" y1="853.2086" x2="1458.5234" y2="796.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1545.1376" y1="853.2086" x2="1545.1376" y2="796.122" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1376.8306" y1="941.7914" x2="1376.8306" y2="872.8937" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1414.232" y1="941.7914" x2="1414.2321" y2="872.8937" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1376.8306" y1="941.7914" x2="1414.232" y2="941.7914" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1376.8306" y1="872.8937" x2="1414.2321" y2="872.8937" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1293.1691" y1="919.1536" x2="1336.4762" y2="919.1535" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1293.1691" y1="942.7756" x2="1336.4761" y2="942.7756" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1293.1691" y1="942.7756" x2="1293.1691" y2="919.1536" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1336.4761" y1="942.7756" x2="1336.4762" y2="919.1535" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1192.7754" y1="938.8387" x2="1236.0825" y2="938.8386" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1192.7754" y1="962.4607" x2="1236.0824" y2="962.4607" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1192.7754" y1="962.4607" x2="1192.7754" y2="938.8387" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1236.0824" y1="962.4607" x2="1236.0825" y2="938.8386" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1251.8307" y1="895.5315" x2="1251.8307" y2="871.9095" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1295.1378" y1="895.5314" x2="1295.1378" y2="871.9096" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1251.8307" y1="871.9095" x2="1295.1378" y2="871.9096" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1251.8307" y1="895.5315" x2="1295.1378" y2="895.5314" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1328.5613" y1="794.0836" x2="1345.2646" y2="777.3803" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1359.1841" y1="824.7063" x2="1375.8873" y2="808.0031" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1345.2646" y1="777.3803" x2="1375.8873" y2="808.0031" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1328.5613" y1="794.0836" x2="1359.1841" y2="824.7063" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1354.1519" y1="757.6663" x2="1370.8552" y2="740.963" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1384.7747" y1="788.289" x2="1401.4779" y2="771.5858" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1370.8552" y1="740.963" x2="1401.4779" y2="771.5858" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1354.1519" y1="757.6663" x2="1384.7747" y2="788.289" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1529.3896" y1="915.2165" x2="1529.3896" y2="875.8464" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5235" y1="915.2165" x2="1458.5235" y2="875.8464" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5235" y1="915.2165" x2="1529.3896" y2="915.2165" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1458.5235" y1="875.8464" x2="1529.3896" y2="875.8464" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="786.2795" x2="1725.2559" y2="786.2795" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="823.6809" x2="1725.2558" y2="823.681" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="823.6809" x2="1656.3581" y2="786.2795" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1725.2558" y1="823.681" x2="1725.2559" y2="786.2795" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="727.2244" x2="1725.2558" y2="727.2244" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="764.6258" x2="1725.2559" y2="764.6259" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1656.3581" y1="764.6258" x2="1656.3581" y2="727.2244" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1725.2558" y1="727.2244" x2="1725.2559" y2="764.6259" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1794.1534" y1="727.2243" x2="1863.0511" y2="727.2243" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1794.1534" y1="764.6258" x2="1863.0511" y2="764.6258" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1794.1534" y1="764.6258" x2="1794.1534" y2="727.2243" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1863.0511" y1="764.6258" x2="1863.0511" y2="727.2243" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1399.4275" y1="666.2707" x2="1416.1308" y2="682.974" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1430.0503" y1="635.648" x2="1446.7535" y2="652.3512" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1399.4275" y1="666.2707" x2="1430.0503" y2="635.648" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1416.1308" y1="682.974" x2="1446.7535" y2="652.3512" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1719.744" y1="659.311" x2="1719.744" y2="541.2008" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1795.7281" y1="659.3111" x2="1795.7281" y2="541.2007" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1719.744" y1="659.311" x2="1795.7281" y2="659.3111" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1719.744" y1="541.2008" x2="1795.7281" y2="541.2007" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1818.6024" y1="570.8543" x2="1940.6496" y2="570.8543" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1818.6024" y1="692.9014" x2="1940.6496" y2="692.9014" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1818.6024" y1="692.9014" x2="1818.6024" y2="570.8543" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1940.6496" y1="692.9014" x2="1940.6496" y2="570.8543" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1932.933" y1="513.6417" x2="1976.24" y2="513.6416" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1932.9331" y1="490.0196" x2="1976.2401" y2="490.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1976.24" y1="513.6416" x2="1976.2401" y2="490.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1932.933" y1="513.6417" x2="1932.9331" y2="490.0196" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1970.3346" y1="578.6024" x2="1970.3347" y2="621.9096" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1993.9567" y1="621.9095" x2="1993.9567" y2="578.6025" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1970.3347" y1="621.9096" x2="1993.9567" y2="621.9095" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1970.3346" y1="578.6024" x2="1993.9567" y2="578.6025" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4054" y1="438.8387" x2="1696.7125" y2="438.8386" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4054" y1="462.4607" x2="1696.7124" y2="462.4607" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4054" y1="462.4607" x2="1653.4054" y2="438.8387" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1696.7124" y1="462.4607" x2="1696.7125" y2="438.8386" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4056" y1="415.2164" x2="1696.7126" y2="415.2165" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4055" y1="391.5944" x2="1696.7127" y2="391.5943" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1696.7126" y1="415.2165" x2="1696.7127" y2="391.5943" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1653.4055" y1="391.5944" x2="1653.4056" y2="415.2164" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1389.0586" y1="563.5999" x2="1406.597" y2="581.1383" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1398.2454" y1="554.413" x2="1415.7838" y2="571.9515" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1406.597" y1="581.1383" x2="1415.7838" y2="571.9515" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1389.0586" y1="563.5999" x2="1398.2454" y2="554.413" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1380.2003" y1="503.5605" x2="1397.7387" y2="521.0989" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1389.3871" y1="494.3736" x2="1406.9255" y2="511.9121" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1397.7387" y1="521.0989" x2="1406.9255" y2="511.9121" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1380.2003" y1="503.5605" x2="1389.3871" y2="494.3736" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1314.2554" y1="488.7967" x2="1331.7938" y2="506.3351" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1323.4422" y1="479.6098" x2="1340.9806" y2="497.1483" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1331.7938" y1="506.3351" x2="1340.9806" y2="497.1483" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1314.2554" y1="488.7967" x2="1323.4422" y2="479.6098" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1308.3499" y1="415.9621" x2="1325.8883" y2="433.5005" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1317.5367" y1="406.7752" x2="1335.0751" y2="424.3137" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1325.8883" y1="433.5005" x2="1335.0751" y2="424.3137" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1308.3499" y1="415.9621" x2="1317.5367" y2="406.7752" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1241.4208" y1="414.9778" x2="1258.9592" y2="432.5162" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1250.6076" y1="405.7909" x2="1268.146" y2="423.3294" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1258.9592" y1="432.5162" x2="1268.146" y2="423.3294" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1241.4208" y1="414.9778" x2="1250.6076" y2="405.7909" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1056.0344" y1="934.8606" x2="1072.7377" y2="951.5639" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1025.4117" y1="965.4834" x2="1042.1149" y2="982.1866" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1042.1149" y1="982.1866" x2="1072.7377" y2="951.5639" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1025.4117" y1="965.4834" x2="1056.0344" y2="934.8606" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1024.5384" y1="903.3646" x2="1041.2417" y2="920.0679" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="993.9157" y1="933.9874" x2="1010.6189" y2="950.6906" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1010.6189" y1="950.6906" x2="1041.2417" y2="920.0679" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="993.9157" y1="933.9874" x2="1024.5384" y2="903.3646" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="993.0423" y1="871.8685" x2="1009.7456" y2="888.5718" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="962.4196" y1="902.4913" x2="979.1228" y2="919.1945" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="979.1228" y1="919.1945" x2="1009.7456" y2="888.5718" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="962.4196" y1="902.4913" x2="993.0423" y2="871.8685" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="923.1604" y1="784.27" x2="939.8637" y2="800.9733" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="892.5377" y1="814.8928" x2="909.2409" y2="831.596" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="909.2409" y1="831.596" x2="939.8637" y2="800.9733" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="892.5377" y1="814.8928" x2="923.1604" y2="784.27" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="879.8533" y1="742.9315" x2="896.5566" y2="759.6348" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="849.2306" y1="773.5543" x2="865.9338" y2="790.2575" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="865.9338" y1="790.2575" x2="896.5566" y2="759.6348" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="849.2306" y1="773.5543" x2="879.8533" y2="742.9315" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="823.751" y1="697.7378" x2="840.4543" y2="681.0345" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="793.1283" y1="667.115" x2="809.8315" y2="650.4118" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="793.1283" y1="667.115" x2="823.751" y2="697.7378" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="809.8315" y1="650.4118" x2="840.4543" y2="681.0345" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="820.7282" y1="565.807" x2="820.7282" y2="542.185" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="777.4211" y1="565.8069" x2="777.4211" y2="542.1851" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="777.4211" y1="565.8069" x2="820.7282" y2="565.807" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="777.4211" y1="542.1851" x2="820.7282" y2="542.185" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="957.9561" y1="457.7781" x2="975.4945" y2="440.2397" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="967.1429" y1="466.9649" x2="984.6814" y2="449.4265" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="957.9561" y1="457.7781" x2="967.1429" y2="466.9649" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="975.4945" y1="440.2397" x2="984.6814" y2="449.4265" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1033.7435" y1="381.9907" x2="1051.2819" y2="364.4523" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1042.9303" y1="391.1775" x2="1060.4688" y2="373.6391" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1033.7435" y1="381.9907" x2="1042.9303" y2="391.1775" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1051.2819" y1="364.4523" x2="1060.4688" y2="373.6391" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="963.8616" y1="380.0222" x2="981.4" y2="362.4838" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="973.0484" y1="389.209" x2="990.5869" y2="371.6706" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="963.8616" y1="380.0222" x2="973.0484" y2="389.209" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="981.4" y1="362.4838" x2="990.5869" y2="371.6706" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="883.153" y1="465.6522" x2="900.6914" y2="448.1138" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="892.3398" y1="474.839" x2="909.8783" y2="457.3006" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="883.153" y1="465.6522" x2="892.3398" y2="474.839" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="900.6914" y1="448.1138" x2="909.8783" y2="457.3006" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="819.5053" y1="494.524" x2="837.0437" y2="476.9856" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="810.3184" y1="485.3372" x2="827.8569" y2="467.7988" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="827.8569" y1="467.7988" x2="837.0437" y2="476.9856" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="810.3184" y1="485.3372" x2="819.5053" y2="494.524" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1084.5078" y1="318.7598" x2="1108.1298" y2="318.7598" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1084.5079" y1="275.4527" x2="1108.1297" y2="275.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1084.5078" y1="318.7598" x2="1084.5079" y2="275.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1108.1297" y1="275.4527" x2="1108.1298" y2="318.7598" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1127.8149" y1="318.7598" x2="1151.4369" y2="318.7598" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1127.8149" y1="275.4527" x2="1151.4369" y2="275.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1127.8149" y1="318.7598" x2="1127.8149" y2="275.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1151.4369" y1="318.7598" x2="1151.4369" y2="275.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1275.8696" y1="329.3479" x2="1293.408" y2="346.8863" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1285.0564" y1="320.161" x2="1302.5948" y2="337.6995" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1293.408" y1="346.8863" x2="1302.5948" y2="337.6995" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1275.8696" y1="329.3479" x2="1285.0564" y2="320.161" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1171.122" y1="335.4921" x2="1194.744" y2="335.4921" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1171.1221" y1="292.185" x2="1194.7439" y2="292.185" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1171.122" y1="335.4921" x2="1171.1221" y2="292.185" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1194.7439" y1="292.185" x2="1194.744" y2="335.4921" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1214.4291" y1="334.5078" x2="1238.0511" y2="334.5078" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1214.4291" y1="291.2007" x2="1238.0511" y2="291.2007" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1214.4291" y1="334.5078" x2="1214.4291" y2="291.2007" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1238.0511" y1="334.5078" x2="1238.0511" y2="291.2007" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1191.7913" y1="253.7992" x2="1191.7913" y2="230.1772" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1235.0984" y1="253.7991" x2="1235.0984" y2="230.1773" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1191.7913" y1="230.1772" x2="1235.0984" y2="230.1773" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1191.7913" y1="253.7992" x2="1235.0984" y2="253.7991" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1306.9486" y1="159.311" x2="1375.8463" y2="159.311" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1306.9486" y1="196.7124" x2="1375.8463" y2="196.7125" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1306.9486" y1="196.7124" x2="1306.9486" y2="159.311" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1375.8463" y1="196.7125" x2="1375.8463" y2="159.311" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1379.7833" y1="257.7362" x2="1379.7833" y2="218.3661" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1308.9172" y1="257.7362" x2="1308.9172" y2="218.3661" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1308.9172" y1="257.7362" x2="1379.7833" y2="257.7362" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1308.9172" y1="218.3661" x2="1379.7833" y2="218.3661" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1487.0668" y1="400.4527" x2="1555.9645" y2="400.4527" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1487.0668" y1="363.0513" x2="1555.9645" y2="363.0512" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1487.0668" y1="400.4527" x2="1487.0668" y2="363.0513" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1555.9645" y1="400.4527" x2="1555.9645" y2="363.0512" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1494.9408" y1="460.4922" x2="1494.9408" y2="421.1221" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1424.0747" y1="460.4922" x2="1424.0747" y2="421.1221" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1424.0747" y1="421.1221" x2="1494.9408" y2="421.1221" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1424.0747" y1="460.4922" x2="1494.9408" y2="460.4922" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1410.2951" y1="519.5472" x2="1479.1928" y2="519.5472" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1410.2951" y1="482.1458" x2="1479.1928" y2="482.1457" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1410.2951" y1="519.5472" x2="1410.2951" y2="482.1458" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1479.1928" y1="519.5472" x2="1479.1928" y2="482.1457" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1292.2549" y1="564.8638" x2="1308.9582" y2="548.1605" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1261.6322" y1="534.241" x2="1278.3354" y2="517.5378" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1278.3354" y1="517.5378" x2="1308.9582" y2="548.1605" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1261.6322" y1="534.241" x2="1292.2549" y2="564.8638" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1221.3887" y1="493.9976" x2="1238.092" y2="477.2943" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1190.766" y1="463.3748" x2="1207.4692" y2="446.6716" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1207.4692" y1="446.6716" x2="1238.092" y2="477.2943" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1190.766" y1="463.3748" x2="1221.3887" y2="493.9976" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="953.6722" y1="541.1598" x2="970.3755" y2="557.8631" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="923.0495" y1="571.7826" x2="939.7527" y2="588.4858" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="923.0495" y1="571.7826" x2="953.6722" y2="541.1598" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="939.7527" y1="588.4858" x2="970.3755" y2="557.8631" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1024.5384" y1="470.2937" x2="1041.2417" y2="486.997" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="993.9157" y1="500.9165" x2="1010.6189" y2="517.6197" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="993.9157" y1="500.9165" x2="1024.5384" y2="470.2937" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1010.6189" y1="517.6197" x2="1041.2417" y2="486.997" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1012.7273" y1="789.2732" x2="1029.4306" y2="772.5699" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="982.1046" y1="758.6504" x2="998.8078" y2="741.9472" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="998.8078" y1="741.9472" x2="1029.4306" y2="772.5699" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="982.1046" y1="758.6504" x2="1012.7273" y2="789.2732" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1088.3749" y1="854.1519" x2="1118.9976" y2="884.7747" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1071.6716" y1="870.8553" x2="1102.2943" y2="901.478" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1102.2943" y1="901.478" x2="1118.9976" y2="884.7747" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1071.6716" y1="870.8553" x2="1088.3749" y2="854.1519" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1104.1519" y1="839.3592" x2="1120.8552" y2="822.6559" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1134.7747" y1="869.9819" x2="1151.4779" y2="853.2787" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1104.1519" y1="839.3592" x2="1134.7747" y2="869.9819" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1120.8552" y1="822.6559" x2="1151.4779" y2="853.2787" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1209.2435" y1="789.4987" x2="1225.9468" y2="806.202" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1239.8663" y1="758.876" x2="1256.5695" y2="775.5792" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1225.9468" y1="806.202" x2="1256.5695" y2="775.5792" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1209.2435" y1="789.4987" x2="1239.8663" y2="758.876" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1043.1692" y1="1005.7677" x2="1043.1692" y2="982.1457" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1086.4763" y1="1005.7676" x2="1086.4763" y2="982.1458" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1043.1692" y1="1005.7677" x2="1086.4763" y2="1005.7676" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="1043.1692" y1="982.1457" x2="1086.4763" y2="982.1458" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="341.3975" y1="965.4133" x2="341.3975" y2="896.5156" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="378.799" y1="965.4133" x2="378.799" y2="896.5156" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="341.3975" y1="896.5156" x2="378.799" y2="896.5156" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="341.3975" y1="965.4133" x2="378.799" y2="965.4133" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="848.2873" x2="362.0669" y2="848.2873" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="824.6653" x2="362.0667" y2="824.6653" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="848.2873" x2="318.7597" y2="824.6653" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="362.0667" y1="824.6653" x2="362.0669" y2="848.2873" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="801.0432" x2="362.0668" y2="801.0433" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="777.4212" x2="362.0669" y2="777.4212" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="318.7597" y1="801.0432" x2="318.7597" y2="777.4212" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="362.0668" y1="801.0433" x2="362.0669" y2="777.4212" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="519.5471" y1="1029.3896" x2="562.8543" y2="1029.3896" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="519.5471" y1="1005.7676" x2="562.8541" y2="1005.7676" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="519.5471" y1="1029.3896" x2="519.5471" y2="1005.7676" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="562.8541" y1="1005.7676" x2="562.8543" y2="1029.3896" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="485.0983" y1="1309.9015" x2="485.0984" y2="1378.7991" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="447.6968" y1="1378.7992" x2="447.6969" y2="1309.9015" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="447.6969" y1="1309.9015" x2="485.0983" y2="1309.9015" stroke="#ec4899" stroke-width="3.937"/>
+    <line data-record="Track" data-layer="MECHANICAL13" x1="447.6968" y1="1378.7992" x2="485.0984" y2="1378.7991" stroke="#ec4899" stroke-width="3.937"/>
+    <polyline data-record="Arc" data-layer="MECHANICAL13" points="1147.4999,840.3045 1147.3315,837.7351 1146.8292,835.2097 1146.0015,832.7714 1144.8627,830.462 1143.4321,828.3211 1141.7343,826.3851 1139.7984,824.6874 1137.6574,823.2568 1135.3481,822.118 1132.9098,821.2903 1130.3843,820.7879 1127.8149,820.6195 1125.2455,820.7879 1122.7201,821.2903 1120.2818,822.118 1117.9724,823.2568 1115.8315,824.6874 1113.8955,826.3851 1112.1978,828.3211 1110.7672,830.462 1109.6284,832.7714 1108.8007,835.2097 1108.2983,837.7351 1108.1299,840.3045 1108.2983,842.8739 1108.8007,845.3994 1109.6284,847.8377 1110.7672,850.147 1112.1978,852.288 1113.8955,854.2239 1115.8315,855.9217 1117.9724,857.3523 1120.2818,858.4911 1122.7201,859.3188 1125.2455,859.8211 1127.8149,859.9895 1130.3843,859.8211 1132.9098,859.3188 1135.3481,858.4911 1137.6574,857.3523 1139.7984,855.9217 1141.7343,854.2239 1143.4321,852.288 1144.8627,850.147 1146.0015,847.8377 1146.8292,845.3994 1147.3315,842.8739 1147.4999,840.3045" fill="none" stroke="#ec4899" stroke-width="3.937"/>
+    <polyline data-record="Arc" data-layer="MECHANICAL13" points="1924.9016,606.2872 1924.7332,603.7178 1924.2309,601.1924 1923.4032,598.7541 1922.2644,596.4447 1920.8338,594.3038 1919.136,592.3678 1917.2001,590.6701 1915.0591,589.2395 1912.7498,588.1007 1910.3115,587.273 1907.786,586.7706 1905.2166,586.6022 1902.6472,586.7706 1900.1218,587.273 1897.6835,588.1007 1895.3741,589.2395 1893.2332,590.6701 1891.2972,592.3678 1889.5995,594.3038 1888.1689,596.4447 1887.0301,598.7541 1886.2024,601.1924 1885.7,603.7178 1885.5316,606.2872 1885.7,608.8566 1886.2024,611.3821 1887.0301,613.8204 1888.1689,616.1297 1889.5995,618.2707 1891.2972,620.2066 1893.2332,621.9044 1895.3741,623.335 1897.6835,624.4738 1900.1218,625.3015 1902.6472,625.8038 1905.2166,625.9722 1907.786,625.8038 1910.3115,625.3015 1912.7498,624.4738 1915.0591,623.335 1917.2001,621.9044 1919.136,620.2066 1920.8338,618.2707 1922.2644,616.1297 1923.4032,613.8204 1924.2309,611.3821 1924.7332,608.8566 1924.9016,606.2872" fill="none" stroke="#ec4899" stroke-width="3.937"/>
+  </g>
+</svg>

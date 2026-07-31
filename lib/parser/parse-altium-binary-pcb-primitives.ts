@@ -15,10 +15,12 @@ import { parseAltiumBinaryPropertyRecord } from "./parse-altium-binary-property-
 const PRIMITIVE_TYPE: Record<string, number> = {
   Arcs6: 1,
   BoardRegions: 11,
+  ComponentBodies6: 12,
   Fills6: 6,
   Pads6: 2,
   Regions6: 11,
   ShapeBasedRegions6: 11,
+  ShapeBasedComponentBodies6: 12,
   Texts6: 5,
   Tracks6: 4,
   Vias6: 3,
@@ -27,23 +29,36 @@ const PRIMITIVE_TYPE: Record<string, number> = {
 export type AltiumBinaryPcbPrimitiveFamily =
   | "Arcs6"
   | "BoardRegions"
+  | "ComponentBodies6"
   | "Fills6"
   | "Pads6"
   | "Regions6"
   | "ShapeBasedRegions6"
+  | "ShapeBasedComponentBodies6"
   | "Texts6"
   | "Tracks6"
   | "Vias6"
 
 type SimplePrimitiveFamily = "Arcs6" | "Fills6" | "Tracks6" | "Vias6"
 
-const REGION_STREAM_CONFIG: Record<
-  "BoardRegions" | "Regions6" | "ShapeBasedRegions6",
+type ContourPrimitiveFamily =
+  | "BoardRegions"
+  | "ComponentBodies6"
+  | "Regions6"
+  | "ShapeBasedComponentBodies6"
+  | "ShapeBasedRegions6"
+
+const CONTOUR_STREAM_CONFIG: Record<
+  ContourPrimitiveFamily,
   { extendedVertices: boolean; recordKind: string }
 > = {
   BoardRegions: {
     extendedVertices: false,
     recordKind: "BoardRegion",
+  },
+  ComponentBodies6: {
+    extendedVertices: false,
+    recordKind: "ComponentBodyLegacy",
   },
   Regions6: {
     extendedVertices: false,
@@ -52,6 +67,10 @@ const REGION_STREAM_CONFIG: Record<
   ShapeBasedRegions6: {
     extendedVertices: true,
     recordKind: "Region",
+  },
+  ShapeBasedComponentBodies6: {
+    extendedVertices: true,
+    recordKind: "ComponentBody",
   },
 }
 
@@ -80,10 +99,12 @@ export function parseAltiumBinaryPcbPrimitiveStream(
   }
   if (
     family === "BoardRegions" ||
+    family === "ComponentBodies6" ||
     family === "Regions6" ||
-    family === "ShapeBasedRegions6"
+    family === "ShapeBasedRegions6" ||
+    family === "ShapeBasedComponentBodies6"
   ) {
-    return parseRegionStream(family, bytes, options)
+    return parseContourStream(family, bytes, options)
   }
 
   const maximumRecordLength = options.maximumRecordLength ?? 16 * 1024 * 1024
@@ -436,12 +457,12 @@ function decodeText(
   return new AltiumTextRecord({ items })
 }
 
-function parseRegionStream(
-  family: "BoardRegions" | "Regions6" | "ShapeBasedRegions6",
+function parseContourStream(
+  family: ContourPrimitiveFamily,
   bytes: Uint8Array,
   options: ParseAltiumBinaryPcbPrimitiveOptions,
 ): AltiumRecord[] {
-  const config = REGION_STREAM_CONFIG[family]
+  const config = CONTOUR_STREAM_CONFIG[family]
   const maximumRecordLength = options.maximumRecordLength ?? 16 * 1024 * 1024
   const records: AltiumRecord[] = []
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
@@ -463,7 +484,7 @@ function parseRegionStream(
       maximumRecordLength,
     )
     records.push(
-      decodeRegion(
+      decodeContourPrimitive(
         subrecord.payload,
         recordOffset,
         family,
@@ -478,10 +499,10 @@ function parseRegionStream(
   return records
 }
 
-function decodeRegion(
+function decodeContourPrimitive(
   payload: Uint8Array,
   byteOffset: number,
-  family: "BoardRegions" | "Regions6" | "ShapeBasedRegions6",
+  family: ContourPrimitiveFamily,
   recordKind: string,
   extendedVertices: boolean,
 ): AltiumRecord {
@@ -524,8 +545,16 @@ function decodeRegion(
     field("POLYGON", String(view.getUint16(5, true))),
     field("COMPONENT", String(view.getUint16(7, true))),
     field("HOLECOUNT", String(view.getUint16(14, true))),
-    field("REGIONKIND", getAltiumRegionKindName(propertyKind, isBoardCutout)),
   ]
+  if (
+    family === "BoardRegions" ||
+    family === "Regions6" ||
+    family === "ShapeBasedRegions6"
+  ) {
+    extraFields.push(
+      field("REGIONKIND", getAltiumRegionKindName(propertyKind, isBoardCutout)),
+    )
+  }
 
   let geometryOffset = propertyEnd
   const storedOutlineCount = view.getUint32(geometryOffset, true)
