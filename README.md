@@ -192,13 +192,13 @@ generated `.snap.svg` visual baselines are committed and compared with
 Binary support is currently read-only: untouched documents can return their
 original bytes, but edits are not serialized back into CFB streams. The PCB
 parser now distinguishes source shape-based regions from generated region-fill
-caches and decodes board cutout regions. It does not yet semantically decode
-fills, component bodies, dimensions, or embedded 3D models. Text barcode/frame
-metadata, custom region-based pad outlines, and the unverified trailing bytes
-in newer extended pad-stack subrecords remain pending. Full-stack `PADMODE=2`
-field decoding is implemented but still needs a real corpus fixture. Those
-source bytes and streams remain available through `AltiumCompoundFile` and
-appear in stream summaries.
+caches and decodes board cutout regions and rotated rectangular fills. It does
+not yet semantically decode component bodies, dimensions, or embedded 3D
+models. Text barcode/frame metadata, custom region-based pad outlines, and the
+unverified trailing bytes in newer extended pad-stack subrecords remain
+pending. Full-stack `PADMODE=2` field decoding is implemented but still needs a
+real corpus fixture. Those source bytes and streams remain available through
+`AltiumCompoundFile` and appear in stream summaries.
 
 Schematic property records are parsed generically and visualized, but the
 numeric record IDs do not yet have a complete typed semantic model. Library,

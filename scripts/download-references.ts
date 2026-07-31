@@ -66,6 +66,13 @@ const references: ReferenceSpec[] = [
       "elk-audio/elk-pi-hardware@770960ce5e520cf450182160cd8cff9690a0a869 (CC BY-SA 4.0)",
     url: "https://media.githubusercontent.com/media/elk-audio/elk-pi-hardware/770960ce5e520cf450182160cd8cff9690a0a869/Altium_files/Main.SchDoc",
   },
+  {
+    filename: "novena-edp-adapter-dvt1.PcbDoc",
+    sha256: "17896fdfeaac33a84ac3063db063d0a4d211c127c997632c8000837c0ce6fc12",
+    source:
+      "KiCad/kicad-source-mirror@c2a91caacf90b4d07261658ef44c0230116e667b (GPL-3.0-or-later mirror; Novena open-hardware fixture)",
+    url: "https://raw.githubusercontent.com/KiCad/kicad-source-mirror/c2a91caacf90b4d07261658ef44c0230116e667b/qa/data/pcbnew/plugins/altium/eDP_adapter_dvt1_source/eDP_adapter_dvt1.PcbDoc",
+  },
 ]
 
 const referencesDirectory = resolve(import.meta.dir, "..", "references")

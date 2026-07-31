@@ -314,10 +314,10 @@ writing Altium files.
 
 ### Fills, regions, and polygons
 
-- [ ] Add `AltiumFillRecord`.
+- [x] Add `AltiumFillRecord`.
 - [x] Add `AltiumRegionRecord`.
 - [x] Add `AltiumPolygonRecord`.
-- [ ] Model fill bounds and rotation.
+- [x] Model fill bounds and rotation.
 - [x] Model region contours and holes.
 - [x] Model region kind and layer.
 - [ ] Model polygon vertices, arcs, and contour holes.
@@ -486,7 +486,7 @@ writing Altium files.
       and common geometry fields.
 - [x] Implement initial via stream parsing.
 - [x] Implement text stream parsing.
-- [ ] Implement fill stream parsing.
+- [x] Implement fill stream parsing.
 - [x] Implement region stream parsing.
 - [x] Decode source `ShapeBasedRegions6` geometry separately from generated
       `Regions6` fill caches.
@@ -772,6 +772,7 @@ writing Altium files.
 - [x] Add full-PCB and per-layer visual snapshots.
 - [x] Add board-coordinate `viewBox` crops for focused PCB snapshots.
 - [x] Add focused snapshots for pad stacks, rounded rectangles, and slots.
+- [x] Add focused snapshots for rotated binary fills.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.

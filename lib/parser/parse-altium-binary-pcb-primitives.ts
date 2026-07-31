@@ -4,6 +4,7 @@ import {
 } from "../errors/altium-error"
 import { AltiumField } from "../fields/altium-field"
 import { AltiumArcRecord } from "../records/altium-arc-record"
+import { AltiumFillRecord } from "../records/altium-fill-record"
 import { AltiumPadRecord } from "../records/altium-pad-record"
 import type { AltiumRecord } from "../records/altium-record"
 import { AltiumTextRecord } from "../records/altium-text-record"
@@ -14,6 +15,7 @@ import { parseAltiumBinaryPropertyRecord } from "./parse-altium-binary-property-
 const PRIMITIVE_TYPE: Record<string, number> = {
   Arcs6: 1,
   BoardRegions: 11,
+  Fills6: 6,
   Pads6: 2,
   Regions6: 11,
   ShapeBasedRegions6: 11,
@@ -25,6 +27,7 @@ const PRIMITIVE_TYPE: Record<string, number> = {
 export type AltiumBinaryPcbPrimitiveFamily =
   | "Arcs6"
   | "BoardRegions"
+  | "Fills6"
   | "Pads6"
   | "Regions6"
   | "ShapeBasedRegions6"
@@ -32,7 +35,7 @@ export type AltiumBinaryPcbPrimitiveFamily =
   | "Tracks6"
   | "Vias6"
 
-type SimplePrimitiveFamily = "Arcs6" | "Tracks6" | "Vias6"
+type SimplePrimitiveFamily = "Arcs6" | "Fills6" | "Tracks6" | "Vias6"
 
 const REGION_STREAM_CONFIG: Record<
   "BoardRegions" | "Regions6" | "ShapeBasedRegions6",
@@ -61,7 +64,7 @@ export interface ParseAltiumBinaryPcbPrimitiveOptions {
 /**
  * Parses the common type-byte + uint32-length framing used by Altium's binary
  * PCB primitive streams. The first implementation intentionally limits
- * semantic decoding to arcs, pads, tracks, and vias while validating every
+ * semantic decoding to the verified primitive families while validating every
  * frame.
  */
 export function parseAltiumBinaryPcbPrimitiveStream(
@@ -142,7 +145,14 @@ function decodePrimitive(
   payload: Uint8Array,
   byteOffset: number,
 ): AltiumRecord {
-  const minimumLength = family === "Tracks6" ? 33 : family === "Arcs6" ? 45 : 31
+  const minimumLength =
+    family === "Tracks6"
+      ? 33
+      : family === "Arcs6"
+        ? 45
+        : family === "Fills6"
+          ? 37
+          : 31
   if (payload.byteLength < minimumLength) {
     throw new AltiumTruncatedRecordError(
       `${family} primitive payload is shorter than ${minimumLength} bytes`,
@@ -156,6 +166,41 @@ function decodePrimitive(
     payload.byteLength,
   )
   const layer = getAltiumPcbLayerName(view.getUint8(0))
+  if (family === "Fills6") {
+    const keepout = view.getUint8(2) === 2
+    const items = [
+      field("RECORD", "Fill"),
+      field("LAYER", layer),
+      field("LOCKED", booleanText((view.getUint8(1) & 0x04) === 0)),
+      field("KEEPOUT", booleanText(keepout)),
+      field("NET", String(view.getUint16(3, true))),
+      field("COMPONENT", String(view.getUint16(7, true))),
+      measurementField("X1", view.getInt32(13, true)),
+      measurementField("Y1", view.getInt32(17, true)),
+      measurementField("X2", view.getInt32(21, true)),
+      measurementField("Y2", view.getInt32(25, true)),
+      field("ROTATION", formatNumber(view.getFloat64(29, true))),
+      field(
+        "KEEPOUTRESTRICTIONS",
+        String(payload.byteLength >= 47 ? view.getUint8(46) : keepout ? 31 : 0),
+      ),
+    ]
+    if (payload.byteLength >= 46) {
+      items.push(field("LAYER_V7_ID", String(view.getUint32(42, true))))
+    }
+    if (payload.byteLength > 37 && payload.byteLength < 46) {
+      items.push(
+        field("UNPARSEDTRAILINGBYTES", String(payload.byteLength - 37)),
+      )
+    }
+    if (payload.byteLength > 47) {
+      items.push(
+        field("UNPARSEDTRAILINGBYTES", String(payload.byteLength - 47)),
+      )
+    }
+    return new AltiumFillRecord({ items })
+  }
+
   const commonFields = [
     field("LAYER", layer),
     field("LOCKED", booleanText((view.getUint8(1) & 0x04) === 0)),

@@ -22,8 +22,14 @@ available format research. Code must not be copied from incompatible licenses.
   [`simplefoc/Arduino-SimpleFOCShield`](https://github.com/simplefoc/Arduino-SimpleFOCShield),
   [`monkslc/hyperpolyglot`](https://github.com/monkslc/hyperpolyglot), and
   [`elk-audio/elk-pi-hardware`](https://github.com/elk-audio/elk-pi-hardware)
-  for pinned real-world fixtures. Exact commits and digests are recorded in
-  `scripts/download-references.ts`.
+  for pinned real-world fixtures.
+- [KiCad's Novena eDP adapter fixture](https://github.com/KiCad/kicad-source-mirror/tree/master/qa/data/pcbnew/plugins/altium/eDP_adapter_dvt1_source)
+  supplies a binary PCB with rotated `Fills6` records. The original
+  [Novena project](https://www.crowdsupply.com/sutajio-kosagi/novena) is open
+  hardware.
+
+Exact fixture commits and digests are recorded in
+`scripts/download-references.ts`.
 
 These references are evidence, not an assertion that every version or record
 layout has been fully verified. New binary offsets must be checked against

@@ -71,7 +71,14 @@ export function renderPcbRecord(
     const y1 = viewport.toY(getPcbMeasurement(record, "Y1"))
     const x2 = viewport.toX(getPcbMeasurement(record, "X2"))
     const y2 = viewport.toY(getPcbMeasurement(record, "Y2"))
-    return `<rect ${metadata} x="${formatSvgNumber(Math.min(x1, x2))}" y="${formatSvgNumber(Math.min(y1, y2))}" width="${formatSvgNumber(Math.abs(x2 - x1))}" height="${formatSvgNumber(Math.abs(y2 - y1))}" fill="${color}" fill-opacity="0.6"/>`
+    const centerX = (x1 + x2) / 2
+    const centerY = (y1 + y2) / 2
+    const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
+    const transform =
+      rotation === 0
+        ? ""
+        : ` transform="rotate(${formatSvgNumber(-rotation)} ${formatSvgNumber(centerX)} ${formatSvgNumber(centerY)})"`
+    return `<rect ${metadata} data-keepout="${record.getBoolean("KEEPOUT") === true}" x="${formatSvgNumber(Math.min(x1, x2))}" y="${formatSvgNumber(Math.min(y1, y2))}" width="${formatSvgNumber(Math.abs(x2 - x1))}" height="${formatSvgNumber(Math.abs(y2 - y1))}" fill="${color}" fill-opacity="0.6"${transform}/>`
   }
 
   if (kind === "Text" && options.showText !== false) {

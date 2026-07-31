@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 480 480" role="img" aria-label="Novena eDP adapter 45-degree top-solder fills" class="altium-pcb" data-renderer="altiumts">
+  <title>Novena eDP adapter 45-degree top-solder fills</title>
+  <rect width="100%" height="100%" fill="#071a16"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polygon data-record="BoardOutline" points="-827.3628,1062.2841 908.8576,1062.2841 908.8576,707.9534 971.8497,644.9613 1137.2041,644.9613 1137.2041,-315.6687 -827.3628,-315.6687 -827.3628,1062.2841" fill="#123d32" stroke="#6ee7b7" stroke-width="3"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="198.2278" y="375.1944" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 231.6924 408.659)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="250.3931" y="323.0289" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 283.8577 356.4934)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="303.5427" y="269.8793" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 337.0073 303.3438)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="355.7081" y="217.7141" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 389.1727 251.1787)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="303.5427" y="165.5486" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 337.0073 199.0132)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="251.3773" y="217.7138" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 284.8419 251.1784)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="198.2277" y="270.8634" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 231.6923 304.3279)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="146.0624" y="323.0289" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 179.527 356.4934)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="198.2278" y="60.2337" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 231.6924 93.6982)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="146.0624" y="112.3989" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 179.527 145.8635)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="92.9128" y="165.5485" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 126.3774 199.0131)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="40.7475" y="217.714" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 74.2121 251.1786)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="251.3774" y="113.3833" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 284.842 146.8479)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="199.212" y="165.5485" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 232.6766 199.0131)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="146.0624" y="218.6981" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 179.527 252.1626)"/>
+    <rect data-record="Fill" data-layer="TOPSOLDER" data-keepout="false" x="93.8971" y="270.8636" width="66.9292" height="66.9291" fill="#4ade80" fill-opacity="0.6" transform="rotate(-45 127.3617 304.3281)"/>
+  </g>
+</svg>
