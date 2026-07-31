@@ -10,7 +10,10 @@ import {
   AltiumTruncatedRecordError,
 } from "../errors/altium-error"
 import type { AltiumRecord } from "../records/altium-record"
-import { decodeAltiumText } from "./decode-altium-text"
+import {
+  type AltiumTextEncodingOverride,
+  decodeAltiumText,
+} from "./decode-altium-text"
 import { type ParseAltiumOptions, parseAltiumAscii } from "./parse-altium-ascii"
 import { parseAltiumBinaryPropertyRecord } from "./parse-altium-binary-property-record"
 
@@ -18,6 +21,7 @@ export interface ParseAltiumSchDocOptions
   extends ParseAltiumOptions,
     ParseAltiumCompoundFileOptions {
   maxRecordLength?: number
+  encoding?: AltiumTextEncodingOverride
 }
 
 export function parseAltiumSchDoc(
@@ -27,6 +31,7 @@ export function parseAltiumSchDoc(
   if (typeof source === "string") {
     const document = new AltiumSchDoc({
       lines: parseAltiumAscii(source, options),
+      originalText: source,
       sourceFormat: "ascii",
     })
     validateSchematicDocument(document)
@@ -34,10 +39,12 @@ export function parseAltiumSchDoc(
   }
 
   if (!isAltiumCompoundFile(source)) {
-    const decoded = decodeAltiumText(source)
+    const decoded = decodeAltiumText(source, options.encoding)
     const document = new AltiumSchDoc({
       lines: parseAltiumAscii(decoded.text, options),
       originalBytes: source.slice(),
+      originalText: decoded.text,
+      sourceEncoding: decoded.encoding,
       sourceFormat: "ascii",
     })
     validateSchematicDocument(document)
@@ -122,6 +129,12 @@ function parseBinarySchematicRecords(
 
     const record = parseAltiumBinaryPropertyRecord(
       bytes.subarray(offset, offset + length),
+      undefined,
+      {
+        byteOffset: lengthOffset,
+        recordIndex: records.length,
+        streamPath: "/FileHeader",
+      },
     )
     const terminator: AltiumLineTerminator =
       offset + length < bytes.byteLength ? "\n" : ""

@@ -20,7 +20,7 @@ export class AltiumEmbeddedModel extends AltiumNode {
     record: AltiumModelRecord
     stream: AltiumCompoundStream
   }) {
-    super()
+    super({ sourceLocation: init.stream.sourceLocation })
     this.index = init.index
     this.record = init.record
     this.stream = init.stream

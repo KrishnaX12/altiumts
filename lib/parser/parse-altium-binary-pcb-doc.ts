@@ -19,17 +19,25 @@ import {
 } from "./parse-altium-binary-pcb-primitives"
 import { parseAltiumBinaryPropertyRecord } from "./parse-altium-binary-property-record"
 
-const PROPERTY_STREAM_RECORD_KINDS: Record<string, string> = {
-  Board6: "Board",
-  Classes6: "Class",
-  Components6: "Component",
-  FileVersionInfo: "FileVersionInfo",
-  Models: "Model",
-  Nets6: "Net",
-  Polygons6: "Polygon",
-  SignalClasses: "SignalClass",
-  SmartUnions: "SmartUnion",
-  UniqueIDPrimitiveInformation: "UniqueIDPrimitiveInformation",
+const PROPERTY_STREAM_CONFIG: Record<
+  string,
+  { headerSize?: 4 | 6; recordKind: string }
+> = {
+  Board6: { recordKind: "Board" },
+  Classes6: { recordKind: "Class" },
+  Components6: { recordKind: "Component" },
+  Connections6: { recordKind: "Connection" },
+  FileVersionInfo: { recordKind: "FileVersionInfo" },
+  FromTos6: { recordKind: "FromTo" },
+  Models: { recordKind: "Model" },
+  Nets6: { recordKind: "Net" },
+  Polygons6: { recordKind: "Polygon" },
+  Rules6: { headerSize: 6, recordKind: "Rule" },
+  SignalClasses: { recordKind: "SignalClass" },
+  SmartUnions: { recordKind: "SmartUnion" },
+  UniqueIDPrimitiveInformation: {
+    recordKind: "UniqueIDPrimitiveInformation",
+  },
 }
 
 const PRIMITIVE_STREAM_FAMILIES = new Set([
@@ -92,15 +100,17 @@ export function parseAltiumBinaryPcbDoc(
     const declaredRecordCount = header
       ? readDeclaredRecordCount(header.content)
       : undefined
-    const recordKind = PROPERTY_STREAM_RECORD_KINDS[family]
+    const propertyConfig = PROPERTY_STREAM_CONFIG[family]
     const decodedRecords =
-      data && recordKind
+      data && propertyConfig
         ? parsePropertyRecordStream(
             data.content,
-            recordKind,
+            propertyConfig.recordKind,
             declaredRecordCount,
             options.maxPropertyRecordLength,
             family === "Models",
+            family,
+            propertyConfig.headerSize,
           )
         : []
     const decodedPrimitives =
@@ -148,6 +158,8 @@ function parsePropertyRecordStream(
   expectedRecordCount: number | undefined,
   maximumRecordLength = 16 * 1024 * 1024,
   allowMissingLeadingDelimiter = false,
+  family = recordKind,
+  headerSize: 4 | 6 = 4,
 ): AltiumRecord[] {
   if (bytes.byteLength === 0) return []
   const records: AltiumRecord[] = []
@@ -156,15 +168,20 @@ function parsePropertyRecordStream(
 
   while (offset < bytes.byteLength) {
     const lengthOffset = offset
-    if (offset + 4 > bytes.byteLength) {
+    if (offset + headerSize > bytes.byteLength) {
       throw new AltiumTruncatedRecordError(
         `${recordKind} property record length is truncated`,
         offset,
       )
     }
-    const rawLength = view.getUint32(offset, true)
+    const rawLength = view.getUint32(
+      headerSize === 6 ? offset + 2 : offset,
+      true,
+    )
     const length = rawLength & 0x00ff_ffff
-    offset += 4
+    const binaryRecordType =
+      headerSize === 6 ? view.getUint16(offset, true) : undefined
+    offset += headerSize
     if (length === 0 || length > maximumRecordLength) {
       throw new AltiumTruncatedRecordError(
         `Invalid ${recordKind} property record length ${length}`,
@@ -183,7 +200,24 @@ function parsePropertyRecordStream(
         `${recordKind} property record at offset ${lengthOffset} does not begin with "|"`,
       )
     }
-    records.push(parseAltiumBinaryPropertyRecord(payload, recordKind))
+    const recordIndex = records.length
+    const sourceLocation = {
+      byteOffset: lengthOffset,
+      recordIndex,
+      streamPath: `/${family}/Data`,
+    }
+    const record = parseAltiumBinaryPropertyRecord(
+      payload,
+      recordKind,
+      sourceLocation,
+    )
+    if (binaryRecordType !== undefined) {
+      record.insertField("BINARYRECORDTYPE", String(binaryRecordType), {
+        index: 1,
+      })
+      record.clearDirty(true)
+    }
+    records.push(record)
     offset += length
   }
 

@@ -1,31 +1,11 @@
+import { parseAltiumMeasurementToMils } from "../measurement/altium-measurement"
 import type { AltiumRecord } from "../records/altium-record"
 import type { SvgPoint } from "./svg-types"
-
-const MILS_PER_UNIT: Record<string, number> = {
-  cm: 10_000 / 25.4,
-  in: 1000,
-  inch: 1000,
-  inches: 1000,
-  mil: 1,
-  mils: 1,
-  mm: 1000 / 25.4,
-}
 
 export function parsePcbMeasurement(
   raw: string | undefined,
 ): number | undefined {
-  if (raw === undefined) return undefined
-  const match =
-    /^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*([a-z]+)?\s*$/iu.exec(
-      raw,
-    )
-  if (!match?.[1]) return undefined
-
-  const value = Number(match[1])
-  const unit = match[2]?.toLowerCase()
-  if (!Number.isFinite(value)) return undefined
-  if (unit === undefined) return value
-  return value * (MILS_PER_UNIT[unit] ?? 1)
+  return parseAltiumMeasurementToMils(raw)
 }
 
 export function getPcbMeasurement(

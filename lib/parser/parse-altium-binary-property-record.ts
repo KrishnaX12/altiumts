@@ -2,11 +2,13 @@ import { AltiumField } from "../fields/altium-field"
 import { AltiumRawField } from "../fields/altium-raw-field"
 import type { AltiumRecord, AltiumRecordItem } from "../records/altium-record"
 import { AltiumUnknownRecord } from "../records/altium-unknown-record"
+import type { AltiumSourceLocation } from "../source-location"
 import { recordConstructors } from "./record-constructors"
 
 export function parseAltiumBinaryPropertyRecord(
   payload: Uint8Array,
   fallbackRecordKind?: string,
+  sourceLocation?: AltiumSourceLocation,
 ): AltiumRecord {
   const content =
     payload.at(-1) === 0 ? payload.subarray(0, payload.byteLength - 1) : payload
@@ -24,7 +26,17 @@ export function parseAltiumBinaryPropertyRecord(
     (recordKind === undefined
       ? undefined
       : recordConstructors.get(recordKind)) ?? AltiumUnknownRecord
-  return new RecordClass({ items })
+  const record = new RecordClass({
+    items,
+    originalBinaryPayload: payload,
+    sourceLocation,
+  })
+  for (const [fieldIndex, item] of items.entries()) {
+    item.setSourceLocation(
+      sourceLocation ? { ...sourceLocation, fieldIndex } : undefined,
+    )
+  }
+  return record
 }
 
 function parseBinaryRecordItem(raw: Uint8Array): AltiumRecordItem {

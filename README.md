@@ -3,11 +3,17 @@
 `altiumts` is a TypeScript-first parser and serializer for Altium document
 formats.
 
-The current prototype supports source-preserving ASCII `.PcbDoc` and `.SchDoc`
-files plus read-only binary compound-file variants. It models documents,
-records, fields, CFB storages, and streams as classes. Unknown content remains
-available in the source tree, and untouched binary documents retain their
-exact original bytes.
+The current experimental release supports source-preserving ASCII `.PcbDoc`,
+`.SchDoc`, `.PrjPcb`, and `.OutJob` files plus read-only binary PCB and
+schematic compound-file variants. It models syntax, semantic records,
+references, connectivity, CFB storages, and streams as classes. Unknown
+content remains available in the source tree, and untouched binary documents
+retain their exact original bytes.
+
+The support matrix is deliberately operation-specific: binary documents can
+be inspected and round-tripped untouched, but modified binary serialization is
+refused. See [Compatibility](./docs/compatibility.md) for tested versions and
+explicit exclusions.
 
 ## Install
 
@@ -42,8 +48,10 @@ await writeFile("board-modified.PcbDoc", board.getString())
 ```
 
 The generic `parseAltiumAscii` function returns document lines without
-requiring a `Board` root record. `getChildren()` is available on every node for
-generic tree walking.
+requiring a `Board` root record. `parseAltiumAsciiStream()` accepts an async
+iterable of decoded chunks. Every node supports `getChildren()`, `walk()`,
+`visit()`, source locations, stable parsed IDs, parent/document references,
+dirty state, structural hashes, and JSON debug output.
 
 ## Auto-detect ASCII and binary files
 
@@ -80,12 +88,30 @@ if (document instanceof AltiumSchDoc) {
 ```
 
 Binary `.PcbDoc` parsing currently inventories every CFB storage family,
-decodes common property streams, and creates semantic records for pads, tracks,
-arcs, vias, polygon-fill regions with contour holes, and wide-string-backed
+decodes common property streams, and creates semantic records for board
+metadata, components, nets, classes, rules, polygons, pads, tracks, arcs, vias,
+fills, regions with contour holes, bodies, models, and wide-string-backed
 text. Extended pad records include top/middle/bottom and full-stack
 layer geometry, custom corner radii, hole shapes and offsets, slot dimensions,
-and plating state. Binary `.SchDoc` parsing decodes its framed `FileHeader`
-property records, `%UTF8%` fields, and owner indexes.
+and plating state. Binary `.SchDoc` parsing decodes framed property records,
+`%UTF8%` fields, typed common record IDs, owner indexes, hierarchy links, and
+schematic connectivity.
+
+## Inspect from the command line
+
+```sh
+altiumts inspect board.PcbDoc --json
+altiumts tree sheet.SchDoc
+altiumts streams board.PcbDoc
+altiumts records board.PcbDoc --json
+altiumts validate board.PcbDoc --json
+altiumts roundtrip board.PcbDoc
+altiumts diff before.PcbDoc after.PcbDoc
+altiumts extract board.PcbDoc extracted-streams
+```
+
+`extract` sanitizes stream names and rejects paths outside the requested
+directory. Hex dumps and allocations are bounded.
 
 ## Render SVG previews
 
@@ -148,6 +174,21 @@ directly, along with round, square, and slotted holes.
   `getComponentForRecord()`, `getNetForRecord()`,
   `getRecordsOwnedByComponent()`, and `getRecordsOnNet()`. The SVG serializer
   accepts `componentIndices` and `netIndices` for focused debugging renders.
+- PCB documents expose lazy `index` and `connectivity` models, layer-stack
+  metadata, typed rules, polygon/rule references, unique-ID lookup, and
+  component bounds.
+- Schematic documents expose typed components, pins, wires, labels, ports,
+  power ports, sheets, ownership indexes, sheet links, and `netGraph`.
+- `parseAltiumPrjPcb()` and `parseAltiumOutJob()` provide source-preserving
+  project/job parsing. Project references resolve Windows paths consistently
+  on any host.
+- `validateAltiumDocument()` returns machine-readable structural diagnostics.
+  `serializeAltiumDocument()` validates by default and refuses unsafe modified
+  binary output.
+- `cloneAltiumNode()`, `transformAltiumTree()`, and
+  `searchAltiumRecords()` support copy-on-write tooling and generic AST work.
+- `altiumCompatibilityManifest` and `supportsAltiumOperation()` let callers
+  query support without relying on prose.
 - `parseAltiumBinaryPcbDoc(bytes, options?)` parses a binary `.PcbDoc`.
 - `parseAltiumCompoundFile(bytes, options?)` exposes a bounded, read-only
   OLE/CFB tree.
@@ -170,8 +211,45 @@ directly, along with round, square, and slotted holes.
   `serializeAltiumSheetToSvg()` provide visual inspection and regression-test
   output.
 
-Pass `{ strict: true }` to reject malformed non-record lines. Unknown record
-kinds are still preserved in strict mode for forward compatibility.
+Pass `{ mode: "strict" }` to reject malformed text, `"compatible"` for the
+normal source-preserving behavior, or `"recovery"` to make recovery decisions
+visible through `onDiagnostic`. Unknown record kinds remain preserved in every
+mode for forward compatibility. Limits are available for files, lines, fields,
+binary records, CFB chains, directories, decompressed models, and writes.
+
+## Projects and output jobs
+
+```ts
+import { parseAltiumPrjPcb } from "altiumts"
+
+const project = parseAltiumPrjPcb(projectText)
+console.log(project.documents)
+console.log(project.variants)
+console.log(project.resolveDocumentPaths("/workspace/hardware"))
+
+project.addDocument("sheets/power.SchDoc", { uniqueId: "POWER-SHEET" })
+project.addVariant("Production", { description: "Shipping configuration" })
+console.log(project.getDocumentGraph("/workspace/hardware").nodes)
+```
+
+Targeted PCB edits can be applied transactionally and exported as an undoable
+change set:
+
+```ts
+import {
+  reassignPcbRecordLayer,
+  renamePcbNet,
+  runPcbEditTransaction,
+} from "altiumts"
+
+const result = runPcbEditTransaction(board, (draft) => {
+  renamePcbNet(draft, 1, "USB_D+")
+  const track = draft.getRecordsByKind("Track")[0]
+  if (track) reassignPcbRecordLayer(draft, track, "BOTTOM")
+})
+
+console.log(result.validation, result.changeSet)
+```
 
 ## Reference files
 
@@ -181,6 +259,8 @@ Altium PCB/schematic references:
 ```sh
 bun run download-references
 bun run inventory-references
+bun run inventory-schema
+bun run benchmark
 ```
 
 Then run the complete suite:
@@ -191,31 +271,28 @@ bun run test:update-svg
 bun run typecheck
 bun run format:check
 bun run build
+bun run verify:browser
+bun run verify:package
 ```
 
 The imported reference files are not committed to this repository. Their
 generated `.snap.svg` visual baselines are committed and compared with
 `bun-match-svg`.
 
-## Current scope
+## Current limitations
 
-Binary support is currently read-only: untouched documents can return their
-original bytes, but edits are not serialized back into CFB streams. The PCB
-parser now distinguishes source shape-based regions from generated region-fill
-caches and decodes board cutout regions, rotated rectangular fills, and
-shape-based component-body outlines and their associated model properties. It
-also resolves and decompresses embedded STEP models on demand without eagerly
-materializing their compound streams. It does not yet semantically decode
-dimensions or resolve linked external model files. Text barcode/frame
-metadata, custom region-based pad outlines, and the unverified trailing bytes
-in newer extended pad-stack subrecords remain pending. Full-stack `PADMODE=2`
-field decoding is implemented but still needs a real corpus fixture. Those
-source bytes and streams remain available through `AltiumCompoundFile` and
-appear in stream summaries.
-
-Schematic property records are parsed generically and visualized, but the
-numeric record IDs do not yet have a complete typed semantic model. Library,
-project, output-job, and integrated-library roots are still future work.
+Binary writing, semantic `.SchLib`/`.PcbLib`/`.IntLib` parsing, a complete
+Altium rule evaluator, Circuit JSON conversion, and licensed Altium reopen
+tests are not implemented. Library headers are detected so callers receive an
+explicit unsupported-feature error instead of accidental document parsing.
+Unverified fields, trailing bytes, streams, embedded blobs, and unknown records
+are retained for inspection and exact untouched round trips.
 
 See [CHECKLIST.md](./CHECKLIST.md) for the implementation roadmap and
 [docs/format-references.md](./docs/format-references.md) for research sources.
+The checklist intentionally keeps fixture-, license-, and reverse-engineering-
+dependent work open.
+
+The packed npm artifact is limited to 1 MB compressed and 5 MB unpacked. The
+minified browser-compatible core bundle is limited to 1.5 MB; both budgets are
+enforced by repository scripts and CI.

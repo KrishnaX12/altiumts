@@ -1,4 +1,4 @@
-import { AltiumNode } from "../base/altium-node"
+import { AltiumNode, type AltiumNodeInit } from "../base/altium-node"
 
 export class AltiumField extends AltiumNode {
   override readonly type = "field"
@@ -6,8 +6,8 @@ export class AltiumField extends AltiumNode {
   private _key: string
   private _value: string
 
-  constructor(init: { key: string; value?: string }) {
-    super()
+  constructor(init: { key: string; value?: string } & AltiumNodeInit) {
+    super(init)
     validateKey(init.key)
     validateValue(init.value ?? "")
     this._key = init.key
@@ -20,7 +20,9 @@ export class AltiumField extends AltiumNode {
 
   set key(key: string) {
     validateKey(key)
+    if (key === this._key) return
     this._key = key
+    this.markDirty()
   }
 
   get value(): string {
@@ -29,7 +31,9 @@ export class AltiumField extends AltiumNode {
 
   set value(value: string) {
     validateValue(value)
+    if (value === this._value) return
     this._value = value
+    this.markDirty()
   }
 
   override getChildren(): AltiumNode[] {
@@ -38,6 +42,16 @@ export class AltiumField extends AltiumNode {
 
   override getString(): string {
     return `${this.key}=${this.value}`
+  }
+
+  override toJSON(): Record<string, unknown> {
+    return {
+      type: this.type,
+      nodeId: this.nodeId,
+      sourceLocation: this.sourceLocation,
+      key: this.key,
+      value: this.value,
+    }
   }
 }
 

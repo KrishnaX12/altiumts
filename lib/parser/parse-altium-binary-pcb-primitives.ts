@@ -92,10 +92,10 @@ export function parseAltiumBinaryPcbPrimitiveStream(
   options: ParseAltiumBinaryPcbPrimitiveOptions = {},
 ): AltiumRecord[] {
   if (family === "Pads6") {
-    return parsePadStream(bytes, options)
+    return annotatePrimitiveRecords(parsePadStream(bytes, options), family)
   }
   if (family === "Texts6") {
-    return parseTextStream(bytes, options)
+    return annotatePrimitiveRecords(parseTextStream(bytes, options), family)
   }
   if (
     family === "BoardRegions" ||
@@ -104,7 +104,10 @@ export function parseAltiumBinaryPcbPrimitiveStream(
     family === "ShapeBasedRegions6" ||
     family === "ShapeBasedComponentBodies6"
   ) {
-    return parseContourStream(family, bytes, options)
+    return annotatePrimitiveRecords(
+      parseContourStream(family, bytes, options),
+      family,
+    )
   }
 
   const maximumRecordLength = options.maximumRecordLength ?? 16 * 1024 * 1024
@@ -158,6 +161,23 @@ export function parseAltiumBinaryPcbPrimitiveStream(
     )
   }
 
+  return annotatePrimitiveRecords(records, family)
+}
+
+function annotatePrimitiveRecords(
+  records: AltiumRecord[],
+  family: AltiumBinaryPcbPrimitiveFamily,
+): AltiumRecord[] {
+  for (const [recordIndex, record] of records.entries()) {
+    const location = {
+      recordIndex,
+      streamPath: `/${family}/Data`,
+    }
+    record.setSourceLocation(location)
+    for (const [fieldIndex, item] of record.items.entries()) {
+      item.setSourceLocation({ ...location, fieldIndex })
+    }
+  }
   return records
 }
 
@@ -219,7 +239,7 @@ function decodePrimitive(
         field("UNPARSEDTRAILINGBYTES", String(payload.byteLength - 47)),
       )
     }
-    return new AltiumFillRecord({ items })
+    return new AltiumFillRecord({ items, originalBinaryPayload: payload })
   }
 
   const commonFields = [
@@ -232,6 +252,7 @@ function decodePrimitive(
 
   if (family === "Tracks6") {
     return new AltiumTrackRecord({
+      originalBinaryPayload: payload,
       items: [
         field("RECORD", "Track"),
         ...commonFields,
@@ -246,6 +267,7 @@ function decodePrimitive(
 
   if (family === "Arcs6") {
     return new AltiumArcRecord({
+      originalBinaryPayload: payload,
       items: [
         field("RECORD", "Arc"),
         ...commonFields,
@@ -260,6 +282,7 @@ function decodePrimitive(
   }
 
   return new AltiumViaRecord({
+    originalBinaryPayload: payload,
     items: [
       field("RECORD", "Via"),
       field("LAYER", "MULTILAYER"),
@@ -454,7 +477,10 @@ function decodeText(
     )
   }
 
-  return new AltiumTextRecord({ items })
+  return new AltiumTextRecord({
+    items,
+    originalBinaryPayload: payload,
+  })
 }
 
 function parseContourStream(
@@ -658,6 +684,7 @@ function decodeContourPrimitive(
     )
   }
   record.items.splice(1, 0, ...extraFields)
+  record.setOriginalBinaryPayload(payload)
   return record
 }
 
@@ -720,6 +747,7 @@ function decodePad(
 
   return new AltiumPadRecord({
     items,
+    originalBinaryPayload: payload,
   })
 }
 

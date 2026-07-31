@@ -1,4 +1,5 @@
 import { AltiumNode } from "../base/altium-node"
+import { AltiumSerializationError } from "../errors/altium-error"
 
 export type AltiumCompoundEntryType = "storage" | "stream" | "root"
 
@@ -40,6 +41,10 @@ export abstract class AltiumCompoundEntry extends AltiumNode {
     super()
     this.metadata = metadata
     this.path = path
+    this.setSourceLocation({
+      recordIndex: metadata.id,
+      streamPath: `/${path.join("/")}`,
+    })
   }
 
   get name(): string {
@@ -83,6 +88,11 @@ export class AltiumCompoundStream extends AltiumCompoundEntry {
     return this.loadedContent !== undefined
   }
 
+  replaceContent(content: Uint8Array): void {
+    this.loadedContent = content.slice()
+    this.markDirty()
+  }
+
   override getChildren(): AltiumNode[] {
     return []
   }
@@ -100,6 +110,7 @@ export class AltiumCompoundStorage extends AltiumCompoundEntry {
   ) {
     super(metadata, path)
     this.entries = entries
+    this.adoptChildren(entries)
   }
 
   get storages(): AltiumCompoundStorage[] {
@@ -133,10 +144,12 @@ export class AltiumCompoundFile extends AltiumNode {
     originalBytes: Uint8Array
     root: AltiumCompoundStorage
   }) {
-    super()
+    super({ sourceLocation: { byteOffset: 0, streamPath: "/" } })
     this.header = init.header
     this.originalBytes = init.originalBytes
     this.root = init.root
+    this.adoptChildren([this.root])
+    this.clearDirty(true)
   }
 
   get entries(): AltiumCompoundEntry[] {
@@ -171,6 +184,11 @@ export class AltiumCompoundFile extends AltiumNode {
   }
 
   getBytes(): Uint8Array {
+    if (this.isDirty) {
+      throw new AltiumSerializationError(
+        "Modified compound files cannot yet be serialized safely",
+      )
+    }
     return this.originalBytes.slice()
   }
 
