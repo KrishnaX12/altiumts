@@ -3,6 +3,7 @@ import { AltiumBoardRecord } from "../records/altium-board-record"
 import { AltiumComponentBodyRecord } from "../records/altium-component-body-record"
 import { AltiumComponentRecord } from "../records/altium-component-record"
 import { AltiumFillRecord } from "../records/altium-fill-record"
+import { AltiumModelRecord } from "../records/altium-model-record"
 import { AltiumNetRecord } from "../records/altium-net-record"
 import { AltiumPadRecord } from "../records/altium-pad-record"
 import { AltiumPolygonRecord } from "../records/altium-polygon-record"
@@ -24,6 +25,7 @@ export const recordConstructors = new Map<string, AltiumRecordConstructor>([
   ["ComponentBodyLegacy", AltiumComponentBodyRecord],
   ["Component", AltiumComponentRecord],
   ["Fill", AltiumFillRecord],
+  ["Model", AltiumModelRecord],
   ["Net", AltiumNetRecord],
   ["Pad", AltiumPadRecord],
   ["Polygon", AltiumPolygonRecord],

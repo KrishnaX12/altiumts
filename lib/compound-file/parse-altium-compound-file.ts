@@ -278,7 +278,7 @@ export function parseAltiumCompoundFile(
           new AltiumCompoundStream(
             rawChild.metadata,
             [...path, rawChild.metadata.name],
-            readStream(rawChild.metadata),
+            () => readStream(rawChild.metadata),
           ),
         )
       }

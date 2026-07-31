@@ -11,7 +11,8 @@ available format research. Code must not be copied from incompatible licenses.
   and [PCB importer](https://github.com/KiCad/kicad-source-mirror/blob/master/pcbnew/pcb_io/altium/altium_pcb.cpp)
   for cross-checking property framing, string encodings, bounded reader
   behavior, extended pad-stack field interpretation, and component-body model
-  metadata.
+  metadata. The importer also confirms that `Models/Data` record order maps to
+  numeric `Models/<index>` streams containing zlib-compressed STEP data.
 
 ## Corpus and structural references
 

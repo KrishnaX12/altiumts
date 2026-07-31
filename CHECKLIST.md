@@ -176,6 +176,7 @@ writing Altium files.
 - [ ] Preserve unresolved references during serialization.
 - [ ] Add lazy decoding for large streams and payloads.
 - [ ] Add lazy loading for embedded images and 3D model blobs.
+- [x] Lazily materialize compound-file stream contents on first access.
 - [ ] Add a stable JSON representation for debugging and interchange.
 - [ ] Add JSON import only after round-trip semantics are defined.
 - [ ] Add type guards for every public node subclass.
@@ -347,11 +348,13 @@ writing Altium files.
 ### Models, bodies, rooms, and embedded content
 
 - [x] Add `AltiumComponentBodyRecord`.
+- [x] Add `AltiumModelRecord`.
 - [ ] Model 3D body type, position, rotation, standoff, and opacity.
 - [x] Model extruded body outlines.
-- [ ] Model linked and embedded STEP model references.
-- [ ] Model generic 3D model metadata.
-- [ ] Extract embedded model blobs without loading them eagerly.
+- [x] Model embedded STEP model references from component bodies.
+- [ ] Resolve linked external STEP model references.
+- [x] Model generic 3D model metadata.
+- [x] Extract and decompress embedded model blobs on demand.
 - [ ] Reinsert untouched embedded model blobs byte-for-byte.
 - [ ] Add `AltiumRoomRecord`.
 - [ ] Model room boundaries, rules, and component membership.
@@ -496,7 +499,7 @@ writing Altium files.
       pours remain pending.
 - [ ] Implement dimension stream parsing.
 - [x] Implement component-body stream parsing.
-- [ ] Implement model metadata and embedded model stream parsing.
+- [x] Implement model metadata and embedded model stream parsing.
 - [x] Implement wide-string table parsing.
 - [x] Resolve stream-local string/index tables.
 - [ ] Resolve owner, component, net, rule, and polygon indexes.
