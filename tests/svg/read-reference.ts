@@ -10,3 +10,13 @@ export async function readReference(
   )
   return new TextDecoder(encoding).decode(bytes)
 }
+
+export async function readReferenceBytes(
+  filename: string,
+): Promise<Uint8Array> {
+  return new Uint8Array(
+    await readFile(
+      resolve(import.meta.dir, "..", "..", "references", filename),
+    ),
+  )
+}

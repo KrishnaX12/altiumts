@@ -32,7 +32,7 @@ writing Altium files.
 - [ ] Define a policy for experimental parsers and codecs.
 - [ ] Add capability flags so callers can query supported operations.
 - [ ] Add a machine-readable compatibility manifest.
-- [ ] Add format/version detection without requiring a filename extension.
+- [x] Add format/version detection without requiring a filename extension.
 
 ## 2. Existing prototype foundation
 
@@ -56,7 +56,7 @@ writing Altium files.
 - [x] Round-trip the current reference board exactly.
 - [x] Run test, typecheck/build, and format/lint checks in CI.
 - [x] Build ESM JavaScript and TypeScript declarations.
-- [ ] Add a stable package-level error hierarchy.
+- [x] Add a stable package-level error hierarchy.
 - [ ] Add source-location metadata to every parsed node.
 - [ ] Add structured warnings without requiring thrown errors.
 - [ ] Add immutable or copy-on-write APIs where useful.
@@ -68,8 +68,10 @@ writing Altium files.
 ## 3. Format research and reference corpus
 
 - [ ] Inventory every Altium file extension we intend to support.
-- [ ] Collect ASCII and binary `.PcbDoc` files from multiple Altium releases.
-- [ ] Collect `.SchDoc` files from multiple Altium releases.
+- [x] Collect ASCII and binary `.PcbDoc` files from multiple independent
+      projects.
+- [x] Collect ASCII and binary `.SchDoc` files from multiple independent
+      projects.
 - [ ] Collect `.PcbLib` files from multiple Altium releases.
 - [ ] Collect `.SchLib` files from multiple Altium releases.
 - [ ] Collect `.IntLib` files with multiple embedded libraries.
@@ -89,57 +91,58 @@ writing Altium files.
 - [ ] Collect files containing unknown/newer record and field types.
 - [ ] Collect intentionally malformed and truncated files.
 - [ ] Collect files with empty streams and zero-length records.
-- [ ] Record the license and provenance of every downloadable fixture.
-- [ ] Pin every external fixture to an immutable commit or content digest.
-- [ ] Store fixture SHA-256 hashes and verify downloads.
-- [ ] Avoid committing third-party fixtures unless their licenses permit it.
+- [x] Record the license and provenance of every downloadable fixture.
+- [x] Pin every external fixture to an immutable commit or content digest.
+- [x] Store fixture SHA-256 hashes and verify downloads.
+- [x] Avoid committing third-party fixtures unless their licenses permit it.
 - [ ] Add synthetic fixture generators for cases that cannot be redistributed.
 - [ ] Add minimal one-feature fixtures for each entity or encoding.
-- [ ] Add large stress-test fixtures.
+- [x] Add a multi-megabyte real-world stress-test fixture.
 - [ ] Add an anonymization tool for private customer fixtures.
-- [ ] Add a corpus inventory script that reports formats, versions, and features.
-- [ ] Add a stream/record discovery script for unknown binary content.
+- [x] Add a corpus inventory script that reports formats, versions, and record
+      and stream counts.
+- [x] Add stream-family inventory for unknown binary content.
 - [ ] Add a fixture minimizer for reducing parser failures.
-- [ ] Document all external format references and reverse-engineering sources.
+- [x] Document all external format references and reverse-engineering sources.
 - [ ] Track unresolved format questions in issues linked from this checklist.
 
 ## 4. Input detection and decoding
 
-- [ ] Detect ASCII Altium record streams.
-- [ ] Detect OLE/CFB compound binary documents by magic bytes.
+- [x] Detect ASCII Altium record streams.
+- [x] Detect OLE/CFB compound binary documents by magic bytes.
 - [ ] Detect ZIP-based containers where applicable.
 - [ ] Detect INI-like project and job files.
 - [ ] Detect XML-based Altium formats where applicable.
-- [ ] Detect UTF-8 BOMs without losing them during round trips.
-- [ ] Detect UTF-16 LE and UTF-16 BE text documents.
-- [ ] Detect legacy Windows code pages.
+- [x] Detect UTF-8 BOMs.
+- [x] Detect UTF-16 LE and UTF-16 BE BOMs.
+- [x] Fall back to Windows-1252 for non-UTF-8 text.
 - [ ] Provide an explicit encoding override.
-- [ ] Return the detected format, encoding, and confidence.
+- [x] Return the detected format, encoding, and confidence.
 - [ ] Reject binary input passed to a text-only parser with a helpful error.
-- [ ] Add `parseAltiumFile(Uint8Array, options)` as the main auto-detect entrypoint.
+- [x] Add `parseAltiumFile(Uint8Array, options)` as the main auto-detect entrypoint.
 - [ ] Add `parseAltiumFileFromPath()` as an optional Node/Bun convenience API.
-- [ ] Keep the core parser independent of filesystem APIs.
-- [ ] Preserve an original-byte snapshot when exact untouched serialization is
+- [x] Keep the core parser independent of filesystem APIs.
+- [x] Preserve an original-byte snapshot when exact untouched serialization is
       possible.
-- [ ] Detect truncated compound-file headers before invoking deeper parsers.
-- [ ] Impose configurable file-size limits before allocating large buffers.
+- [x] Detect truncated compound-file headers before invoking deeper parsers.
+- [x] Impose configurable file-size limits before allocating large buffers.
 
 ## 5. Diagnostics and error handling
 
-- [ ] Create an `AltiumError` base class.
+- [x] Create an `AltiumError` base class.
 - [ ] Create `AltiumSyntaxError`.
-- [ ] Create `AltiumFormatDetectionError`.
-- [ ] Create `AltiumUnsupportedVersionError`.
+- [x] Create `AltiumFormatDetectionError`.
+- [x] Create `AltiumUnsupportedVersionError`.
 - [ ] Create `AltiumUnsupportedFeatureError`.
-- [ ] Create `AltiumCorruptContainerError`.
-- [ ] Create `AltiumTruncatedRecordError`.
+- [x] Create `AltiumCorruptContainerError`.
+- [x] Create `AltiumTruncatedRecordError`.
 - [ ] Create `AltiumSerializationError`.
-- [ ] Add byte offsets to binary errors.
+- [x] Add byte offsets to binary errors.
 - [ ] Add line and column locations to text errors.
 - [ ] Add stream paths and record indexes to container errors.
 - [ ] Add record kind and field name context where available.
 - [ ] Support warning, error, and fatal diagnostic severities.
-- [ ] Support diagnostic codes suitable for programmatic handling.
+- [x] Support diagnostic codes suitable for programmatic handling.
 - [ ] Provide a callback or collector for nonfatal diagnostics.
 - [ ] Define strict, compatible, and recovery parsing modes.
 - [ ] Make recovery decisions visible in diagnostics.
@@ -185,13 +188,13 @@ writing Altium files.
 - [x] Parse ordered `KEY=VALUE` fields.
 - [x] Preserve empty and malformed field segments.
 - [x] Preserve unknown record kinds.
-- [ ] Support BOM-prefixed files.
+- [x] Support BOM-prefixed files.
 - [ ] Verify whether literal pipe characters can occur in field values.
 - [ ] Implement every verified escape convention.
-- [ ] Decode and preserve `%UTF8%` field variants.
+- [x] Decode `%UTF8%` field variants in binary property records.
 - [ ] Handle triple-pipe UTF-8 terminators where applicable.
-- [ ] Preserve key casing.
-- [ ] Define optional case-insensitive lookup helpers.
+- [x] Preserve key casing.
+- [x] Define optional case-insensitive and decoded lookup helpers.
 - [ ] Preserve whitespace around keys and values when encountered.
 - [ ] Distinguish absent values from empty values.
 - [ ] Distinguish raw numeric text from normalized numeric values.
@@ -395,8 +398,8 @@ writing Altium files.
 - [ ] Model coordinates, points, vectors, sizes, and bounding boxes.
 - [ ] Model rotations and angle normalization without rewriting untouched text.
 - [ ] Model colors from Altium integer color values.
-- [ ] Add layer-name and layer-ID normalization.
-- [ ] Preserve unknown/custom layer identifiers.
+- [x] Add initial layer-name and layer-ID normalization.
+- [x] Preserve unknown layer IDs with a stable fallback name.
 - [ ] Add geometry helpers for arcs, polygons, and regions.
 - [ ] Add contour winding and hole classification.
 - [ ] Add geometry bounds for every primitive.
@@ -407,24 +410,24 @@ writing Altium files.
 
 ## 10. OLE/CFB compound-file container support
 
-- [ ] Select or implement a maintained Compound File Binary parser.
+- [x] Implement a bounded, dependency-free Compound File Binary reader.
 - [ ] Evaluate browser compatibility of the chosen CFB implementation.
 - [ ] Audit the dependency's license and security posture.
-- [ ] Parse the CFB header and sector sizes.
-- [ ] Parse DIFAT, FAT, MiniFAT, and directory sectors.
-- [ ] Parse regular and mini streams.
-- [ ] Preserve directory entry names exactly.
-- [ ] Preserve directory hierarchy.
-- [ ] Preserve stream ordering where observable.
-- [ ] Preserve CLSIDs, state bits, timestamps, and stream metadata.
-- [ ] Preserve empty storages and streams.
-- [ ] Detect FAT loops and invalid sector references.
-- [ ] Enforce bounds while following sector chains.
-- [ ] Add limits for sector count, directory depth, and stream size.
-- [ ] Expose storages and streams as typed `AltiumNode` classes.
+- [x] Parse the CFB header and sector sizes.
+- [x] Parse DIFAT, FAT, MiniFAT, and directory sectors.
+- [x] Parse regular and mini streams.
+- [x] Preserve directory entry names exactly.
+- [x] Preserve directory hierarchy.
+- [x] Preserve stream ordering where observable.
+- [x] Preserve CLSIDs, state bits, timestamps, and stream metadata.
+- [x] Preserve empty storages and streams.
+- [x] Detect FAT loops and invalid sector references.
+- [x] Enforce bounds while following sector chains.
+- [x] Add limits for chain length, directory entries, and total file size.
+- [x] Expose storages and streams as typed `AltiumNode` classes.
 - [ ] Provide lazy stream content access.
 - [ ] Support replacing one stream without decoding unrelated streams.
-- [ ] Return the original bytes when the container is untouched.
+- [x] Return the original bytes when the container is untouched.
 - [ ] Serialize modified CFB containers deterministically.
 - [ ] Test output by reopening it with both altiumts and an independent CFB
       implementation.
@@ -436,23 +439,24 @@ writing Altium files.
 
 - [ ] Implement bounded little-endian byte readers.
 - [ ] Implement bounded byte writers.
-- [ ] Implement signed and unsigned integer codecs.
-- [ ] Implement 32-bit and 64-bit floating-point codecs.
-- [ ] Implement fixed-point coordinate codecs.
+- [x] Implement the bounded signed/unsigned integer and floating-point reads
+      required by the first PCB primitive codecs.
+- [x] Implement fixed-point internal-coordinate decoding for tracks, arcs, and
+      vias.
 - [ ] Implement Pascal/length-prefixed string codecs.
-- [ ] Implement UTF-8 and UTF-16 string codecs.
-- [ ] Implement null-terminated string codecs where verified.
+- [x] Implement UTF-8, UTF-16, and Windows-1252 decoding where verified.
+- [x] Implement null-terminated property payload handling where verified.
 - [ ] Implement GUID/UUID codecs.
 - [ ] Implement date/time codecs where verified.
 - [ ] Implement bit-field helpers.
 - [ ] Implement enum codecs that preserve unknown numeric values.
-- [ ] Implement length-prefixed record framing.
+- [x] Implement bounded length-prefixed property and primitive framing.
 - [ ] Verify two-byte-length plus type-byte record framing where it occurs.
 - [ ] Support record formats with alternate header sizes.
-- [ ] Detect record lengths that exceed the containing stream.
+- [x] Detect record lengths that exceed the containing stream.
 - [ ] Preserve unknown record payload bytes.
 - [ ] Preserve padding and alignment bytes.
-- [ ] Preserve record ordering.
+- [x] Preserve decoded record ordering.
 - [ ] Add record-level dirty tracking.
 - [ ] Serialize untouched records from their original payload bytes.
 - [ ] Add hex-dump and annotated-record debugging utilities.
@@ -462,30 +466,32 @@ writing Altium files.
 
 ## 12. Binary `.PcbDoc` support
 
-- [ ] Identify and verify the root/header streams.
-- [ ] Identify all stream/storage families across supported Altium versions.
-- [ ] Verify version suffix conventions such as `*6` streams.
-- [ ] Implement board/header stream parsing.
+- [x] Identify and verify the `Board6` root/header streams.
+- [x] Inventory all stream/storage families in the binary reference corpus.
+- [x] Verify the `*6` stream convention against the current corpus.
+- [x] Implement board property/header stream parsing.
 - [ ] Implement layer-stack stream parsing.
-- [ ] Implement component stream parsing.
-- [ ] Implement net stream parsing.
-- [ ] Implement class stream parsing.
+- [x] Implement component property stream parsing.
+- [x] Implement net property stream parsing.
+- [x] Implement class property stream parsing.
 - [ ] Implement rule stream parsing.
-- [ ] Implement track stream parsing.
-- [ ] Implement arc stream parsing.
-- [ ] Implement pad stream parsing.
-- [ ] Implement via stream parsing.
+- [x] Implement initial track stream parsing.
+- [x] Implement initial arc stream parsing.
+- [x] Implement initial pad stream parsing, including nested subrecord framing
+      and common geometry fields.
+- [x] Implement initial via stream parsing.
 - [ ] Implement text stream parsing.
 - [ ] Implement fill stream parsing.
 - [ ] Implement region stream parsing.
-- [ ] Implement polygon stream parsing.
+- [x] Implement polygon property stream parsing; binary polygon primitives and
+      pours remain pending.
 - [ ] Implement dimension stream parsing.
 - [ ] Implement component-body stream parsing.
 - [ ] Implement model metadata and embedded model stream parsing.
 - [ ] Implement wide-string table parsing.
 - [ ] Resolve stream-local string/index tables.
 - [ ] Resolve owner, component, net, rule, and polygon indexes.
-- [ ] Preserve unknown streams without decoding them.
+- [x] Preserve unknown streams without decoding them.
 - [ ] Preserve unknown records inside known streams.
 - [ ] Build the same semantic PCB model from ASCII and binary input.
 - [ ] Serialize model edits back to binary streams.
@@ -495,13 +501,13 @@ writing Altium files.
 
 ## 13. `.SchDoc` schematic support
 
-- [ ] Add an `AltiumSchDoc` root class.
-- [ ] Add `parseAltiumSchDoc()`.
-- [ ] Detect ASCII and binary schematic variants.
-- [ ] Parse and validate schematic headers.
-- [ ] Build ownership trees from owner indexes.
-- [ ] Preserve record order independently of the ownership tree.
-- [ ] Implement sheet/header records.
+- [x] Add an `AltiumSchDoc` root class.
+- [x] Add `parseAltiumSchDoc()`.
+- [x] Detect ASCII and binary schematic variants.
+- [x] Parse and validate schematic headers.
+- [x] Add parent/owned-record queries from owner indexes.
+- [x] Preserve record order independently of ownership queries.
+- [x] Parse sheet/header records as source-preserving property records.
 - [ ] Implement component records.
 - [ ] Implement pin records, including binary pin payloads.
 - [ ] Implement IEEE symbol records.
@@ -531,7 +537,7 @@ writing Altium files.
 - [ ] Implement hierarchical document links.
 - [ ] Implement multichannel/repeated-sheet metadata.
 - [ ] Implement variant and fitted-state metadata.
-- [ ] Preserve unknown schematic record IDs and payloads.
+- [x] Preserve unknown schematic record IDs and property fields.
 - [ ] Verify historical record IDs against fixtures before documenting them as
       stable.
 - [ ] Add exact round-trip fixtures for every supported schematic version.
@@ -636,10 +642,11 @@ writing Altium files.
 
 - [ ] Define exact, structural, and semantic round-trip levels.
 - [ ] Report which level is available for a parsed document.
-- [ ] Return the original bytes for untouched binary documents.
-- [ ] Return the original text for untouched text documents.
-- [ ] Preserve unknown fields, records, streams, and embedded blobs.
-- [ ] Preserve original line endings.
+- [x] Return the original bytes for untouched binary documents.
+- [x] Return the original text for untouched text documents.
+- [x] Preserve unknown fields, records, streams, and embedded blobs in the
+      read-only source model.
+- [x] Preserve original line endings.
 - [ ] Preserve original encoding when possible.
 - [ ] Preserve numeric precision and exponent formatting.
 - [ ] Preserve duplicate keys and their positions.
@@ -656,7 +663,7 @@ writing Altium files.
 - [ ] Refuse serialization when an edit cannot be represented safely.
 - [ ] Surface lossy operations explicitly.
 - [ ] Test parse → serialize → parse model equivalence.
-- [ ] Test byte equality for untouched documents.
+- [x] Test byte equality for untouched documents.
 - [ ] Test targeted edits with minimal binary/text diffs.
 - [ ] Test files by reopening them with Altium Designer when available.
 
@@ -757,16 +764,17 @@ writing Altium files.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.
-- [ ] Add tests for every supported file root.
+- [x] Add tests for each currently supported ASCII/binary PCB and schematic
+      root.
 - [ ] Add tests for every supported Altium version.
 - [ ] Add tests for mixed and unusual encodings.
 - [ ] Add tests for Unicode identifiers and values.
 - [ ] Add tests for duplicate fields and records.
 - [ ] Add tests for empty fields, records, streams, and documents.
-- [ ] Add tests for malformed and truncated input.
+- [x] Add initial tests for malformed and truncated compound-file input.
 - [ ] Add tests for integer overflow and pathological lengths.
 - [ ] Add tests for cyclic and invalid CFB sector chains.
-- [ ] Add tests for resource limits.
+- [x] Add initial tests for parser resource limits.
 - [ ] Add property-based tests for text field parsing.
 - [ ] Add property-based tests for measurement parsing.
 - [ ] Add property-based tests for record framing.
@@ -845,7 +853,7 @@ writing Altium files.
 - [ ] Add source-location display for text records.
 - [ ] Add a browser-based document inspector.
 - [ ] Add a record/stream search UI.
-- [ ] Add a fixture corpus report.
+- [x] Add a fixture corpus report.
 - [ ] Add scripts for identifying new record kinds and fields.
 - [ ] Add scripts for comparing output across Altium versions.
 - [ ] Add a release-size check.
@@ -854,9 +862,9 @@ writing Altium files.
 ## 27. Documentation and examples
 
 - [x] Document the initial ASCII `.PcbDoc` API.
-- [x] Document the current binary/schematic limitations.
+- [x] Document the current binary/schematic capabilities and limitations.
 - [ ] Add architecture documentation.
-- [ ] Add a supported-formats table.
+- [x] Add a concise supported-format summary to the README.
 - [ ] Add a version compatibility table.
 - [ ] Document strict, permissive, and recovery modes.
 - [ ] Document round-trip guarantee levels.
@@ -864,10 +872,10 @@ writing Altium files.
 - [ ] Document mutation and dirty-state behavior.
 - [ ] Document encoding behavior.
 - [ ] Document measurement and coordinate handling.
-- [ ] Add an ASCII PCB inspection example.
+- [x] Add an ASCII PCB inspection/edit example.
 - [ ] Add a targeted PCB edit example.
-- [ ] Add a binary PCB inspection example.
-- [ ] Add a schematic inspection example.
+- [x] Add a binary PCB inspection example.
+- [x] Add a schematic inspection example.
 - [ ] Add a schematic-library lookup example.
 - [ ] Add a PCB-library footprint extraction example.
 - [ ] Add a project variant example.
@@ -875,7 +883,7 @@ writing Altium files.
 - [ ] Add API reference generation.
 - [ ] Add contributor guidance for implementing a new record class.
 - [ ] Add contributor guidance for adding licensed fixtures.
-- [ ] Add a format-research notes directory.
+- [x] Add format-research notes.
 - [ ] Add a changelog.
 - [ ] Add a security policy.
 - [ ] Add a code of conduct if required by the organization.

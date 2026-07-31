@@ -33,7 +33,7 @@ export function getPcbMeasurement(
   key: string,
   fallback = 0,
 ): number {
-  return parsePcbMeasurement(record.get(key)) ?? fallback
+  return parsePcbMeasurement(record.getCaseInsensitive(key)) ?? fallback
 }
 
 export function getSchematicCoordinate(
@@ -41,8 +41,8 @@ export function getSchematicCoordinate(
   key: string,
   fallback = 0,
 ): number {
-  const integerPart = Number(record.get(key) ?? fallback)
-  const fractionRaw = record.get(`${key}_FRAC`)
+  const integerPart = Number(record.getCaseInsensitive(key) ?? fallback)
+  const fractionRaw = record.getCaseInsensitive(`${key}_FRAC`)
   if (!Number.isFinite(integerPart) || fractionRaw === undefined) {
     return Number.isFinite(integerPart) ? integerPart : fallback
   }
@@ -57,8 +57,8 @@ export function getPcbVertexPoints(record: AltiumRecord): SvgPoint[] {
   const points: SvgPoint[] = []
 
   for (let index = 0; index < 10_000; index++) {
-    const x = parsePcbMeasurement(record.get(`VX${index}`))
-    const y = parsePcbMeasurement(record.get(`VY${index}`))
+    const x = parsePcbMeasurement(record.getCaseInsensitive(`VX${index}`))
+    const y = parsePcbMeasurement(record.getCaseInsensitive(`VY${index}`))
     if (x === undefined || y === undefined) break
     points.push({ x, y })
   }
@@ -68,7 +68,7 @@ export function getPcbVertexPoints(record: AltiumRecord): SvgPoint[] {
 
 export function getSchematicIndexedPoints(record: AltiumRecord): SvgPoint[] {
   const points: SvgPoint[] = []
-  const declaredCount = Number(record.get("LOCATIONCOUNT"))
+  const declaredCount = Number(record.getCaseInsensitive("LOCATIONCOUNT"))
   const maximum = Number.isFinite(declaredCount)
     ? Math.min(Math.max(declaredCount, 0), 10_000)
     : 10_000
@@ -76,7 +76,12 @@ export function getSchematicIndexedPoints(record: AltiumRecord): SvgPoint[] {
   for (let index = 1; index <= maximum; index++) {
     const xKey = `X${index}`
     const yKey = `Y${index}`
-    if (record.get(xKey) === undefined || record.get(yKey) === undefined) break
+    if (
+      record.getCaseInsensitive(xKey) === undefined ||
+      record.getCaseInsensitive(yKey) === undefined
+    ) {
+      break
+    }
     points.push({
       x: getSchematicCoordinate(record, xKey),
       y: getSchematicCoordinate(record, yKey),

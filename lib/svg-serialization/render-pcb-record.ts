@@ -15,7 +15,7 @@ export function renderPcbRecord(
   options: AltiumPcbSvgOptions,
 ): string | undefined {
   const kind = record.recordKind
-  const layer = record.get("LAYER")
+  const layer = record.getCaseInsensitive("LAYER")
   const color = getPcbLayerColor(layer)
   const metadata = `data-record="${escapeXml(kind ?? "Unknown")}"${layer ? ` data-layer="${escapeXml(layer)}"` : ""}`
 
@@ -34,8 +34,8 @@ export function renderPcbRecord(
       y: getPcbMeasurement(record, "LOCATION.Y"),
     }
     const radius = getPcbMeasurement(record, "RADIUS")
-    const startAngle = Number(record.get("STARTANGLE") ?? 0)
-    const endAngle = Number(record.get("ENDANGLE") ?? 360)
+    const startAngle = Number(record.getCaseInsensitive("STARTANGLE") ?? 0)
+    const endAngle = Number(record.getCaseInsensitive("ENDANGLE") ?? 360)
     const points = approximateArc(center, radius, startAngle, endAngle)
     const width = Math.max(getPcbMeasurement(record, "WIDTH", 4), 0.5)
     return `<polyline ${metadata} points="${pointsToSvg(points, viewport)}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(width)}"/>`
@@ -66,16 +66,17 @@ export function renderPcbRecord(
 
   if (kind === "Text" && options.showText !== false) {
     const text =
-      decodeAltiumWideString(record.get("WIDESTRING")) ||
-      record.get("TEXT") ||
+      decodeAltiumWideString(record.getDecoded("WIDESTRING")) ||
+      record.getDecoded("TEXT") ||
       ""
-    if (!text) return undefined
+    const normalizedText = text.replace(/[ \t]+$/gm, "")
+    if (!normalizedText) return undefined
     const x = viewport.toX(getPcbMeasurement(record, "X"))
     const y = viewport.toY(getPcbMeasurement(record, "Y"))
     const height = Math.max(getPcbMeasurement(record, "HEIGHT", 30), 3)
-    const rotation = Number(record.get("ROTATION") ?? 0)
+    const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
     const mirror = record.getBoolean("MIRROR") ? -1 : 1
-    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="${formatSvgNumber(height)}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${escapeXml(text)}</text>`
+    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="${formatSvgNumber(height)}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${escapeXml(normalizedText)}</text>`
   }
 
   if (kind === "Component" && options.showComponentOrigins) {
@@ -97,15 +98,15 @@ function renderPad(
   const x = viewport.toX(getPcbMeasurement(record, "X"))
   const y = viewport.toY(getPcbMeasurement(record, "Y"))
   const width =
-    parsePcbMeasurement(record.get("XSIZE")) ??
-    parsePcbMeasurement(record.get("TOPXSIZE")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("XSIZE")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("TOPXSIZE")) ??
     20
   const height =
-    parsePcbMeasurement(record.get("YSIZE")) ??
-    parsePcbMeasurement(record.get("TOPYSIZE")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("YSIZE")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("TOPYSIZE")) ??
     width
-  const rotation = Number(record.get("ROTATION") ?? 0)
-  const shape = record.get("SHAPE")?.toUpperCase() ?? "ROUND"
+  const rotation = Number(record.getCaseInsensitive("ROTATION") ?? 0)
+  const shape = record.getCaseInsensitive("SHAPE")?.toUpperCase() ?? "ROUND"
   const body =
     shape === "ROUND" || shape === "CIRCLE"
       ? `<ellipse cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" rx="${formatSvgNumber(width / 2)}" ry="${formatSvgNumber(height / 2)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
@@ -127,8 +128,8 @@ function renderVia(
   const x = viewport.toX(getPcbMeasurement(record, "X"))
   const y = viewport.toY(getPcbMeasurement(record, "Y"))
   const diameter =
-    parsePcbMeasurement(record.get("DIAMETER")) ??
-    parsePcbMeasurement(record.get("TOPLAYERSIZE")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
     20
   const holeSize = getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
   const hole =

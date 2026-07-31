@@ -115,12 +115,12 @@
     <g data-record="17"><path d="M 469.755 333.6583 l -5 -7 h 10 Z" fill="#000000"/><text x="476.755" y="330.6583" fill="#000000" font-family="Arial, sans-serif" font-size="10">3.3V</text></g>
     <g data-record="17"><path d="M 694.755 123.6583 l -5 -7 h 10 Z" fill="#000000"/><text x="701.755" y="120.6583" fill="#000000" font-family="Arial, sans-serif" font-size="10">3.3V</text></g>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(570.755 294.735) rotate(0)">R2</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(572.455 304.735) rotate(0)">Comment</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(572.455 304.735) rotate(0)">10kΩ</text>
     <g data-record="2"><line x1="564.755" y1="278.6583" x2="574.755" y2="278.6583" stroke="#000000" stroke-width="1"/><circle cx="564.755" cy="278.6583" r="1.2" fill="#000000"/><text x="577.755" y="276.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
     <g data-record="2"><line x1="564.755" y1="298.6583" x2="574.755" y2="298.6583" stroke="#000000" stroke-width="1"/><circle cx="564.755" cy="298.6583" r="1.2" fill="#000000"/><text x="577.755" y="296.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
     <rect data-record="10" x="560.755" y="278.6583" width="8" height="20" rx="0" fill="none" stroke="#880000" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(515.755 294.735) rotate(0)">R3</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(515.755 303.705) rotate(0)">Comment</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(515.755 303.705) rotate(0)">10kΩ</text>
     <g data-record="2"><line x1="509.755" y1="278.6583" x2="519.755" y2="278.6583" stroke="#000000" stroke-width="1"/><circle cx="509.755" cy="278.6583" r="1.2" fill="#000000"/><text x="522.755" y="276.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
     <g data-record="2"><line x1="509.755" y1="298.6583" x2="519.755" y2="298.6583" stroke="#000000" stroke-width="1"/><circle cx="509.755" cy="298.6583" r="1.2" fill="#000000"/><text x="522.755" y="296.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
     <rect data-record="10" x="505.755" y="278.6583" width="8" height="20" rx="0" fill="none" stroke="#880000" stroke-width="1"/>
@@ -137,13 +137,13 @@
     <polyline data-record="27" points="729.755,128.6583 729.755,138.6583 699.755,138.6583 689.755,138.6583" fill="none" stroke="#008800" stroke-width="1"/>
     <g data-record="17"><path d="M 729.755 128.6583 l -5 -7 h 10 Z" fill="#000000"/><text x="736.755" y="125.6583" fill="#000000" font-family="Arial, sans-serif" font-size="10">GND</text></g>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(635.755 294.735) rotate(0)">R1</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(635.755 303.705) rotate(0)">Comment</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(635.755 303.705) rotate(0)">10kΩ</text>
     <g data-record="2"><line x1="629.755" y1="278.6583" x2="639.755" y2="278.6583" stroke="#000000" stroke-width="1"/><circle cx="629.755" cy="278.6583" r="1.2" fill="#000000"/><text x="642.755" y="276.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
     <g data-record="2"><line x1="629.755" y1="298.6583" x2="639.755" y2="298.6583" stroke="#000000" stroke-width="1"/><circle cx="629.755" cy="298.6583" r="1.2" fill="#000000"/><text x="642.755" y="296.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
     <rect data-record="10" x="625.755" y="278.6583" width="8" height="20" rx="0" fill="none" stroke="#880000" stroke-width="1"/>
     <polyline data-record="27" points="629.755,268.6583 629.755,228.6583" fill="none" stroke="#008800" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(595.755 114.905) rotate(0)">R4</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(595.755 123.765) rotate(0)">Comment</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(595.755 123.765) rotate(0)">10kΩ</text>
     <g data-record="2"><line x1="589.755" y1="98.6583" x2="599.755" y2="98.6583" stroke="#000000" stroke-width="1"/><circle cx="589.755" cy="98.6583" r="1.2" fill="#000000"/><text x="602.755" y="96.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
     <g data-record="2"><line x1="589.755" y1="118.6583" x2="599.755" y2="118.6583" stroke="#000000" stroke-width="1"/><circle cx="589.755" cy="118.6583" r="1.2" fill="#000000"/><text x="602.755" y="116.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
     <rect data-record="10" x="585.755" y="98.6583" width="8" height="20" rx="0" fill="none" stroke="#880000" stroke-width="1"/>
@@ -184,7 +184,7 @@
     <polyline data-record="6" points="269.755,404.6583 265.755,406.6583 265.755,406.6583 267.755,408.6583 267.755,408.6583 269.755,404.6583" fill="none" stroke="#880000" stroke-width="1"/>
     <polyline data-record="6" points="269.755,417.6583 269.755,429.6583" fill="none" stroke="#880000" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(208.795 449.635) rotate(0)">R5</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(203.755 439.635) rotate(0)">Comment</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(203.755 439.635) rotate(0)">1kΩ</text>
     <g data-record="2"><line x1="224.755" y1="423.6583" x2="234.755" y2="423.6583" stroke="#000000" stroke-width="1"/><circle cx="224.755" cy="423.6583" r="1.2" fill="#000000"/><text x="237.755" y="421.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">2 2</text></g>
     <g data-record="2"><line x1="204.755" y1="423.6583" x2="214.755" y2="423.6583" stroke="#000000" stroke-width="1"/><circle cx="204.755" cy="423.6583" r="1.2" fill="#000000"/><text x="217.755" y="421.6583" fill="#000000" font-family="Arial, sans-serif" font-size="7">1 1</text></g>
     <rect data-record="10" x="204.755" y="419.6583" width="20" height="8" rx="0" fill="none" stroke="#880000" stroke-width="1"/>

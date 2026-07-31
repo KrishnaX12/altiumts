@@ -1,4 +1,5 @@
 import { AltiumPcbDoc } from "../altium-pcb-doc"
+import { AltiumSchDoc } from "../altium-sch-doc"
 import type { AltiumLine } from "../base/altium-line"
 import { AltiumRecord } from "../records/altium-record"
 import {
@@ -25,7 +26,7 @@ import {
 } from "./svg-utils"
 
 export function serializeAltiumSheetToSvg(
-  source: AltiumPcbDoc | AltiumLine[],
+  source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
   options: AltiumSheetSvgOptions = {},
 ): string {
   if (source instanceof AltiumPcbDoc) {
@@ -36,12 +37,19 @@ export function serializeAltiumSheetToSvg(
     })
   }
 
-  const records = source.filter(
+  const lines = source instanceof AltiumSchDoc ? source.lines : source
+  const records = lines.filter(
     (line): line is AltiumRecord => line instanceof AltiumRecord,
   )
   const sheetRecord = records.find((record) => record.recordKind === "31")
-  const sheetWidth = Math.max(Number(sheetRecord?.get("CUSTOMX") ?? 1000), 1)
-  const sheetHeight = Math.max(Number(sheetRecord?.get("CUSTOMY") ?? 800), 1)
+  const sheetWidth = Math.max(
+    Number(sheetRecord?.getCaseInsensitive("CUSTOMX") ?? 1000),
+    1,
+  )
+  const sheetHeight = Math.max(
+    Number(sheetRecord?.getCaseInsensitive("CUSTOMY") ?? 800),
+    1,
+  )
   const paperBounds: SvgBounds = {
     minX: 0,
     minY: 0,
@@ -84,9 +92,12 @@ function renderSchematicRecord(
   options: AltiumSheetSvgOptions,
 ): string | undefined {
   const kind = record.recordKind
-  const color = altiumColorToCss(record.get("COLOR"), "#1f2937")
+  const color = altiumColorToCss(record.getCaseInsensitive("COLOR"), "#1f2937")
   const metadata = `data-record="${escapeXml(kind ?? "Unknown")}"`
-  const lineWidth = Math.max(Number(record.get("LINEWIDTH") ?? 1), 0.7)
+  const lineWidth = Math.max(
+    Number(record.getCaseInsensitive("LINEWIDTH") ?? 1),
+    0.7,
+  )
 
   if (kind === "6" || kind === "27" || kind === "7") {
     const points = getSchematicIndexedPoints(record)
@@ -94,7 +105,7 @@ function renderSchematicRecord(
     const polygon = kind === "7"
     const tag = polygon ? "polygon" : "polyline"
     const fill = polygon
-      ? altiumColorToCss(record.get("AREACOLOR"), "none")
+      ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "none")
       : "none"
     return `<${tag} ${metadata} points="${pointsToSvg(points, viewport)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
@@ -107,14 +118,14 @@ function renderSchematicRecord(
     const center = getSchematicLocation(record)
     const radiusX = getSchematicCoordinate(record, "RADIUS", 1)
     const radiusY = getSchematicCoordinate(record, "SECONDARYRADIUS", radiusX)
-    return `<ellipse ${metadata} cx="${formatSvgNumber(viewport.toX(center.x))}" cy="${formatSvgNumber(viewport.toY(center.y))}" rx="${formatSvgNumber(radiusX)}" ry="${formatSvgNumber(radiusY)}" fill="${record.getBoolean("ISSOLID") ? altiumColorToCss(record.get("AREACOLOR"), "none") : "none"}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+    return `<ellipse ${metadata} cx="${formatSvgNumber(viewport.toX(center.x))}" cy="${formatSvgNumber(viewport.toY(center.y))}" rx="${formatSvgNumber(radiusX)}" ry="${formatSvgNumber(radiusY)}" fill="${record.getBoolean("ISSOLID") ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "none") : "none"}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
 
   if (kind === "11" || kind === "12") {
     const center = getSchematicLocation(record)
     const radius = getSchematicCoordinate(record, "RADIUS", 1)
-    const startAngle = Number(record.get("STARTANGLE") ?? 0)
-    const endAngle = Number(record.get("ENDANGLE") ?? 360)
+    const startAngle = Number(record.getCaseInsensitive("STARTANGLE") ?? 0)
+    const endAngle = Number(record.getCaseInsensitive("ENDANGLE") ?? 360)
     const points = approximateSchematicArc(center, radius, startAngle, endAngle)
     return `<polyline ${metadata} points="${pointsToSvg(points, viewport)}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
@@ -125,7 +136,10 @@ function renderSchematicRecord(
 
   if (kind === "29") {
     const location = getSchematicLocation(record)
-    const radius = Math.max(Number(record.get("SIZE") ?? 1) * 1.8, 1.5)
+    const radius = Math.max(
+      Number(record.getCaseInsensitive("SIZE") ?? 1) * 1.8,
+      1.5,
+    )
     return `<circle ${metadata} cx="${formatSvgNumber(viewport.toX(location.x))}" cy="${formatSvgNumber(viewport.toY(location.y))}" r="${formatSvgNumber(radius)}" fill="${color}"/>`
   }
 
@@ -133,7 +147,7 @@ function renderSchematicRecord(
     const location = getSchematicLocation(record)
     const x = viewport.toX(location.x)
     const y = viewport.toY(location.y)
-    const text = record.get("TEXT") ?? record.get("NAME") ?? ""
+    const text = record.getDecoded("TEXT") ?? record.getDecoded("NAME") ?? ""
     return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l -5 -7 h 10 Z" fill="${color}"/><text x="${formatSvgNumber(x + 7)}" y="${formatSvgNumber(y - 3)}" fill="${color}" font-family="Arial, sans-serif" font-size="10">${escapeXml(text)}</text></g>`
   }
 
@@ -141,8 +155,8 @@ function renderSchematicRecord(
     const location = getSchematicLocation(record)
     const x = viewport.toX(location.x)
     const y = viewport.toY(location.y)
-    const width = Math.max(Number(record.get("WIDTH") ?? 16), 10)
-    const name = record.get("NAME") ?? ""
+    const width = Math.max(Number(record.getCaseInsensitive("WIDTH") ?? 16), 10)
+    const name = record.getDecoded("NAME") ?? ""
     return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l ${formatSvgNumber(width * 0.22)} -5 h ${formatSvgNumber(width * 0.78)} v 10 h ${formatSvgNumber(-width * 0.78)} Z" fill="#fff" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${color}" font-family="Arial, sans-serif" font-size="8">${escapeXml(name)}</text></g>`
   }
 
@@ -153,9 +167,12 @@ function renderSchematicRecord(
     const x = viewport.toX(location.x)
     const y = viewport.toY(location.y)
     const text =
-      record.get("TEXT") ?? record.get("NAME") ?? record.get("DESIGNATOR") ?? ""
+      record.getDecoded("TEXT") ??
+      record.getDecoded("NAME") ??
+      record.getDecoded("DESIGNATOR") ??
+      ""
     if (!text) return undefined
-    const rotation = Number(record.get("ORIENTATION") ?? 0) * -90
+    const rotation = Number(record.getCaseInsensitive("ORIENTATION") ?? 0) * -90
     return `<text ${metadata} x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="9" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(rotation)})">${escapeXml(text)}</text>`
   }
 
@@ -176,8 +193,8 @@ function renderSchematicRecord(
     const top = viewport.toY(rectangle.maxY)
     const width = rectangle.maxX - rectangle.minX
     const height = rectangle.maxY - rectangle.minY
-    const text = (record.get("TEXT") ?? "").slice(0, 140)
-    return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${altiumColorToCss(record.get("AREACOLOR"), "#fff7ed")}" stroke="${color}"/><text x="${formatSvgNumber(left + 6)}" y="${formatSvgNumber(top + 14)}" fill="${color}" font-family="Arial, sans-serif" font-size="9">${escapeXml(text)}</text></g>`
+    const text = (record.getDecoded("TEXT") ?? "").slice(0, 140)
+    return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff7ed")}" stroke="${color}"/><text x="${formatSvgNumber(left + 6)}" y="${formatSvgNumber(top + 14)}" fill="${color}" font-family="Arial, sans-serif" font-size="9">${escapeXml(text)}</text></g>`
   }
 
   return undefined
@@ -195,11 +212,11 @@ function renderSchematicRectangle(
   const top = viewport.toY(rectangle.maxY)
   const width = rectangle.maxX - rectangle.minX
   const height = rectangle.maxY - rectangle.minY
-  const radius = Number(record.get("CORNERXRADIUS") ?? 0)
+  const radius = Number(record.getCaseInsensitive("CORNERXRADIUS") ?? 0)
   const fill = record.getBoolean("ISSOLID")
-    ? altiumColorToCss(record.get("AREACOLOR"), "#fff")
+    ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff")
     : "none"
-  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(Math.max(Number(record.get("LINEWIDTH") ?? 1), 0.7))}"/>`
+  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(Math.max(Number(record.getCaseInsensitive("LINEWIDTH") ?? 1), 0.7))}"/>`
 }
 
 function renderSchematicPin(
@@ -209,8 +226,11 @@ function renderSchematicPin(
   color: string,
 ): string {
   const location = getSchematicLocation(record)
-  const length = Math.max(Number(record.get("PINLENGTH") ?? 10), 1)
-  const orientation = Number(record.get("ORIENTATION") ?? 0) & 3
+  const length = Math.max(
+    Number(record.getCaseInsensitive("PINLENGTH") ?? 10),
+    1,
+  )
+  const orientation = Number(record.getCaseInsensitive("ORIENTATION") ?? 0) & 3
   const direction = [
     { x: 1, y: 0 },
     { x: 0, y: -1 },
@@ -221,8 +241,8 @@ function renderSchematicPin(
     x: location.x + direction.x * length,
     y: location.y + direction.y * length,
   }
-  const name = record.get("NAME") ?? ""
-  const designator = record.get("DESIGNATOR") ?? ""
+  const name = record.getDecoded("NAME") ?? ""
+  const designator = record.getDecoded("DESIGNATOR") ?? ""
   const label = [designator, name].filter(Boolean).join(" ")
   return `<g ${metadata}><line x1="${formatSvgNumber(viewport.toX(location.x))}" y1="${formatSvgNumber(viewport.toY(location.y))}" x2="${formatSvgNumber(viewport.toX(end.x))}" y2="${formatSvgNumber(viewport.toY(end.y))}" stroke="${color}" stroke-width="1"/><circle cx="${formatSvgNumber(viewport.toX(location.x))}" cy="${formatSvgNumber(viewport.toY(location.y))}" r="1.2" fill="${color}"/>${label ? `<text x="${formatSvgNumber(viewport.toX(end.x) + 3)}" y="${formatSvgNumber(viewport.toY(end.y) - 2)}" fill="${color}" font-family="Arial, sans-serif" font-size="7">${escapeXml(label)}</text>` : ""}</g>`
 }
@@ -285,8 +305,8 @@ function getSchematicLocationIfPresent(
   record: AltiumRecord,
 ): SvgPoint | undefined {
   if (
-    record.get("LOCATION.X") === undefined ||
-    record.get("LOCATION.Y") === undefined
+    record.getCaseInsensitive("LOCATION.X") === undefined ||
+    record.getCaseInsensitive("LOCATION.Y") === undefined
   ) {
     return undefined
   }
@@ -297,8 +317,8 @@ function getSchematicCornerIfPresent(
   record: AltiumRecord,
 ): SvgPoint | undefined {
   if (
-    record.get("CORNER.X") === undefined ||
-    record.get("CORNER.Y") === undefined
+    record.getCaseInsensitive("CORNER.X") === undefined ||
+    record.getCaseInsensitive("CORNER.Y") === undefined
   ) {
     return undefined
   }

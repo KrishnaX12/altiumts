@@ -1,4 +1,4 @@
-import type { AltiumPcbDoc } from "../altium-pcb-doc"
+import type { AltiumPcbDocument } from "../altium-pcb-document"
 import { getPcbBoardOutline, getPcbDocumentBounds } from "./pcb-geometry"
 import { recordAppliesToLayers } from "./pcb-layer"
 import { renderPcbRecord } from "./render-pcb-record"
@@ -18,7 +18,7 @@ const RECORD_PAINT_ORDER: Record<string, number> = {
 }
 
 export function serializeAltiumPcbToSvg(
-  document: AltiumPcbDoc,
+  document: AltiumPcbDocument,
   options: AltiumPcbSvgOptions = {},
 ): string {
   const bounds = getPcbDocumentBounds(document)

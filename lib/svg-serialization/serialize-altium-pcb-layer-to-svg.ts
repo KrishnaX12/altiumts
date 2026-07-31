@@ -1,9 +1,9 @@
-import type { AltiumPcbDoc } from "../altium-pcb-doc"
+import type { AltiumPcbDocument } from "../altium-pcb-document"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
 import type { AltiumPcbSvgOptions } from "./svg-types"
 
 export function serializeAltiumPcbLayerToSvg(
-  document: AltiumPcbDoc,
+  document: AltiumPcbDocument,
   layer: string,
   options: Omit<AltiumPcbSvgOptions, "layers"> = {},
 ): string {

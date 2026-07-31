@@ -3,10 +3,11 @@
 `altiumts` is a TypeScript-first parser and serializer for Altium document
 formats.
 
-The initial prototype supports ASCII `.PcbDoc` files. It models documents,
-records, and fields as classes, preserves unknown records and fields, retains
-mixed line endings, and round-trips existing files byte-for-byte when their
-text is not modified.
+The current prototype supports source-preserving ASCII `.PcbDoc` and `.SchDoc`
+files plus read-only binary compound-file variants. It models documents,
+records, fields, CFB storages, and streams as classes. Unknown content remains
+available in the source tree, and untouched binary documents retain their
+exact original bytes.
 
 ## Install
 
@@ -44,6 +45,43 @@ The generic `parseAltiumAscii` function returns document lines without
 requiring a `Board` root record. `getChildren()` is available on every node for
 generic tree walking.
 
+## Auto-detect ASCII and binary files
+
+Use the byte-oriented entrypoint when the container or encoding is not known:
+
+```ts
+import { readFile } from "node:fs/promises"
+import {
+  AltiumBinaryPcbDoc,
+  AltiumSchDoc,
+  parseAltiumFile,
+} from "altiumts"
+
+const bytes = new Uint8Array(await readFile("design.PcbDoc"))
+const { detection, document } = parseAltiumFile(bytes)
+
+console.log(detection.container, detection.documentKind, detection.encoding)
+
+if (document instanceof AltiumBinaryPcbDoc) {
+  console.log(document.components.length, document.nets.length)
+  console.log(
+    document.pads.length,
+    document.tracks.length,
+    document.arcs.length,
+    document.vias.length,
+  )
+}
+
+if (document instanceof AltiumSchDoc) {
+  console.log(document.sourceFormat, document.records.length)
+}
+```
+
+Binary `.PcbDoc` parsing currently inventories every CFB storage family,
+decodes common property streams, and creates semantic records for pads, tracks,
+arcs, and vias. Binary `.SchDoc` parsing decodes its framed `FileHeader`
+property records, `%UTF8%` fields, and owner indexes.
+
 ## Render SVG previews
 
 The SVG serialization module can render a complete PCB, one PCB layer, or a
@@ -66,8 +104,9 @@ await writeFile(
 )
 ```
 
-`serializeAltiumSheetToSvg()` accepts either an `AltiumPcbDoc` or the lines
-returned by `parseAltiumAscii()`. PCB rendering currently prioritizes outlines,
+`serializeAltiumSheetToSvg()` accepts `AltiumSchDoc`, `AltiumPcbDoc`, or the
+lines returned by `parseAltiumAscii()`. The PCB serializers accept either
+ASCII or binary PCB documents. PCB rendering currently prioritizes outlines,
 tracks, arcs, pads, vias, regions, polygons, fills, and text. The renderer is
 intentionally source-model based, so visual snapshot differences expose parser
 or geometry regressions directly.
@@ -76,6 +115,13 @@ or geometry regressions directly.
 
 - `parseAltiumPcbDoc(source, options?)` parses and validates an ASCII
   `.PcbDoc`.
+- `parseAltiumSchDoc(source, options?)` parses ASCII or binary `.SchDoc`
+  input.
+- `parseAltiumBinaryPcbDoc(bytes, options?)` parses a binary `.PcbDoc`.
+- `parseAltiumCompoundFile(bytes, options?)` exposes a bounded, read-only
+  OLE/CFB tree.
+- `detectAltiumFile(bytes)` and `parseAltiumFile(bytes, options?)` provide
+  extension-independent format detection and dispatch.
 - `parseAltiumAscii(source, options?)` parses any Altium ASCII record stream.
 - `AltiumPcbDoc#getString()` serializes a complete board.
 - `AltiumRecord#get()`, `getAll()`, `set()`, and `delete()` provide ergonomic
@@ -98,11 +144,12 @@ kinds are still preserved in strict mode for forward compatibility.
 
 ## Reference files
 
-Download the pinned SimpleFOC Mini and Hyperpolyglot Altium PCB/schematic
-references:
+Download the pinned SimpleFOC Mini, SimpleFOC Shield, Hyperpolyglot, and Elk Pi
+Altium PCB/schematic references:
 
 ```sh
 bun run download-references
+bun run inventory-references
 ```
 
 Then run the complete suite:
@@ -121,6 +168,17 @@ generated `.snap.svg` visual baselines are committed and compared with
 
 ## Current scope
 
-This prototype intentionally does not yet parse Altium's binary compound-file
-documents or schematic/library formats. Those formats should get dedicated
-root classes and parsers rather than being guessed through the ASCII parser.
+Binary support is currently read-only: untouched documents can return their
+original bytes, but edits are not serialized back into CFB streams. The PCB
+parser does not yet semantically decode text, fills, regions, primitive
+polygons, component bodies, or embedded 3D models. Per-layer full-stack pad
+details beyond the top/middle/bottom shape model also remain pending. Those
+streams remain available through `AltiumCompoundFile` and appear in stream
+summaries.
+
+Schematic property records are parsed generically and visualized, but the
+numeric record IDs do not yet have a complete typed semantic model. Library,
+project, output-job, and integrated-library roots are still future work.
+
+See [CHECKLIST.md](./CHECKLIST.md) for the implementation roadmap and
+[docs/format-references.md](./docs/format-references.md) for research sources.
