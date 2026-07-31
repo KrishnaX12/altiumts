@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1111" viewBox="0 0 180 200" role="img" aria-label="Novena eDP adapter rotated top-paste fills" class="altium-pcb" data-renderer="altiumts">
+  <title>Novena eDP adapter rotated top-paste fills</title>
+  <rect width="100%" height="100%" fill="#071a16"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polygon data-record="BoardOutline" points="-1727.3628,912.2841 8.8576,912.2841 8.8576,557.9534 71.8497,494.9613 237.2041,494.9613 237.2041,-465.6687 -1727.3628,-465.6687 -1727.3628,912.2841" fill="#123d32" stroke="#6ee7b7" stroke-width="3"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="107.1468" y="29.5365" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-270 120.9263 36.4263)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="69.741" y="29.5317" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-270 83.5205 36.4215)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="32.3232" y="29.5148" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-270 46.1027 36.4046)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="32.3386" y="151.5865" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-90 46.1181 158.4763)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="69.7396" y="151.5861" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-90 83.5191 158.4759)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="107.1414" y="151.5781" width="27.559" height="13.7796" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-90 120.9209 158.4679)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="92.3621" y="96.4644" width="23.6221" height="33.4646" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-270 104.1732 113.1967)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="92.3639" y="64.9673" width="23.6221" height="33.4646" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-90 104.175 81.6996)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="51.0225" y="64.9694" width="23.6221" height="33.4646" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-90 62.8335 81.7017)"/>
+    <rect data-record="Fill" data-layer="TOPPASTE" data-keepout="false" x="51.0235" y="96.4649" width="23.6221" height="33.4646" fill="#cbd5e1" fill-opacity="0.6" transform="rotate(-270 62.8346 113.1972)"/>
+  </g>
+</svg>

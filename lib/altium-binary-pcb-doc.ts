@@ -71,6 +71,10 @@ export class AltiumBinaryPcbDoc extends AltiumNode {
     return this.primitiveRecords.get("Pads6") ?? []
   }
 
+  get fills(): AltiumRecord[] {
+    return this.primitiveRecords.get("Fills6") ?? []
+  }
+
   get regions(): AltiumRecord[] {
     return (
       this.primitiveRecords.get("ShapeBasedRegions6") ??

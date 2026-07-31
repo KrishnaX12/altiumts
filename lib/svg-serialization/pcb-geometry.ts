@@ -110,16 +110,28 @@ export function getPcbRecordBounds(
   }
 
   if (kind === "Fill") {
-    return boundsFromPoints([
-      {
-        x: getPcbMeasurement(record, "X1"),
-        y: getPcbMeasurement(record, "Y1"),
-      },
-      {
-        x: getPcbMeasurement(record, "X2"),
-        y: getPcbMeasurement(record, "Y2"),
-      },
-    ])
+    const x1 = getPcbMeasurement(record, "X1")
+    const y1 = getPcbMeasurement(record, "Y1")
+    const x2 = getPcbMeasurement(record, "X2")
+    const y2 = getPcbMeasurement(record, "Y2")
+    const centerX = (x1 + x2) / 2
+    const centerY = (y1 + y2) / 2
+    const halfWidth = Math.abs(x2 - x1) / 2
+    const halfHeight = Math.abs(y2 - y1) / 2
+    const rotation =
+      (Number(record.getCaseInsensitive("ROTATION") ?? 0) * Math.PI) / 180
+    const extentX =
+      Math.abs(Math.cos(rotation)) * halfWidth +
+      Math.abs(Math.sin(rotation)) * halfHeight
+    const extentY =
+      Math.abs(Math.sin(rotation)) * halfWidth +
+      Math.abs(Math.cos(rotation)) * halfHeight
+    return {
+      minX: centerX - extentX,
+      minY: centerY - extentY,
+      maxX: centerX + extentX,
+      maxY: centerY + extentY,
+    }
   }
 
   return undefined

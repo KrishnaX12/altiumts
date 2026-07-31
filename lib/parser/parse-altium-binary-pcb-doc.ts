@@ -34,6 +34,7 @@ const PROPERTY_STREAM_RECORD_KINDS: Record<string, string> = {
 const PRIMITIVE_STREAM_FAMILIES = new Set([
   "Arcs6",
   "BoardRegions",
+  "Fills6",
   "Pads6",
   "Regions6",
   "ShapeBasedRegions6",
