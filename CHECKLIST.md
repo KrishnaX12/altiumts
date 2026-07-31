@@ -751,6 +751,9 @@ writing Altium files.
 
 - [x] Add unit tests for basic ASCII parsing and mutation.
 - [x] Add an exact real-file ASCII `.PcbDoc` round-trip test.
+- [x] Add `bun-match-svg` visual regression infrastructure.
+- [x] Add SVG snapshots for every imported PCB and schematic reference.
+- [x] Add full-PCB and per-layer visual snapshots.
 - [ ] Add tests for every public class and helper.
 - [ ] Add tests for every known ASCII record kind.
 - [ ] Add tests for every binary record codec.
@@ -824,6 +827,9 @@ writing Altium files.
 
 ## 26. Developer tooling
 
+- [x] Add basic PCB-to-SVG serialization.
+- [x] Add basic PCB-layer-to-SVG serialization.
+- [x] Add basic schematic-sheet-to-SVG serialization.
 - [ ] Add a CLI package or `altiumts` binary.
 - [ ] Add `altiumts inspect <file>`.
 - [ ] Add `altiumts tree <file>`.

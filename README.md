@@ -44,6 +44,34 @@ The generic `parseAltiumAscii` function returns document lines without
 requiring a `Board` root record. `getChildren()` is available on every node for
 generic tree walking.
 
+## Render SVG previews
+
+The SVG serialization module can render a complete PCB, one PCB layer, or a
+generic ASCII schematic sheet:
+
+```ts
+import { readFile, writeFile } from "node:fs/promises"
+import {
+  parseAltiumPcbDoc,
+  serializeAltiumPcbLayerToSvg,
+  serializeAltiumPcbToSvg,
+} from "altiumts"
+
+const board = parseAltiumPcbDoc(await readFile("board.PcbDoc", "utf8"))
+
+await writeFile("board.svg", serializeAltiumPcbToSvg(board))
+await writeFile(
+  "board-top.svg",
+  serializeAltiumPcbLayerToSvg(board, "TOP"),
+)
+```
+
+`serializeAltiumSheetToSvg()` accepts either an `AltiumPcbDoc` or the lines
+returned by `parseAltiumAscii()`. PCB rendering currently prioritizes outlines,
+tracks, arcs, pads, vias, regions, polygons, fills, and text. The renderer is
+intentionally source-model based, so visual snapshot differences expose parser
+or geometry regressions directly.
+
 ## API
 
 - `parseAltiumPcbDoc(source, options?)` parses and validates an ASCII
@@ -61,13 +89,17 @@ generic tree walking.
 - Unrecognized record kinds become `AltiumUnknownRecord` instances and
   malformed lines become `AltiumRawLine` instances, so permissive parsing does
   not discard data.
+- `serializeAltiumPcbToSvg()`, `serializeAltiumPcbLayerToSvg()`, and
+  `serializeAltiumSheetToSvg()` provide visual inspection and regression-test
+  output.
 
 Pass `{ strict: true }` to reject malformed non-record lines. Unknown record
 kinds are still preserved in strict mode for forward compatibility.
 
 ## Reference files
 
-Download the pinned, MIT-licensed SimpleFOC Mini Altium board:
+Download the pinned SimpleFOC Mini and Hyperpolyglot Altium PCB/schematic
+references:
 
 ```sh
 bun run download-references
@@ -77,14 +109,15 @@ Then run the complete suite:
 
 ```sh
 bun test
+bun run test:update-svg
 bun run typecheck
 bun run format:check
 bun run build
 ```
 
-The reference file is downloaded from
-[`simplefoc/SimpleFOCMini`](https://github.com/simplefoc/SimpleFOCMini) and is
-not committed to this repository.
+The imported reference files are not committed to this repository. Their
+generated `.snap.svg` visual baselines are committed and compared with
+`bun-match-svg`.
 
 ## Current scope
 
