@@ -28,6 +28,7 @@ import {
 
 interface SchematicRenderContext {
   document?: AltiumSchDoc
+  records: AltiumRecord[]
   sheetRecord?: AltiumSchSheetRecord
 }
 
@@ -70,6 +71,7 @@ export function serializeAltiumSheetToSvg(
   const content: string[] = []
   const context: SchematicRenderContext = {
     document: source instanceof AltiumSchDoc ? source : undefined,
+    records: records.filter((record) => record.recordKind !== undefined),
     sheetRecord,
   }
 
@@ -96,6 +98,7 @@ export function serializeAltiumSheetToSvg(
     '<g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">',
   )
   for (const record of records) {
+    if (!shouldRenderSchematicRecord(record, context)) continue
     const rendered = renderSchematicRecord(record, viewport, options, context)
     if (rendered) content.push(rendered)
   }
@@ -163,7 +166,7 @@ function renderSchematicRecord(
   }
 
   if (kind === "2") {
-    return renderSchematicPin(record, viewport, metadata, color)
+    return renderSchematicPin(record, viewport, metadata, color, options)
   }
 
   if (kind === "29") {
@@ -215,10 +218,8 @@ function renderSchematicRecord(
       ""
     if (!text) return undefined
     const font = getSchematicFont(record, context.sheetRecord, 9)
-    const rotation =
-      Number(record.getCaseInsensitive("ORIENTATION") ?? 0) * -90 -
-      font.rotation
-    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(rotation)})">${escapeXml(text)}</text>`
+    const positioning = getSchematicTextPositioning(record)
+    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${escapeXml(text)}</text>`
   }
 
   if (kind === "28") {
@@ -286,18 +287,28 @@ function renderSchematicPin(
   viewport: SvgViewport,
   metadata: string,
   color: string,
+  options: AltiumSheetSvgOptions,
 ): string {
   const location = getSchematicLocation(record)
   const length = Math.max(
     Number(record.getCaseInsensitive("PINLENGTH") ?? 10),
     1,
   )
-  const orientation = Number(record.getCaseInsensitive("ORIENTATION") ?? 0) & 3
+  const pinConglomerate = record.getNumber("PINCONGLOMERATE")
+  const orientation =
+    (pinConglomerate ?? Number(record.getCaseInsensitive("ORIENTATION") ?? 0)) &
+    3
+  const hidden =
+    record.getBoolean("ISHIDDEN") ||
+    (pinConglomerate !== undefined && (pinConglomerate & 0x04) !== 0)
+  if (hidden && !options.showHidden) {
+    return ""
+  }
   const direction = [
     { x: 1, y: 0 },
-    { x: 0, y: -1 },
-    { x: -1, y: 0 },
     { x: 0, y: 1 },
+    { x: -1, y: 0 },
+    { x: 0, y: -1 },
   ][orientation] ?? { x: 1, y: 0 }
   const end = {
     x: location.x + direction.x * length,
@@ -305,8 +316,44 @@ function renderSchematicPin(
   }
   const name = record.getDecoded("NAME") ?? ""
   const designator = record.getDecoded("DESIGNATOR") ?? ""
-  const label = [designator, name].filter(Boolean).join(" ")
-  return `<g ${metadata}><line x1="${formatSvgNumber(viewport.toX(location.x))}" y1="${formatSvgNumber(viewport.toY(location.y))}" x2="${formatSvgNumber(viewport.toX(end.x))}" y2="${formatSvgNumber(viewport.toY(end.y))}" stroke="${color}" stroke-width="1"/><circle cx="${formatSvgNumber(viewport.toX(location.x))}" cy="${formatSvgNumber(viewport.toY(location.y))}" r="1.2" fill="${color}"/>${label ? `<text x="${formatSvgNumber(viewport.toX(end.x) + 3)}" y="${formatSvgNumber(viewport.toY(end.y) - 2)}" fill="${color}" font-family="Arial, sans-serif" font-size="7">${escapeXml(label)}</text>` : ""}</g>`
+  const showName =
+    pinConglomerate === undefined || (pinConglomerate & 0x08) !== 0
+  const showDesignator =
+    pinConglomerate === undefined || (pinConglomerate & 0x10) !== 0
+  const body = {
+    x: viewport.toX(location.x),
+    y: viewport.toY(location.y),
+  }
+  const connection = {
+    x: viewport.toX(end.x),
+    y: viewport.toY(end.y),
+  }
+  const screenDirection = {
+    x: direction.x,
+    y: -direction.y,
+  }
+  const rotation = orientation === 1 || orientation === 3 ? -90 : 0
+  const directionMatchesText = orientation === 0 || orientation === 1
+  const designatorAnchor = directionMatchesText ? "start" : "end"
+  const nameAnchor = directionMatchesText ? "end" : "start"
+  const designatorPosition = {
+    x: body.x + screenDirection.x * 2,
+    y: body.y + screenDirection.y * 2,
+  }
+  const namePosition = {
+    x: body.x - screenDirection.x * 2,
+    y: body.y - screenDirection.y * 2,
+  }
+  const renderPinText = (
+    text: string,
+    position: SvgPoint,
+    anchor: string,
+  ): string =>
+    text
+      ? `<text x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="6" text-anchor="${anchor}" dominant-baseline="text-after-edge" transform="translate(${formatSvgNumber(position.x)} ${formatSvgNumber(position.y)}) rotate(${rotation})">${escapeXml(text)}</text>`
+      : ""
+
+  return `<g ${metadata}><line x1="${formatSvgNumber(body.x)}" y1="${formatSvgNumber(body.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
 }
 
 function renderSchematicSheetBorder(
@@ -409,7 +456,7 @@ function getSchematicFont(
   record: AltiumRecord,
   sheetRecord: AltiumSchSheetRecord | undefined,
   fallbackSize: number,
-): { attributes: string; rotation: number; size: number } {
+): { attributes: string; size: number } {
   const fontId = Math.max(
     Math.round(Number(record.getCaseInsensitive("FONTID") ?? 1)),
     1,
@@ -428,13 +475,86 @@ function getSchematicFont(
     sheetRecord?.getBoolean(`UNDERLINE${fontId}`) === true
       ? "underline"
       : "none"
-  const rotation = Number(
-    sheetRecord?.getCaseInsensitive(`ROTATION${fontId}`) ?? 0,
-  )
   return {
     attributes: `font-family="${escapeXml(family)}" font-size="${formatSvgNumber(size)}" font-style="${style}" font-weight="${weight}" text-decoration="${decoration}"`,
-    rotation: Number.isFinite(rotation) ? rotation : 0,
     size,
+  }
+}
+
+function shouldRenderSchematicRecord(
+  record: AltiumRecord,
+  context: SchematicRenderContext,
+): boolean {
+  let ownerPartId = record.getNumber("OWNERPARTID")
+  let ownerPartDisplayMode = record.getNumber("OWNERPARTDISPLAYMODE")
+  let current: AltiumRecord | undefined = record
+  const visited = new Set<AltiumRecord>()
+
+  while (current && !visited.has(current)) {
+    visited.add(current)
+    const ownerIndex = current.getNumber("OWNERINDEX")
+    const parent: AltiumRecord | undefined = context.document
+      ? context.document.getParent(current)
+      : ownerIndex === undefined || ownerIndex < 0
+        ? undefined
+        : context.records[ownerIndex]
+    if (!parent) return true
+
+    if (ownerPartId === undefined || ownerPartId <= 0) {
+      ownerPartId = current.getNumber("OWNERPARTID")
+    }
+    if (ownerPartDisplayMode === undefined) {
+      ownerPartDisplayMode = current.getNumber("OWNERPARTDISPLAYMODE")
+    }
+
+    if (parent.recordKind === "1") {
+      const currentPartId = parent.getNumber("CURRENTPARTID") ?? 1
+      const partMatches =
+        ownerPartId === undefined ||
+        ownerPartId <= 0 ||
+        ownerPartId === currentPartId
+      const displayModeMatches =
+        ownerPartDisplayMode === undefined || ownerPartDisplayMode === 0
+      return partMatches && displayModeMatches
+    }
+
+    current = parent
+  }
+
+  return true
+}
+
+function getSchematicTextPositioning(record: AltiumRecord): {
+  anchor: "start" | "middle" | "end"
+  baseline: "text-after-edge" | "central" | "text-before-edge"
+  rotation: number
+} {
+  const justification = Math.min(
+    Math.max(Math.round(record.getNumber("JUSTIFICATION") ?? 0), 0),
+    8,
+  )
+  const orientation =
+    ((Math.round(record.getNumber("ORIENTATION") ?? 0) % 4) + 4) % 4
+  const column = justification % 3
+  const row = Math.floor(justification / 3)
+  let anchor: "start" | "middle" | "end" =
+    column === 1 ? "middle" : column === 2 ? "end" : "start"
+
+  // Altium keeps text upright for leftwards/downwards orientation and flips
+  // horizontal justification instead of rotating the glyphs by 180 degrees.
+  if (orientation === 2 || orientation === 3) {
+    anchor = anchor === "start" ? "end" : anchor === "end" ? "start" : anchor
+  }
+
+  return {
+    anchor,
+    baseline:
+      row === 1
+        ? "central"
+        : row === 2
+          ? "text-before-edge"
+          : "text-after-edge",
+    rotation: orientation === 1 || orientation === 3 ? -90 : 0,
   }
 }
 
