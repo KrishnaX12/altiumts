@@ -187,12 +187,13 @@ function renderSchematicRecord(
   }
 
   if (kind === "17") {
-    const location = getSchematicLocation(record)
-    const x = viewport.toX(location.x)
-    const y = viewport.toY(location.y)
-    const text = record.getDecoded("TEXT") ?? record.getDecoded("NAME") ?? ""
-    const font = getSchematicFont(record, context.sheetRecord, 10)
-    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l -5 -7 h 10 Z" fill="${color}"/><text x="${formatSvgNumber(x + 7)}" y="${formatSvgNumber(y - 3)}" fill="${color}" ${font.attributes}>${escapeXml(text)}</text></g>`
+    return renderSchematicPowerPort(
+      record,
+      viewport,
+      metadata,
+      color,
+      context.sheetRecord,
+    )
   }
 
   if (kind === "18") {
@@ -200,9 +201,30 @@ function renderSchematicRecord(
     const x = viewport.toX(location.x)
     const y = viewport.toY(location.y)
     const width = Math.max(Number(record.getCaseInsensitive("WIDTH") ?? 16), 10)
+    const height = Math.max(
+      Number(record.getCaseInsensitive("HEIGHT") ?? 10),
+      4,
+    )
+    const halfHeight = height / 2
+    const pointDepth = Math.min(width * 0.22, height)
+    const ioType = Number(record.getCaseInsensitive("IOTYPE") ?? 0)
     const name = record.getDecoded("NAME") ?? ""
     const font = getSchematicFont(record, context.sheetRecord, 8)
-    return `<g ${metadata}><path d="M ${formatSvgNumber(x)} ${formatSvgNumber(y)} l ${formatSvgNumber(width * 0.22)} -5 h ${formatSvgNumber(width * 0.78)} v 10 h ${formatSvgNumber(-width * 0.78)} Z" fill="#fff" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${color}" ${font.attributes}>${escapeXml(name)}</text></g>`
+    const fillColor = altiumColorToCss(
+      record.getCaseInsensitive("AREACOLOR"),
+      "#fff",
+    )
+    const textColor = altiumColorToCss(
+      record.getCaseInsensitive("TEXTCOLOR"),
+      color,
+    )
+    const path =
+      ioType === 1
+        ? `M ${formatSvgNumber(x)} ${formatSvgNumber(y)} L ${formatSvgNumber(x + pointDepth)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width)} V ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x + pointDepth)} Z`
+        : ioType === 2
+          ? `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width - pointDepth)} L ${formatSvgNumber(x + width)} ${formatSvgNumber(y)} L ${formatSvgNumber(x + width - pointDepth)} ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
+          : `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width)} V ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
+    return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text></g>`
   }
 
   if (kind === "4" || kind === "25" || kind === "34" || kind === "41") {
@@ -356,6 +378,67 @@ function renderSchematicPin(
   return `<g ${metadata}><line x1="${formatSvgNumber(body.x)}" y1="${formatSvgNumber(body.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
 }
 
+function renderSchematicPowerPort(
+  record: AltiumRecord,
+  viewport: SvgViewport,
+  metadata: string,
+  color: string,
+  sheetRecord: AltiumSchSheetRecord | undefined,
+): string {
+  const location = getSchematicLocation(record)
+  const origin = {
+    x: viewport.toX(location.x),
+    y: viewport.toY(location.y),
+  }
+  const orientation =
+    ((Math.round(record.getNumber("ORIENTATION") ?? 0) % 4) + 4) % 4
+  const direction = [
+    { x: 1, y: 0 },
+    { x: 0, y: -1 },
+    { x: -1, y: 0 },
+    { x: 0, y: 1 },
+  ][orientation] ?? { x: 1, y: 0 }
+  const perpendicular = { x: -direction.y, y: direction.x }
+  const point = (along: number, across = 0): SvgPoint => ({
+    x: origin.x + direction.x * along + perpendicular.x * across,
+    y: origin.y + direction.y * along + perpendicular.y * across,
+  })
+  const svgPoint = (value: SvgPoint): string =>
+    `${formatSvgNumber(value.x)} ${formatSvgNumber(value.y)}`
+  const style = Math.round(Number(record.getCaseInsensitive("STYLE") ?? 2))
+  let symbol: string
+  let labelDistance: number
+
+  if (style === 2) {
+    const stemEnd = point(8)
+    symbol = `<path d="M ${svgPoint(origin)} L ${svgPoint(stemEnd)} M ${svgPoint(point(8, -5))} L ${svgPoint(point(8, 5))}" fill="none" stroke="${color}" stroke-width="1"/>`
+    labelDistance = 12
+  } else if (style === 5) {
+    symbol = `<path d="M ${svgPoint(origin)} L ${svgPoint(point(4))} M ${svgPoint(point(4, -7))} L ${svgPoint(point(4, 7))} L ${svgPoint(point(12))} Z" fill="none" stroke="${color}" stroke-width="1"/>`
+    labelDistance = 16
+  } else if (style === 4) {
+    symbol = `<path d="M ${svgPoint(origin)} L ${svgPoint(point(4))} M ${svgPoint(point(4, -7))} L ${svgPoint(point(4, 7))} M ${svgPoint(point(8, -4.5))} L ${svgPoint(point(8, 4.5))} M ${svgPoint(point(12, -2))} L ${svgPoint(point(12, 2))}" fill="none" stroke="${color}" stroke-width="1"/>`
+    labelDistance = 16
+  } else if (style === 6) {
+    symbol = `<path d="M ${svgPoint(origin)} L ${svgPoint(point(4))} M ${svgPoint(point(4, -7))} L ${svgPoint(point(4, 7))} M ${svgPoint(point(4, -7))} L ${svgPoint(point(9, -9))} M ${svgPoint(point(4))} L ${svgPoint(point(9, -2))} M ${svgPoint(point(4, 7))} L ${svgPoint(point(9, 5))}" fill="none" stroke="${color}" stroke-width="1"/>`
+    labelDistance = 14
+  } else {
+    symbol = `<path d="M ${svgPoint(origin)} L ${svgPoint(point(10, -5))} L ${svgPoint(point(10, 5))} Z" fill="${color}"/>`
+    labelDistance = 14
+  }
+
+  const text = record.getDecoded("TEXT") ?? record.getDecoded("NAME") ?? ""
+  const showNetName = record.getBoolean("SHOWNETNAME") !== false
+  if (!text || !showNetName) return `<g ${metadata}>${symbol}</g>`
+
+  const font = getSchematicFont(record, sheetRecord, 10)
+  const label = point(labelDistance)
+  const vertical = direction.y !== 0
+  const textAnchor = vertical ? "middle" : direction.x > 0 ? "start" : "end"
+  const baseline = vertical ? (direction.y > 0 ? "hanging" : "auto") : "central"
+  return `<g ${metadata}>${symbol}<text x="${formatSvgNumber(label.x)}" y="${formatSvgNumber(label.y)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${color}" ${font.attributes}>${escapeXml(text)}</text></g>`
+}
+
 function renderSchematicSheetBorder(
   sheetRecord: AltiumSchSheetRecord | undefined,
   viewport: SvgViewport,
@@ -414,15 +497,18 @@ function renderSchematicTextFrame(
   const width = rectangle.maxX - rectangle.minX
   const height = rectangle.maxY - rectangle.minY
   const font = getSchematicFont(record, sheetRecord, 9)
-  const margin = Math.max(getSchematicCoordinate(record, "TEXTMARGIN", 1), 0)
+  const margin = Math.max(getSchematicCoordinate(record, "TEXTMARGIN", 0), 0)
   const availableWidth = Math.max(width - margin * 2, font.size)
   const availableHeight = Math.max(height - margin * 2, font.size)
-  const lines = wrapSchematicText(text, availableWidth, font.size)
-  const lineHeight = font.size * 1.15
-  const visibleLines = lines.slice(
-    0,
-    Math.max(Math.floor(availableHeight / lineHeight), 1),
-  )
+  const lines =
+    record.getBoolean("WORDWRAP") === false
+      ? text.split("\n")
+      : wrapSchematicText(text, availableWidth, font.size, font.family)
+  const lineHeight = font.size
+  const clip = record.getBoolean("CLIPTORECT") !== false
+  const visibleLines = clip
+    ? lines.slice(0, Math.max(Math.ceil(availableHeight / lineHeight), 1))
+    : lines
   const alignment = Number(record.getCaseInsensitive("ALIGNMENT") ?? 1)
   const anchor = alignment === 2 ? "middle" : alignment === 3 ? "end" : "start"
   const x =
@@ -447,16 +533,21 @@ function renderSchematicTextFrame(
         `<tspan x="${formatSvgNumber(x)}" dy="${formatSvgNumber(index === 0 ? 0 : lineHeight)}">${escapeXml(line)}</tspan>`,
     )
     .join("")
-  const clip = record.getBoolean("CLIPTORECT") !== false
+  const isSolid = record.getBoolean("ISSOLID") === true
+  const showBorder = record.getBoolean("SHOWBORDER") === true
+  const background =
+    isSolid || showBorder
+      ? `<rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${isSolid ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff") : "none"}" stroke="${showBorder ? altiumColorToCss(record.getCaseInsensitive("COLOR"), color) : "none"}"/>`
+      : ""
 
-  return `<g ${metadata}>${clip ? `<defs><clipPath id="${clipId}"><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}"/></clipPath></defs>` : ""}<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(top + margin + font.size)}" fill="${color}" text-anchor="${anchor}" ${font.attributes}${clip ? ` clip-path="url(#${clipId})"` : ""}>${tspans}</text></g>`
+  return `<g ${metadata}>${background}${clip ? `<defs><clipPath id="${clipId}"><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}"/></clipPath></defs>` : ""}<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(top + margin + font.size)}" fill="${color}" text-anchor="${anchor}" ${font.attributes}${clip ? ` clip-path="url(#${clipId})"` : ""}>${tspans}</text></g>`
 }
 
 function getSchematicFont(
   record: AltiumRecord,
   sheetRecord: AltiumSchSheetRecord | undefined,
   fallbackSize: number,
-): { attributes: string; size: number } {
+): { attributes: string; family: string; size: number } {
   const fontId = Math.max(
     Math.round(Number(record.getCaseInsensitive("FONTID") ?? 1)),
     1,
@@ -477,6 +568,7 @@ function getSchematicFont(
       : "none"
   return {
     attributes: `font-family="${escapeXml(family)}" font-size="${formatSvgNumber(size)}" font-style="${style}" font-weight="${weight}" text-decoration="${decoration}"`,
+    family,
     size,
   }
 }
@@ -566,20 +658,25 @@ function wrapSchematicText(
   text: string,
   maximumWidth: number,
   fontSize: number,
+  fontFamily: string,
 ): string[] {
-  const maximumCharacters = Math.max(
-    Math.floor(maximumWidth / Math.max(fontSize * 0.6, 1)),
-    1,
-  )
   return text.split("\n").flatMap((paragraph) => {
-    if (paragraph.length <= maximumCharacters) return [paragraph]
+    if (
+      estimateSchematicTextWidth(paragraph, fontSize, fontFamily) <=
+      maximumWidth
+    ) {
+      return [paragraph]
+    }
     const words = paragraph.split(/\s+/u)
     const lines: string[] = []
     let line = ""
     for (const word of words) {
       if (!line) {
         line = word
-      } else if (`${line} ${word}`.length <= maximumCharacters) {
+      } else if (
+        estimateSchematicTextWidth(`${line} ${word}`, fontSize, fontFamily) <=
+        maximumWidth
+      ) {
         line = `${line} ${word}`
       } else {
         lines.push(line)
@@ -589,6 +686,31 @@ function wrapSchematicText(
     if (line) lines.push(line)
     return lines.length > 0 ? lines : [paragraph]
   })
+}
+
+function estimateSchematicTextWidth(
+  text: string,
+  fontSize: number,
+  fontFamily: string,
+): number {
+  if (/courier|mono/iu.test(fontFamily)) return text.length * fontSize * 0.6
+  if (!/times|cambria|serif/iu.test(fontFamily)) {
+    return text.length * fontSize * 0.52
+  }
+
+  return [...text].reduce((width, character) => {
+    const emWidth =
+      character === " "
+        ? 0.23
+        : /[ilI1.,:;!'`|]/u.test(character)
+          ? 0.2
+          : /[mwMW@%]/u.test(character)
+            ? 0.7
+            : /[A-Z0-9]/u.test(character)
+              ? 0.5
+              : 0.4
+    return width + emWidth * fontSize
+  }, 0)
 }
 
 function getSchematicRectangle(record: AltiumRecord): SvgBounds | undefined {
