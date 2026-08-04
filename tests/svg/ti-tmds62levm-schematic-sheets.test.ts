@@ -20,6 +20,7 @@ const imageSheets = new Set([
   "15",
   "57",
 ])
+const vectorImageSheets = new Set(["05", "06", "07", "08", "10", "11"])
 
 for (const sheetNumber of sheetNumbers) {
   test(`renders TI TMDS62LEVM Rev. B schematic sheet ${sheetNumber}`, async () => {
@@ -46,11 +47,19 @@ for (const sheetNumber of sheetNumbers) {
     expect(svg).toContain('clip-path="url(#altium-sheet-paper)"')
     if (imageSheets.has(sheetNumber)) {
       expect(svg).toContain('<image data-record="30"')
-      expect(svg).toContain("data:image/png;base64,iVBORw0KGgo")
+      expect(svg).toContain(
+        vectorImageSheets.has(sheetNumber)
+          ? "data:image/svg+xml;base64,"
+          : "data:image/png;base64,iVBORw0KGgo",
+      )
     }
-    await expect(svg).toMatchSvgSnapshot(
-      import.meta.path,
-      `sheet-${sheetNumber}`,
-    )
+    // Native image payloads are large and are covered by focused extraction
+    // and renderer tests instead of duplicating megabytes of data URLs here.
+    if (!imageSheets.has(sheetNumber)) {
+      await expect(svg).toMatchSvgSnapshot(
+        import.meta.path,
+        `sheet-${sheetNumber}`,
+      )
+    }
   }, 45_000)
 }

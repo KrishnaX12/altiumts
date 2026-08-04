@@ -12,6 +12,7 @@ import {
   getSchematicIndexedPoints,
 } from "./altium-values"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
+import { serializeWindowsEnhancedMetafileToDataUrl } from "./serialize-windows-enhanced-metafile-to-svg"
 import type {
   AltiumSheetSvgOptions,
   SvgBounds,
@@ -265,7 +266,11 @@ function renderSchematicRecord(
         ? context.document?.getEmbeddedImageForRecord(record)
         : undefined
     if (embeddedImage) {
-      const dataUrl = embeddedImage.getDataUrl()
+      const metafile = embeddedImage.getEnhancedMetafileBytes()
+      const dataUrl =
+        (metafile
+          ? serializeWindowsEnhancedMetafileToDataUrl(metafile)
+          : undefined) ?? embeddedImage.getDataUrl()
       return `<image ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" xlink:href="${dataUrl}" preserveAspectRatio="${record.getBoolean("KEEPASPECT") === false ? "none" : "xMidYMid meet"}"/>`
     }
     return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="#f1f5f9" stroke="#64748b"/><path d="M ${formatSvgNumber(left)} ${formatSvgNumber(top)} l ${formatSvgNumber(width)} ${formatSvgNumber(height)} M ${formatSvgNumber(left + width)} ${formatSvgNumber(top)} l ${formatSvgNumber(-width)} ${formatSvgNumber(height)}" stroke="#94a3b8"/></g>`
