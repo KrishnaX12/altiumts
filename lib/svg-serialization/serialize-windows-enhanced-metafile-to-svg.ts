@@ -542,12 +542,13 @@ function renderLine(state: EmfState, from: EmfPoint, to: EmfPoint): string {
 }
 
 function renderPolygon(state: EmfState, points: EmfPoint[]): string {
-  const data = points
-    .map(
-      (point, index) => `${index === 0 ? "M" : "L"}${mapPoint(state, point)}`,
-    )
-    .join(" ")
-  return renderPath(state, `${data} Z`, true, true)
+  const commands: string[] = []
+  for (const point of points) {
+    let command = "L"
+    if (commands.length === 0) command = "M"
+    commands.push(`${command}${mapPoint(state, point)}`)
+  }
+  return renderPath(state, `${commands.join(" ")} Z`, true, true)
 }
 
 function renderPath(
@@ -556,35 +557,52 @@ function renderPath(
   fill: boolean,
   stroke: boolean,
 ): string {
-  const fillColor =
-    fill && state.brush.style !== BS_NULL ? state.brush.color : "none"
-  const strokeAttributes =
-    stroke && state.pen.style !== PS_NULL
-      ? penAttributes(state)
-      : 'stroke="none"'
-  const fillRule = state.polyFillMode === 1 ? "evenodd" : "nonzero"
+  let fillColor = "none"
+  if (fill && state.brush.style !== BS_NULL) {
+    fillColor = state.brush.color
+  }
+
+  let strokeAttributes = 'stroke="none"'
+  if (stroke && state.pen.style !== PS_NULL) {
+    strokeAttributes = penAttributes(state)
+  }
+
+  let fillRule = "nonzero"
+  if (state.polyFillMode === 1) {
+    fillRule = "evenodd"
+  }
   return `<path d="${data.trim()}" fill="${fillColor}" fill-rule="${fillRule}" ${strokeAttributes}/>`
 }
 
 function penAttributes(state: EmfState): string {
   const width = mapPenWidth(state, state.pen.width)
   const dash = penDashArray(state.pen.style, width)
-  return `stroke="${state.pen.color}" stroke-width="${formatSvgNumber(width)}" stroke-linecap="round" stroke-linejoin="round"${dash ? ` stroke-dasharray="${dash}"` : ""}`
+  let dashAttribute = ""
+  if (dash) {
+    dashAttribute = ` stroke-dasharray="${dash}"`
+  }
+  return `stroke="${state.pen.color}" stroke-width="${formatSvgNumber(width)}" stroke-linecap="round" stroke-linejoin="round"${dashAttribute}`
 }
 
 function penDashArray(style: number, width: number): string | undefined {
   const scale = Math.max(width, 1)
-  const values =
-    style === 1
-      ? [6, 4]
-      : style === 2
-        ? [1, 3]
-        : style === 3
-          ? [6, 3, 1, 3]
-          : style === 4
-            ? [6, 3, 1, 3, 1, 3]
-            : undefined
-  return values?.map((value) => formatSvgNumber(value * scale)).join(" ")
+  let values: number[] | undefined
+  switch (style) {
+    case 1:
+      values = [6, 4]
+      break
+    case 2:
+      values = [1, 3]
+      break
+    case 3:
+      values = [6, 3, 1, 3]
+      break
+    case 4:
+      values = [6, 3, 1, 3, 1, 3]
+      break
+  }
+  if (!values) return undefined
+  return values.map((value) => formatSvgNumber(value * scale)).join(" ")
 }
 
 function renderText(
@@ -615,32 +633,39 @@ function renderText(
 
   const x = mapX(state, reference.x)
   const y = mapY(state, reference.y)
-  const fontScale =
-    state.windowExtent.y === 0
-      ? 1
-      : Math.abs(state.viewportExtent.y / state.windowExtent.y)
+  let fontScale = 1
+  if (state.windowExtent.y !== 0) {
+    fontScale = Math.abs(state.viewportExtent.y / state.windowExtent.y)
+  }
   const fontSize = Math.max(Math.abs(state.font.height) * fontScale, 1)
   const anchorBits = state.textAlign & 6
-  const anchor =
-    anchorBits === 6 ? "middle" : anchorBits === 2 ? "end" : "start"
+  let anchor = "start"
+  if (anchorBits === 6) {
+    anchor = "middle"
+  } else if (anchorBits === 2) {
+    anchor = "end"
+  }
   const baselineBits = state.textAlign & 24
-  const baseline =
-    baselineBits === 24
-      ? "alphabetic"
-      : baselineBits === 8
-        ? "text-after-edge"
-        : "text-before-edge"
-  const decorations = [
-    state.font.underline ? "underline" : undefined,
-    state.font.strikeOut ? "line-through" : undefined,
-  ].filter((item): item is string => item !== undefined)
+  let baseline = "text-before-edge"
+  if (baselineBits === 24) {
+    baseline = "alphabetic"
+  } else if (baselineBits === 8) {
+    baseline = "text-after-edge"
+  }
+
+  const decorations: string[] = []
+  if (state.font.underline) decorations.push("underline")
+  if (state.font.strikeOut) decorations.push("line-through")
+
   const rotation = -state.font.escapement / 10
-  const transform = rotation
-    ? ` transform="rotate(${formatSvgNumber(rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
-    : ""
+  let transform = ""
+  if (rotation !== 0) {
+    transform = ` transform="rotate(${formatSvgNumber(rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
+  }
 
   let lengthAttributes = ""
-  const dxElementSize = options & 0x2000 ? 8 : 4
+  let dxElementSize = 4
+  if (options & 0x2000) dxElementSize = 8
   if (
     dxOffset >= 76 &&
     offset + dxOffset >= offset &&
@@ -653,19 +678,30 @@ function renderText(
         true,
       )
     }
-    const scale =
-      state.windowExtent.x === 0
-        ? 1
-        : Math.abs(state.viewportExtent.x / state.windowExtent.x)
+    let scale = 1
+    if (state.windowExtent.x !== 0) {
+      scale = Math.abs(state.viewportExtent.x / state.windowExtent.x)
+    }
     const renderedWidth = Math.abs(logicalWidth) * scale
     if (renderedWidth > 0) {
       lengthAttributes = ` textLength="${formatSvgNumber(renderedWidth)}" lengthAdjust="spacingAndGlyphs"`
     }
   }
 
+  let fontWeight = "normal"
+  if (state.font.weight >= 700) fontWeight = "bold"
+
+  let fontStyle = "normal"
+  if (state.font.italic) fontStyle = "italic"
+
+  let decorationAttribute = ""
+  if (decorations.length > 0) {
+    decorationAttribute = ` text-decoration="${decorations.join(" ")}"`
+  }
+
   return {
     characters,
-    svg: `<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(y)}" fill="${state.textColor}" font-family="${escapeXml(state.font.faceName || "Arial")}, sans-serif" font-size="${formatSvgNumber(fontSize)}" font-weight="${state.font.weight >= 700 ? "bold" : "normal"}" font-style="${state.font.italic ? "italic" : "normal"}" text-anchor="${anchor}" dominant-baseline="${baseline}"${decorations.length > 0 ? ` text-decoration="${decorations.join(" ")}"` : ""}${lengthAttributes}${transform} xml:space="preserve">${escapeXml(value)}</text>`,
+    svg: `<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(y)}" fill="${state.textColor}" font-family="${escapeXml(state.font.faceName || "Arial")}, sans-serif" font-size="${formatSvgNumber(fontSize)}" font-weight="${fontWeight}" font-style="${fontStyle}" text-anchor="${anchor}" dominant-baseline="${baseline}"${decorationAttribute}${lengthAttributes}${transform} xml:space="preserve">${escapeXml(value)}</text>`,
   }
 }
 
@@ -704,10 +740,11 @@ function renderStretchDibits(
       maximumBitmapSize,
     )
   } else if (record.rasterOperation === SRCCOPY) {
-    bitmap =
-      record.bitsPerPixel === 1 && record.compression === 0
-        ? expandOneBitBitmap(bytes, view, record, maximumBitmapSize)
-        : createWindowsBitmap(bytes, record)
+    if (record.bitsPerPixel === 1 && record.compression === 0) {
+      bitmap = expandOneBitBitmap(bytes, view, record, maximumBitmapSize)
+    } else {
+      bitmap = createWindowsBitmap(bytes, record)
+    }
   }
   if (!bitmap || bitmap.byteLength > maximumBitmapSize) return {}
 
@@ -870,18 +907,19 @@ function combineMaskedBitmap(
     color.signedDibHeight,
     maximumBitmapSize,
     (x, y) => {
-      const maskSourceY = mask.signedDibHeight < 0 ? y : mask.dibHeight - y - 1
+      const maskSourceY = getBitmapSourceY(mask, y)
       const maskByte =
         bytes[
           mask.bitsStart + maskSourceY * maskRowLength + Math.floor(x / 8)
         ] ?? 0
       const paletteIndex = (maskByte >> (7 - (x & 7))) & 1
-      const colorSourceY =
-        color.signedDibHeight < 0 ? y : color.dibHeight - y - 1
+      const colorSourceY = getBitmapSourceY(color, y)
       const colorOffset =
         color.bitsStart + colorSourceY * colorRowLength + x * 3
+      let alpha = 0
+      if (paletteOpaque[paletteIndex]) alpha = 255
       return {
-        alpha: paletteOpaque[paletteIndex] ? 255 : 0,
+        alpha,
         blue: bytes[colorOffset] ?? 0,
         green: bytes[colorOffset + 1] ?? 0,
         red: bytes[colorOffset + 2] ?? 0,
@@ -905,7 +943,7 @@ function expandOneBitBitmap(
     record.signedDibHeight,
     maximumBitmapSize,
     (x, y) => {
-      const sourceY = record.signedDibHeight < 0 ? y : record.dibHeight - y - 1
+      const sourceY = getBitmapSourceY(record, y)
       const byte =
         bytes[record.bitsStart + sourceY * rowLength + Math.floor(x / 8)] ?? 0
       const paletteIndex = (byte >> (7 - (x & 7))) & 1
@@ -918,6 +956,14 @@ function expandOneBitBitmap(
       }
     },
   )
+}
+
+function getBitmapSourceY(
+  record: Pick<StretchDibitsRecord, "dibHeight" | "signedDibHeight">,
+  outputY: number,
+): number {
+  if (record.signedDibHeight < 0) return outputY
+  return record.dibHeight - outputY - 1
 }
 
 function paletteEntryIsOpaque(view: DataView, offset: number): boolean {
@@ -983,20 +1029,21 @@ function readRecordPoints(
 ): EmfPoint[] {
   if (end - offset < 28) return []
   const declared = view.getUint32(offset + 24, true)
-  const stride = useInt16 ? 4 : 8
+  let stride = 8
+  if (useInt16) stride = 4
   const available = Math.floor((end - (offset + 28)) / stride)
   if (declared > available) return []
   const points: EmfPoint[] = []
   for (let index = 0; index < declared; index++) {
     const pointOffset = offset + 28 + index * stride
-    points.push(
-      useInt16
-        ? {
-            x: view.getInt16(pointOffset, true),
-            y: view.getInt16(pointOffset + 2, true),
-          }
-        : readPoint32(view, pointOffset),
-    )
+    if (useInt16) {
+      points.push({
+        x: view.getInt16(pointOffset, true),
+        y: view.getInt16(pointOffset + 2, true),
+      })
+    } else {
+      points.push(readPoint32(view, pointOffset))
+    }
   }
   return points
 }
@@ -1107,11 +1154,13 @@ function readUtf16(view: DataView, offset: number, characters: number): string {
 function sanitizeXmlText(value: string): string {
   return Array.from(value, (character) => {
     const code = character.codePointAt(0) ?? 0
-    return (code < 0x20 && code !== 0x09 && code !== 0x0a && code !== 0x0d) ||
-      code === 0xfffe ||
-      code === 0xffff
-      ? "\ufffd"
-      : character
+    const isInvalidControlCharacter =
+      code < 0x20 && code !== 0x09 && code !== 0x0a && code !== 0x0d
+    const isInvalidUnicodeCharacter = code === 0xfffe || code === 0xffff
+    if (isInvalidControlCharacter || isInvalidUnicodeCharacter) {
+      return "\ufffd"
+    }
+    return character
   }).join("")
 }
 
@@ -1125,11 +1174,22 @@ function encodeBase64(bytes: Uint8Array): string {
     const second = bytes[offset + 1]
     const third = bytes[offset + 2]
     const value = (first << 16) | ((second ?? 0) << 8) | (third ?? 0)
+
+    let thirdCharacter = "="
+    if (second !== undefined) {
+      thirdCharacter = alphabet[(value >>> 6) & 63] ?? ""
+    }
+
+    let fourthCharacter = "="
+    if (third !== undefined) {
+      fourthCharacter = alphabet[value & 63] ?? ""
+    }
+
     chunk.push(
       alphabet[(value >>> 18) & 63] ?? "",
       alphabet[(value >>> 12) & 63] ?? "",
-      second === undefined ? "=" : (alphabet[(value >>> 6) & 63] ?? ""),
-      third === undefined ? "=" : (alphabet[value & 63] ?? ""),
+      thirdCharacter,
+      fourthCharacter,
     )
     if (chunk.length >= 16_384) {
       output.push(chunk.join(""))

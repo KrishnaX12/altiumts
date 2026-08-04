@@ -47,11 +47,11 @@ for (const sheetNumber of sheetNumbers) {
     expect(svg).toContain('clip-path="url(#altium-sheet-paper)"')
     if (imageSheets.has(sheetNumber)) {
       expect(svg).toContain('<image data-record="30"')
-      expect(svg).toContain(
-        vectorImageSheets.has(sheetNumber)
-          ? "data:image/svg+xml;base64,"
-          : "data:image/png;base64,iVBORw0KGgo",
-      )
+      let expectedImagePrefix = "data:image/png;base64,iVBORw0KGgo"
+      if (vectorImageSheets.has(sheetNumber)) {
+        expectedImagePrefix = "data:image/svg+xml;base64,"
+      }
+      expect(svg).toContain(expectedImagePrefix)
     }
     // Native image payloads are large and are covered by focused extraction
     // and renderer tests instead of duplicating megabytes of data URLs here.

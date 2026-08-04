@@ -300,7 +300,8 @@ function extractNativeImage(
       payload.subarray(nativeImageOffset),
       maximumNativeImageSize,
     )
-    return pngBytes ? { nativePngBytes: pngBytes } : {}
+    if (!pngBytes) return {}
+    return { nativePngBytes: pngBytes }
   }
   if (
     className !== "TMetafile" ||
@@ -333,9 +334,8 @@ function extractNativeImage(
     nativeImageOffset,
     nativeImageOffset + metafileLength,
   )
-  return isCompleteEnhancedMetafile(metafileBytes, headerSize)
-    ? { enhancedMetafileBytes: metafileBytes }
-    : {}
+  if (!isCompleteEnhancedMetafile(metafileBytes, headerSize)) return {}
+  return { enhancedMetafileBytes: metafileBytes }
 }
 
 function isCompleteEnhancedMetafile(
@@ -390,7 +390,8 @@ function extractPng(
       sawHeader = true
     }
     if (chunkType === "IEND") {
-      return dataLength === 0 ? bytes.slice(0, chunkEnd) : undefined
+      if (dataLength !== 0) return undefined
+      return bytes.slice(0, chunkEnd)
     }
     offset = chunkEnd
   }
