@@ -5,7 +5,15 @@ import type { AltiumSchImageRecord } from "./records/altium-schematic-records"
 
 export interface DecodeAltiumSchematicImageOptions {
   maximumBitmapSize?: number
+  maximumMetafileSize?: number
+  maximumNativeImageSize?: number
   maximumOutputSize?: number
+}
+
+export interface AltiumSchematicImagePayload {
+  bitmapBytes: Uint8Array
+  enhancedMetafileBytes?: Uint8Array
+  nativePngBytes?: Uint8Array
 }
 
 export interface AltiumSchematicImageStorageEntry {
@@ -19,6 +27,7 @@ export class AltiumEmbeddedSchematicImage {
   readonly record: AltiumSchImageRecord
   readonly storage: AltiumCompoundStream
   private readonly compressedBytes: Uint8Array
+  private decodedPayload?: AltiumSchematicImagePayload
 
   constructor(init: {
     compressedBytes: Uint8Array
@@ -43,7 +52,19 @@ export class AltiumEmbeddedSchematicImage {
   }
 
   getBitmapBytes(options: DecodeAltiumSchematicImageOptions = {}): Uint8Array {
-    return decodeAltiumSchematicBitmap(this.compressedBytes, options)
+    return this.getPayload(options).bitmapBytes.slice()
+  }
+
+  getEnhancedMetafileBytes(
+    options: DecodeAltiumSchematicImageOptions = {},
+  ): Uint8Array | undefined {
+    return this.getPayload(options).enhancedMetafileBytes?.slice()
+  }
+
+  getNativePngBytes(
+    options: DecodeAltiumSchematicImageOptions = {},
+  ): Uint8Array | undefined {
+    return this.getPayload(options).nativePngBytes?.slice()
   }
 
   getDataUrl(options: DecodeAltiumSchematicImageOptions = {}): string {
@@ -51,7 +72,23 @@ export class AltiumEmbeddedSchematicImage {
   }
 
   getPngBytes(options: DecodeAltiumSchematicImageOptions = {}): Uint8Array {
-    return encodeWindowsBitmapAsPng(this.getBitmapBytes(options))
+    const payload = this.getPayload(options)
+    return (
+      payload.nativePngBytes?.slice() ??
+      encodeWindowsBitmapAsPng(payload.bitmapBytes)
+    )
+  }
+
+  private getPayload(
+    options: DecodeAltiumSchematicImageOptions,
+  ): AltiumSchematicImagePayload {
+    if (Object.keys(options).length > 0) {
+      return decodeAltiumSchematicImagePayload(this.compressedBytes, options)
+    }
+    this.decodedPayload ??= decodeAltiumSchematicImagePayload(
+      this.compressedBytes,
+    )
+    return this.decodedPayload
   }
 }
 
@@ -154,10 +191,22 @@ export function decodeAltiumSchematicBitmap(
   compressedBytes: Uint8Array,
   options: DecodeAltiumSchematicImageOptions = {},
 ): Uint8Array {
+  return decodeAltiumSchematicImagePayload(compressedBytes, options).bitmapBytes
+}
+
+export function decodeAltiumSchematicImagePayload(
+  compressedBytes: Uint8Array,
+  options: DecodeAltiumSchematicImageOptions = {},
+): AltiumSchematicImagePayload {
   const maximumBitmapSize = options.maximumBitmapSize ?? 32 * 1024 * 1024
+  const maximumMetafileSize = options.maximumMetafileSize ?? 32 * 1024 * 1024
+  const maximumNativeImageSize =
+    options.maximumNativeImageSize ?? 32 * 1024 * 1024
   const maximumOutputSize = options.maximumOutputSize ?? 64 * 1024 * 1024
   for (const [name, value] of [
     ["maximumBitmapSize", maximumBitmapSize],
+    ["maximumMetafileSize", maximumMetafileSize],
+    ["maximumNativeImageSize", maximumNativeImageSize],
     ["maximumOutputSize", maximumOutputSize],
   ] as const) {
     if (!Number.isSafeInteger(value) || value <= 0) {
@@ -165,12 +214,8 @@ export function decodeAltiumSchematicBitmap(
     }
   }
 
-  const prefix = new Uint8Array(6)
-  let prefixLength = 0
-  let bitmapLength: number | undefined
-  let retainedLength = 0
   let outputLength = 0
-  const retained: Uint8Array[] = []
+  const inflatedChunks: Uint8Array[] = []
 
   try {
     const inflater = new Unzlib((chunk) => {
@@ -180,38 +225,7 @@ export function decodeAltiumSchematicBitmap(
           `Schematic image expands beyond the ${maximumOutputSize}-byte limit`,
         )
       }
-
-      let chunkOffset = 0
-      if (bitmapLength === undefined) {
-        const prefixBytes = Math.min(6 - prefixLength, chunk.byteLength)
-        prefix.set(chunk.subarray(0, prefixBytes), prefixLength)
-        prefixLength += prefixBytes
-        chunkOffset += prefixBytes
-        if (prefixLength === 6) {
-          if (prefix[0] !== 0x42 || prefix[1] !== 0x4d) {
-            throw new AltiumCorruptContainerError(
-              "Embedded schematic image is not a Windows bitmap",
-            )
-          }
-          bitmapLength = new DataView(prefix.buffer).getUint32(2, true)
-          if (bitmapLength < 14 || bitmapLength > maximumBitmapSize) {
-            throw new AltiumCorruptContainerError(
-              `Embedded schematic bitmap declares invalid size ${bitmapLength}`,
-            )
-          }
-          retained.push(prefix.slice())
-          retainedLength = prefix.byteLength
-        }
-      }
-
-      if (bitmapLength !== undefined && retainedLength < bitmapLength) {
-        const remaining = bitmapLength - retainedLength
-        const keepLength = Math.min(remaining, chunk.byteLength - chunkOffset)
-        if (keepLength > 0) {
-          retained.push(chunk.slice(chunkOffset, chunkOffset + keepLength))
-          retainedLength += keepLength
-        }
-      }
+      inflatedChunks.push(chunk.slice())
     })
     const inputChunkSize = 64 * 1024
     for (let offset = 0; offset < compressedBytes.byteLength; ) {
@@ -229,18 +243,159 @@ export function decodeAltiumSchematicBitmap(
     )
   }
 
-  if (bitmapLength === undefined || retainedLength !== bitmapLength) {
+  const inflated = concatenateBytes(inflatedChunks)
+  if (inflated.byteLength < 6 || inflated[0] !== 0x42 || inflated[1] !== 0x4d) {
+    throw new AltiumCorruptContainerError(
+      "Embedded schematic image is not a Windows bitmap",
+    )
+  }
+  const inflatedView = new DataView(
+    inflated.buffer,
+    inflated.byteOffset,
+    inflated.byteLength,
+  )
+  const bitmapLength = inflatedView.getUint32(2, true)
+  if (bitmapLength < 14 || bitmapLength > maximumBitmapSize) {
+    throw new AltiumCorruptContainerError(
+      `Embedded schematic bitmap declares invalid size ${bitmapLength}`,
+    )
+  }
+  if (bitmapLength > inflated.byteLength) {
     throw new AltiumCorruptContainerError(
       "Embedded schematic bitmap payload is truncated",
     )
   }
-  const bitmap = new Uint8Array(bitmapLength)
-  let offset = 0
-  for (const chunk of retained) {
-    bitmap.set(chunk, offset)
-    offset += chunk.byteLength
+
+  const nativePayload = extractNativeImage(
+    inflated,
+    bitmapLength,
+    maximumMetafileSize,
+    maximumNativeImageSize,
+  )
+  return {
+    bitmapBytes: inflated.slice(0, bitmapLength),
+    ...nativePayload,
   }
-  return bitmap
+}
+
+function extractNativeImage(
+  payload: Uint8Array,
+  bitmapLength: number,
+  maximumMetafileSize: number,
+  maximumNativeImageSize: number,
+): Pick<
+  AltiumSchematicImagePayload,
+  "enhancedMetafileBytes" | "nativePngBytes"
+> {
+  if (bitmapLength >= payload.byteLength) return {}
+  const classNameLength = payload[bitmapLength] ?? 0
+  const classNameOffset = bitmapLength + 1
+  const nativeImageOffset = classNameOffset + classNameLength
+  if (nativeImageOffset > payload.byteLength) return {}
+  const className = new TextDecoder("windows-1252").decode(
+    payload.subarray(classNameOffset, nativeImageOffset),
+  )
+  if (className === "TdxPNGImage") {
+    const pngBytes = extractPng(
+      payload.subarray(nativeImageOffset),
+      maximumNativeImageSize,
+    )
+    if (!pngBytes) return {}
+    return { nativePngBytes: pngBytes }
+  }
+  if (
+    className !== "TMetafile" ||
+    nativeImageOffset + 88 > payload.byteLength
+  ) {
+    return {}
+  }
+
+  const view = new DataView(
+    payload.buffer,
+    payload.byteOffset + nativeImageOffset,
+    payload.byteLength - nativeImageOffset,
+  )
+  const recordType = view.getUint32(0, true)
+  const headerSize = view.getUint32(4, true)
+  const signature = view.getUint32(40, true)
+  const metafileLength = view.getUint32(48, true)
+  if (
+    recordType !== 1 ||
+    ![88, 100, 108].includes(headerSize) ||
+    signature !== 0x464d_4520 ||
+    metafileLength < headerSize ||
+    metafileLength % 4 !== 0 ||
+    metafileLength > maximumMetafileSize ||
+    nativeImageOffset + metafileLength > payload.byteLength
+  ) {
+    return {}
+  }
+  const metafileBytes = payload.slice(
+    nativeImageOffset,
+    nativeImageOffset + metafileLength,
+  )
+  if (!isCompleteEnhancedMetafile(metafileBytes, headerSize)) return {}
+  return { enhancedMetafileBytes: metafileBytes }
+}
+
+function isCompleteEnhancedMetafile(
+  bytes: Uint8Array,
+  headerSize: number,
+): boolean {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+  let offset = headerSize
+  while (offset + 8 <= bytes.byteLength) {
+    const type = view.getUint32(offset, true)
+    const size = view.getUint32(offset + 4, true)
+    const end = offset + size
+    if (size < 8 || size % 4 !== 0 || end <= offset || end > bytes.byteLength) {
+      return false
+    }
+    if (type === 14) return size >= 20 && end === bytes.byteLength
+    offset = end
+  }
+  return false
+}
+
+function extractPng(
+  bytes: Uint8Array,
+  maximumNativeImageSize: number,
+): Uint8Array | undefined {
+  const signature = [137, 80, 78, 71, 13, 10, 26, 10]
+  if (
+    bytes.byteLength < 20 ||
+    bytes.byteLength > maximumNativeImageSize ||
+    !signature.every((byte, index) => bytes[index] === byte)
+  ) {
+    return undefined
+  }
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+  let offset = signature.length
+  let sawHeader = false
+  while (offset + 12 <= bytes.byteLength) {
+    const dataLength = view.getUint32(offset)
+    const chunkEnd = offset + 12 + dataLength
+    if (
+      dataLength > maximumNativeImageSize ||
+      chunkEnd > bytes.byteLength ||
+      chunkEnd > maximumNativeImageSize
+    ) {
+      return undefined
+    }
+    const chunkType = new TextDecoder().decode(
+      bytes.subarray(offset + 4, offset + 8),
+    )
+    if (!sawHeader) {
+      if (chunkType !== "IHDR" || dataLength !== 13) return undefined
+      sawHeader = true
+    }
+    if (chunkType === "IEND") {
+      if (dataLength !== 0) return undefined
+      return bytes.slice(0, chunkEnd)
+    }
+    offset = chunkEnd
+  }
+  return undefined
 }
 
 export function encodeWindowsBitmapAsPng(bitmap: Uint8Array): Uint8Array {

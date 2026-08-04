@@ -12,6 +12,7 @@ import {
   getSchematicIndexedPoints,
 } from "./altium-values"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
+import { serializeWindowsEnhancedMetafileToDataUrl } from "./serialize-windows-enhanced-metafile-to-svg"
 import type {
   AltiumSheetSvgOptions,
   SvgBounds,
@@ -260,13 +261,24 @@ function renderSchematicRecord(
     const top = viewport.toY(rectangle.maxY)
     const width = rectangle.maxX - rectangle.minX
     const height = rectangle.maxY - rectangle.minY
-    const embeddedImage =
-      record instanceof AltiumSchImageRecord
-        ? context.document?.getEmbeddedImageForRecord(record)
-        : undefined
-    if (embeddedImage) {
-      const dataUrl = embeddedImage.getDataUrl()
-      return `<image ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" xlink:href="${dataUrl}" preserveAspectRatio="${record.getBoolean("KEEPASPECT") === false ? "none" : "xMidYMid meet"}"/>`
+    if (record instanceof AltiumSchImageRecord) {
+      const embeddedImage = context.document?.getEmbeddedImageForRecord(record)
+      if (embeddedImage) {
+        const metafile = embeddedImage.getEnhancedMetafileBytes()
+        let dataUrl: string | undefined
+        if (metafile) {
+          dataUrl = serializeWindowsEnhancedMetafileToDataUrl(metafile)
+        }
+        if (dataUrl === undefined) {
+          dataUrl = embeddedImage.getDataUrl()
+        }
+
+        let preserveAspectRatio = "xMidYMid meet"
+        if (record.getBoolean("KEEPASPECT") === false) {
+          preserveAspectRatio = "none"
+        }
+        return `<image ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" xlink:href="${dataUrl}" preserveAspectRatio="${preserveAspectRatio}"/>`
+      }
     }
     return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="#f1f5f9" stroke="#64748b"/><path d="M ${formatSvgNumber(left)} ${formatSvgNumber(top)} l ${formatSvgNumber(width)} ${formatSvgNumber(height)} M ${formatSvgNumber(left + width)} ${formatSvgNumber(top)} l ${formatSvgNumber(-width)} ${formatSvgNumber(height)}" stroke="#94a3b8"/></g>`
   }
