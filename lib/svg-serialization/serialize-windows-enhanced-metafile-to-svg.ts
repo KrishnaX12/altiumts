@@ -1,13 +1,21 @@
 import { encodeWindowsBitmapAsPng } from "../altium-embedded-schematic-image"
 import { escapeXml, formatSvgNumber } from "./svg-utils"
 
+/** Resource limits applied while converting an EMF payload to SVG. */
 export interface SerializeWindowsEnhancedMetafileToSvgOptions {
+  /** Maximum decoded bitmap allocation in bytes. Defaults to 32 MiB. */
   maximumBitmapSize?: number
+  /** Maximum accepted EMF input size in bytes. Defaults to 64 MiB. */
   maximumInputSize?: number
+  /** Maximum number of simultaneously registered GDI objects. */
   maximumObjectCount?: number
+  /** Maximum generated SVG length in UTF-16 code units. */
   maximumOutputLength?: number
+  /** Maximum total number of points read from vector records. */
   maximumPointCount?: number
+  /** Maximum number of EMF records processed. */
   maximumRecordCount?: number
+  /** Maximum total number of text characters rendered. */
   maximumTextLength?: number
 }
 
@@ -152,6 +160,10 @@ export function serializeWindowsEnhancedMetafileToSvg(
   }
 }
 
+/**
+ * Converts a supported Windows Enhanced Metafile into an SVG data URL.
+ * Returns `undefined` when the payload is invalid or uses unsupported records.
+ */
 export function serializeWindowsEnhancedMetafileToDataUrl(
   bytes: Uint8Array,
   options: SerializeWindowsEnhancedMetafileToSvgOptions = {},

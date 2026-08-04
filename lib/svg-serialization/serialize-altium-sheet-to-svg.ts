@@ -267,10 +267,13 @@ function renderSchematicRecord(
         : undefined
     if (embeddedImage) {
       const metafile = embeddedImage.getEnhancedMetafileBytes()
-      const dataUrl =
-        (metafile
-          ? serializeWindowsEnhancedMetafileToDataUrl(metafile)
-          : undefined) ?? embeddedImage.getDataUrl()
+      let dataUrl: string | undefined
+      if (metafile) {
+        dataUrl = serializeWindowsEnhancedMetafileToDataUrl(metafile)
+      }
+      if (dataUrl === undefined) {
+        dataUrl = embeddedImage.getDataUrl()
+      }
       return `<image ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" xlink:href="${dataUrl}" preserveAspectRatio="${record.getBoolean("KEEPASPECT") === false ? "none" : "xMidYMid meet"}"/>`
     }
     return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="#f1f5f9" stroke="#64748b"/><path d="M ${formatSvgNumber(left)} ${formatSvgNumber(top)} l ${formatSvgNumber(width)} ${formatSvgNumber(height)} M ${formatSvgNumber(left + width)} ${formatSvgNumber(top)} l ${formatSvgNumber(-width)} ${formatSvgNumber(height)}" stroke="#94a3b8"/></g>`
