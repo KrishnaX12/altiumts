@@ -448,22 +448,21 @@ async function selectView(documentId: string, viewId: string): Promise<void> {
 async function getProjectSvg(
   documentId: string,
   viewId: string,
+  cacheResult = true,
 ): Promise<string> {
   const cacheKey = getSvgCacheKey(documentId, viewId)
   const cached = svgCache.get(cacheKey)
   if (cached) return cached
   const inFlight = svgRenderPromises.get(cacheKey)
-  if (inFlight) return inFlight
-
-  const rendering = renderCoordinator
-    .request(documentId, viewId)
-    .then((svg) => {
-      svgCache.set(cacheKey, svg)
-      return svg
-    })
-    .finally(() => svgRenderPromises.delete(cacheKey))
-  svgRenderPromises.set(cacheKey, rendering)
-  return rendering
+  const rendering =
+    inFlight ??
+    renderCoordinator
+      .request(documentId, viewId)
+      .finally(() => svgRenderPromises.delete(cacheKey))
+  if (!inFlight) svgRenderPromises.set(cacheKey, rendering)
+  const svg = await rendering
+  if (cacheResult) svgCache.set(cacheKey, svg)
+  return svg
 }
 
 function displaySvg(svg: string): void {
@@ -542,12 +541,12 @@ async function downloadProject(): Promise<void> {
           error.name = "AbortError"
           throw error
         }
-        return getProjectSvg(documentId, viewId)
+        return getProjectSvg(documentId, viewId, false)
       },
       signal: controller.signal,
     })
     if (manifest !== exportManifest || controller.signal.aborted) return
-    downloadBytes(archive, plan.archiveName, "application/zip")
+    downloadBlob(archive, plan.archiveName)
     projectExportStatus.textContent = `Downloaded ${plan.items.length} views as SVG and PNG.`
   } catch (error) {
     if (getErrorName(error) !== "AbortError") {
@@ -564,10 +563,8 @@ async function downloadProject(): Promise<void> {
   }
 }
 
-function downloadBytes(bytes: Uint8Array, name: string, type: string): void {
-  const url = URL.createObjectURL(
-    new Blob([Uint8Array.from(bytes).buffer], { type }),
-  )
+function downloadBlob(blob: Blob, name: string): void {
+  const url = URL.createObjectURL(blob)
   const link = document.createElement("a")
   link.href = url
   link.download = name

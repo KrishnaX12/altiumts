@@ -137,13 +137,23 @@ test("does not compress or download a partial export after a conversion failure"
       createDocument("schematic-0", "Demo/Main.SchDoc", ["sheet", "second"]),
     ]),
   )
-  let compressed = false
+  let aborted = false
+  let finished = false
+  const addedPaths: string[] = []
 
   await expect(
     prepareProjectExport(plan, {
-      compress: async () => {
-        compressed = true
-        return new Uint8Array([1])
+      archiveWriter: {
+        abort: () => {
+          aborted = true
+        },
+        add: async (path) => {
+          addedPaths.push(path)
+        },
+        finish: async () => {
+          finished = true
+          return new Blob()
+        },
       },
       rasterizeSvg: async () => {
         throw new Error("PNG failed")
@@ -151,7 +161,9 @@ test("does not compress or download a partial export after a conversion failure"
       renderSvg: async () => '<svg width="1" height="1"></svg>',
     }),
   ).rejects.toThrow("PNG failed")
-  expect(compressed).toBeFalse()
+  expect(addedPaths).toEqual(["svg/demo--main--sheet.svg"])
+  expect(aborted).toBeTrue()
+  expect(finished).toBeFalse()
 })
 
 test("builds one archive with matching SVG and PNG folders", async () => {
@@ -166,7 +178,7 @@ test("builds one archive with matching SVG and PNG folders", async () => {
     renderSvg: async (documentId, viewId) =>
       `<svg><title>${documentId}:${viewId}</title></svg>`,
   })
-  const files = unzipSync(archive)
+  const files = unzipSync(new Uint8Array(await archive.arrayBuffer()))
 
   expect(Object.keys(files).sort()).toEqual(
     [
