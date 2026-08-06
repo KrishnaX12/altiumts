@@ -1,9 +1,8 @@
-import { AsyncZipDeflate, Zip, ZipPassThrough } from "fflate"
+import { Zip, ZipDeflate } from "fflate"
 import type { ProjectViewerManifest } from "./project-viewer-types"
 
 export interface ProjectExportPlanItem {
   documentId: string
-  pngPath: string
   svgPath: string
   viewId: string
 }
@@ -20,17 +19,9 @@ export interface ProjectExportProgress {
 }
 
 interface PrepareProjectExportOptions {
-  archiveWriter?: ProjectArchiveWriter
   onProgress?: (progress: ProjectExportProgress) => void
-  rasterizeSvg: (svg: string) => Promise<Uint8Array>
   renderSvg: (documentId: string, viewId: string) => Promise<string>
   signal?: AbortSignal
-}
-
-export interface ProjectArchiveWriter {
-  abort(): void
-  add(path: string, data: Uint8Array): Promise<void>
-  finish(): Promise<Blob>
 }
 
 const WINDOWS_RESERVED_NAME =
@@ -61,7 +52,6 @@ export function createProjectExportPlan(
       usedNames.add(name.toLocaleLowerCase("en-US"))
       items.push({
         documentId: document.id,
-        pngPath: `png/${name}.png`,
         svgPath: `svg/${name}.svg`,
         viewId: view.id,
       })
@@ -97,7 +87,24 @@ export async function prepareProjectExport(
   options: PrepareProjectExportOptions,
 ): Promise<Blob> {
   const encode = new TextEncoder()
-  const archiveWriter = options.archiveWriter ?? createProjectArchiveWriter()
+  const chunks: ArrayBuffer[] = []
+  let archiveBlob: Blob | undefined
+  let archiveError: Error | undefined
+  const archive = new Zip((error, chunk, final) => {
+    if (error) {
+      archiveError = toError(error)
+      return
+    }
+    if (chunk.byteLength > 0) {
+      chunks.push(
+        chunk.buffer.slice(
+          chunk.byteOffset,
+          chunk.byteOffset + chunk.byteLength,
+        ) as ArrayBuffer,
+      )
+    }
+    if (final) archiveBlob = new Blob(chunks, { type: "application/zip" })
+  })
 
   try {
     for (const [index, item] of plan.items.entries()) {
@@ -109,14 +116,10 @@ export async function prepareProjectExport(
       })
       const svg = await options.renderSvg(item.documentId, item.viewId)
       throwIfAborted(options.signal)
-      await archiveWriter.add(item.svgPath, encode.encode(svg))
-      throwIfAborted(options.signal)
-      const png = await options.rasterizeSvg(svg)
-      throwIfAborted(options.signal)
-      if (png.byteLength === 0) {
-        throw new Error(`PNG encoding produced no data for ${item.pngPath}`)
-      }
-      await archiveWriter.add(item.pngPath, png)
+      const entry = new ZipDeflate(item.svgPath, { level: 6 })
+      archive.add(entry)
+      entry.push(encode.encode(svg), true)
+      if (archiveError) throw archiveError
     }
 
     options.onProgress?.({
@@ -124,73 +127,14 @@ export async function prepareProjectExport(
       phase: "compressing",
       total: plan.items.length,
     })
-    const archive = await archiveWriter.finish()
+    archive.end()
+    if (archiveError) throw archiveError
+    if (!archiveBlob) throw new Error("Could not finalize the project archive")
     throwIfAborted(options.signal)
-    return archive
+    return archiveBlob
   } catch (error) {
-    archiveWriter.abort()
+    archive.terminate()
     throw error
-  }
-}
-
-export function createProjectArchiveWriter(): ProjectArchiveWriter {
-  const chunks: ArrayBuffer[] = []
-  let failure: Error | undefined
-  let finishResolve: ((archive: Blob) => void) | undefined
-  let finishReject: ((error: Error) => void) | undefined
-  let terminated = false
-  const archive = new Zip((error, chunk, final) => {
-    if (error) {
-      failure = toError(error)
-      finishReject?.(failure)
-      return
-    }
-    if (chunk.byteLength > 0) {
-      chunks.push(
-        chunk.buffer.slice(
-          chunk.byteOffset,
-          chunk.byteOffset + chunk.byteLength,
-        ) as ArrayBuffer,
-      )
-    }
-    if (final) {
-      finishResolve?.(new Blob(chunks, { type: "application/zip" }))
-      chunks.length = 0
-    }
-  })
-
-  return {
-    abort: () => {
-      if (terminated) return
-      terminated = true
-      chunks.length = 0
-      archive.terminate()
-    },
-    add: async (path, data) => {
-      if (failure) throw failure
-      const entry = path.endsWith(".png")
-        ? new ZipPassThrough(path)
-        : new AsyncZipDeflate(path, { level: 6 })
-      archive.add(entry)
-      const emit = entry.ondata
-      await new Promise<void>((resolve, reject) => {
-        entry.ondata = (error, chunk, final) => {
-          emit(error, chunk, final)
-          if (error) reject(toError(error))
-          else if (final) resolve()
-        }
-        entry.push(data, true)
-      })
-    },
-    finish: () => {
-      if (failure) return Promise.reject(failure)
-      return new Promise<Blob>((resolve, reject) => {
-        finishResolve = resolve
-        finishReject = reject
-        archive.end()
-        terminated = true
-      })
-    },
   }
 }
 

@@ -4,7 +4,6 @@ import { createBugReportUrl } from "./bug-report"
 import { downloadGitHubProjectFiles } from "./github-project"
 import { createProjectExportPlan, prepareProjectExport } from "./project-export"
 import { ProjectRenderCoordinator } from "./render-coordinator"
-import { rasterizeSvgToPng } from "./svg-to-png"
 import type {
   BrowserProjectFile,
   ProjectDocumentManifest,
@@ -534,7 +533,6 @@ async function downloadProject(): Promise<void> {
         downloadProjectButton.textContent = message
         projectExportStatus.textContent = message
       },
-      rasterizeSvg: rasterizeSvgToPng,
       renderSvg: async (documentId, viewId) => {
         if (manifest !== exportManifest) {
           const error = new Error("A different project is now open")
@@ -547,7 +545,7 @@ async function downloadProject(): Promise<void> {
     })
     if (manifest !== exportManifest || controller.signal.aborted) return
     downloadBlob(archive, plan.archiveName)
-    projectExportStatus.textContent = `Downloaded ${plan.items.length} views as SVG and PNG.`
+    projectExportStatus.textContent = `Downloaded ${plan.items.length} SVG views.`
   } catch (error) {
     if (getErrorName(error) !== "AbortError") {
       projectExportError.textContent = `Could not download project: ${getErrorMessage(error)}`

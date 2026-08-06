@@ -60,7 +60,7 @@ test("opens loose schematic and PCB files and renders their SVG views", async ()
   expect(topLayerSvg).toContain("Top copper")
 })
 
-test("plans SVG and PNG exports for every manifest view in order", () => {
+test("plans SVG exports for every manifest view in order", () => {
   const manifest = createViewerManifest([
     createDocument("schematic-0", "Schematics/Power.SchDoc", ["sheet"]),
     createDocument("pcb-1", "Boards/Controller.PcbDoc", [
@@ -76,31 +76,26 @@ test("plans SVG and PNG exports for every manifest view in order", () => {
   expect(plan.items).toEqual([
     {
       documentId: "schematic-0",
-      pngPath: "png/schematics--power--sheet.png",
       svgPath: "svg/schematics--power--sheet.svg",
       viewId: "sheet",
     },
     {
       documentId: "pcb-1",
-      pngPath: "png/boards--controller--overview.png",
       svgPath: "svg/boards--controller--overview.svg",
       viewId: "overview",
     },
     {
       documentId: "pcb-1",
-      pngPath: "png/boards--controller--board.png",
       svgPath: "svg/boards--controller--board.svg",
       viewId: "board",
     },
     {
       documentId: "pcb-1",
-      pngPath: "png/boards--controller--layer-top.png",
       svgPath: "svg/boards--controller--layer-top.svg",
       viewId: "layer:TOP",
     },
     {
       documentId: "pcb-1",
-      pngPath: "png/boards--controller--layer-bottom.png",
       svgPath: "svg/boards--controller--layer-bottom.svg",
       viewId: "layer:BOTTOM",
     },
@@ -131,42 +126,27 @@ test("creates traversal-safe, reserved-safe, collision-safe export names", () =>
   expect(svgPaths.every((path) => !path.includes("../"))).toBeTrue()
 })
 
-test("does not compress or download a partial export after a conversion failure", async () => {
+test("does not produce an archive after a render failure", async () => {
   const plan = createProjectExportPlan(
     createViewerManifest([
       createDocument("schematic-0", "Demo/Main.SchDoc", ["sheet", "second"]),
     ]),
   )
-  let aborted = false
-  let finished = false
-  const addedPaths: string[] = []
+  let renderCount = 0
 
   await expect(
     prepareProjectExport(plan, {
-      archiveWriter: {
-        abort: () => {
-          aborted = true
-        },
-        add: async (path) => {
-          addedPaths.push(path)
-        },
-        finish: async () => {
-          finished = true
-          return new Blob()
-        },
+      renderSvg: async () => {
+        renderCount += 1
+        if (renderCount === 2) throw new Error("Render failed")
+        return '<svg width="1" height="1"></svg>'
       },
-      rasterizeSvg: async () => {
-        throw new Error("PNG failed")
-      },
-      renderSvg: async () => '<svg width="1" height="1"></svg>',
     }),
-  ).rejects.toThrow("PNG failed")
-  expect(addedPaths).toEqual(["svg/demo--main--sheet.svg"])
-  expect(aborted).toBeTrue()
-  expect(finished).toBeFalse()
+  ).rejects.toThrow("Render failed")
+  expect(renderCount).toBe(2)
 })
 
-test("builds one archive with matching SVG and PNG folders", async () => {
+test("builds one archive containing only SVG views", async () => {
   const plan = createProjectExportPlan(
     createViewerManifest([
       createDocument("schematic-0", "Demo/Main.SchDoc", ["sheet"]),
@@ -174,25 +154,16 @@ test("builds one archive with matching SVG and PNG folders", async () => {
     ]),
   )
   const archive = await prepareProjectExport(plan, {
-    rasterizeSvg: async () => new Uint8Array([137, 80, 78, 71]),
     renderSvg: async (documentId, viewId) =>
       `<svg><title>${documentId}:${viewId}</title></svg>`,
   })
   const files = unzipSync(new Uint8Array(await archive.arrayBuffer()))
 
   expect(Object.keys(files).sort()).toEqual(
-    [
-      "png/demo--main--board.png",
-      "png/demo--main--sheet.png",
-      "svg/demo--main--board.svg",
-      "svg/demo--main--sheet.svg",
-    ].sort(),
+    ["svg/demo--main--board.svg", "svg/demo--main--sheet.svg"].sort(),
   )
   expect(new TextDecoder().decode(files["svg/demo--main--sheet.svg"])).toBe(
     "<svg><title>schematic-0:sheet</title></svg>",
-  )
-  expect(files["png/demo--main--board.png"]).toEqual(
-    new Uint8Array([137, 80, 78, 71]),
   )
 })
 
