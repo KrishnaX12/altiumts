@@ -935,6 +935,7 @@ main {
 
 .zoom-controls {
   display: inline-flex;
+  align-items: stretch;
   height: 36px;
   overflow: hidden;
   margin: 0;
@@ -946,15 +947,11 @@ main {
 .zoom-controls button {
   min-width: 34px;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   color: #49617e;
   cursor: pointer;
   font-size: 13px;
   background: #ffffff;
-}
-
-.zoom-controls button:last-child {
-  border-right: 0;
 }
 
 .zoom-controls button:hover,
@@ -967,6 +964,17 @@ main {
   min-width: 44px;
   font-size: 9px;
   font-weight: 700;
+}
+
+.zoom-controls .zoom-hint {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: #687991;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .download-button {
