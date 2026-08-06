@@ -79,11 +79,14 @@ const svgStage = getElement<HTMLElement>("svg-stage")
 const svgImage = getElement<HTMLImageElement>("svg-image")
 const renderLoader = getElement<HTMLElement>("render-loader")
 const fitButton = getElement<HTMLButtonElement>("fit-button")
-const zoomInButton = getElement<HTMLButtonElement>("zoom-in-button")
-const zoomOutButton = getElement<HTMLButtonElement>("zoom-out-button")
 const downloadSvgButton = getElement<HTMLButtonElement>("download-svg-button")
 const viewStatus = getElement<HTMLElement>("view-status")
 const zoomStatus = getElement<HTMLElement>("zoom-status")
+
+const BASE_SVG_WIDTH = 1600
+const MIN_ZOOM = 0.05
+const MAX_ZOOM = 20
+const WHEEL_ZOOM_SENSITIVITY = 0.002
 
 const parserWorker = new Worker(
   new URL("./parser-worker.ts", import.meta.url),
@@ -145,11 +148,8 @@ viewSelector.addEventListener("change", () => {
   void selectView(currentDocument.id, viewSelector.value)
 })
 fitButton.addEventListener("click", setFitZoom)
-zoomInButton.addEventListener("click", () => setNumericZoom((zoom ?? 1) * 1.25))
-zoomOutButton.addEventListener("click", () =>
-  setNumericZoom((zoom ?? 1) / 1.25),
-)
 downloadSvgButton.addEventListener("click", downloadCurrentSvg)
+canvasViewport.addEventListener("wheel", zoomWithWheel, { passive: false })
 canvasViewport.addEventListener("pointerdown", beginPan)
 canvasViewport.addEventListener("pointermove", updatePan)
 canvasViewport.addEventListener("pointerup", endPan)
@@ -467,13 +467,47 @@ function setFitZoom(): void {
 }
 
 function setNumericZoom(value: number): void {
-  zoom = Math.min(4, Math.max(0.25, value))
+  zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, value))
   svgStage.classList.remove("is-fit")
-  svgImage.style.width = `${1600 * zoom}px`
+  svgImage.style.width = `${BASE_SVG_WIDTH * zoom}px`
   svgImage.style.maxWidth = "none"
   svgImage.style.maxHeight = "none"
   fitButton.classList.remove("is-active")
   zoomStatus.textContent = `${Math.round(zoom * 100)}%`
+}
+
+function zoomWithWheel(event: WheelEvent): void {
+  if (!svgImage.hasAttribute("src") || event.deltaY === 0) return
+  event.preventDefault()
+
+  const imageRect = svgImage.getBoundingClientRect()
+  if (imageRect.width === 0 || imageRect.height === 0) return
+
+  const deltaMultiplier =
+    event.deltaMode === WheelEvent.DOM_DELTA_LINE
+      ? 16
+      : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+        ? canvasViewport.clientHeight
+        : 1
+  const delta = event.deltaY * deltaMultiplier
+  const currentZoom =
+    zoom ??
+    Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, imageRect.width / BASE_SVG_WIDTH))
+  const nextZoom = Math.min(
+    MAX_ZOOM,
+    Math.max(MIN_ZOOM, currentZoom * Math.exp(-delta * WHEEL_ZOOM_SENSITIVITY)),
+  )
+  if (nextZoom === currentZoom) return
+
+  const relativeX = (event.clientX - imageRect.left) / imageRect.width
+  const relativeY = (event.clientY - imageRect.top) / imageRect.height
+  setNumericZoom(nextZoom)
+
+  const resizedImageRect = svgImage.getBoundingClientRect()
+  canvasViewport.scrollLeft +=
+    resizedImageRect.left + relativeX * resizedImageRect.width - event.clientX
+  canvasViewport.scrollTop +=
+    resizedImageRect.top + relativeY * resizedImageRect.height - event.clientY
 }
 
 function downloadCurrentSvg(): void {
