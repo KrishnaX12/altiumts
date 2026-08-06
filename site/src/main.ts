@@ -483,16 +483,22 @@ function zoomWithWheel(event: WheelEvent): void {
   const imageRect = svgImage.getBoundingClientRect()
   if (imageRect.width === 0 || imageRect.height === 0) return
 
-  const deltaMultiplier =
-    event.deltaMode === WheelEvent.DOM_DELTA_LINE
-      ? 16
-      : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
-        ? canvasViewport.clientHeight
-        : 1
+  let deltaMultiplier: number = 1
+  if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) {
+    deltaMultiplier = 16
+  } else if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
+    deltaMultiplier = canvasViewport.clientHeight
+  }
   const delta = event.deltaY * deltaMultiplier
-  const currentZoom =
-    zoom ??
-    Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, imageRect.width / BASE_SVG_WIDTH))
+  let currentZoom: number
+  if (zoom === undefined) {
+    currentZoom = Math.min(
+      MAX_ZOOM,
+      Math.max(MIN_ZOOM, imageRect.width / BASE_SVG_WIDTH),
+    )
+  } else {
+    currentZoom = zoom
+  }
   const nextZoom = Math.min(
     MAX_ZOOM,
     Math.max(MIN_ZOOM, currentZoom * Math.exp(-delta * WHEEL_ZOOM_SENSITIVITY)),
