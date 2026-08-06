@@ -18,6 +18,8 @@ export interface ProjectExportProgress {
   total: number
 }
 
+export const PROJECT_EXPORT_VIEWS_PER_ARCHIVE = 5
+
 interface PrepareProjectExportOptions {
   onProgress?: (progress: ProjectExportProgress) => void
   renderSvg: (documentId: string, viewId: string) => Promise<string>
@@ -80,6 +82,25 @@ export function sanitizeExportComponent(
   }
   if (WINDOWS_RESERVED_NAME.test(sanitized)) sanitized += "-file"
   return sanitized
+}
+
+export function splitProjectExportPlan(
+  plan: ProjectExportPlan,
+  viewsPerArchive = PROJECT_EXPORT_VIEWS_PER_ARCHIVE,
+): ProjectExportPlan[] {
+  if (viewsPerArchive < 1)
+    throw new Error("Archive size must be at least one view")
+  const batchCount = Math.ceil(plan.items.length / viewsPerArchive)
+  if (batchCount <= 1) return [plan]
+  const archiveBase = plan.archiveName.replace(/\.zip$/u, "")
+
+  return Array.from({ length: batchCount }, (_, index) => ({
+    archiveName: `${archiveBase}-part-${String(index + 1).padStart(2, "0")}-of-${String(batchCount).padStart(2, "0")}.zip`,
+    items: plan.items.slice(
+      index * viewsPerArchive,
+      (index + 1) * viewsPerArchive,
+    ),
+  }))
 }
 
 export async function prepareProjectExport(

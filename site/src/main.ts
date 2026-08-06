@@ -2,7 +2,11 @@ import "./styles.css"
 
 import { createBugReportUrl } from "./bug-report"
 import { downloadGitHubProjectFiles } from "./github-project"
-import { createProjectExportPlan, prepareProjectExport } from "./project-export"
+import {
+  createProjectExportPlan,
+  prepareProjectExport,
+  splitProjectExportPlan,
+} from "./project-export"
 import { ProjectRenderCoordinator } from "./render-coordinator"
 import type {
   BrowserProjectFile,
@@ -517,6 +521,7 @@ async function downloadProject(): Promise<void> {
   const exportManifest = manifest
   if (!exportManifest || projectExportController) return
   const plan = createProjectExportPlan(exportManifest)
+  const archivePlans = splitProjectExportPlan(plan)
   const controller = new AbortController()
   projectExportController = controller
   downloadProjectButton.disabled = true
@@ -524,28 +529,32 @@ async function downloadProject(): Promise<void> {
   projectExportError.textContent = ""
 
   try {
-    const archive = await prepareProjectExport(plan, {
-      onProgress: ({ current, phase, total }) => {
-        const message =
-          phase === "compressing"
-            ? `Compressing ${total} rendered views…`
-            : `Preparing ${current} of ${total}…`
-        downloadProjectButton.textContent = message
-        projectExportStatus.textContent = message
-      },
-      renderSvg: async (documentId, viewId) => {
-        if (manifest !== exportManifest) {
-          const error = new Error("A different project is now open")
-          error.name = "AbortError"
-          throw error
-        }
-        return getProjectSvg(documentId, viewId, false)
-      },
-      signal: controller.signal,
-    })
-    if (manifest !== exportManifest || controller.signal.aborted) return
-    downloadBlob(archive, plan.archiveName)
-    projectExportStatus.textContent = `Downloaded ${plan.items.length} SVG views.`
+    let completedViews = 0
+    for (const [archiveIndex, archivePlan] of archivePlans.entries()) {
+      const archive = await prepareProjectExport(archivePlan, {
+        onProgress: ({ current, phase }) => {
+          const message =
+            phase === "compressing"
+              ? `Finalizing archive ${archiveIndex + 1} of ${archivePlans.length}…`
+              : `Preparing ${completedViews + current} of ${plan.items.length}…`
+          downloadProjectButton.textContent = message
+          projectExportStatus.textContent = message
+        },
+        renderSvg: async (documentId, viewId) => {
+          if (manifest !== exportManifest) {
+            const error = new Error("A different project is now open")
+            error.name = "AbortError"
+            throw error
+          }
+          return getProjectSvg(documentId, viewId, false)
+        },
+        signal: controller.signal,
+      })
+      if (manifest !== exportManifest || controller.signal.aborted) return
+      await downloadBlob(archive, archivePlan.archiveName)
+      completedViews += archivePlan.items.length
+    }
+    projectExportStatus.textContent = `Downloaded ${plan.items.length} SVG views in ${archivePlans.length} ${archivePlans.length === 1 ? "archive" : "archives"}.`
   } catch (error) {
     if (getErrorName(error) !== "AbortError") {
       projectExportError.textContent = `Could not download project: ${getErrorMessage(error)}`
@@ -561,13 +570,14 @@ async function downloadProject(): Promise<void> {
   }
 }
 
-function downloadBlob(blob: Blob, name: string): void {
+async function downloadBlob(blob: Blob, name: string): Promise<void> {
   const url = URL.createObjectURL(blob)
   const link = document.createElement("a")
   link.href = url
   link.download = name
   link.click()
-  window.setTimeout(() => URL.revokeObjectURL(url), 1_000)
+  await new Promise((resolve) => window.setTimeout(resolve, 1_000))
+  URL.revokeObjectURL(url)
 }
 
 function beginPan(event: PointerEvent): void {

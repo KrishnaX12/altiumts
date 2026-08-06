@@ -6,6 +6,7 @@ import { createBugReportUrl } from "../site/src/bug-report"
 import {
   createProjectExportPlan,
   prepareProjectExport,
+  splitProjectExportPlan,
 } from "../site/src/project-export"
 import {
   expandBrowserProjectFiles,
@@ -100,6 +101,30 @@ test("plans SVG exports for every manifest view in order", () => {
       viewId: "layer:BOTTOM",
     },
   ])
+})
+
+test("splits large exports into deterministic bounded archives", () => {
+  const plan = createProjectExportPlan(
+    createViewerManifest([
+      createDocument(
+        "pcb-0",
+        "Boards/Main.PcbDoc",
+        Array.from({ length: 12 }, (_, index) => `view-${index + 1}`),
+      ),
+    ]),
+  )
+
+  const archives = splitProjectExportPlan(plan)
+  expect(archives.map(({ archiveName }) => archiveName)).toEqual([
+    "demo-project-rendered-views-part-01-of-03.zip",
+    "demo-project-rendered-views-part-02-of-03.zip",
+    "demo-project-rendered-views-part-03-of-03.zip",
+  ])
+  expect(archives.map(({ items }) => items.length)).toEqual([5, 5, 2])
+  expect(archives.flatMap(({ items }) => items)).toEqual(plan.items)
+  expect(
+    splitProjectExportPlan({ ...plan, items: plan.items.slice(0, 5) }),
+  ).toEqual([{ ...plan, items: plan.items.slice(0, 5) }])
 })
 
 test("creates traversal-safe, reserved-safe, collision-safe export names", () => {
