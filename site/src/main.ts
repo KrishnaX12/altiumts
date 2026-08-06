@@ -2,6 +2,9 @@ import "./styles.css"
 
 import { createBugReportUrl } from "./bug-report"
 import { downloadGitHubProjectFiles } from "./github-project"
+import { createProjectExportPlan, prepareProjectExport } from "./project-export"
+import { ProjectRenderCoordinator } from "./render-coordinator"
+import { rasterizeSvgToPng } from "./svg-to-png"
 import type {
   BrowserProjectFile,
   ProjectDocumentManifest,
@@ -13,9 +16,7 @@ import type {
 type ScreenName = "error" | "loading" | "viewer" | "welcome"
 
 interface PendingRequest {
-  documentId?: string
-  type: "parse" | "render"
-  viewId?: string
+  type: "parse"
 }
 
 interface DroppedFileEntry {
@@ -69,6 +70,11 @@ const projectWarning = getElement<HTMLElement>("project-warning")
 const warningTitle = getElement<HTMLElement>("warning-title")
 const warningSummary = getElement<HTMLElement>("warning-summary")
 const warningReportLink = getElement<HTMLAnchorElement>("warning-report-link")
+const downloadProjectButton = getElement<HTMLButtonElement>(
+  "download-project-button",
+)
+const projectExportStatus = getElement<HTMLElement>("project-export-status")
+const projectExportError = getElement<HTMLElement>("project-export-error")
 const documentTitle = getElement<HTMLElement>("document-title")
 const documentKindIcon = getElement<HTMLElement>("document-kind-icon")
 const documentFormatBadge = getElement<HTMLElement>("document-format-badge")
@@ -93,12 +99,18 @@ const parserWorker = new Worker(
 )
 const pendingRequests = new Map<number, PendingRequest>()
 const svgCache = new Map<string, string>()
+const svgRenderPromises = new Map<string, Promise<string>>()
 let nextRequestId = 1
+const renderCoordinator = new ProjectRenderCoordinator(
+  () => nextRequestId++,
+  (request) => parserWorker.postMessage(request),
+)
 let manifest: ProjectViewerManifest | undefined
 let currentDocument: ProjectDocumentManifest | undefined
 let currentViewId: string | undefined
 let currentSvg: string | undefined
 let currentImageUrl: string | undefined
+let projectExportController: AbortController | undefined
 let selectedFileNames: string[] = []
 let zoom: number | undefined
 let panStart:
@@ -150,6 +162,7 @@ zoomOutButton.addEventListener("click", () =>
   setNumericZoom((zoom ?? 1) / 1.25),
 )
 downloadSvgButton.addEventListener("click", downloadCurrentSvg)
+downloadProjectButton.addEventListener("click", () => void downloadProject())
 canvasViewport.addEventListener("pointerdown", beginPan)
 canvasViewport.addEventListener("pointermove", updatePan)
 canvasViewport.addEventListener("pointerup", endPan)
@@ -171,6 +184,7 @@ window.addEventListener("keydown", (event) => {
 parserWorker.addEventListener(
   "message",
   ({ data }: MessageEvent<ProjectWorkerResponse>) => {
+    if (renderCoordinator.handleResponse(data)) return
     const pending = pendingRequests.get(data.requestId)
     if (!pending) return
     if (data.type === "progress") {
@@ -189,16 +203,6 @@ parserWorker.addEventListener(
       if (firstDocument) void selectDocument(firstDocument.id)
       return
     }
-    if (
-      pending.type !== "render" ||
-      data.documentId !== currentDocument?.id ||
-      data.viewId !== currentViewId
-    ) {
-      return
-    }
-    const cacheKey = getSvgCacheKey(data.documentId, data.viewId)
-    svgCache.set(cacheKey, data.svg)
-    displaySvg(data.svg)
   },
 )
 
@@ -299,6 +303,9 @@ async function openGitHubUrl(value: string): Promise<void> {
 }
 
 function parseProjectFiles(files: BrowserProjectFile[]): void {
+  cancelProjectExport()
+  renderCoordinator.cancelAll("A different project is being opened")
+  svgRenderPromises.clear()
   const requestId = nextRequestId++
   pendingRequests.clear()
   pendingRequests.set(requestId, { type: "parse" })
@@ -423,22 +430,40 @@ async function selectView(documentId: string, viewId: string): Promise<void> {
   viewSelector.value = viewId
   const view = currentDocument.views.find(({ id }) => id === viewId)
   viewStatus.textContent = view?.label ?? "Rendering"
-  const cached = svgCache.get(getSvgCacheKey(documentId, viewId))
-  if (cached) {
-    displaySvg(cached)
-    return
-  }
   renderLoader.hidden = false
   svgStage.classList.add("is-loading")
-  const requestId = nextRequestId++
-  pendingRequests.set(requestId, { documentId, type: "render", viewId })
-  const request: ProjectWorkerRequest = {
-    documentId,
-    requestId,
-    type: "render",
-    viewId,
+  try {
+    const svg = await getProjectSvg(documentId, viewId)
+    if (currentDocument?.id === documentId && currentViewId === viewId) {
+      displaySvg(svg)
+    }
+  } catch (error) {
+    if (getErrorName(error) === "AbortError") return
+    if (currentDocument?.id === documentId && currentViewId === viewId) {
+      showFatalError(getErrorMessage(error), getErrorName(error))
+    }
   }
-  parserWorker.postMessage(request)
+}
+
+async function getProjectSvg(
+  documentId: string,
+  viewId: string,
+): Promise<string> {
+  const cacheKey = getSvgCacheKey(documentId, viewId)
+  const cached = svgCache.get(cacheKey)
+  if (cached) return cached
+  const inFlight = svgRenderPromises.get(cacheKey)
+  if (inFlight) return inFlight
+
+  const rendering = renderCoordinator
+    .request(documentId, viewId)
+    .then((svg) => {
+      svgCache.set(cacheKey, svg)
+      return svg
+    })
+    .finally(() => svgRenderPromises.delete(cacheKey))
+  svgRenderPromises.set(cacheKey, rendering)
+  return rendering
 }
 
 function displaySvg(svg: string): void {
@@ -490,6 +515,66 @@ function downloadCurrentSvg(): void {
   window.setTimeout(() => URL.revokeObjectURL(url), 1_000)
 }
 
+async function downloadProject(): Promise<void> {
+  const exportManifest = manifest
+  if (!exportManifest || projectExportController) return
+  const plan = createProjectExportPlan(exportManifest)
+  const controller = new AbortController()
+  projectExportController = controller
+  downloadProjectButton.disabled = true
+  projectExportError.hidden = true
+  projectExportError.textContent = ""
+
+  try {
+    const archive = await prepareProjectExport(plan, {
+      onProgress: ({ current, phase, total }) => {
+        const message =
+          phase === "compressing"
+            ? `Compressing ${total} rendered views…`
+            : `Preparing ${current} of ${total}…`
+        downloadProjectButton.textContent = message
+        projectExportStatus.textContent = message
+      },
+      rasterizeSvg: rasterizeSvgToPng,
+      renderSvg: async (documentId, viewId) => {
+        if (manifest !== exportManifest) {
+          const error = new Error("A different project is now open")
+          error.name = "AbortError"
+          throw error
+        }
+        return getProjectSvg(documentId, viewId)
+      },
+      signal: controller.signal,
+    })
+    if (manifest !== exportManifest || controller.signal.aborted) return
+    downloadBytes(archive, plan.archiveName, "application/zip")
+    projectExportStatus.textContent = `Downloaded ${plan.items.length} views as SVG and PNG.`
+  } catch (error) {
+    if (getErrorName(error) !== "AbortError") {
+      projectExportError.textContent = `Could not download project: ${getErrorMessage(error)}`
+      projectExportError.hidden = false
+      projectExportStatus.textContent = "Project export failed."
+    }
+  } finally {
+    if (projectExportController === controller) {
+      projectExportController = undefined
+      downloadProjectButton.disabled = false
+      downloadProjectButton.textContent = "Download project"
+    }
+  }
+}
+
+function downloadBytes(bytes: Uint8Array, name: string, type: string): void {
+  const url = URL.createObjectURL(
+    new Blob([Uint8Array.from(bytes).buffer], { type }),
+  )
+  const link = document.createElement("a")
+  link.href = url
+  link.download = name
+  link.click()
+  window.setTimeout(() => URL.revokeObjectURL(url), 1_000)
+}
+
 function beginPan(event: PointerEvent): void {
   if (event.button !== 0) return
   panStart = {
@@ -516,12 +601,15 @@ function endPan(event: PointerEvent): void {
 }
 
 function resetViewer(): void {
+  cancelProjectExport()
+  renderCoordinator.cancelAll()
   manifest = undefined
   currentDocument = undefined
   currentViewId = undefined
   currentSvg = undefined
   selectedFileNames = []
   svgCache.clear()
+  svgRenderPromises.clear()
   pendingRequests.clear()
   folderInput.value = ""
   fileInput.value = ""
@@ -530,6 +618,16 @@ function resetViewer(): void {
   currentImageUrl = undefined
   svgImage.removeAttribute("src")
   setScreen("welcome")
+}
+
+function cancelProjectExport(): void {
+  projectExportController?.abort()
+  projectExportController = undefined
+  downloadProjectButton.disabled = false
+  downloadProjectButton.textContent = "Download project"
+  projectExportStatus.textContent = ""
+  projectExportError.hidden = true
+  projectExportError.textContent = ""
 }
 
 function showFatalError(
@@ -607,4 +705,12 @@ function getElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id)
   if (!element) throw new Error(`Missing required element #${id}`)
   return element as T
+}
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+
+function getErrorName(error: unknown): string {
+  return error instanceof Error ? error.name : "Error"
 }
