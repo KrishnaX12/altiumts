@@ -44,7 +44,7 @@
     "inventory-schema": "bun run scripts/audit-record-schema.ts",
     "lint": "biome check .",
     "prepack": "bun run build",
-    "prepare": "bun run build",
+    "prepare": "bun install --ignore-scripts && bun run build",
     "site:build": "vite build --config site/vite.config.ts",
     "site:dev": "vite --config site/vite.config.ts",
     "site:preview": "vite preview --config site/vite.config.ts",
