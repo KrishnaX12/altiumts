@@ -241,6 +241,8 @@ directly, along with round, square, and slotted holes.
 - `AltiumRecord#get()`, `getAll()`, `set()`, and `delete()` provide ergonomic
   field access while the ordered `items` array preserves duplicate and unknown
   fields.
+- `sanitizeAltiumFieldText()` replaces record delimiters and control
+  characters before arbitrary text is assigned to an ASCII field.
 - Known PCB primitives are represented by dedicated record classes:
   `AltiumArcRecord`, `AltiumBoardRecord`, `AltiumComponentRecord`,
   `AltiumNetRecord`, `AltiumPadRecord`, `AltiumPolygonRecord`,
