@@ -17,9 +17,13 @@ async function runCommand(
   const buildProcess = Bun.spawn(command, {
     cwd: workingDirectory,
     stderr: "inherit",
-    stdout: "inherit",
+    stdout: "pipe",
   })
-  const exitCode = await buildProcess.exited
+  const [exitCode, commandOutput] = await Promise.all([
+    buildProcess.exited,
+    new Response(buildProcess.stdout).text(),
+  ])
+  if (commandOutput) await Bun.write(Bun.stderr, commandOutput)
   if (exitCode !== 0) {
     throw new Error(`${command[0]} exited with code ${exitCode}`)
   }
