@@ -4,6 +4,11 @@ import { join, relative, resolve, sep } from "node:path"
 
 const sourceDirectory = resolve(import.meta.dir, "..")
 const excludedTopLevelNames = new Set([".git", "dist", "node_modules"])
+const isInstalledSourceDependency = sourceDirectory
+  .split(sep)
+  .includes("node_modules")
+
+if (!isInstalledSourceDependency) process.exit(0)
 
 function shouldCopyBuildSource(sourcePath: string): boolean {
   const topLevelName = relative(sourceDirectory, sourcePath).split(sep)[0]

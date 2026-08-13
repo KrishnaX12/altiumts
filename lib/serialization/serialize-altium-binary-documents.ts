@@ -21,6 +21,21 @@ const PCB_LAYER = {
 } as const
 
 type AsciiAltiumDocument = string | AltiumPcbDoc | AltiumSchDoc
+type AltiumFieldName = string
+type AltiumRecordFields = Map<AltiumFieldName, string>
+
+type WritePrimitiveCommonOptions = {
+  defaultLayer: number
+  fields: AltiumRecordFields
+  writer: AltiumBinaryWriter
+}
+
+type AddSectionOptions = {
+  compoundFile: ReturnType<typeof CFB.utils.cfb_new>
+  content: Uint8Array
+  name: string
+  recordCount: number
+}
 
 const getAsciiSource = (document: AsciiAltiumDocument): string => {
   if (typeof document === "string") return document
@@ -44,24 +59,24 @@ const concatBytes = (...parts: Uint8Array[]) => {
   return output
 }
 
-const asciiBytes = (value: string) =>
-  Uint8Array.from(value, (character) => character.charCodeAt(0) & 0x7f)
+const asciiBytes = (text: string) =>
+  Uint8Array.from(text, (character) => character.charCodeAt(0) & 0x7f)
 
-const toAltiumParamBytes = (line: string) => {
+const toAltiumRecordBytes = (line: string) => {
   const output: number[] = []
   for (const segment of line.split("|")) {
     if (!segment) continue
     const equals = segment.indexOf("=")
     if (equals < 1) continue
     const key = segment.slice(0, equals)
-    const value = segment.slice(equals + 1)
-    if (/[^\x20-\x7e]/u.test(value)) {
+    const fieldText = segment.slice(equals + 1)
+    if (/[^\x20-\x7e]/u.test(fieldText)) {
       output.push(
-        ...new TextEncoder().encode(`|%UTF8%${key}=${value.trim()}||`),
+        ...new TextEncoder().encode(`|%UTF8%${key}=${fieldText.trim()}||`),
       )
     }
     output.push(
-      ...asciiBytes(`|${key}=${value.replace(/[^\x20-\x7e]/gu, "?")}`),
+      ...asciiBytes(`|${key}=${fieldText.replace(/[^\x20-\x7e]/gu, "?")}`),
     )
   }
   output.push(0)
@@ -71,13 +86,13 @@ const toAltiumParamBytes = (line: string) => {
 const writeLengthPrefixedRecords = (lines: string[]) => {
   const writer = new AltiumBinaryWriter()
   for (const line of lines) {
-    writer.uint32LengthPrefixedBytes(toAltiumParamBytes(line))
+    writer.uint32LengthPrefixedBytes(toAltiumRecordBytes(line))
   }
   return writer.toUint8Array()
 }
 
-const getFields = (line: string) =>
-  new Map(
+const getFields = (line: string): AltiumRecordFields =>
+  new Map<AltiumFieldName, string>(
     line
       .split("|")
       .filter(Boolean)
@@ -92,24 +107,24 @@ const getFields = (line: string) =>
 
 const getRecordKind = (line: string) => getFields(line).get("RECORD") ?? ""
 
-const parseMil = (value: string | undefined) => {
-  const mils = Number.parseFloat(value ?? "0")
+const parseMil = (measurement: string | undefined) => {
+  const mils = Number.parseFloat(measurement ?? "0")
   return Number.isFinite(mils) ? Math.round(mils * INTERNAL_UNITS_PER_MIL) : 0
 }
 
-const parseIndex = (value: string | undefined) => {
-  if (value === undefined) return NO_INDEX
-  const parsed = Number.parseInt(value, 10)
+const parseIndex = (indexText: string | undefined) => {
+  if (indexText === undefined) return NO_INDEX
+  const parsed = Number.parseInt(indexText, 10)
   return Number.isInteger(parsed) && parsed >= 0 && parsed < NO_INDEX
     ? parsed
     : NO_INDEX
 }
 
 const parseLayer = (
-  value: string | undefined,
+  layerName: string | undefined,
   fallback: number = PCB_LAYER.top,
 ) => {
-  switch (value?.toUpperCase()) {
+  switch (layerName?.toUpperCase()) {
     case "TOP":
       return PCB_LAYER.top
     case "BOTTOM":
@@ -121,11 +136,11 @@ const parseLayer = (
   }
 }
 
-const writePrimitiveCommon = (
-  writer: AltiumBinaryWriter,
-  fields: Map<string, string>,
-  defaultLayer: number,
-) => {
+const writePrimitiveCommon = ({
+  defaultLayer,
+  fields,
+  writer,
+}: WritePrimitiveCommonOptions) => {
   writer
     .uint8(parseLayer(fields.get("LAYER"), defaultLayer))
     .uint16(0)
@@ -136,8 +151,8 @@ const writePrimitiveCommon = (
     .uint16(NO_INDEX)
 }
 
-const pascalString = (value: string) => {
-  const bytes = asciiBytes(value.slice(0, 255))
+const pascalString = (text: string) => {
+  const bytes = asciiBytes(text.slice(0, 255))
   return concatBytes(Uint8Array.of(bytes.byteLength), bytes)
 }
 
@@ -148,7 +163,7 @@ const serializePad = (line: string) => {
   const xSize = parseMil(fields.get("XSIZE"))
   const ySize = parseMil(fields.get("YSIZE"))
   const main = new AltiumBinaryWriter()
-  writePrimitiveCommon(main, fields, layer)
+  writePrimitiveCommon({ defaultLayer: layer, fields, writer: main })
   main.int32(parseMil(fields.get("X"))).int32(parseMil(fields.get("Y")))
   for (let index = 0; index < 3; index++) {
     main.int32(xSize).int32(ySize)
@@ -181,7 +196,11 @@ const serializePad = (line: string) => {
 const serializeTrack = (line: string) => {
   const fields = getFields(line)
   const writer = new AltiumBinaryWriter()
-  writePrimitiveCommon(writer, fields, parseLayer(fields.get("LAYER")))
+  writePrimitiveCommon({
+    defaultLayer: parseLayer(fields.get("LAYER")),
+    fields,
+    writer,
+  })
   writer
     .int32(parseMil(fields.get("X1")))
     .int32(parseMil(fields.get("Y1")))
@@ -195,7 +214,11 @@ const serializeTrack = (line: string) => {
 const serializeVia = (line: string) => {
   const fields = getFields(line)
   const writer = new AltiumBinaryWriter()
-  writePrimitiveCommon(writer, fields, PCB_LAYER.multilayer)
+  writePrimitiveCommon({
+    defaultLayer: PCB_LAYER.multilayer,
+    fields,
+    writer,
+  })
   writer
     .int32(parseMil(fields.get("X")))
     .int32(parseMil(fields.get("Y")))
@@ -217,17 +240,17 @@ const writePrimitiveRecords = (objectId: number, records: Uint8Array[][]) => {
   return writer.toUint8Array()
 }
 
-const uint32Bytes = (value: number) =>
-  new AltiumBinaryWriter(4, 4).uint32(value).toUint8Array()
+const uint32Bytes = (integer: number) =>
+  new AltiumBinaryWriter(4, 4).uint32(integer).toUint8Array()
 
-const addSection = (
-  compoundFile: ReturnType<typeof CFB.utils.cfb_new>,
-  name: string,
-  count: number,
-  data: Uint8Array,
-) => {
-  CFB.utils.cfb_add(compoundFile, `/${name}/Header`, uint32Bytes(count))
-  CFB.utils.cfb_add(compoundFile, `/${name}/Data`, data)
+const addSection = ({
+  compoundFile,
+  content,
+  name,
+  recordCount,
+}: AddSectionOptions) => {
+  CFB.utils.cfb_add(compoundFile, `/${name}/Header`, uint32Bytes(recordCount))
+  CFB.utils.cfb_add(compoundFile, `/${name}/Data`, content)
 }
 
 const writeCompoundFile = (
@@ -280,42 +303,45 @@ export const serializeAltiumPcbDocToBinary = (
     currentHeader.toUint8Array(),
   )
 
-  addSection(
+  addSection({
     compoundFile,
-    "Board6",
-    board.length,
-    writeLengthPrefixedRecords(board),
-  )
-  addSection(
+    name: "Board6",
+    recordCount: board.length,
+    content: writeLengthPrefixedRecords(board),
+  })
+  addSection({
     compoundFile,
-    "Nets6",
-    nets.length,
-    writeLengthPrefixedRecords(nets),
-  )
-  addSection(
+    name: "Nets6",
+    recordCount: nets.length,
+    content: writeLengthPrefixedRecords(nets),
+  })
+  addSection({
     compoundFile,
-    "Components6",
-    components.length,
-    writeLengthPrefixedRecords(components),
-  )
-  addSection(
+    name: "Components6",
+    recordCount: components.length,
+    content: writeLengthPrefixedRecords(components),
+  })
+  addSection({
     compoundFile,
-    "Pads6",
-    pads.length,
-    writePrimitiveRecords(PCB_OBJECT.pad, pads.map(serializePad)),
-  )
-  addSection(
+    name: "Pads6",
+    recordCount: pads.length,
+    content: writePrimitiveRecords(PCB_OBJECT.pad, pads.map(serializePad)),
+  })
+  addSection({
     compoundFile,
-    "Vias6",
-    vias.length,
-    writePrimitiveRecords(PCB_OBJECT.via, vias.map(serializeVia)),
-  )
-  addSection(
+    name: "Vias6",
+    recordCount: vias.length,
+    content: writePrimitiveRecords(PCB_OBJECT.via, vias.map(serializeVia)),
+  })
+  addSection({
     compoundFile,
-    "Tracks6",
-    tracks.length,
-    writePrimitiveRecords(PCB_OBJECT.track, tracks.map(serializeTrack)),
-  )
+    name: "Tracks6",
+    recordCount: tracks.length,
+    content: writePrimitiveRecords(
+      PCB_OBJECT.track,
+      tracks.map(serializeTrack),
+    ),
+  })
 
   for (const section of [
     "Arcs6",
@@ -329,14 +355,19 @@ export const serializeAltiumPcbDocToBinary = (
     "Connections6",
     "WideStrings6",
   ]) {
-    addSection(compoundFile, section, 0, new Uint8Array())
+    addSection({
+      compoundFile,
+      name: section,
+      recordCount: 0,
+      content: new Uint8Array(),
+    })
   }
 
   return writeCompoundFile(compoundFile)
 }
 
-const writeTextBlock = (params: Uint8Array) =>
-  concatBytes(uint32Bytes(params.byteLength), params)
+const writeTextBlock = (recordBytes: Uint8Array) =>
+  concatBytes(uint32Bytes(recordBytes.byteLength), recordBytes)
 
 /** Encodes an ASCII schematic into Altium's native OLE/CFB SchDoc container. */
 export const serializeAltiumSchDocToBinary = (
@@ -349,11 +380,11 @@ export const serializeAltiumSchDocToBinary = (
     "Protel for Windows - Schematic Capture Binary File Version 5.0"
   const fileHeader = [
     writeTextBlock(
-      toAltiumParamBytes(
+      toAltiumRecordBytes(
         `|HEADER=${binaryHeader}|WEIGHT=${records.length}|MINORVERSION=0|UNIQUEID=ALTIUMTS`,
       ),
     ),
-    ...records.map((line) => writeTextBlock(toAltiumParamBytes(line))),
+    ...records.map((line) => writeTextBlock(toAltiumRecordBytes(line))),
   ]
 
   const compoundFile = CFB.utils.cfb_new({ root: "Root Entry" })
@@ -361,12 +392,12 @@ export const serializeAltiumSchDocToBinary = (
   CFB.utils.cfb_add(
     compoundFile,
     "/Storage",
-    writeTextBlock(toAltiumParamBytes("|HEADER=Icon storage")),
+    writeTextBlock(toAltiumRecordBytes("|HEADER=Icon storage")),
   )
   CFB.utils.cfb_add(
     compoundFile,
     "/Additional",
-    writeTextBlock(toAltiumParamBytes(`|HEADER=${binaryHeader}`)),
+    writeTextBlock(toAltiumRecordBytes(`|HEADER=${binaryHeader}`)),
   )
   return writeCompoundFile(compoundFile)
 }
