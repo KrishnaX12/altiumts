@@ -69,6 +69,23 @@ for (const track of tracks) {
 await writeFile("board-modified.PcbDoc", board.getString())
 ```
 
+Create native binary Altium documents from ASCII models:
+
+```ts
+import {
+  parseAltiumPcbDoc,
+  serializeAltiumPcbDocToBinary,
+  serializeAltiumSchDocToBinary,
+} from "altiumts"
+
+const pcb = parseAltiumPcbDoc(asciiPcbSource)
+const pcbBytes = serializeAltiumPcbDocToBinary(pcb)
+const schematicBytes = serializeAltiumSchDocToBinary(asciiSchematicSource)
+```
+
+The native PCB serializer preserves the source board contour coordinates and
+winding while encoding board, net, component, pad, track, and via streams.
+
 The generic `parseAltiumAscii` function returns document lines without
 requiring a `Board` root record. `parseAltiumAsciiStream()` accepts an async
 iterable of decoded chunks. Every node supports `getChildren()`, `walk()`,
