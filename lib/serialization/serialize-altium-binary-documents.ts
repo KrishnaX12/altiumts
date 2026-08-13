@@ -10,6 +10,7 @@ const INTERNAL_UNITS_PER_MIL = 10_000
 
 const PCB_OBJECT = {
   pad: 2,
+  text: 5,
   via: 3,
   track: 4,
 } as const
@@ -124,16 +125,52 @@ const parseLayer = (
   layerName: string | undefined,
   fallback: number = PCB_LAYER.top,
 ) => {
-  switch (layerName?.toUpperCase()) {
+  const normalizedLayerName = layerName?.toUpperCase()
+  switch (normalizedLayerName) {
     case "TOP":
       return PCB_LAYER.top
     case "BOTTOM":
       return PCB_LAYER.bottom
+    case "TOPOVERLAY":
+      return 33
+    case "BOTTOMOVERLAY":
+      return 34
+    case "TOPPASTE":
+      return 35
+    case "BOTTOMPASTE":
+      return 36
+    case "TOPSOLDER":
+      return 37
+    case "BOTTOMSOLDER":
+      return 38
+    case "DRILLGUIDE":
+      return 55
+    case "KEEPOUT":
+      return 56
+    case "DRILLDRAWING":
+      return 73
     case "MULTILAYER":
       return PCB_LAYER.multilayer
     default:
-      return fallback
+      return parseOrdinalLayer(normalizedLayerName) ?? fallback
   }
+}
+
+const parseOrdinalLayer = (layerName: string | undefined) => {
+  const layerMatch = /^(MID-LAYER|INTERNALPLANE|MECHANICAL)(\d{1,2})$/u.exec(
+    layerName ?? "",
+  )
+  const ordinal = Number.parseInt(layerMatch?.[2] ?? "", 10)
+  if (!layerMatch || !Number.isInteger(ordinal) || ordinal < 1) {
+    return undefined
+  }
+  if (layerMatch[1] === "MID-LAYER" && ordinal <= 30) return ordinal + 1
+  if (layerMatch[1] === "INTERNALPLANE" && ordinal <= 16) {
+    return ordinal + 38
+  }
+  if (layerMatch[1] === "MECHANICAL" && ordinal <= 16) return ordinal + 56
+  if (layerMatch[1] === "MECHANICAL" && ordinal <= 32) return ordinal + 66
+  return undefined
 }
 
 const writePrimitiveCommon = ({
@@ -154,6 +191,35 @@ const writePrimitiveCommon = ({
 const pascalString = (text: string) => {
   const bytes = asciiBytes(text.slice(0, 255))
   return concatBytes(Uint8Array.of(bytes.byteLength), bytes)
+}
+
+const legacyText = (text: string) => text.replace(/[^\x20-\x7e]/gu, "?")
+
+const utf16LeBytes = (text: string, byteLength?: number) => {
+  const output = new Uint8Array(byteLength ?? (text.length + 1) * 2)
+  const view = new DataView(output.buffer)
+  const maximumCharacterCount = Math.min(text.length, output.byteLength / 2)
+  for (let index = 0; index < maximumCharacterCount; index++) {
+    view.setUint16(index * 2, text.charCodeAt(index), true)
+  }
+  return output
+}
+
+const serializePadStack = (fields: AltiumRecordFields) => {
+  const holeShape = fields.get("HOLESHAPE")?.toUpperCase()
+  if (holeShape !== "SLOT" && holeShape !== "SQUARE") {
+    return new Uint8Array()
+  }
+  const output = new Uint8Array(596)
+  const view = new DataView(output.buffer)
+  view.setUint8(262, holeShape === "SLOT" ? 2 : 1)
+  view.setInt32(263, parseMil(fields.get("HOLEWIDTH")), true)
+  view.setFloat64(
+    267,
+    Number.parseFloat(fields.get("HOLEROTATION") ?? "0") || 0,
+    true,
+  )
+  return output
 }
 
 const serializePad = (line: string) => {
@@ -180,8 +246,7 @@ const serializePad = (line: string) => {
     .int32(0)
     .writeBytes(new Uint8Array(38))
     .uint8(0)
-    .int32(0)
-    .int32(0)
+    .float64(Number.parseFloat(fields.get("HOLEROTATION") ?? "0") || 0)
 
   return [
     pascalString(fields.get("NAME") ?? ""),
@@ -189,7 +254,7 @@ const serializePad = (line: string) => {
     pascalString(""),
     pascalString(""),
     main.toUint8Array(),
-    new Uint8Array(),
+    serializePadStack(fields),
   ]
 }
 
@@ -227,6 +292,54 @@ const serializeVia = (line: string) => {
     .uint8(PCB_LAYER.top)
     .uint8(PCB_LAYER.bottom)
   return [writer.toUint8Array()]
+}
+
+const serializeText = (line: string, wideStringIndex: number) => {
+  const fields = getFields(line)
+  const text = fields.get("TEXT") ?? ""
+  const writer = new AltiumBinaryWriter(137, 137)
+  writePrimitiveCommon({
+    defaultLayer: parseLayer(fields.get("LAYER")),
+    fields,
+    writer,
+  })
+  writer
+    .int32(parseMil(fields.get("X")))
+    .int32(parseMil(fields.get("Y")))
+    .int32(parseMil(fields.get("HEIGHT")))
+    .uint16(Number.parseInt(fields.get("STROKEFONT") ?? "0", 10) || 0)
+    .float64(Number.parseFloat(fields.get("ROTATION") ?? "0") || 0)
+    .uint8(fields.get("MIRROR") === "TRUE" ? 1 : 0)
+    .int32(parseMil(fields.get("WIDTH")))
+    .uint8(fields.get("COMMENT") === "TRUE" ? 1 : 0)
+    .uint8(fields.get("DESIGNATOR") === "TRUE" ? 1 : 0)
+    .uint8(0)
+    .uint8(fields.get("USETTFONTS") === "TRUE" ? 1 : 0)
+    .uint8(fields.get("BOLD") === "TRUE" ? 1 : 0)
+    .uint8(fields.get("ITALIC") === "TRUE" ? 1 : 0)
+    .writeBytes(utf16LeBytes(fields.get("FONTNAME") ?? "", 64))
+    .uint8(fields.get("INVERTED") === "TRUE" ? 1 : 0)
+    .int32(parseMil(fields.get("MARGINBORDERWIDTH")))
+    .uint32(wideStringIndex)
+    .writeBytes(new Uint8Array(4))
+    .uint8(fields.get("INVERTEDRECT") === "TRUE" ? 1 : 0)
+    .int32(parseMil(fields.get("TEXTBOXWIDTH")))
+    .int32(parseMil(fields.get("TEXTBOXHEIGHT")))
+    .uint8(Number.parseInt(fields.get("JUSTIFICATION") ?? "0", 10) || 0)
+    .int32(parseMil(fields.get("TEXTOFFSET")))
+  return [writer.toUint8Array(), pascalString(legacyText(text))]
+}
+
+const writeWideStrings = (lines: string[]) => {
+  const writer = new AltiumBinaryWriter()
+  for (const [wideStringIndex, line] of lines.entries()) {
+    const textBytes = utf16LeBytes(getFields(line).get("TEXT") ?? "")
+    writer
+      .uint32(wideStringIndex)
+      .uint32(textBytes.byteLength)
+      .writeBytes(textBytes)
+  }
+  return writer.toUint8Array()
 }
 
 const writePrimitiveRecords = (objectId: number, records: Uint8Array[][]) => {
@@ -282,6 +395,7 @@ export const serializeAltiumPcbDocToBinary = (
   const pads = lines.filter((line) => getRecordKind(line) === "Pad")
   const vias = lines.filter((line) => getRecordKind(line) === "Via")
   const tracks = lines.filter((line) => getRecordKind(line) === "Track")
+  const texts = lines.filter((line) => getRecordKind(line) === "Text")
 
   const compoundFile = CFB.utils.cfb_new({ root: "Root Entry" })
   const legacyHeader = new AltiumBinaryWriter().uint32(
@@ -342,18 +456,33 @@ export const serializeAltiumPcbDocToBinary = (
       tracks.map(serializeTrack),
     ),
   })
+  addSection({
+    compoundFile,
+    name: "Texts6",
+    recordCount: texts.length,
+    content: writePrimitiveRecords(
+      PCB_OBJECT.text,
+      texts.map((line, wideStringIndex) =>
+        serializeText(line, wideStringIndex),
+      ),
+    ),
+  })
+  addSection({
+    compoundFile,
+    name: "WideStrings6",
+    recordCount: texts.length,
+    content: writeWideStrings(texts),
+  })
 
   for (const section of [
     "Arcs6",
     "Polygons6",
-    "Texts6",
     "Fills6",
     "Regions6",
     "ComponentBodies6",
     "Classes6",
     "DifferentialPairs6",
     "Connections6",
-    "WideStrings6",
   ]) {
     addSection({
       compoundFile,

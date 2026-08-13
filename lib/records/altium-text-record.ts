@@ -16,7 +16,10 @@ export class AltiumTextRecord extends AltiumRecord {
   }
 
   get text(): string | undefined {
-    return getFirstDecoded(this, "WIDESTRING", "TEXT")
+    const wideString = this.getDecoded("WIDESTRING")
+    return wideString === undefined
+      ? getFirstDecoded(this, "TEXT")
+      : decodeWideString(wideString)
   }
 
   get position(): AltiumPoint | undefined {
@@ -73,5 +76,16 @@ export class AltiumTextRecord extends AltiumRecord {
 
   get isComment(): boolean {
     return this.getBoolean("COMMENT") === true
+  }
+}
+
+function decodeWideString(wideString: string): string {
+  if (!/^\d+(?:,\d+)*$/u.test(wideString)) return wideString
+  try {
+    return String.fromCodePoint(
+      ...wideString.split(",").map((codePoint) => Number(codePoint)),
+    )
+  } catch {
+    return wideString
   }
 }

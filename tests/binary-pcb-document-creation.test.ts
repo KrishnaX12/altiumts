@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test"
 import {
+  AltiumTextRecord,
   parseAltiumBinaryPcbDoc,
   parseAltiumPcbDoc,
   serializeAltiumPcbDocToBinary,
@@ -20,8 +21,19 @@ test("creates native binary PCB documents with exact board bounds", () => {
     winding: "counterclockwise",
   })
   expect(document.pads).toHaveLength(1)
+  expect(document.pads[0]?.get("HOLESHAPE")).toBe("SLOT")
+  expect(document.pads[0]?.get("HOLEROTATION")).toBe("90")
   expect(document.tracks).toHaveLength(1)
+  expect(document.tracks[0]?.get("LAYER")).toBe("TOPOVERLAY")
   expect(document.vias).toHaveLength(1)
+  expect(document.texts).toHaveLength(1)
+  const text = document.texts[0]
+  expect(text).toBeInstanceOf(AltiumTextRecord)
+  if (!(text instanceof AltiumTextRecord)) {
+    throw new Error("Expected a typed Altium text record")
+  }
+  expect(text.get("LAYER")).toBe("BOTTOMOVERLAY")
+  expect(text.text).toBe("R1 Ω")
   expect(document.components).toHaveLength(1)
   expect(document.nets).toHaveLength(1)
 })
