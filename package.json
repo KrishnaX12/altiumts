@@ -71,6 +71,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "cfb": "^1.2.2",
     "fflate": "^0.8.3"
   }
 }
