@@ -5,9 +5,7 @@
 export function sanitizeAltiumFieldText(text: string): string {
   return [...text]
     .map((character) => {
-      const characterCode = character.charCodeAt(0)
-      const isInvalidCharacter =
-        character === "|" || characterCode < 32 || characterCode === 127
+      const isInvalidCharacter = character === "|" || /\p{Cc}/u.test(character)
       return isInvalidCharacter ? " " : character
     })
     .join("")

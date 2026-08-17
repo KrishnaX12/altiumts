@@ -84,7 +84,9 @@ const schematicBytes = serializeAltiumSchDocToBinary(asciiSchematicSource)
 ```
 
 The native PCB serializer preserves the source board contour coordinates and
-winding while encoding board, net, component, pad, track, and via streams.
+winding while encoding board, net, component, pad, track, via, and text
+streams. It throws `AltiumSerializationError` for record kinds, primitive
+fields, layers, shapes, or values that it cannot encode without loss.
 
 The generic `parseAltiumAscii` function returns document lines without
 requiring a `Board` root record. `parseAltiumAsciiStream()` accepts an async

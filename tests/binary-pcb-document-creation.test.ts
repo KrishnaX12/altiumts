@@ -21,11 +21,16 @@ test("creates native binary PCB documents with exact board bounds", () => {
     winding: "counterclockwise",
   })
   expect(document.pads).toHaveLength(1)
+  expect(document.pads[0]?.getBoolean("LOCKED")).toBeFalse()
   expect(document.pads[0]?.get("HOLESHAPE")).toBe("SLOT")
   expect(document.pads[0]?.get("HOLEROTATION")).toBe("90")
   expect(document.tracks).toHaveLength(1)
+  expect(document.tracks[0]?.getBoolean("LOCKED")).toBeFalse()
   expect(document.tracks[0]?.get("LAYER")).toBe("TOPOVERLAY")
   expect(document.vias).toHaveLength(1)
+  expect(document.vias[0]?.getBoolean("LOCKED")).toBeFalse()
+  expect(document.vias[0]?.get("STARTLAYER")).toBe("TOP")
+  expect(document.vias[0]?.get("ENDLAYER")).toBe("BOTTOM")
   expect(document.texts).toHaveLength(1)
   const text = document.texts[0]
   expect(text).toBeInstanceOf(AltiumTextRecord)
