@@ -18,6 +18,9 @@ const UNLOCKED_PRIMITIVE_FLAG = 0x04
 const STANDARD_PRIMITIVE_FLAG = 0x08
 const TENTED_TOP_PRIMITIVE_FLAG = 0x20
 const TENTED_BOTTOM_PRIMITIVE_FLAG = 0x40
+// Native Vias6 records retain a reserved metadata tail even when every
+// optional via-stack field is unset. Real Altium documents use this minimum.
+const NATIVE_VIA_PAYLOAD_LENGTH = 209
 
 export const PCB_OBJECT_ID = {
   pad: 2,
@@ -108,6 +111,7 @@ export function serializeAltiumViaRecord(recordSource: string): Uint8Array[] {
         32,
       ),
     )
+    .writeBytes(new Uint8Array(NATIVE_VIA_PAYLOAD_LENGTH - writer.length))
   return [writer.toUint8Array()]
 }
 
