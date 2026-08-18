@@ -3,6 +3,7 @@ import { getPcbRegionSemanticKind } from "../pcb-contours"
 import {
   getPcbRecordComponentIndex,
   getPcbRecordNetIndex,
+  getPcbRecordPolygonIndex,
 } from "../pcb-reference-resolution"
 import type { AltiumRecord } from "../records/altium-record"
 import {
@@ -58,6 +59,13 @@ export function serializeAltiumPcbToSvg(
   const boardCutouts =
     options.showBoardCutouts === false ? [] : document.boardGeometry.cutouts
   const componentLookup = createComponentLookup(document)
+  const polygonIndexesWithRegionRecords = new Set(
+    document.records.flatMap((record) => {
+      if (record.recordKind !== "Region") return []
+      const polygonIndex = getPcbRecordPolygonIndex(document, record)
+      return polygonIndex === undefined ? [] : [polygonIndex]
+    }),
+  )
 
   if (outline.length >= 3 && options.showBoardOutline !== false) {
     if (boardCutouts.length === 0) {
@@ -97,10 +105,22 @@ export function serializeAltiumPcbToSvg(
     )
 
   for (const record of records) {
-    const rendered = renderPcbRecord(record, viewport, {
-      showHoles: true,
-      showText: true,
-      ...options,
+    const polygonIndex =
+      record.recordKind === "Polygon"
+        ? getPcbRecordPolygonIndex(document, record)
+        : undefined
+    const fillPolygon =
+      polygonIndex === undefined ||
+      !polygonIndexesWithRegionRecords.has(polygonIndex)
+    const rendered = renderPcbRecord({
+      fillPolygon,
+      record,
+      svgOptions: {
+        showHoles: true,
+        showText: true,
+        ...options,
+      },
+      viewport,
     })
     if (rendered) content.push(rendered)
   }

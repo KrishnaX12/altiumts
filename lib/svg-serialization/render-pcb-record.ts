@@ -17,11 +17,17 @@ import {
   pointsToSvg,
 } from "./svg-utils"
 
-export function renderPcbRecord(
-  record: AltiumRecord,
-  viewport: SvgViewport,
-  options: AltiumPcbSvgOptions,
-): string | undefined {
+export function renderPcbRecord({
+  fillPolygon = true,
+  record,
+  svgOptions,
+  viewport,
+}: {
+  fillPolygon?: boolean
+  record: AltiumRecord
+  svgOptions: AltiumPcbSvgOptions
+  viewport: SvgViewport
+}): string | undefined {
   const kind = record.recordKind
   const layer = record.getCaseInsensitive("LAYER")
   const color = getPcbLayerColor(layer)
@@ -50,11 +56,11 @@ export function renderPcbRecord(
   }
 
   if (kind === "Pad") {
-    return renderPad(record, viewport, options, metadata, color)
+    return renderPad(record, viewport, svgOptions, metadata, color)
   }
 
   if (kind === "Via") {
-    return renderVia(record, viewport, options, metadata)
+    return renderVia(record, viewport, svgOptions, metadata)
   }
 
   if (kind === "Region") {
@@ -89,7 +95,10 @@ export function renderPcbRecord(
   if (kind === "Polygon") {
     const points = getPcbVertexPoints(record)
     if (points.length < 3) return undefined
-    return `<polygon ${metadata} points="${pointsToSvg(points, viewport)}" fill="${color}" fill-opacity="0.16" stroke="${color}" stroke-width="1.5"/>`
+    const fill = fillPolygon
+      ? ` fill="${color}" fill-opacity="0.16"`
+      : ' fill="none"'
+    return `<polygon ${metadata} points="${pointsToSvg(points, viewport)}"${fill} stroke="${color}" stroke-width="1.5"/>`
   }
 
   if (kind === "Fill") {
@@ -107,7 +116,7 @@ export function renderPcbRecord(
     return `<rect ${metadata} data-keepout="${record.getBoolean("KEEPOUT") === true}" x="${formatSvgNumber(Math.min(x1, x2))}" y="${formatSvgNumber(Math.min(y1, y2))}" width="${formatSvgNumber(Math.abs(x2 - x1))}" height="${formatSvgNumber(Math.abs(y2 - y1))}" fill="${color}" fill-opacity="0.6"${transform}/>`
   }
 
-  if (kind === "Text" && options.showText !== false) {
+  if (kind === "Text" && svgOptions.showText !== false) {
     const text =
       decodeAltiumWideString(record.getDecoded("WIDESTRING")) ||
       record.getDecoded("TEXT") ||
@@ -135,7 +144,7 @@ export function renderPcbRecord(
     return `<text ${metadata} x="0" y="0" fill="${color}" font-family="${escapeXml(fontName)}, sans-serif" font-size="${formatSvgNumber(height)}" font-weight="${fontWeight}" font-style="${fontStyle}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${textContent}</text>`
   }
 
-  if (kind === "Component" && options.showComponentOrigins) {
+  if (kind === "Component" && svgOptions.showComponentOrigins) {
     const x = viewport.toX(getPcbMeasurement(record, "X"))
     const y = viewport.toY(getPcbMeasurement(record, "Y"))
     return `<path ${metadata} d="M ${formatSvgNumber(x - 8)} ${formatSvgNumber(y)} H ${formatSvgNumber(x + 8)} M ${formatSvgNumber(x)} ${formatSvgNumber(y - 8)} V ${formatSvgNumber(y + 8)}" fill="none" stroke="#f472b6" stroke-width="2"/>`
