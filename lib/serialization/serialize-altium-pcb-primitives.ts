@@ -156,10 +156,12 @@ export function writeAltiumWideStrings(recordSources: string[]): Uint8Array {
     const textBytes = toAltiumUtf16LeBytes(
       getAltiumRecordFields(recordSource).get("TEXT") ?? "",
     )
-    writer
-      .uint32(wideStringIndex)
-      .uint32(textBytes.byteLength)
-      .writeBytes(textBytes)
+    writer.uint32(wideStringIndex).uint32(textBytes.byteLength)
+    // Native files declare the UTF-16 terminator for an empty string without
+    // storing those two bytes in the stream.
+    if (textBytes.byteLength > 2) {
+      writer.writeBytes(textBytes)
+    }
   }
   return writer.toUint8Array()
 }
