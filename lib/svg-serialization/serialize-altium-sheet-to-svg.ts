@@ -33,6 +33,14 @@ interface SchematicRenderContext {
   sheetRecord?: AltiumSchSheetRecord
 }
 
+interface SchematicPinRenderContext {
+  color: string
+  metadata: string
+  options: AltiumSheetSvgOptions
+  sheetRecord: AltiumSchSheetRecord | undefined
+  viewport: SvgViewport
+}
+
 export function serializeAltiumSheetToSvg(
   source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
   options: AltiumSheetSvgOptions = {},
@@ -167,7 +175,13 @@ function renderSchematicRecord(
   }
 
   if (kind === "2") {
-    return renderSchematicPin(record, viewport, metadata, color, options)
+    return renderSchematicPin(record, {
+      color,
+      metadata,
+      options,
+      sheetRecord: context.sheetRecord,
+      viewport,
+    })
   }
 
   if (kind === "29") {
@@ -318,11 +332,9 @@ function renderSchematicRectangle(
 
 function renderSchematicPin(
   record: AltiumRecord,
-  viewport: SvgViewport,
-  metadata: string,
-  color: string,
-  options: AltiumSheetSvgOptions,
+  context: SchematicPinRenderContext,
 ): string {
+  const { color, metadata, options, sheetRecord, viewport } = context
   const location = getSchematicLocation(record)
   const length = Math.max(
     Number(record.getCaseInsensitive("PINLENGTH") ?? 10),
@@ -378,13 +390,14 @@ function renderSchematicPin(
     x: body.x - screenDirection.x * 2,
     y: body.y - screenDirection.y * 2,
   }
+  const font = getSchematicFont(record, sheetRecord, 6)
   const renderPinText = (
     text: string,
     position: SvgPoint,
     anchor: string,
   ): string =>
     text
-      ? `<text x="0" y="0" fill="${color}" font-family="Arial, sans-serif" font-size="6" text-anchor="${anchor}" dominant-baseline="text-after-edge" transform="translate(${formatSvgNumber(position.x)} ${formatSvgNumber(position.y)}) rotate(${rotation})">${escapeXml(text)}</text>`
+      ? `<text x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${anchor}" dominant-baseline="text-after-edge" transform="translate(${formatSvgNumber(position.x)} ${formatSvgNumber(position.y)}) rotate(${rotation})">${escapeXml(text)}</text>`
       : ""
 
   return `<g ${metadata}><line x1="${formatSvgNumber(body.x)}" y1="${formatSvgNumber(body.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
