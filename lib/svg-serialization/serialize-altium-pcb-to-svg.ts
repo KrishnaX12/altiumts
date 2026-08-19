@@ -109,12 +109,14 @@ export function serializeAltiumPcbToSvg(
       record.recordKind === "Polygon"
         ? getPcbRecordPolygonIndex(document, record)
         : undefined
-    const fillPolygon =
-      polygonIndex === undefined ||
-      !polygonIndexesWithRegionRecords.has(polygonIndex)
+    const shouldFillPolygon =
+      record.recordKind === "Polygon" &&
+      record.getBoolean("SHELVED") !== true &&
+      (polygonIndex === undefined ||
+        !polygonIndexesWithRegionRecords.has(polygonIndex))
     const rendered = renderPcbRecord({
-      fillPolygon,
       record,
+      shouldFillPolygon,
       svgOptions: {
         showHoles: true,
         showText: true,

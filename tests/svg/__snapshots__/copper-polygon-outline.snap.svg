@@ -4,7 +4,8 @@
   <g stroke-linecap="round" stroke-linejoin="round">
     <polygon data-record="BoardOutline" points="175,5175 5175,5175 5175,175 175,175 175,5175" fill="#123d32" stroke="#6ee7b7" stroke-width="3"/>
     <polygon data-record="Polygon" data-layer="TOP" points="1175,4175 4175,4175 4175,1175 1175,1175 1175,4175" fill="none" stroke="#ef4444" stroke-width="1.5"/>
-    <polygon data-record="Polygon" data-layer="BOTTOM" points="425,4925 925,4925 925,4425 425,4425 425,4925" fill="#3b82f6" fill-opacity="0.16" stroke="#3b82f6" stroke-width="1.5"/>
+    <polygon data-record="Polygon" data-layer="BOTTOM" points="425,4925 925,4925 925,4425 425,4425 425,4925" fill="#3b82f6" fill-opacity="0.32" stroke="#3b82f6" stroke-width="1.5"/>
+    <polygon data-record="Polygon" data-layer="MID1" points="4425,925 4925,925 4925,425 4425,425 4425,925" fill="none" stroke="#f97316" stroke-width="1.5"/>
     <path data-record="Region" data-layer="TOP" d="M 1175 4175 L 4175 4175 L 4175 1175 L 1175 1175 L 1175 4175 Z" fill="#ef4444" fill-opacity="0.32" fill-rule="evenodd" stroke="#ef4444" stroke-width="1.5"/>
   </g>
 </svg>

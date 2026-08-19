@@ -17,14 +17,16 @@ import {
   pointsToSvg,
 } from "./svg-utils"
 
+const COPPER_FILL_OPACITY = 0.32
+
 export function renderPcbRecord({
-  fillPolygon = true,
   record,
+  shouldFillPolygon,
   svgOptions,
   viewport,
 }: {
-  fillPolygon?: boolean
   record: AltiumRecord
+  shouldFillPolygon: boolean
   svgOptions: AltiumPcbSvgOptions
   viewport: SvgViewport
 }): string | undefined {
@@ -76,7 +78,7 @@ export function renderPcbRecord({
     if (regionKind === "POLYGON_CUTOUT") {
       return `<path ${metadata} data-region-kind="POLYGON_CUTOUT" d="${path}" fill="${PCB_BOARD_FILL_COLOR}" fill-rule="evenodd" stroke="${PCB_BOARD_FILL_COLOR}" stroke-width="1.5"/>`
     }
-    return `<path ${metadata} d="${path}" fill="${color}" fill-opacity="0.32" fill-rule="evenodd" stroke="${color}" stroke-width="1.5"/>`
+    return `<path ${metadata} d="${path}" fill="${color}" fill-opacity="${COPPER_FILL_OPACITY}" fill-rule="evenodd" stroke="${color}" stroke-width="1.5"/>`
   }
 
   if (kind === "ComponentBody") {
@@ -95,8 +97,8 @@ export function renderPcbRecord({
   if (kind === "Polygon") {
     const points = getPcbVertexPoints(record)
     if (points.length < 3) return undefined
-    const fill = fillPolygon
-      ? ` fill="${color}" fill-opacity="0.16"`
+    const fill = shouldFillPolygon
+      ? ` fill="${color}" fill-opacity="${COPPER_FILL_OPACITY}"`
       : ' fill="none"'
     return `<polygon ${metadata} points="${pointsToSvg(points, viewport)}"${fill} stroke="${color}" stroke-width="1.5"/>`
   }
