@@ -7,7 +7,13 @@ import {
 } from "./altium-binary-record-encoding"
 import { getAltiumPcbLayerId } from "./altium-pcb-binary-layers"
 
-export type SupportedAltiumPcbPrimitiveKind = "Pad" | "Text" | "Track" | "Via"
+export type SupportedAltiumPcbPrimitiveKind =
+  | "Fill"
+  | "Pad"
+  | "Region"
+  | "Text"
+  | "Track"
+  | "Via"
 
 const COMMON_PRIMITIVE_FIELDS = [
   "COMPONENT",
@@ -22,6 +28,15 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
   SupportedAltiumPcbPrimitiveKind,
   ReadonlySet<string>
 > = {
+  Fill: new Set([
+    ...COMMON_PRIMITIVE_FIELDS,
+    "KEEPOUT",
+    "ROTATION",
+    "X1",
+    "X2",
+    "Y1",
+    "Y2",
+  ]),
   Pad: new Set([
     ...COMMON_PRIMITIVE_FIELDS,
     "HOLESHAPE",
@@ -38,6 +53,13 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
     "XSIZE",
     "Y",
     "YSIZE",
+  ]),
+  Region: new Set([
+    ...COMMON_PRIMITIVE_FIELDS,
+    "HOLECOUNT",
+    "KEEPOUT",
+    "REGIONKIND",
+    "TEARDROP",
   ]),
   Text: new Set([
     ...COMMON_PRIMITIVE_FIELDS,
@@ -95,7 +117,7 @@ export function assertSupportedAltiumPcbPrimitive(
   }
 
   const unsupportedFieldNames = fieldNames.filter(
-    (fieldName) => !SUPPORTED_PRIMITIVE_FIELDS[recordKind].has(fieldName),
+    (fieldName) => !isSupportedPrimitiveFieldName(fieldName, recordKind),
   )
   if (unsupportedFieldNames.length > 0) {
     throw new AltiumSerializationError(
@@ -130,11 +152,13 @@ function validateSupportedPrimitiveFieldText(
     "INVERTED",
     "INVERTEDRECT",
     "ITALIC",
+    "KEEPOUT",
     "LOCKED",
     "MIRROR",
     "PLATED",
     "TENTEDBOTTOM",
     "TENTEDTOP",
+    "TEARDROP",
     "USETTFONTS",
   ]) {
     if (fields.has(booleanFieldName)) {
@@ -165,4 +189,24 @@ function validateSupportedPrimitiveFieldText(
     getAltiumPcbLayerId(fields.get("STARTLAYER"), 1)
     getAltiumPcbLayerId(fields.get("ENDLAYER") ?? fields.get("STOPLAYER"), 32)
   }
+  if (recordKind === "Region") {
+    const regionKind = fields.get("REGIONKIND")?.toUpperCase() ?? "COPPER"
+    if (regionKind !== "COPPER") {
+      throw new AltiumSerializationError(
+        `Unsupported Altium region kind: ${JSON.stringify(regionKind)}`,
+      )
+    }
+  }
+}
+
+function isSupportedPrimitiveFieldName(
+  fieldName: string,
+  recordKind: SupportedAltiumPcbPrimitiveKind,
+): boolean {
+  if (SUPPORTED_PRIMITIVE_FIELDS[recordKind].has(fieldName)) return true
+  if (recordKind !== "Region") return false
+  return (
+    /^(?:KIND|VX|VY|CX|CY|R|SA|EA)\d+$/u.test(fieldName) ||
+    /^HOLE\d+(?:COUNT|V[XY]\d+)$/u.test(fieldName)
+  )
 }

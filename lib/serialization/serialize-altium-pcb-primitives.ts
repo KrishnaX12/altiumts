@@ -18,12 +18,15 @@ const UNLOCKED_PRIMITIVE_FLAG = 0x04
 const STANDARD_PRIMITIVE_FLAG = 0x08
 const TENTED_TOP_PRIMITIVE_FLAG = 0x20
 const TENTED_BOTTOM_PRIMITIVE_FLAG = 0x40
+const KEEPOUT_PRIMITIVE_FLAG = 0x0200
 // Native Vias6 records retain a reserved metadata tail even when every
 // optional via-stack field is unset. Real Altium documents use this minimum.
 const NATIVE_VIA_PAYLOAD_LENGTH = 209
 
 export const PCB_OBJECT_ID = {
+  fill: 6,
   pad: 2,
+  region: 11,
   text: 5,
   track: 4,
   via: 3,
@@ -42,7 +45,7 @@ export function serializeAltiumPadRecord(recordSource: string): Uint8Array[] {
   const xSize = parseAltiumInternalUnits(fields.get("XSIZE"))
   const ySize = parseAltiumInternalUnits(fields.get("YSIZE"))
   const writer = new AltiumBinaryWriter()
-  writePrimitiveCommon({ defaultLayerId: layerId, fields, writer })
+  writeAltiumPcbPrimitiveCommon({ defaultLayerId: layerId, fields, writer })
   writer
     .int32(parseAltiumInternalUnits(fields.get("X")))
     .int32(parseAltiumInternalUnits(fields.get("Y")))
@@ -76,7 +79,7 @@ export function serializeAltiumPadRecord(recordSource: string): Uint8Array[] {
 export function serializeAltiumTrackRecord(recordSource: string): Uint8Array[] {
   const fields = getAltiumRecordFields(recordSource)
   const writer = new AltiumBinaryWriter()
-  writePrimitiveCommon({
+  writeAltiumPcbPrimitiveCommon({
     defaultLayerId: getAltiumPcbLayerId(fields.get("LAYER")),
     fields,
     writer,
@@ -91,10 +94,27 @@ export function serializeAltiumTrackRecord(recordSource: string): Uint8Array[] {
   return [writer.toUint8Array()]
 }
 
+export function serializeAltiumFillRecord(recordSource: string): Uint8Array[] {
+  const fields = getAltiumRecordFields(recordSource)
+  const writer = new AltiumBinaryWriter()
+  writeAltiumPcbPrimitiveCommon({
+    defaultLayerId: getAltiumPcbLayerId(fields.get("LAYER")),
+    fields,
+    writer,
+  })
+  writer
+    .int32(parseAltiumInternalUnits(fields.get("X1")))
+    .int32(parseAltiumInternalUnits(fields.get("Y1")))
+    .int32(parseAltiumInternalUnits(fields.get("X2")))
+    .int32(parseAltiumInternalUnits(fields.get("Y2")))
+    .float64(parseAltiumFiniteNumber(fields.get("ROTATION")))
+  return [writer.toUint8Array()]
+}
+
 export function serializeAltiumViaRecord(recordSource: string): Uint8Array[] {
   const fields = getAltiumRecordFields(recordSource)
   const writer = new AltiumBinaryWriter()
-  writePrimitiveCommon({
+  writeAltiumPcbPrimitiveCommon({
     defaultLayerId: getAltiumPcbLayerId("MULTILAYER"),
     fields,
     writer,
@@ -122,7 +142,7 @@ export function serializeAltiumTextRecord(
   const fields = getAltiumRecordFields(recordSource)
   const text = fields.get("TEXT") ?? ""
   const writer = new AltiumBinaryWriter(137, 137)
-  writePrimitiveCommon({
+  writeAltiumPcbPrimitiveCommon({
     defaultLayerId: getAltiumPcbLayerId(fields.get("LAYER")),
     fields,
     writer,
@@ -184,7 +204,7 @@ export function writeAltiumPrimitiveRecords(
   return writer.toUint8Array()
 }
 
-function writePrimitiveCommon({
+export function writeAltiumPcbPrimitiveCommon({
   defaultLayerId,
   fields,
   writer,
@@ -209,6 +229,9 @@ function getPrimitiveFlags(fields: AltiumRecordFields): number {
   }
   if (parseAltiumBoolean(fields.get("TENTEDBOTTOM"))) {
     flags |= TENTED_BOTTOM_PRIMITIVE_FLAG
+  }
+  if (parseAltiumBoolean(fields.get("KEEPOUT"))) {
+    flags |= KEEPOUT_PRIMITIVE_FLAG
   }
   return flags
 }
