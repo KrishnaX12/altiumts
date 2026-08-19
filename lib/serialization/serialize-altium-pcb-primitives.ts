@@ -1,4 +1,5 @@
 import { AltiumBinaryWriter } from "../binary/altium-binary-io"
+import { decodeAltiumWideString } from "../decode-altium-wide-string"
 import {
   type AltiumRecordFields,
   getAltiumRecordFields,
@@ -140,7 +141,7 @@ export function serializeAltiumTextRecord(
   wideStringIndex: number,
 ): Uint8Array[] {
   const fields = getAltiumRecordFields(recordSource)
-  const text = fields.get("TEXT") ?? ""
+  const text = getAltiumTextContent(fields)
   const writer = new AltiumBinaryWriter(137, 137)
   writeAltiumPcbPrimitiveCommon({
     defaultLayerId: getAltiumPcbLayerId(fields.get("LAYER")),
@@ -178,7 +179,7 @@ export function writeAltiumWideStrings(recordSources: string[]): Uint8Array {
   const writer = new AltiumBinaryWriter()
   for (const [wideStringIndex, recordSource] of recordSources.entries()) {
     const textBytes = toAltiumUtf16LeBytes(
-      getAltiumRecordFields(recordSource).get("TEXT") ?? "",
+      getAltiumTextContent(getAltiumRecordFields(recordSource)),
     )
     writer.uint32(wideStringIndex).uint32(textBytes.byteLength)
     // Native files declare the UTF-16 terminator for an empty string without
@@ -188,6 +189,13 @@ export function writeAltiumWideStrings(recordSources: string[]): Uint8Array {
     }
   }
   return writer.toUint8Array()
+}
+
+function getAltiumTextContent(fields: AltiumRecordFields): string {
+  const wideString = fields.get("WIDESTRING")
+  return wideString === undefined
+    ? (fields.get("TEXT") ?? "")
+    : decodeAltiumWideString(wideString)
 }
 
 export function writeAltiumPrimitiveRecords(

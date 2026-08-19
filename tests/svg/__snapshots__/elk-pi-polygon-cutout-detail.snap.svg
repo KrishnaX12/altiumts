@@ -16,6 +16,6 @@
     <g data-record="Pad" data-layer="TOP" data-pad-name="2" data-pad-shape="RECTANGLE" data-pad-stack-layer="0" data-pad-stack-mode="SIMPLE" data-plated="true"><rect x="-13.3256" y="267.8494" width="39.3701" height="43.3071" fill="#ef4444" stroke="#111827" stroke-width="1"/></g>
     <g data-record="Pad" data-layer="TOP" data-pad-name="2" data-pad-shape="RECTANGLE" data-pad-stack-layer="0" data-pad-stack-mode="SIMPLE" data-plated="true" transform="rotate(-180 12.1645 404.189)"><rect x="-24.2528" y="337.2599" width="72.8346" height="133.8583" fill="#ef4444" stroke="#111827" stroke-width="1"/></g>
     <g data-record="Via" data-layer="MULTILAYER"><circle cx="31.8505" cy="24.9636" r="13.7796" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/><circle cx="31.8505" cy="24.9636" r="5.9055" fill="#111827"/></g>
-    <text data-record="Text" data-layer="TOP" x="0" y="0" fill="#ef4444" font-family="Arial, sans-serif" font-size="47.2441" font-weight="normal" font-style="normal" dominant-baseline="central" transform="translate(155.8664 309.1171) rotate(-90) scale(1 1)">TL</text>
+    <text data-record="Text" data-layer="TOP" x="0" y="0" fill="#ef4444" font-family="Arial, sans-serif" font-size="47.2441" font-weight="normal" font-style="normal" text-anchor="middle" dominant-baseline="central" transform="translate(155.8664 309.1171) rotate(-90) scale(1 1)">TL</text>
   </g>
 </svg>

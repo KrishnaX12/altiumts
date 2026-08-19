@@ -4149,6 +4149,6 @@
     <g data-record="Via" data-layer="MULTILAYER"><circle cx="2748.4887" cy="2163.6811" r="13.7796" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/><circle cx="2748.4887" cy="2163.6811" r="5.9055" fill="#111827"/></g>
     <g data-record="Via" data-layer="MULTILAYER"><circle cx="2748.4887" cy="2206.9891" r="13.7796" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/><circle cx="2748.4887" cy="2206.9891" r="5.9055" fill="#111827"/></g>
     <g data-record="Via" data-layer="MULTILAYER"><circle cx="2748.4887" cy="2250.2951" r="13.7796" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/><circle cx="2748.4887" cy="2250.2951" r="5.9055" fill="#111827"/></g>
-    <text data-record="Text" data-layer="TOP" x="0" y="0" fill="#ef4444" font-family="Arial, sans-serif" font-size="47.2441" font-weight="normal" font-style="normal" dominant-baseline="central" transform="translate(5187.6952 1057.4012) rotate(-90) scale(1 1)">TL</text>
+    <text data-record="Text" data-layer="TOP" x="0" y="0" fill="#ef4444" font-family="Arial, sans-serif" font-size="47.2441" font-weight="normal" font-style="normal" text-anchor="middle" dominant-baseline="central" transform="translate(5187.6952 1057.4012) rotate(-90) scale(1 1)">TL</text>
   </g>
 </svg>

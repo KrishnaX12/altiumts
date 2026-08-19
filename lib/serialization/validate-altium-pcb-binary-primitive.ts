@@ -81,6 +81,7 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
     "TEXTBOXWIDTH",
     "TEXTOFFSET",
     "USETTFONTS",
+    "WIDESTRING",
     "WIDTH",
     "X",
     "Y",
