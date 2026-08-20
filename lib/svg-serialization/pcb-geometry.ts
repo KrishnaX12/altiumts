@@ -5,8 +5,8 @@ import {
   getPcbVertexPoints,
   parsePcbMeasurement,
 } from "./altium-values"
-import { getPcbPadGeometry } from "./pcb-pad-geometry"
 import { getPcbDimensionGeometry } from "./pcb-dimension-geometry"
+import { getPcbPadGeometry } from "./pcb-pad-geometry"
 import type { SvgBounds, SvgPoint } from "./svg-types"
 import { boundsFromPoints, expandBounds, mergeBounds } from "./svg-utils"
 

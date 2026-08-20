@@ -9,8 +9,8 @@ import {
 } from "./altium-values"
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
-import { renderPcbDimension } from "./render-pcb-dimension"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
+import { renderPcbDimension } from "./render-pcb-dimension"
 import type { AltiumPcbSvgOptions, SvgPoint, SvgViewport } from "./svg-types"
 import {
   escapeXml,

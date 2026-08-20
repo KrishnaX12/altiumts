@@ -1,5 +1,5 @@
-import type { AltiumRecord } from "../records/altium-record"
 import { AltiumDimensionRecord } from "../records/altium-dimension-record"
+import type { AltiumRecord } from "../records/altium-record"
 import type { SvgPoint } from "./svg-types"
 
 export interface PcbDimensionGeometry {

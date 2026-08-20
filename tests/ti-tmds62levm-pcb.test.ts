@@ -20,7 +20,7 @@ test("parses and strictly validates the TI TMDS62LEVM Rev. B PCB", async () => {
   expect(result.document).toBeInstanceOf(AltiumBinaryPcbDoc)
   const document = result.document as AltiumBinaryPcbDoc
 
-  expect(document.records).toHaveLength(424_275)
+  expect(document.records).toHaveLength(424_279)
   expect(document.streamSummaries).toHaveLength(47)
   expect(document.components).toHaveLength(1_585)
   expect(document.nets).toHaveLength(1_000)
@@ -36,6 +36,7 @@ test("parses and strictly validates the TI TMDS62LEVM Rev. B PCB", async () => {
   expect(document.regionFills).toHaveLength(3_903)
   expect(document.boardRegions).toHaveLength(1)
   expect(document.texts).toHaveLength(18_556)
+  expect(document.getRecordsByKind("Dimension")).toHaveLength(4)
 
   expect(document.boardGeometry.outline).toMatchObject({
     bounds: {
@@ -55,7 +56,7 @@ test("parses and strictly validates the TI TMDS62LEVM Rev. B PCB", async () => {
   expect(document.getStreamSummary("Dimensions6")).toMatchObject({
     declaredRecordCount: 4,
     decodedPrimitiveRecordCount: 0,
-    decodedPropertyRecordCount: 0,
+    decodedPropertyRecordCount: 4,
     hasData: true,
   })
   expect(document.getStreamSummary("DifferentialPairs6")).toMatchObject({
