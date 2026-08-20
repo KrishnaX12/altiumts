@@ -1,3 +1,4 @@
+import { decodeAltiumWideString } from "../decode-altium-wide-string"
 import type { AltiumPoint, AltiumSize } from "../geometry/altium-geometry"
 import { normalizeAltiumAngle } from "../geometry/altium-geometry"
 import { AltiumRecord, type AltiumRecordInit } from "./altium-record"
@@ -19,7 +20,7 @@ export class AltiumTextRecord extends AltiumRecord {
     const wideString = this.getDecoded("WIDESTRING")
     return wideString === undefined
       ? getFirstDecoded(this, "TEXT")
-      : decodeWideString(wideString)
+      : decodeAltiumWideString(wideString)
   }
 
   get position(): AltiumPoint | undefined {
@@ -76,16 +77,5 @@ export class AltiumTextRecord extends AltiumRecord {
 
   get isComment(): boolean {
     return this.getBoolean("COMMENT") === true
-  }
-}
-
-function decodeWideString(wideString: string): string {
-  if (!/^\d+(?:,\d+)*$/u.test(wideString)) return wideString
-  try {
-    return String.fromCodePoint(
-      ...wideString.split(",").map((codePoint) => Number(codePoint)),
-    )
-  } catch {
-    return wideString
   }
 }

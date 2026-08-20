@@ -28,5 +28,11 @@ test("snapshots all nine Altium PCB text justification positions", async () => {
     title: "Altium PCB text justification",
   })
 
+  expect(svg.match(/text-anchor="start"/gu)).toHaveLength(3)
+  expect(svg.match(/text-anchor="middle"/gu)).toHaveLength(3)
+  expect(svg.match(/text-anchor="end"/gu)).toHaveLength(3)
+  expect(svg.match(/dominant-baseline="text-before-edge"/gu)).toHaveLength(3)
+  expect(svg.match(/dominant-baseline="central"/gu)).toHaveLength(3)
+  expect(svg.match(/dominant-baseline="text-after-edge"/gu)).toHaveLength(3)
   await expect(svg).toMatchSvgSnapshot(import.meta.path)
 })

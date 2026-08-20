@@ -70,17 +70,6 @@ export function getSchematicIndexedPoints(record: AltiumRecord): SvgPoint[] {
   return points
 }
 
-export function decodeAltiumWideString(raw: string | undefined): string {
-  if (!raw) return ""
-  if (!/^\d+(?:,\d+)*$/u.test(raw)) return raw
-
-  try {
-    return String.fromCodePoint(...raw.split(",").map((value) => Number(value)))
-  } catch {
-    return raw
-  }
-}
-
 export function altiumColorToCss(
   raw: string | undefined,
   fallback: string,

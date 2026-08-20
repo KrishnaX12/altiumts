@@ -1,7 +1,7 @@
+import { decodeAltiumWideString } from "../decode-altium-wide-string"
 import { getPcbRegionSemanticKind } from "../pcb-contours"
 import type { AltiumRecord } from "../records/altium-record"
 import {
-  decodeAltiumWideString,
   getPcbMeasurement,
   getPcbRegionContours,
   getPcbVertexPoints,
@@ -9,6 +9,7 @@ import {
 } from "./altium-values"
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
+import { getPcbTextPositioning } from "./pcb-text-positioning"
 import type { AltiumPcbSvgOptions, SvgPoint, SvgViewport } from "./svg-types"
 import {
   escapeXml,
@@ -133,6 +134,7 @@ export function renderPcbRecord({
     const fontName = record.getDecoded("FONTNAME") || "Arial"
     const fontWeight = record.getBoolean("BOLD") ? "bold" : "normal"
     const fontStyle = record.getBoolean("ITALIC") ? "italic" : "normal"
+    const positioning = getPcbTextPositioning(record.getNumber("JUSTIFICATION"))
     const lines = normalizedText.split("\n")
     const textContent =
       lines.length === 1
@@ -143,7 +145,7 @@ export function renderPcbRecord({
                 `<tspan x="0" dy="${index === 0 ? "0" : formatSvgNumber(height * 1.2)}">${escapeXml(line)}</tspan>`,
             )
             .join("")
-    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="${escapeXml(fontName)}, sans-serif" font-size="${formatSvgNumber(height)}" font-weight="${fontWeight}" font-style="${fontStyle}" dominant-baseline="central" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${textContent}</text>`
+    return `<text ${metadata} x="0" y="0" fill="${color}" font-family="${escapeXml(fontName)}, sans-serif" font-size="${formatSvgNumber(height)}" font-weight="${fontWeight}" font-style="${fontStyle}" text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(-rotation)}) scale(${mirror} 1)">${textContent}</text>`
   }
 
   if (kind === "Component" && svgOptions.showComponentOrigins) {
