@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1239" viewBox="0 0 1088.2 1348.2" role="img" aria-label="Native linear dimension" class="altium-pcb" data-renderer="altiumts">
+  <title>Native linear dimension</title>
+  <rect width="100%" height="100%" fill="#071a16"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polygon data-record="BoardOutline" points="44.1,1044.1 1044.1,1044.1 1044.1,44.1 44.1,44.1 44.1,1044.1" fill="#123d32" stroke="#6ee7b7" stroke-width="3"/>
+    <g data-record="Dimension" data-layer="MECHANICAL15"><path d="M 144.1 944.1 L 144.1 1194.1 M 944.1 944.1 L 944.1 1194.1 M 144.1 1194.1 L 372.1 1194.1 M 716.1 1194.1 L 944.1 1194.1" fill="none" stroke="#ec4899" stroke-width="4"/><polygon points="144.1,1194.1 184.1,1208.1 184.1,1180.1" fill="#ec4899"/><polygon points="944.1,1194.1 904.1,1208.1 904.1,1180.1" fill="#ec4899"/><text x="0" y="0" fill="#ec4899" font-family="Arial, sans-serif" font-size="60" text-anchor="middle" dominant-baseline="central" transform="translate(544.1 1244.1) rotate(0)">20.320 mm</text></g>
+  </g>
+</svg>

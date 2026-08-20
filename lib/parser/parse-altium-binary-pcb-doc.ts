@@ -27,6 +27,7 @@ const PROPERTY_STREAM_CONFIG: Record<
   Classes6: { recordKind: "Class" },
   Components6: { recordKind: "Component" },
   Connections6: { recordKind: "Connection" },
+  Dimensions6: { headerSize: 6, recordKind: "Dimension" },
   FileVersionInfo: { recordKind: "FileVersionInfo" },
   FromTos6: { recordKind: "FromTo" },
   Models: { recordKind: "Model" },
@@ -103,15 +104,15 @@ export function parseAltiumBinaryPcbDoc(
     const propertyConfig = PROPERTY_STREAM_CONFIG[family]
     const decodedRecords =
       data && propertyConfig
-        ? parsePropertyRecordStream(
-            data.content,
-            propertyConfig.recordKind,
-            declaredRecordCount,
-            options.maxPropertyRecordLength,
-            family === "Models",
+        ? parsePropertyRecordStream({
+            allowMissingLeadingDelimiter: family === "Models",
+            bytes: data.content,
+            expectedRecordCount: declaredRecordCount,
             family,
-            propertyConfig.headerSize,
-          )
+            headerSize: propertyConfig.headerSize,
+            maximumRecordLength: options.maxPropertyRecordLength,
+            recordKind: propertyConfig.recordKind,
+          })
         : []
     const decodedPrimitives =
       data && PRIMITIVE_STREAM_FAMILIES.has(family)
@@ -152,15 +153,23 @@ export function parseAltiumBinaryPcbDoc(
   })
 }
 
-function parsePropertyRecordStream(
-  bytes: Uint8Array,
-  recordKind: string,
-  expectedRecordCount: number | undefined,
-  maximumRecordLength = 16 * 1024 * 1024,
+function parsePropertyRecordStream({
   allowMissingLeadingDelimiter = false,
+  bytes,
+  expectedRecordCount,
+  recordKind,
   family = recordKind,
-  headerSize: 4 | 6 = 4,
-): AltiumRecord[] {
+  headerSize = 4,
+  maximumRecordLength = 16 * 1024 * 1024,
+}: {
+  allowMissingLeadingDelimiter?: boolean
+  bytes: Uint8Array
+  expectedRecordCount: number | undefined
+  family?: string
+  headerSize?: 4 | 6
+  maximumRecordLength?: number
+  recordKind: string
+}): AltiumRecord[] {
   if (bytes.byteLength === 0) return []
   const records: AltiumRecord[] = []
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)

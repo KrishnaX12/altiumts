@@ -6,6 +6,7 @@ import {
   parsePcbMeasurement,
 } from "./altium-values"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
+import { getPcbDimensionGeometry } from "./pcb-dimension-geometry"
 import type { SvgBounds, SvgPoint } from "./svg-types"
 import { boundsFromPoints, expandBounds, mergeBounds } from "./svg-utils"
 
@@ -15,7 +16,15 @@ export function getPcbBoardOutline(document: AltiumPcbDocument): SvgPoint[] {
 
 export function getPcbDocumentBounds(document: AltiumPcbDocument): SvgBounds {
   const outlineBounds = boundsFromPoints(getPcbBoardOutline(document))
-  if (outlineBounds) return outlineBounds
+  if (outlineBounds) {
+    return document.records.reduce(
+      (bounds, record) =>
+        record.recordKind === "Dimension"
+          ? (mergeBounds(bounds, getPcbRecordBounds(record)) ?? bounds)
+          : bounds,
+      outlineBounds,
+    )
+  }
 
   let bounds: SvgBounds | undefined
   for (const record of document.records) {
@@ -30,6 +39,44 @@ export function getPcbRecordBounds(
   requestedLayers?: string[],
 ): SvgBounds | undefined {
   const kind = record.recordKind
+
+  if (kind === "Dimension") {
+    const geometry = getPcbDimensionGeometry(record)
+    if (!geometry) return undefined
+    const dimensionDeltaX = geometry.dimensionEnd.x - geometry.dimensionStart.x
+    const dimensionDeltaY = geometry.dimensionEnd.y - geometry.dimensionStart.y
+    const dimensionLength = Math.hypot(dimensionDeltaX, dimensionDeltaY)
+    const textDirection = {
+      x: dimensionDeltaX / dimensionLength,
+      y: dimensionDeltaY / dimensionLength,
+    }
+    const bounds = boundsFromPoints([
+      geometry.referenceStart,
+      geometry.referenceEnd,
+      geometry.dimensionStart,
+      geometry.dimensionEnd,
+      geometry.textPosition,
+      {
+        x:
+          geometry.textPosition.x -
+          textDirection.x * geometry.estimatedTextHalfWidth,
+        y:
+          geometry.textPosition.y -
+          textDirection.y * geometry.estimatedTextHalfWidth,
+      },
+      {
+        x:
+          geometry.textPosition.x +
+          textDirection.x * geometry.estimatedTextHalfWidth,
+        y:
+          geometry.textPosition.y +
+          textDirection.y * geometry.estimatedTextHalfWidth,
+      },
+    ])
+    return bounds
+      ? expandBounds(bounds, Math.max(geometry.arrowSize, geometry.textHeight))
+      : undefined
+  }
 
   if (kind === "Track") {
     const bounds = boundsFromPoints([

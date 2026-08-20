@@ -1,6 +1,11 @@
 import type { AltiumPoint } from "../geometry/altium-geometry"
 import { AltiumRecord, type AltiumRecordInit } from "./altium-record"
-import { getFirstDecoded, getPcbRecordPoint } from "./pcb-record-helpers"
+import {
+  getFirstDecoded,
+  getFirstNumber,
+  getPcbRecordMeasurementMils,
+  getPcbRecordPoint,
+} from "./pcb-record-helpers"
 
 export class AltiumDimensionRecord extends AltiumRecord {
   override readonly type = "dimension-record"
@@ -14,28 +19,97 @@ export class AltiumDimensionRecord extends AltiumRecord {
   }
 
   get start(): AltiumPoint | undefined {
-    return getPcbRecordPoint(this, ["X1"], ["Y1"])
+    return this.referencePoints[0] ?? getPcbRecordPoint(this, ["X1"], ["Y1"])
   }
 
   get end(): AltiumPoint | undefined {
-    return getPcbRecordPoint(this, ["X2"], ["Y2"])
+    return this.referencePoints[1] ?? getPcbRecordPoint(this, ["X2"], ["Y2"])
+  }
+
+  get dimensionLineAnchor(): AltiumPoint | undefined {
+    return getPcbRecordPoint(this, ["X1"], ["Y1"])
+  }
+
+  get referencePoints(): AltiumPoint[] {
+    return getIndexedDimensionPoints({
+      pointInfix: "POINT",
+      prefix: "REFERENCE",
+      record: this,
+    })
+  }
+
+  get textPoints(): AltiumPoint[] {
+    const unindexedTextPoint = getPcbRecordPoint(this, ["TEXTX"], ["TEXTY"])
+    if (unindexedTextPoint) return [unindexedTextPoint]
+    return getIndexedDimensionPoints({
+      pointInfix: "",
+      prefix: "TEXT",
+      record: this,
+    })
   }
 
   get unit(): string | undefined {
-    return getFirstDecoded(this, "DIMENSIONUNIT", "UNIT")
+    return getFirstDecoded(this, "TEXTDIMENSIONUNIT", "DIMENSIONUNIT", "UNIT")
   }
 
   get precision(): number | undefined {
-    return this.getNumber("PRECISION")
+    return (
+      getFirstNumber(this, "TEXTPRECISION", "PRECISION") ??
+      getPcbRecordMeasurementMils(this, "TEXTPRECISION", "PRECISION")
+    )
   }
 
   get prefix(): string | undefined {
-    return getFirstDecoded(this, "PREFIX")
+    return getFirstDecoded(this, "TEXTPREFIX", "PREFIX")
   }
 
   get suffix(): string | undefined {
-    return getFirstDecoded(this, "SUFFIX")
+    return getFirstDecoded(this, "TEXTSUFFIX", "SUFFIX")
   }
+
+  get lineWidthMils(): number | undefined {
+    return getPcbRecordMeasurementMils(
+      this,
+      "LINEWIDTH",
+      "ARROWLINEWIDTH",
+      "WIDTH",
+    )
+  }
+
+  get textHeightMils(): number | undefined {
+    return getPcbRecordMeasurementMils(this, "TEXTHEIGHT", "HEIGHT")
+  }
+}
+
+function getIndexedDimensionPoints({
+  pointInfix,
+  prefix,
+  record,
+}: {
+  pointInfix: "POINT" | ""
+  prefix: "REFERENCE" | "TEXT"
+  record: AltiumRecord
+}): AltiumPoint[] {
+  const points: AltiumPoint[] = []
+  const declaredCount =
+    prefix === "REFERENCE" ? record.getNumber("REFERENCES_COUNT") : undefined
+  const maximumPointCount = Math.min(Math.max(declaredCount ?? 100, 0), 10_000)
+  const firstIndex = prefix === "REFERENCE" ? 0 : 1
+
+  for (
+    let index = firstIndex;
+    index < firstIndex + maximumPointCount;
+    index++
+  ) {
+    const point = getPcbRecordPoint(
+      record,
+      [`${prefix}${index}${pointInfix}X`],
+      [`${prefix}${index}${pointInfix}Y`],
+    )
+    if (!point) break
+    points.push(point)
+  }
+  return points
 }
 
 export class AltiumCoordinateRecord extends AltiumRecord {
