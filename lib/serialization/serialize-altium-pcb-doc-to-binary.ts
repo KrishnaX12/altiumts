@@ -13,6 +13,7 @@ import {
   getAltiumRecordKind,
   getAsciiAltiumSource,
   toAltiumPascalString,
+  writeBinaryTypeLengthPrefixedAltiumRecords,
   writeLengthPrefixedAltiumRecords,
 } from "./altium-binary-record-encoding"
 import {
@@ -34,6 +35,7 @@ import {
 type SupportedAltiumPcbRecordKind =
   | "Board"
   | "Component"
+  | "Dimension"
   | "Net"
   | "Polygon"
   | SupportedAltiumPcbPrimitiveKind
@@ -92,6 +94,14 @@ export function serializeAltiumPcbDocToBinary(
     content: writeLengthPrefixedAltiumRecords(recordSources.Polygon),
     name: "Polygons6",
     recordCount: recordSources.Polygon.length,
+  })
+  addAltiumBinarySection({
+    compoundFile,
+    content: writeBinaryTypeLengthPrefixedAltiumRecords(
+      recordSources.Dimension,
+    ),
+    name: "Dimensions6",
+    recordCount: recordSources.Dimension.length,
   })
   addAltiumBinarySection({
     compoundFile,
@@ -172,6 +182,7 @@ function collectSupportedPcbRecordSources(
   const recordSources: AltiumPcbRecordSources = {
     Board: [],
     Component: [],
+    Dimension: [],
     Fill: [],
     Net: [],
     Pad: [],
@@ -202,6 +213,7 @@ function isSupportedAltiumPcbRecordKind(
   return [
     "Board",
     "Component",
+    "Dimension",
     "Fill",
     "Net",
     "Pad",

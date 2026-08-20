@@ -40,6 +40,7 @@ const RECORD_PAINT_ORDER: Record<string, number> = {
   Pad: 50,
   Via: 60,
   Text: 70,
+  Dimension: 75,
   Component: 80,
 }
 

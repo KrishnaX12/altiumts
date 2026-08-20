@@ -10,6 +10,7 @@ import {
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
+import { renderPcbDimension } from "./render-pcb-dimension"
 import type { AltiumPcbSvgOptions, SvgPoint, SvgViewport } from "./svg-types"
 import {
   escapeXml,
@@ -56,6 +57,10 @@ export function renderPcbRecord({
     const points = approximateArc(center, radius, startAngle, endAngle)
     const width = Math.max(getPcbMeasurement(record, "WIDTH", 4), 0.5)
     return `<polyline ${metadata} points="${pointsToSvg(points, viewport)}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(width)}"/>`
+  }
+
+  if (kind === "Dimension") {
+    return renderPcbDimension({ color, metadata, record, viewport })
   }
 
   if (kind === "Pad") {

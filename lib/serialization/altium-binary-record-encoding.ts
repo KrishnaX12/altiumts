@@ -71,6 +71,29 @@ export function writeLengthPrefixedAltiumRecords(
   return writer.toUint8Array()
 }
 
+export function writeBinaryTypeLengthPrefixedAltiumRecords(
+  recordSources: string[],
+): Uint8Array {
+  const writer = new AltiumBinaryWriter()
+  for (const recordSource of recordSources) {
+    const fields = getAltiumRecordFields(recordSource)
+    const binaryRecordType = parseAltiumBinaryRecordType(
+      fields.get("BINARYRECORDTYPE"),
+    )
+    const payloadSource = recordSource
+      .split("|")
+      .filter((segment) => segment && !/^BINARYRECORDTYPE=/iu.test(segment))
+      .map((segment) => `|${segment}`)
+      .join("")
+    const payload = toAltiumBinaryRecordBytes(payloadSource)
+    writer
+      .uint16(binaryRecordType)
+      .uint32(payload.byteLength)
+      .writeBytes(payload)
+  }
+  return writer.toUint8Array()
+}
+
 export function parseAltiumInternalUnits(
   measurement: string | undefined,
 ): number {
@@ -97,6 +120,19 @@ export function parseAltiumIndex(indexText: string | undefined): number {
     )
   }
   return parsedIndex
+}
+
+function parseAltiumBinaryRecordType(
+  recordTypeText: string | undefined,
+): number {
+  if (recordTypeText === undefined) return 0
+  const recordType = Number(recordTypeText)
+  if (!Number.isInteger(recordType) || recordType < 0 || recordType > 0xffff) {
+    throw new AltiumSerializationError(
+      `Invalid Altium binary record type: ${JSON.stringify(recordTypeText)}`,
+    )
+  }
+  return recordType
 }
 
 export function parseAltiumFiniteNumber(
