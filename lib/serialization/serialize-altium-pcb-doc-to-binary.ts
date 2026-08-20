@@ -16,6 +16,12 @@ import {
   writeBinaryTypeLengthPrefixedAltiumRecords,
   writeLengthPrefixedAltiumRecords,
 } from "./altium-binary-record-encoding"
+import { serializeAltiumComponentBodyRecord } from "./serialize-altium-pcb-component-body"
+import {
+  type AltiumEmbeddedModelInput,
+  addAltiumEmbeddedModelStreams,
+  writeAltiumModelRecords,
+} from "./serialize-altium-pcb-models"
 import {
   PCB_OBJECT_ID,
   serializeAltiumFillRecord,
@@ -26,12 +32,6 @@ import {
   writeAltiumPrimitiveRecords,
   writeAltiumWideStrings,
 } from "./serialize-altium-pcb-primitives"
-import { serializeAltiumComponentBodyRecord } from "./serialize-altium-pcb-component-body"
-import {
-  type AltiumEmbeddedModelInput,
-  addAltiumEmbeddedModelStreams,
-  writeAltiumModelRecords,
-} from "./serialize-altium-pcb-models"
 import { serializeAltiumRegionRecord } from "./serialize-altium-pcb-region"
 import {
   assertSupportedAltiumPcbPrimitive,

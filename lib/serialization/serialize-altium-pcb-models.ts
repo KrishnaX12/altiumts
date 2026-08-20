@@ -2,13 +2,13 @@ import { zlibSync } from "fflate"
 import { AltiumBinaryWriter } from "../binary/altium-binary-io"
 import { AltiumSerializationError } from "../errors/altium-error"
 import {
-  getAltiumRecordFields,
-  toAltiumBinaryRecordBytes,
-} from "./altium-binary-record-encoding"
-import {
   type AltiumCompoundFile,
   addAltiumCompoundStream,
 } from "./altium-binary-container"
+import {
+  getAltiumRecordFields,
+  toAltiumBinaryRecordBytes,
+} from "./altium-binary-record-encoding"
 
 export type AltiumEmbeddedModelInput = {
   bytes: Uint8Array
