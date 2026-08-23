@@ -158,6 +158,14 @@ function renderSchematicRecord(
     return renderSchematicRectangle(record, viewport, metadata, color)
   }
 
+  if (kind === "15") {
+    return renderSchematicSheetSymbol(record, viewport, metadata, color)
+  }
+
+  if (kind === "16") {
+    return renderSchematicSheetEntry(record, viewport, metadata, color, context)
+  }
+
   if (kind === "8") {
     const center = getSchematicLocation(record)
     const radiusX = getSchematicCoordinate(record, "RADIUS", 1)
@@ -242,7 +250,14 @@ function renderSchematicRecord(
     return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text></g>`
   }
 
-  if (kind === "4" || kind === "25" || kind === "34" || kind === "41") {
+  if (
+    kind === "4" ||
+    kind === "25" ||
+    kind === "32" ||
+    kind === "33" ||
+    kind === "34" ||
+    kind === "41"
+  ) {
     if (record.getBoolean("ISHIDDEN") && !options.showHidden) return undefined
     if (options.showText === false) return undefined
     const location = getSchematicLocation(record)
@@ -309,6 +324,140 @@ function renderSchematicRecord(
   }
 
   return undefined
+}
+
+function renderSchematicSheetSymbol(
+  record: AltiumRecord,
+  viewport: SvgViewport,
+  metadata: string,
+  color: string,
+): string {
+  const location = getSchematicLocation(record)
+  const width = Math.max(getSchematicCoordinate(record, "XSIZE", 1), 1)
+  const height = Math.max(getSchematicCoordinate(record, "YSIZE", 1), 1)
+  const left = viewport.toX(location.x)
+  const top = viewport.toY(location.y)
+  const fill = record.getBoolean("ISSOLID")
+    ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff")
+    : "none"
+
+  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${fill}" stroke="${color}" stroke-width="1"/>`
+}
+
+function renderSchematicSheetEntry(
+  record: AltiumRecord,
+  viewport: SvgViewport,
+  metadata: string,
+  color: string,
+  context: SchematicRenderContext,
+): string | undefined {
+  const sheetSymbol = getSchematicRecordParent(record, context)
+  if (sheetSymbol?.recordKind !== "15") return undefined
+
+  const sheetLocation = getSchematicLocation(sheetSymbol)
+  const sheetWidth = Math.max(
+    getSchematicCoordinate(sheetSymbol, "XSIZE", 1),
+    1,
+  )
+  const sheetHeight = Math.max(
+    getSchematicCoordinate(sheetSymbol, "YSIZE", 1),
+    1,
+  )
+  const side = Math.round(record.getNumber("SIDE") ?? 0)
+  const distance = Math.max(record.getNumber("DISTANCEFROMTOP") ?? 0, 0) * 10
+  const entryPoint = getSchematicSheetEntryPoint({
+    distance,
+    sheetHeight,
+    sheetLocation,
+    sheetWidth,
+    side,
+  })
+  const x = viewport.toX(entryPoint.x)
+  const y = viewport.toY(entryPoint.y)
+  const horizontal = side === 0 || side === 1
+  const points = getSchematicSheetEntryPolygon({ side, x, y })
+  const name = record.getDecoded("NAME") ?? ""
+  const font = getSchematicFont(record, context.sheetRecord, 8)
+  const textColor = altiumColorToCss(
+    record.getCaseInsensitive("TEXTCOLOR"),
+    color,
+  )
+  const textOffset = 9
+  const textX = side === 0 ? x + textOffset : side === 1 ? x - textOffset : x
+  const textY = side === 2 ? y + textOffset : side === 3 ? y - textOffset : y
+  const textAnchor = side === 0 ? "start" : side === 1 ? "end" : "middle"
+  const baseline = horizontal
+    ? "central"
+    : side === 2
+      ? "hanging"
+      : "text-after-edge"
+
+  return `<g ${metadata}><polygon points="${points}" fill="${altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff")}" stroke="${color}" stroke-width="1"/>${name ? `<text x="${formatSvgNumber(textX)}" y="${formatSvgNumber(textY)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text>` : ""}</g>`
+}
+
+function getSchematicRecordParent(
+  record: AltiumRecord,
+  context: SchematicRenderContext,
+): AltiumRecord | undefined {
+  if (context.document) return context.document.getParent(record)
+  const ownerIndex = record.getNumber("OWNERINDEX")
+  return ownerIndex === undefined || ownerIndex < 0
+    ? undefined
+    : context.records[ownerIndex]
+}
+
+function getSchematicSheetEntryPoint({
+  distance,
+  sheetHeight,
+  sheetLocation,
+  sheetWidth,
+  side,
+}: {
+  distance: number
+  sheetHeight: number
+  sheetLocation: SvgPoint
+  sheetWidth: number
+  side: number
+}): SvgPoint {
+  if (side === 1) {
+    return {
+      x: sheetLocation.x + sheetWidth,
+      y: sheetLocation.y - distance,
+    }
+  }
+  if (side === 2) {
+    return { x: sheetLocation.x + distance, y: sheetLocation.y }
+  }
+  if (side === 3) {
+    return {
+      x: sheetLocation.x + distance,
+      y: sheetLocation.y - sheetHeight,
+    }
+  }
+  return { x: sheetLocation.x, y: sheetLocation.y - distance }
+}
+
+function getSchematicSheetEntryPolygon({
+  side,
+  x,
+  y,
+}: {
+  side: number
+  x: number
+  y: number
+}): string {
+  const halfWidth = 4
+  const depth = 7
+  if (side === 1) {
+    return `${formatSvgNumber(x)},${formatSvgNumber(y - halfWidth)} ${formatSvgNumber(x - depth)},${formatSvgNumber(y)} ${formatSvgNumber(x)},${formatSvgNumber(y + halfWidth)}`
+  }
+  if (side === 2) {
+    return `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y)} ${formatSvgNumber(x)},${formatSvgNumber(y + depth)} ${formatSvgNumber(x + halfWidth)},${formatSvgNumber(y)}`
+  }
+  if (side === 3) {
+    return `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y)} ${formatSvgNumber(x)},${formatSvgNumber(y - depth)} ${formatSvgNumber(x + halfWidth)},${formatSvgNumber(y)}`
+  }
+  return `${formatSvgNumber(x)},${formatSvgNumber(y - halfWidth)} ${formatSvgNumber(x + depth)},${formatSvgNumber(y)} ${formatSvgNumber(x)},${formatSvgNumber(y + halfWidth)}`
 }
 
 function renderSchematicRectangle(
