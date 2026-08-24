@@ -41,6 +41,9 @@ interface SchematicPinRenderContext {
   viewport: SvgViewport
 }
 
+const SCHEMATIC_COMPONENT_OUTLINE_COLOR = "#880000"
+const SCHEMATIC_COMPONENT_FILL_COLOR = "#ffffff"
+
 export function serializeAltiumSheetToSvg(
   source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
   options: AltiumSheetSvgOptions = {},
@@ -159,11 +162,11 @@ function renderSchematicRecord(
   }
 
   if (kind === "15") {
-    return renderSchematicSheetSymbol(record, viewport, metadata, color)
+    return renderSchematicSheetSymbol(record, viewport, metadata)
   }
 
   if (kind === "16") {
-    return renderSchematicSheetEntry(record, viewport, metadata, color, context)
+    return renderSchematicSheetEntry(record, viewport, metadata, context)
   }
 
   if (kind === "8") {
@@ -330,25 +333,19 @@ function renderSchematicSheetSymbol(
   record: AltiumRecord,
   viewport: SvgViewport,
   metadata: string,
-  color: string,
 ): string {
   const location = getSchematicLocation(record)
   const width = Math.max(getSchematicCoordinate(record, "XSIZE", 1), 1)
   const height = Math.max(getSchematicCoordinate(record, "YSIZE", 1), 1)
   const left = viewport.toX(location.x)
   const top = viewport.toY(location.y)
-  const fill = record.getBoolean("ISSOLID")
-    ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff")
-    : "none"
-
-  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${fill}" stroke="${color}" stroke-width="1"/>`
+  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="none" stroke="${SCHEMATIC_COMPONENT_OUTLINE_COLOR}" stroke-width="1"/>`
 }
 
 function renderSchematicSheetEntry(
   record: AltiumRecord,
   viewport: SvgViewport,
   metadata: string,
-  color: string,
   context: SchematicRenderContext,
 ): string | undefined {
   const sheetSymbol = getSchematicRecordParent(record, context)
@@ -378,10 +375,6 @@ function renderSchematicSheetEntry(
   const points = getSchematicSheetEntryPolygon({ side, x, y })
   const name = record.getDecoded("NAME") ?? ""
   const font = getSchematicFont(record, context.sheetRecord, 8)
-  const textColor = altiumColorToCss(
-    record.getCaseInsensitive("TEXTCOLOR"),
-    color,
-  )
   const textOffset = 9
   const textX = side === 0 ? x + textOffset : side === 1 ? x - textOffset : x
   const textY = side === 2 ? y + textOffset : side === 3 ? y - textOffset : y
@@ -392,7 +385,7 @@ function renderSchematicSheetEntry(
       ? "hanging"
       : "text-after-edge"
 
-  return `<g ${metadata}><polygon points="${points}" fill="${altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff")}" stroke="${color}" stroke-width="1"/>${name ? `<text x="${formatSvgNumber(textX)}" y="${formatSvgNumber(textY)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text>` : ""}</g>`
+  return `<g ${metadata}><polygon points="${points}" fill="${SCHEMATIC_COMPONENT_FILL_COLOR}" stroke="${SCHEMATIC_COMPONENT_OUTLINE_COLOR}" stroke-width="1"/>${name ? `<text x="${formatSvgNumber(textX)}" y="${formatSvgNumber(textY)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${SCHEMATIC_COMPONENT_OUTLINE_COLOR}" ${font.attributes}>${escapeXml(name)}</text>` : ""}</g>`
 }
 
 function getSchematicRecordParent(
