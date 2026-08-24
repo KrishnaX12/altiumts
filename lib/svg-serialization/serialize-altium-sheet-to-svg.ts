@@ -41,8 +41,8 @@ interface SchematicPinRenderContext {
   viewport: SvgViewport
 }
 
-const SCHEMATIC_COMPONENT_OUTLINE_COLOR = "#880000"
-const SCHEMATIC_COMPONENT_FILL_COLOR = "#ffffff"
+const SCHEMATIC_COMPONENT_OUTLINE_COLOR = "#840000"
+const SCHEMATIC_COMPONENT_FILL_COLOR = "#ffffc2"
 
 export function serializeAltiumSheetToSvg(
   source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
