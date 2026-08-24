@@ -339,7 +339,7 @@ function renderSchematicSheetSymbol(
   const height = Math.max(getSchematicCoordinate(record, "YSIZE", 1), 1)
   const left = viewport.toX(location.x)
   const top = viewport.toY(location.y)
-  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="none" stroke="${SCHEMATIC_COMPONENT_OUTLINE_COLOR}" stroke-width="1"/>`
+  return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${SCHEMATIC_COMPONENT_FILL_COLOR}" stroke="${SCHEMATIC_COMPONENT_OUTLINE_COLOR}" stroke-width="1"/>`
 }
 
 function renderSchematicSheetEntry(
