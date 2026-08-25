@@ -1,3 +1,5 @@
+import type { AltiumPrjPcb } from "../altium-prj-pcb"
+
 export interface SvgPoint {
   x: number
   y: number
@@ -43,6 +45,12 @@ export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
 }
 
 export interface AltiumSheetSvgOptions extends AltiumSvgRenderOptions {
+  /** Current schematic filename, including its extension. */
+  documentName?: string
+  /** Parsed project that supplies user-defined project parameters. */
+  project?: AltiumPrjPcb
+  /** Current project filename, including its extension. */
+  projectName?: string
   showBorder?: boolean
 }
 
