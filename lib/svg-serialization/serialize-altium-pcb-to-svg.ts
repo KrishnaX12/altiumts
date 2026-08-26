@@ -1,11 +1,11 @@
 import type { AltiumPcbDocument } from "../altium-pcb-document"
-import { getPcbRegionSemanticKind } from "../pcb-contours"
 import {
   getPcbRecordComponentIndex,
   getPcbRecordNetIndex,
   getPcbRecordPolygonIndex,
 } from "../pcb-reference-resolution"
 import type { AltiumRecord } from "../records/altium-record"
+import { comparePcbRecordPaintOrder } from "./compare-pcb-record-paint-order"
 import {
   getPcbBoardOutline,
   getPcbDocumentBounds,
@@ -29,20 +29,6 @@ import {
   pointsToClosedPath,
   pointsToSvg,
 } from "./svg-utils"
-
-const RECORD_PAINT_ORDER: Record<string, number> = {
-  ComponentBody: 5,
-  Polygon: 10,
-  Region: 20,
-  Fill: 30,
-  Track: 40,
-  Arc: 45,
-  Pad: 50,
-  Via: 60,
-  Text: 70,
-  Dimension: 75,
-  Component: 80,
-}
 
 export function serializeAltiumPcbToSvg(
   document: AltiumPcbDocument,
@@ -101,9 +87,7 @@ export function serializeAltiumPcbToSvg(
       const recordBounds = getPcbRecordBounds(record, options.layers)
       return !recordBounds || boundsIntersect(recordBounds, bounds)
     })
-    .toSorted(
-      (left, right) => getRecordPaintOrder(left) - getRecordPaintOrder(right),
-    )
+    .toSorted(comparePcbRecordPaintOrder)
 
   for (const record of records) {
     const polygonIndex =
@@ -138,16 +122,6 @@ export function serializeAltiumPcbToSvg(
     title: options.title ?? `Altium PCB${layerTitle}`,
     viewport,
   })
-}
-
-function getRecordPaintOrder(record: AltiumRecord): number {
-  if (
-    record.recordKind === "Region" &&
-    getPcbRegionSemanticKind(record) === "POLYGON_CUTOUT"
-  ) {
-    return 25
-  }
-  return RECORD_PAINT_ORDER[record.recordKind ?? ""] ?? 100
 }
 
 function recordAppliesToReferences(
