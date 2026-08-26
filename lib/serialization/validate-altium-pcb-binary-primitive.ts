@@ -57,6 +57,7 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
   Region: new Set([
     ...COMMON_PRIMITIVE_FIELDS,
     "HOLECOUNT",
+    "ISBOARDCUTOUT",
     "KEEPOUT",
     "REGIONKIND",
     "TEARDROP",
@@ -192,7 +193,11 @@ function validateSupportedPrimitiveFieldText(
   }
   if (recordKind === "Region") {
     const regionKind = fields.get("REGIONKIND")?.toUpperCase() ?? "COPPER"
-    if (regionKind !== "COPPER") {
+    if (
+      regionKind !== "COPPER" &&
+      regionKind !== "BOARDCUTOUT" &&
+      regionKind !== "BOARD_CUTOUT"
+    ) {
       throw new AltiumSerializationError(
         `Unsupported Altium region kind: ${JSON.stringify(regionKind)}`,
       )

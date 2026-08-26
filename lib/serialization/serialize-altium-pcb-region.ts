@@ -87,10 +87,15 @@ function getRegionHoleCount(fields: AltiumRecordFields): number {
 function createRegionPropertyBytes(fields: AltiumRecordFields): Uint8Array {
   const layer = fields.get("LAYER") ?? "TOP"
   const polygonIndex = parseAltiumIndex(fields.get("POLYGON"))
+  const isBoardCutout =
+    fields.get("REGIONKIND")?.toUpperCase() === "BOARDCUTOUT" ||
+    fields.get("REGIONKIND")?.toUpperCase() === "BOARD_CUTOUT" ||
+    fields.get("ISBOARDCUTOUT")?.toUpperCase() === "TRUE"
   const propertySource = [
     `V7_LAYER=${layer}`,
     "NAME= ",
     "KIND=0",
+    ...(isBoardCutout ? ["ISBOARDCUTOUT=TRUE"] : []),
     `SUBPOLYINDEX=${polygonIndex === NO_INDEX ? -1 : polygonIndex}`,
     "UNIONINDEX=0",
     "ARCRESOLUTION=0.5mil",

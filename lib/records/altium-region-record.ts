@@ -42,7 +42,9 @@ export class AltiumRegionRecord extends AltiumRecord {
   }
 
   get isBoardCutout(): boolean {
-    return this.regionKind === "BOARD_CUTOUT"
+    return (
+      this.regionKind === "BOARD_CUTOUT" || this.regionKind === "BOARDCUTOUT"
+    )
   }
 
   get isLayerStackRegion(): boolean {
