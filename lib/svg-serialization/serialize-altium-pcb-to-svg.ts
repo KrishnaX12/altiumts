@@ -16,12 +16,12 @@ import {
   recordAppliesToLayers,
 } from "./pcb-layer"
 import { renderPcbRecord } from "./render-pcb-record"
+import { sortPcbRecordsForPainting } from "./sort-pcb-records-for-painting"
 import type {
   AltiumPcbSvgOptions,
   AltiumPcbViewBox,
   SvgBounds,
 } from "./svg-types"
-import { sortPcbRecordsForPainting } from "./sort-pcb-records-for-painting"
 import {
   boundsIntersect,
   createSvgDocument,
