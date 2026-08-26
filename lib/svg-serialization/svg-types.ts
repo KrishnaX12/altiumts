@@ -37,6 +37,11 @@ export interface AltiumPcbViewBox {
 
 export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
   componentIndices?: number[]
+  /**
+   * Layer names from front to back. The first layer renders on top, matching
+   * Altium's Layer Drawing Order preference.
+   */
+  layerDrawingOrder?: string[]
   layers?: string[]
   netIndices?: number[]
   showBoardCutouts?: boolean

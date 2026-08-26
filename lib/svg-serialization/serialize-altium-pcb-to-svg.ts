@@ -5,7 +5,6 @@ import {
   getPcbRecordPolygonIndex,
 } from "../pcb-reference-resolution"
 import type { AltiumRecord } from "../records/altium-record"
-import { comparePcbRecordPaintOrder } from "./compare-pcb-record-paint-order"
 import {
   getPcbBoardOutline,
   getPcbDocumentBounds,
@@ -22,6 +21,7 @@ import type {
   AltiumPcbViewBox,
   SvgBounds,
 } from "./svg-types"
+import { sortPcbRecordsForPainting } from "./sort-pcb-records-for-painting"
 import {
   boundsIntersect,
   createSvgDocument,
@@ -74,20 +74,23 @@ export function serializeAltiumPcbToSvg(
     }
   }
 
-  const records = document.records
-    .filter((record) => recordAppliesToLayers(record, options.layers))
-    .filter((record) => recordAppliesToReferences(document, record, options))
-    .filter(
-      (record) =>
-        options.showHidden === true ||
-        isVisibleComponentText(record, componentLookup),
-    )
-    .filter((record) => {
-      if (!options.viewBox) return true
-      const recordBounds = getPcbRecordBounds(record, options.layers)
-      return !recordBounds || boundsIntersect(recordBounds, bounds)
-    })
-    .toSorted(comparePcbRecordPaintOrder)
+  const records = sortPcbRecordsForPainting({
+    document,
+    layerDrawingOrder: options.layerDrawingOrder,
+    records: document.records
+      .filter((record) => recordAppliesToLayers(record, options.layers))
+      .filter((record) => recordAppliesToReferences(document, record, options))
+      .filter(
+        (record) =>
+          options.showHidden === true ||
+          isVisibleComponentText(record, componentLookup),
+      )
+      .filter((record) => {
+        if (!options.viewBox) return true
+        const recordBounds = getPcbRecordBounds(record, options.layers)
+        return !recordBounds || boundsIntersect(recordBounds, bounds)
+      }),
+  })
 
   for (const record of records) {
     const polygonIndex =
