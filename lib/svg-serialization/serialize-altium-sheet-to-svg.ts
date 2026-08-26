@@ -12,6 +12,7 @@ import {
   getSchematicCoordinate,
   getSchematicIndexedPoints,
 } from "./altium-values"
+import { renderSchematicPinEdgeSymbols } from "./render-schematic-pin-edge-symbols"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
 import { serializeWindowsEnhancedMetafileToDataUrl } from "./serialize-windows-enhanced-metafile-to-svg"
 import type {
@@ -405,13 +406,20 @@ function renderSchematicPin(
     x: direction.x,
     y: -direction.y,
   }
+  const pinEdgeSymbols = renderSchematicPinEdgeSymbols({
+    bodyPosition: body,
+    color,
+    hasClockSymbol: record.getNumber("SYMBOL_INNEREDGE") === 3,
+    hasInversionSymbol: record.getNumber("SYMBOL_OUTEREDGE") === 1,
+    screenDirection,
+  })
   const rotation = orientation === 1 || orientation === 3 ? -90 : 0
   const directionMatchesText = orientation === 0 || orientation === 1
   const designatorAnchor = directionMatchesText ? "start" : "end"
   const nameAnchor = directionMatchesText ? "end" : "start"
   const designatorPosition = {
-    x: body.x + screenDirection.x * 2,
-    y: body.y + screenDirection.y * 2,
+    x: pinEdgeSymbols.outerSymbolEdgePosition.x + screenDirection.x * 2,
+    y: pinEdgeSymbols.outerSymbolEdgePosition.y + screenDirection.y * 2,
   }
   const namePosition = {
     x: body.x - screenDirection.x * 2,
@@ -427,7 +435,7 @@ function renderSchematicPin(
       ? `<text x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${anchor}" dominant-baseline="text-after-edge" transform="translate(${formatSvgNumber(position.x)} ${formatSvgNumber(position.y)}) rotate(${rotation})">${escapeXml(text)}</text>`
       : ""
 
-  return `<g ${metadata}><line x1="${formatSvgNumber(body.x)}" y1="${formatSvgNumber(body.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
+  return `<g ${metadata}><line x1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.x)}" y1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${pinEdgeSymbols.svg}${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
 }
 
 function renderSchematicPowerPort(
