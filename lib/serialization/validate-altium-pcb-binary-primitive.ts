@@ -114,7 +114,15 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
     "X",
     "Y",
   ]),
-  Track: new Set([...COMMON_PRIMITIVE_FIELDS, "WIDTH", "X1", "X2", "Y1", "Y2"]),
+  Track: new Set([
+    ...COMMON_PRIMITIVE_FIELDS,
+    "KEEPOUT",
+    "WIDTH",
+    "X1",
+    "X2",
+    "Y1",
+    "Y2",
+  ]),
   Via: new Set([
     ...COMMON_PRIMITIVE_FIELDS,
     "DIAMETER",

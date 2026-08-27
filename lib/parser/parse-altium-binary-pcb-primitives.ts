@@ -26,6 +26,8 @@ const PRIMITIVE_TYPE: Record<string, number> = {
   Vias6: 3,
 }
 
+const KEEPOUT_PRIMITIVE_FLAG = 0x0200
+
 export type AltiumBinaryPcbPrimitiveFamily =
   | "Arcs6"
   | "BoardRegions"
@@ -242,9 +244,13 @@ function decodePrimitive(
     return new AltiumFillRecord({ items, originalBinaryPayload: payload })
   }
 
+  const primitiveFlags = view.getUint16(1, true)
   const commonFields = [
     field("LAYER", layer),
     field("LOCKED", booleanText((view.getUint8(1) & 0x04) === 0)),
+    ...((primitiveFlags & KEEPOUT_PRIMITIVE_FLAG) !== 0
+      ? [field("KEEPOUT", "TRUE")]
+      : []),
     field("NET", String(view.getUint16(3, true))),
     field("COMPONENT", String(view.getUint16(7, true))),
     field("POLYGON", String(view.getUint16(9, true))),
