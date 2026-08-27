@@ -8,6 +8,7 @@ import {
 import { getAltiumPcbLayerId } from "./altium-pcb-binary-layers"
 
 export type SupportedAltiumPcbPrimitiveKind =
+  | "ComponentBody"
   | "Fill"
   | "Pad"
   | "Region"
@@ -28,6 +29,32 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
   SupportedAltiumPcbPrimitiveKind,
   ReadonlySet<string>
 > = {
+  ComponentBody: new Set([
+    ...COMMON_PRIMITIVE_FIELDS,
+    "ARCRESOLUTION",
+    "BODYCOLOR3D",
+    "BODYOPACITY3D",
+    "BODYPROJECTION",
+    "CAVITYHEIGHT",
+    "HOLECOUNT",
+    "IDENTIFIER",
+    "ISSHAPEBASED",
+    "KEEPOUT",
+    "KIND",
+    "NAME",
+    "OVERALLHEIGHT",
+    "STANDOFFHEIGHT",
+    "SUBPOLYINDEX",
+    "TEARDROP",
+    "TEXTURE",
+    "TEXTURECENTERX",
+    "TEXTURECENTERY",
+    "TEXTUREROTATION",
+    "TEXTURESIZEX",
+    "TEXTURESIZEY",
+    "UNIONINDEX",
+    "V7_LAYER",
+  ]),
   Fill: new Set([
     ...COMMON_PRIMITIVE_FIELDS,
     "KEEPOUT",
@@ -71,6 +98,7 @@ const SUPPORTED_PRIMITIVE_FIELDS: Record<
     "INVERTED",
     "INVERTEDRECT",
     "ITALIC",
+    "ISSHAPEBASED",
     "JUSTIFICATION",
     "MARGINBORDERWIDTH",
     "MIRROR",
@@ -205,7 +233,7 @@ function isSupportedPrimitiveFieldName(
   recordKind: SupportedAltiumPcbPrimitiveKind,
 ): boolean {
   if (SUPPORTED_PRIMITIVE_FIELDS[recordKind].has(fieldName)) return true
-  if (recordKind !== "Region") return false
+  if (recordKind !== "Region" && recordKind !== "ComponentBody") return false
   return (
     /^(?:KIND|VX|VY|CX|CY|R|SA|EA)\d+$/u.test(fieldName) ||
     /^HOLE\d+(?:COUNT|V[XY]\d+)$/u.test(fieldName)
