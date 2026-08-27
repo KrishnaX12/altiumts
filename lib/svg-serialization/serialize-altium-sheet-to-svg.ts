@@ -12,7 +12,13 @@ import {
   getSchematicCoordinate,
   getSchematicIndexedPoints,
 } from "./altium-values"
+import { getSchematicFont } from "./get-schematic-font"
 import { renderSchematicPinEdgeSymbols } from "./render-schematic-pin-edge-symbols"
+import {
+  renderSchematicSheetEntry,
+  renderSchematicSheetSymbol,
+} from "./render-schematic-sheet-symbol"
+import type { SchematicRenderContext } from "./schematic-render-context"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
 import { serializeWindowsEnhancedMetafileToDataUrl } from "./serialize-windows-enhanced-metafile-to-svg"
 import type {
@@ -28,12 +34,6 @@ import {
   formatSvgNumber,
   pointsToSvg,
 } from "./svg-utils"
-
-interface SchematicRenderContext {
-  document?: AltiumSchDoc
-  records: AltiumRecord[]
-  sheetRecord?: AltiumSchSheetRecord
-}
 
 interface SchematicPinRenderContext {
   color: string
@@ -160,6 +160,14 @@ function renderSchematicRecord(
     return renderSchematicRectangle(record, viewport, metadata, color)
   }
 
+  if (kind === "15") {
+    return renderSchematicSheetSymbol({ metadata, record, viewport })
+  }
+
+  if (kind === "16") {
+    return renderSchematicSheetEntry({ context, metadata, record, viewport })
+  }
+
   if (kind === "8") {
     const center = getSchematicLocation(record)
     const radiusX = getSchematicCoordinate(record, "RADIUS", 1)
@@ -226,7 +234,11 @@ function renderSchematicRecord(
     const pointDepth = Math.min(width * 0.22, height)
     const ioType = Number(record.getCaseInsensitive("IOTYPE") ?? 0)
     const name = record.getDecoded("NAME") ?? ""
-    const font = getSchematicFont(record, context.sheetRecord, 8)
+    const font = getSchematicFont({
+      fallbackSize: 8,
+      record,
+      sheetRecord: context.sheetRecord,
+    })
     const fillColor = altiumColorToCss(
       record.getCaseInsensitive("AREACOLOR"),
       "#fff",
@@ -244,7 +256,14 @@ function renderSchematicRecord(
     return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text></g>`
   }
 
-  if (kind === "4" || kind === "25" || kind === "34" || kind === "41") {
+  if (
+    kind === "4" ||
+    kind === "25" ||
+    kind === "32" ||
+    kind === "33" ||
+    kind === "34" ||
+    kind === "41"
+  ) {
     if (record.getBoolean("ISHIDDEN") && !options.showHidden) return undefined
     if (options.showText === false) return undefined
     const location = getSchematicLocation(record)
@@ -266,7 +285,11 @@ function renderSchematicRecord(
           }) ?? sourceText)
         : sourceText
     if (!text) return undefined
-    const font = getSchematicFont(record, context.sheetRecord, 9)
+    const font = getSchematicFont({
+      fallbackSize: 9,
+      record,
+      sheetRecord: context.sheetRecord,
+    })
     const positioning = getSchematicTextPositioning(record)
     return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${escapeXml(text)}</text>`
   }
@@ -425,7 +448,11 @@ function renderSchematicPin(
     x: body.x - screenDirection.x * 2,
     y: body.y - screenDirection.y * 2,
   }
-  const font = getSchematicFont(record, sheetRecord, 6)
+  const font = getSchematicFont({
+    fallbackSize: 6,
+    record,
+    sheetRecord,
+  })
   const renderPinText = (
     text: string,
     position: SvgPoint,
@@ -491,7 +518,11 @@ function renderSchematicPowerPort(
   const showNetName = record.getBoolean("SHOWNETNAME") !== false
   if (!text || !showNetName) return `<g ${metadata}>${symbol}</g>`
 
-  const font = getSchematicFont(record, sheetRecord, 10)
+  const font = getSchematicFont({
+    fallbackSize: 10,
+    record,
+    sheetRecord,
+  })
   const label = point(labelDistance)
   const vertical = direction.y !== 0
   const textAnchor = vertical ? "middle" : direction.x > 0 ? "start" : "end"
@@ -556,7 +587,11 @@ function renderSchematicTextFrame(
   const top = viewport.toY(rectangle.maxY)
   const width = rectangle.maxX - rectangle.minX
   const height = rectangle.maxY - rectangle.minY
-  const font = getSchematicFont(record, sheetRecord, 9)
+  const font = getSchematicFont({
+    fallbackSize: 9,
+    record,
+    sheetRecord,
+  })
   const margin = Math.max(getSchematicCoordinate(record, "TEXTMARGIN", 0), 0)
   const availableWidth = Math.max(width - margin * 2, font.size)
   const availableHeight = Math.max(height - margin * 2, font.size)
@@ -601,36 +636,6 @@ function renderSchematicTextFrame(
       : ""
 
   return `<g ${metadata}>${background}${clip ? `<defs><clipPath id="${clipId}"><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}"/></clipPath></defs>` : ""}<text x="${formatSvgNumber(x)}" y="${formatSvgNumber(top + margin + font.size)}" fill="${color}" text-anchor="${anchor}" ${font.attributes}${clip ? ` clip-path="url(#${clipId})"` : ""}>${tspans}</text></g>`
-}
-
-function getSchematicFont(
-  record: AltiumRecord,
-  sheetRecord: AltiumSchSheetRecord | undefined,
-  fallbackSize: number,
-): { attributes: string; family: string; size: number } {
-  const fontId = Math.max(
-    Math.round(Number(record.getCaseInsensitive("FONTID") ?? 1)),
-    1,
-  )
-  const size = Math.max(
-    Number(sheetRecord?.getCaseInsensitive(`SIZE${fontId}`) ?? fallbackSize),
-    1,
-  )
-  const family =
-    sheetRecord?.getDecoded(`FONTNAME${fontId}`) ?? "Arial, sans-serif"
-  const weight =
-    sheetRecord?.getBoolean(`BOLD${fontId}`) === true ? "bold" : "normal"
-  const style =
-    sheetRecord?.getBoolean(`ITALIC${fontId}`) === true ? "italic" : "normal"
-  const decoration =
-    sheetRecord?.getBoolean(`UNDERLINE${fontId}`) === true
-      ? "underline"
-      : "none"
-  return {
-    attributes: `font-family="${escapeXml(family)}" font-size="${formatSvgNumber(size)}" font-style="${style}" font-weight="${weight}" text-decoration="${decoration}"`,
-    family,
-    size,
-  }
 }
 
 function shouldRenderSchematicRecord(
