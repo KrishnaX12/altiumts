@@ -2,6 +2,10 @@
 
 Run `bun run download-references` to download:
 
+- `stm32-st-link-v2.SchDoc` from the GPL-3.0-licensed
+  [`yasir-shahzad/STM32-ST-Link-V2.0-Programmer`](https://github.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer)
+  open-source hardware repository, pinned to commit
+  `3284ac4fbd9a3f8471844db3c2b368fff2c33ca9`.
 - `simplefocmini-2024-04-26.PcbDoc` and
   `simplefocmini-2024-04-26.SchDoc` from the MIT-licensed
   [`simplefoc/SimpleFOCMini`](https://github.com/simplefoc/SimpleFOCMini)
