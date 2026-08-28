@@ -51,7 +51,7 @@
     <polyline data-record="6" points="424.065,818.065 424.065,815.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="424.065,808.065 424.065,811.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(433.065 817.065) rotate(0)">C10</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(433.065 827.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(433.065 827.065) rotate(0)">100nF</text>
     <text data-record="25" x="0" y="0" fill="#800000" font-family="Arial" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(529.065 248.065) rotate(-90)">USB_RENUMn</text>
     <g data-record="17"><path d="M 649.065 318.065 L 649.065 310.065 M 644.065 310.065 L 654.065 310.065" fill="none" stroke="#800000" stroke-width="1"/><text x="649.065" y="306.065" text-anchor="middle" dominant-baseline="auto" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">3V3</text></g>
     <g data-record="17"><path d="M 564.065 528.065 L 564.065 520.065 M 559.065 520.065 L 569.065 520.065" fill="none" stroke="#800000" stroke-width="1"/><text x="564.065" y="516.065" text-anchor="middle" dominant-baseline="auto" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">3V3</text></g>
@@ -194,7 +194,7 @@
     <polyline data-record="6" points="209.065,408.065 209.065,405.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="209.065,398.065 209.065,401.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(184.065 403.065) rotate(0)">C11</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(176.565 415.565) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(176.565 415.565) rotate(0)">100nF</text>
     <g data-record="2"><line x1="979.065" y1="413.065" x2="979.065" y2="403.065" stroke="#1f2937" stroke-width="1"/></g>
     <g data-record="2"><line x1="979.065" y1="423.065" x2="979.065" y2="433.065" stroke="#1f2937" stroke-width="1"/></g>
     <line data-record="13" x1="987.065" y1="420.065" x2="971.065" y2="420.065" stroke="#0000ff" stroke-width="1"/>
@@ -202,7 +202,7 @@
     <polyline data-record="6" points="979.065,413.065 979.065,416.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="979.065,423.065 979.065,420.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(988.065 422.065) rotate(0)">C12</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(988.065 432.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(988.065 432.065) rotate(0)">100nF</text>
     <g data-record="2"><line x1="204.065" y1="573.065" x2="194.065" y2="573.065" stroke="#1f2937" stroke-width="1"/></g>
     <g data-record="2"><line x1="214.065" y1="573.065" x2="224.065" y2="573.065" stroke="#1f2937" stroke-width="1"/></g>
     <line data-record="13" x1="211.065" y1="565.065" x2="211.065" y2="581.065" stroke="#0000ff" stroke-width="1"/>
@@ -210,7 +210,7 @@
     <polyline data-record="6" points="204.065,573.065 207.065,573.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="214.065,573.065 211.065,573.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(189.065 563.065) rotate(0)">C13</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(203.065 592.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(203.065 592.065) rotate(0)">100nF</text>
     <g data-record="17"><path d="M 899.065 188.065 L 903.065 188.065 M 903.065 181.065 L 903.065 195.065 M 907.065 183.565 L 907.065 192.565 M 911.065 186.065 L 911.065 190.065" fill="none" stroke="#800000" stroke-width="1"/></g>
     <g data-record="17"><path d="M 899.065 228.065 L 907.065 228.065 M 907.065 223.065 L 907.065 233.065" fill="none" stroke="#800000" stroke-width="1"/><text x="911.065" y="228.065" text-anchor="start" dominant-baseline="central" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">3V3</text></g>
     <g data-record="2"><line x1="749.065" y1="638.065" x2="739.065" y2="638.065" stroke="#1f2937" stroke-width="1"/></g>
@@ -241,7 +241,7 @@
     <polyline data-record="6" points="229.065,318.065 229.065,315.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="229.065,308.065 229.065,311.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(209.065 313.065) rotate(0)">C1</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(204.065 328.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(204.065 328.065) rotate(0)">20pF</text>
     <g data-record="2"><line x1="279.065" y1="318.065" x2="279.065" y2="328.065" stroke="#1f2937" stroke-width="1"/></g>
     <g data-record="2"><line x1="279.065" y1="308.065" x2="279.065" y2="298.065" stroke="#1f2937" stroke-width="1"/></g>
     <line data-record="13" x1="271.065" y1="311.065" x2="287.065" y2="311.065" stroke="#0000ff" stroke-width="1"/>
@@ -249,7 +249,7 @@
     <polyline data-record="6" points="279.065,318.065 279.065,315.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="279.065,308.065 279.065,311.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(289.065 313.065) rotate(0)">C2</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(288.065 327.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(288.065 327.065) rotate(0)">20pF</text>
     <g data-record="2"><line x1="794.065" y1="423.065" x2="794.065" y2="433.065" stroke="#1f2937" stroke-width="1"/></g>
     <g data-record="2"><line x1="794.065" y1="413.065" x2="794.065" y2="403.065" stroke="#1f2937" stroke-width="1"/></g>
     <line data-record="13" x1="802.065" y1="416.065" x2="786.065" y2="416.065" stroke="#0000ff" stroke-width="1"/>
@@ -257,7 +257,7 @@
     <polyline data-record="6" points="794.065,423.065 794.065,420.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="794.065,413.065 794.065,416.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(803.065 422.065) rotate(0)">C14</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(803.065 432.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(803.065 432.065) rotate(0)">47pF</text>
     <g data-record="2"><line x1="754.065" y1="423.065" x2="754.065" y2="433.065" stroke="#1f2937" stroke-width="1"/></g>
     <g data-record="2"><line x1="754.065" y1="413.065" x2="754.065" y2="403.065" stroke="#1f2937" stroke-width="1"/></g>
     <line data-record="13" x1="762.065" y1="416.065" x2="746.065" y2="416.065" stroke="#0000ff" stroke-width="1"/>
@@ -265,7 +265,7 @@
     <polyline data-record="6" points="754.065,423.065 754.065,420.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="754.065,413.065 754.065,416.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(763.065 422.065) rotate(0)">C15</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(763.065 432.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(763.065 432.065) rotate(0)">47pF</text>
     <g data-record="17"><path d="M 794.065 458.065 L 794.065 462.065 M 801.065 462.065 L 787.065 462.065 M 798.565 466.065 L 789.565 466.065 M 796.065 470.065 L 792.065 470.065" fill="none" stroke="#800000" stroke-width="1"/></g>
     <g data-record="17"><path d="M 754.065 458.065 L 754.065 462.065 M 761.065 462.065 L 747.065 462.065 M 758.565 466.065 L 749.565 466.065 M 756.065 470.065 L 752.065 470.065" fill="none" stroke="#800000" stroke-width="1"/></g>
     <g data-record="2"><line x1="779.065" y1="343.065" x2="779.065" y2="353.065" stroke="#1f2937" stroke-width="1"/></g>
@@ -279,7 +279,7 @@
     <polyline data-record="6" points="309.065,263.065 309.065,260.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="309.065,253.065 309.065,256.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(318.065 262.065) rotate(0)">C16</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(318.065 272.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(318.065 272.065) rotate(0)">100nF</text>
     <g data-record="17"><path d="M 309.065 273.065 L 309.065 277.065 M 316.065 277.065 L 302.065 277.065 M 313.565 281.065 L 304.565 281.065 M 311.065 285.065 L 307.065 285.065" fill="none" stroke="#800000" stroke-width="1"/></g>
     <g data-record="17"><path d="M 779.065 303.065 L 779.065 295.065 M 774.065 295.065 L 784.065 295.065" fill="none" stroke="#800000" stroke-width="1"/><text x="779.065" y="291.065" text-anchor="middle" dominant-baseline="auto" fill="#800000" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none">3V3</text></g>
     <g data-record="2"><line x1="679.065" y1="428.065" x2="679.065" y2="418.065" stroke="#1f2937" stroke-width="1"/></g>
@@ -433,7 +433,7 @@
     <polyline data-record="6" points="884.065,423.065 884.065,420.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <polyline data-record="6" points="884.065,413.065 884.065,416.065" fill="none" stroke="#0000ff" stroke-width="1"/>
     <text data-record="34" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(858.065 420.065) rotate(0)">C3</text>
-    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(856.065 432.065) rotate(0)">=Value</text>
+    <text data-record="41" x="0" y="0" fill="#000080" font-family="Times New Roman" font-size="10" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(856.065 432.065) rotate(0)">100nF</text>
     <g data-record="17"><path d="M 884.065 458.065 L 884.065 462.065 M 891.065 462.065 L 877.065 462.065 M 888.565 466.065 L 879.565 466.065 M 886.065 470.065 L 882.065 470.065" fill="none" stroke="#800000" stroke-width="1"/></g>
     <text data-record="25" x="0" y="0" fill="#800000" font-family="Arial" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(449.065 248.065) rotate(-90)">PB10</text>
     <text data-record="25" x="0" y="0" fill="#800000" font-family="Arial" font-size="9" font-style="normal" font-weight="normal" text-decoration="none" text-anchor="start" dominant-baseline="text-after-edge" transform="translate(324.065 613.065) rotate(0)">T_SWIM</text>
