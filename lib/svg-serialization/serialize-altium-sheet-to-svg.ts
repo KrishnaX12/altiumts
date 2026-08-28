@@ -274,16 +274,16 @@ function renderSchematicRecord(
       record.getDecoded("NAME") ??
       record.getDecoded("DESIGNATOR") ??
       ""
-    const text =
-      context.document && !hasSchematicComponentAncestor(record, context)
-        ? (resolveSchematicParameterReferenceWithContext({
-            document: context.document,
-            documentName: options.documentName,
-            project: options.project,
-            projectName: options.projectName,
-            reference: sourceText,
-          }) ?? sourceText)
-        : sourceText
+    const text = context.document
+      ? (resolveSchematicParameterReferenceWithContext({
+          document: context.document,
+          documentName: options.documentName,
+          project: options.project,
+          projectName: options.projectName,
+          record,
+          reference: sourceText,
+        }) ?? sourceText)
+      : sourceText
     if (!text) return undefined
     const font = getSchematicFont({
       fallbackSize: 9,
@@ -344,22 +344,6 @@ function renderSchematicRecord(
   }
 
   return undefined
-}
-
-function hasSchematicComponentAncestor(
-  record: AltiumRecord,
-  context: SchematicRenderContext,
-): boolean {
-  let current = context.document?.getParent(record)
-  const visited = new Set<AltiumRecord>()
-
-  while (current && !visited.has(current)) {
-    if (current.recordKind === "1") return true
-    visited.add(current)
-    current = context.document?.getParent(current)
-  }
-
-  return false
 }
 
 function renderSchematicRectangle(

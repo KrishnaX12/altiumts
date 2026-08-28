@@ -1,5 +1,6 @@
 import type { AltiumPrjPcb } from "./altium-prj-pcb"
 import type { AltiumSchDoc } from "./altium-sch-doc"
+import type { AltiumRecord } from "./records/altium-record"
 
 type SchematicParameterName = string
 
@@ -16,6 +17,8 @@ export interface ResolveSchematicParameterReferenceInput {
   project?: AltiumPrjPcb
   /** Current project filename, including its extension. */
   projectName?: string
+  /** Record containing the reference, used to resolve component parameters. */
+  record?: AltiumRecord
   reference: string
 }
 
@@ -54,6 +57,7 @@ export function resolveSchematicParameterReferenceWithContext({
   documentName,
   project,
   projectName,
+  record,
   reference,
 }: ResolveSchematicParameterReferenceInput): string | undefined {
   const match = PARAMETER_REFERENCE.exec(reference)
@@ -68,12 +72,49 @@ export function resolveSchematicParameterReferenceWithContext({
   }
   if (projectName) parameters.set("projectname", projectName)
   if (documentName) parameters.set("documentname", documentName)
+  if (record) {
+    for (const [name, text] of getSchematicComponentParameters(
+      document,
+      record,
+    )) {
+      parameters.set(name, text)
+    }
+  }
 
   return resolveParameter({
     parameterName,
     parameters,
     visitedParameterNames: new Set(),
   })
+}
+
+function getSchematicComponentParameters(
+  document: AltiumSchDoc,
+  record: AltiumRecord,
+): Map<SchematicParameterName, string> {
+  let component: AltiumRecord | undefined = record
+  const visited = new Set<AltiumRecord>()
+
+  while (component && component.recordKind !== "1") {
+    if (visited.has(component)) return new Map()
+    visited.add(component)
+    component = document.getParent(component)
+  }
+  if (!component) return new Map()
+
+  const parameters = new Map<SchematicParameterName, string>()
+  for (const key of ["DESIGNATOR", "COMMENT", "LIBREFERENCE"] as const) {
+    const value = component.getDecoded(key)
+    if (value !== undefined) parameters.set(key.toLowerCase(), value)
+  }
+  for (const ownedRecord of document.getOwnedRecords(component)) {
+    if (ownedRecord.recordKind !== "41") continue
+    const name = ownedRecord.getDecoded("NAME")
+    const text = ownedRecord.getDecoded("TEXT")
+    if (name && text !== undefined) parameters.set(name.toLowerCase(), text)
+  }
+
+  return parameters
 }
 
 function getSchematicDocumentParameters(
