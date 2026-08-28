@@ -365,6 +365,29 @@ function renderSchematicRectangle(
   return `<rect ${metadata} x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(Math.max(Number(record.getCaseInsensitive("LINEWIDTH") ?? 1), 0.7))}"/>`
 }
 
+function renderSchematicPinText(params: {
+  anchor: "start" | "end"
+  color: string
+  dominantBaseline: "central" | "text-after-edge"
+  fontAttributes: string
+  clockwiseRotationDegrees: number
+  svgPosition: SvgPoint
+  text: string
+}): string {
+  const {
+    anchor,
+    color,
+    dominantBaseline,
+    fontAttributes,
+    clockwiseRotationDegrees,
+    svgPosition,
+    text,
+  } = params
+  if (!text) return ""
+
+  return `<text x="0" y="0" fill="${color}" ${fontAttributes} text-anchor="${anchor}" dominant-baseline="${dominantBaseline}" transform="translate(${formatSvgNumber(svgPosition.x)} ${formatSvgNumber(svgPosition.y)}) rotate(${formatSvgNumber(clockwiseRotationDegrees)})">${escapeXml(text)}</text>`
+}
+
 function renderSchematicPin(
   record: AltiumRecord,
   context: SchematicPinRenderContext,
@@ -420,7 +443,8 @@ function renderSchematicPin(
     hasInversionSymbol: record.getNumber("SYMBOL_OUTEREDGE") === 1,
     screenDirection,
   })
-  const rotation = orientation === 1 || orientation === 3 ? -90 : 0
+  const clockwiseRotationDegrees =
+    orientation === 1 || orientation === 3 ? -90 : 0
   const directionMatchesText = orientation === 0 || orientation === 1
   const designatorAnchor = directionMatchesText ? "start" : "end"
   const nameAnchor = directionMatchesText ? "end" : "start"
@@ -437,16 +461,30 @@ function renderSchematicPin(
     record,
     sheetRecord,
   })
-  const renderPinText = (
-    text: string,
-    position: SvgPoint,
-    anchor: string,
-  ): string =>
-    text
-      ? `<text x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${anchor}" dominant-baseline="text-after-edge" transform="translate(${formatSvgNumber(position.x)} ${formatSvgNumber(position.y)}) rotate(${rotation})">${escapeXml(text)}</text>`
-      : ""
+  const designatorSvg = showDesignator
+    ? renderSchematicPinText({
+        anchor: designatorAnchor,
+        color,
+        dominantBaseline: "text-after-edge",
+        fontAttributes: font.attributes,
+        clockwiseRotationDegrees,
+        svgPosition: designatorPosition,
+        text: designator,
+      })
+    : ""
+  const nameSvg = showName
+    ? renderSchematicPinText({
+        anchor: nameAnchor,
+        color,
+        dominantBaseline: "central",
+        fontAttributes: font.attributes,
+        clockwiseRotationDegrees,
+        svgPosition: namePosition,
+        text: name,
+      })
+    : ""
 
-  return `<g ${metadata}><line x1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.x)}" y1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${pinEdgeSymbols.svg}${showDesignator ? renderPinText(designator, designatorPosition, designatorAnchor) : ""}${showName ? renderPinText(name, namePosition, nameAnchor) : ""}</g>`
+  return `<g ${metadata}><line x1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.x)}" y1="${formatSvgNumber(pinEdgeSymbols.lineStartPosition.y)}" x2="${formatSvgNumber(connection.x)}" y2="${formatSvgNumber(connection.y)}" stroke="${color}" stroke-width="1"/>${pinEdgeSymbols.svg}${designatorSvg}${nameSvg}</g>`
 }
 
 function renderSchematicPowerPort(
