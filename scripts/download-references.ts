@@ -25,6 +25,13 @@ type NestedZipBundleSpec = {
 
 const references: DirectReferenceSpec[] = [
   {
+    filename: "stm32-st-link-v2.SchDoc",
+    sha256: "e571d8b66e23d73ebc7ecac53d17c116194c6117f534947d420fef87c6cd50c2",
+    source:
+      "yasir-shahzad/STM32-ST-Link-V2.0-Programmer@3284ac4fbd9a3f8471844db3c2b368fff2c33ca9 (GPL-3.0)",
+    url: "https://raw.githubusercontent.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer/3284ac4fbd9a3f8471844db3c2b368fff2c33ca9/hardware/ST_LINK_V2-1.SchDoc",
+  },
+  {
     filename: "simplefocmini-2024-04-26.PcbDoc",
     sha256: "8328cebe97ba8623fb2b707490e3473c6f7dc13fb0502b596b0e40c7e1613d24",
     source:
