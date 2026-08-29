@@ -13,6 +13,7 @@ import {
   getSchematicIndexedPoints,
 } from "./altium-values"
 import { getSchematicFont } from "./get-schematic-font"
+import { renderAltiumNegatedText } from "./render-altium-negated-text"
 import { renderSchematicPinEdgeSymbols } from "./render-schematic-pin-edge-symbols"
 import {
   renderSchematicSheetEntry,
@@ -21,6 +22,7 @@ import {
 import type { SchematicRenderContext } from "./schematic-render-context"
 import { serializeAltiumPcbToSvg } from "./serialize-altium-pcb-to-svg"
 import { serializeWindowsEnhancedMetafileToDataUrl } from "./serialize-windows-enhanced-metafile-to-svg"
+import { sortSchematicRecordsForPainting } from "./sort-schematic-records-for-painting"
 import type {
   AltiumSheetSvgOptions,
   SvgBounds,
@@ -115,7 +117,17 @@ export function serializeAltiumSheetToSvg(
   content.push(
     '<g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">',
   )
-  for (const record of records) {
+  const recordsForPainting = sortSchematicRecordsForPainting({
+    getParent: (record) => {
+      if (context.document) return context.document.getParent(record)
+      const ownerIndex = record.getNumber("OWNERINDEX")
+      return ownerIndex === undefined || ownerIndex < 0
+        ? undefined
+        : context.records[ownerIndex]
+    },
+    records,
+  })
+  for (const record of recordsForPainting) {
     if (!shouldRenderSchematicRecord(record, context)) continue
     const rendered = renderSchematicRecord(record, viewport, options, context)
     if (rendered) content.push(rendered)
@@ -168,6 +180,10 @@ function renderSchematicRecord(
     Number(record.getCaseInsensitive("LINEWIDTH") ?? 1),
     0.7,
   )
+
+  if (kind === "5") {
+    return renderSchematicBezier(record, viewport, metadata, color, lineWidth)
+  }
 
   if (kind === "6" || kind === "27" || kind === "7") {
     const points = getSchematicIndexedPoints(record)
@@ -284,7 +300,7 @@ function renderSchematicRecord(
         : ioType === 2
           ? `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width - pointDepth)} L ${formatSvgNumber(x + width)} ${formatSvgNumber(y)} L ${formatSvgNumber(x + width - pointDepth)} ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
           : `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width)} V ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
-    return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text></g>`
+    return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${renderAltiumNegatedText(name)}</text></g>`
   }
 
   if (
@@ -322,7 +338,9 @@ function renderSchematicRecord(
       sheetRecord: context.sheetRecord,
     })
     const positioning = getSchematicTextPositioning(record)
-    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${escapeXml(text)}</text>`
+    const renderedText =
+      kind === "25" ? renderAltiumNegatedText(text) : escapeXml(text)
+    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${renderedText}</text>`
   }
 
   if (kind === "28") {
@@ -377,6 +395,43 @@ function renderSchematicRecord(
   return undefined
 }
 
+function renderSchematicBezier(
+  record: AltiumRecord,
+  viewport: SvgViewport,
+  metadata: string,
+  color: string,
+  lineWidth: number,
+): string | undefined {
+  const points = getSchematicIndexedPoints(record)
+  if (points.length < 4) return undefined
+
+  const commands: string[] = []
+  let previousEnd: SvgPoint | undefined
+  for (let index = 0; index + 3 < points.length; ) {
+    const [start, control1, control2, end] = points.slice(index, index + 4)
+    if (!start || !control1 || !control2 || !end) break
+
+    if (
+      !previousEnd ||
+      start.x !== previousEnd.x ||
+      start.y !== previousEnd.y
+    ) {
+      commands.push(
+        `M ${formatSvgNumber(viewport.toX(start.x))} ${formatSvgNumber(viewport.toY(start.y))}`,
+      )
+    }
+    commands.push(
+      `C ${formatSvgNumber(viewport.toX(control1.x))} ${formatSvgNumber(viewport.toY(control1.y))} ${formatSvgNumber(viewport.toX(control2.x))} ${formatSvgNumber(viewport.toY(control2.y))} ${formatSvgNumber(viewport.toX(end.x))} ${formatSvgNumber(viewport.toY(end.y))}`,
+    )
+    previousEnd = end
+
+    const duplicatedStart = points[index + 4]
+    index += duplicatedStart?.x === end.x && duplicatedStart.y === end.y ? 4 : 3
+  }
+
+  return `<path ${metadata} class="altium-schematic-bezier" d="${commands.join(" ")}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+}
+
 function renderSchematicRectangle(
   record: AltiumRecord,
   viewport: SvgViewport,
@@ -404,6 +459,7 @@ function renderSchematicPinText(params: {
   clockwiseRotationDegrees: number
   svgPosition: SvgPoint
   text: string
+  useAltiumNegation?: boolean
 }): string {
   const {
     anchor,
@@ -413,10 +469,14 @@ function renderSchematicPinText(params: {
     clockwiseRotationDegrees,
     svgPosition,
     text,
+    useAltiumNegation,
   } = params
   if (!text) return ""
 
-  return `<text x="0" y="0" fill="${color}" ${fontAttributes} text-anchor="${anchor}" dominant-baseline="${dominantBaseline}" transform="translate(${formatSvgNumber(svgPosition.x)} ${formatSvgNumber(svgPosition.y)}) rotate(${formatSvgNumber(clockwiseRotationDegrees)})">${escapeXml(text)}</text>`
+  const renderedText = useAltiumNegation
+    ? renderAltiumNegatedText(text)
+    : escapeXml(text)
+  return `<text x="0" y="0" fill="${color}" ${fontAttributes} text-anchor="${anchor}" dominant-baseline="${dominantBaseline}" transform="translate(${formatSvgNumber(svgPosition.x)} ${formatSvgNumber(svgPosition.y)}) rotate(${formatSvgNumber(clockwiseRotationDegrees)})">${renderedText}</text>`
 }
 
 function renderSchematicPin(
@@ -512,6 +572,7 @@ function renderSchematicPin(
         clockwiseRotationDegrees,
         svgPosition: namePosition,
         text: name,
+        useAltiumNegation: true,
       })
     : ""
 
@@ -580,7 +641,7 @@ function renderSchematicPowerPort(
   const vertical = direction.y !== 0
   const textAnchor = vertical ? "middle" : direction.x > 0 ? "start" : "end"
   const baseline = vertical ? (direction.y > 0 ? "hanging" : "auto") : "central"
-  return `<g ${metadata}>${symbol}<text x="${formatSvgNumber(label.x)}" y="${formatSvgNumber(label.y)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${color}" ${font.attributes}>${escapeXml(text)}</text></g>`
+  return `<g ${metadata}>${symbol}<text x="${formatSvgNumber(label.x)}" y="${formatSvgNumber(label.y)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${color}" ${font.attributes}>${renderAltiumNegatedText(text)}</text></g>`
 }
 
 function renderSchematicSheetBorder(
