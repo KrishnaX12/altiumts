@@ -54,6 +54,17 @@ export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
   viewBox?: AltiumPcbViewBox
 }
 
+/**
+ * A crop rectangle expressed in Altium schematic coordinates. `x` and `y`
+ * locate the lower-left corner; all values use schematic document units.
+ */
+export interface AltiumSchematicViewBox {
+  height: number
+  width: number
+  x: number
+  y: number
+}
+
 export interface AltiumSheetSvgOptions extends AltiumSvgRenderOptions {
   /** Current schematic filename, including its extension. */
   documentName?: string
@@ -62,6 +73,11 @@ export interface AltiumSheetSvgOptions extends AltiumSvgRenderOptions {
   /** Current project filename, including its extension. */
   projectName?: string
   showBorder?: boolean
+  /**
+   * Region to render and clip. Defaults to the declared schematic paper,
+   * which intentionally hides off-sheet records.
+   */
+  viewBox?: AltiumSchematicViewBox
 }
 
 export interface SvgViewport {

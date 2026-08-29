@@ -77,8 +77,15 @@ export function serializeAltiumSheetToSvg(
     maxY: sheetHeight,
   }
   // Altium can retain intentionally off-sheet annotations and helper objects.
-  // The paper rectangle, rather than all record geometry, defines the view.
-  const viewport = createSvgViewport(paperBounds, options)
+  // The paper rectangle defines the default view; callers can explicitly
+  // request a different region when inspecting those records.
+  const renderBounds = options.viewBox
+    ? schematicViewBoxToBounds(options.viewBox)
+    : paperBounds
+  const viewport = createSvgViewport(renderBounds, {
+    ...options,
+    margin: options.margin ?? (options.viewBox ? 0 : undefined),
+  })
   const content: string[] = []
   const context: SchematicRenderContext = {
     document: source instanceof AltiumSchDoc ? source : undefined,
@@ -86,12 +93,12 @@ export function serializeAltiumSheetToSvg(
     sheetRecord,
   }
 
-  const paperLeft = viewport.toX(0)
-  const paperTop = viewport.toY(sheetHeight)
-  const paperWidth = sheetWidth
-  const paperHeight = sheetHeight
+  const clipLeft = viewport.toX(renderBounds.minX)
+  const clipTop = viewport.toY(renderBounds.maxY)
+  const clipWidth = renderBounds.maxX - renderBounds.minX
+  const clipHeight = renderBounds.maxY - renderBounds.minY
   content.push(
-    `<defs><clipPath id="altium-sheet-paper"><rect x="${formatSvgNumber(paperLeft)}" y="${formatSvgNumber(paperTop)}" width="${formatSvgNumber(paperWidth)}" height="${formatSvgNumber(paperHeight)}"/></clipPath></defs>`,
+    `<defs><clipPath id="altium-sheet-paper"><rect x="${formatSvgNumber(clipLeft)}" y="${formatSvgNumber(clipTop)}" width="${formatSvgNumber(clipWidth)}" height="${formatSvgNumber(clipHeight)}"/></clipPath></defs>`,
   )
 
   if (options.showBorder !== false) {
@@ -122,6 +129,30 @@ export function serializeAltiumSheetToSvg(
     title: options.title ?? "Altium schematic sheet",
     viewport,
   })
+}
+
+function schematicViewBoxToBounds(
+  viewBox: NonNullable<AltiumSheetSvgOptions["viewBox"]>,
+): SvgBounds {
+  if (
+    !Number.isFinite(viewBox.x) ||
+    !Number.isFinite(viewBox.y) ||
+    !Number.isFinite(viewBox.width) ||
+    !Number.isFinite(viewBox.height) ||
+    viewBox.width <= 0 ||
+    viewBox.height <= 0
+  ) {
+    throw new TypeError(
+      "Schematic SVG viewBox must have finite x/y values and positive finite width/height values",
+    )
+  }
+
+  return {
+    minX: viewBox.x,
+    minY: viewBox.y,
+    maxX: viewBox.x + viewBox.width,
+    maxY: viewBox.y + viewBox.height,
+  }
 }
 
 function renderSchematicRecord(
