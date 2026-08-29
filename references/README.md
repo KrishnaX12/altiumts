@@ -2,6 +2,10 @@
 
 Run `bun run download-references` to download:
 
+- `stm32-vfd-clock-ds3231.SchDoc` from the MIT-licensed
+  [`linzi0928/STM32_VFD_CLOCK_DS3231`](https://github.com/linzi0928/STM32_VFD_CLOCK_DS3231)
+  open-source hardware repository, pinned to commit
+  `995ad383c34c13ae0e29a174294a5a8dc1c962f4`.
 - `stm32-st-link-v2.SchDoc` from the GPL-3.0-licensed
   [`yasir-shahzad/STM32-ST-Link-V2.0-Programmer`](https://github.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer)
   open-source hardware repository, pinned to commit

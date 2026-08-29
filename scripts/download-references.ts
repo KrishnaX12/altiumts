@@ -25,6 +25,13 @@ type NestedZipBundleSpec = {
 
 const references: DirectReferenceSpec[] = [
   {
+    filename: "stm32-vfd-clock-ds3231.SchDoc",
+    sha256: "8c515e006412661da8fc7ec4676202658f457eab6a50e1485defe13732f0fd62",
+    source:
+      "linzi0928/STM32_VFD_CLOCK_DS3231@995ad383c34c13ae0e29a174294a5a8dc1c962f4 (MIT)",
+    url: "https://raw.githubusercontent.com/linzi0928/STM32_VFD_CLOCK_DS3231/995ad383c34c13ae0e29a174294a5a8dc1c962f4/AltiumDesigner%20PCB%20Project/VJ111.SchDoc",
+  },
+  {
     filename: "stm32-st-link-v2.SchDoc",
     sha256: "e571d8b66e23d73ebc7ecac53d17c116194c6117f534947d420fef87c6cd50c2",
     source:
