@@ -182,7 +182,11 @@ function renderSchematicRecord(
   )
 
   if (kind === "5") {
-    return renderSchematicBezier(record, viewport, metadata, color, lineWidth)
+    const points = getSchematicIndexedPoints(record)
+    if (points.length < 4) return undefined
+    const path = renderSchematicBezierPath(points, viewport)
+    if (!path) return undefined
+    return `<path ${metadata} d="${path}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
 
   if (kind === "6" || kind === "27" || kind === "7") {
@@ -395,41 +399,32 @@ function renderSchematicRecord(
   return undefined
 }
 
-function renderSchematicBezier(
-  record: AltiumRecord,
+function renderSchematicBezierPath(
+  points: SvgPoint[],
   viewport: SvgViewport,
-  metadata: string,
-  color: string,
-  lineWidth: number,
 ): string | undefined {
-  const points = getSchematicIndexedPoints(record)
-  if (points.length < 4) return undefined
+  const startPoint = points[0]
+  if (!startPoint || points.length < 4) return undefined
 
-  const commands: string[] = []
-  let previousEnd: SvgPoint | undefined
-  for (let index = 0; index + 3 < points.length; ) {
-    const [start, control1, control2, end] = points.slice(index, index + 4)
-    if (!start || !control1 || !control2 || !end) break
-
-    if (
-      !previousEnd ||
-      start.x !== previousEnd.x ||
-      start.y !== previousEnd.y
-    ) {
-      commands.push(
-        `M ${formatSvgNumber(viewport.toX(start.x))} ${formatSvgNumber(viewport.toY(start.y))}`,
-      )
-    }
+  const commands = [
+    `M ${formatSvgNumber(viewport.toX(startPoint.x))} ${formatSvgNumber(viewport.toY(startPoint.y))}`,
+  ]
+  for (let index = 1; index + 2 < points.length; ) {
+    const controlPoint1 = points[index]
+    const controlPoint2 = points[index + 1]
+    const endPoint = points[index + 2]
+    if (!controlPoint1 || !controlPoint2 || !endPoint) break
     commands.push(
-      `C ${formatSvgNumber(viewport.toX(control1.x))} ${formatSvgNumber(viewport.toY(control1.y))} ${formatSvgNumber(viewport.toX(control2.x))} ${formatSvgNumber(viewport.toY(control2.y))} ${formatSvgNumber(viewport.toX(end.x))} ${formatSvgNumber(viewport.toY(end.y))}`,
+      `C ${formatSvgNumber(viewport.toX(controlPoint1.x))} ${formatSvgNumber(viewport.toY(controlPoint1.y))} ${formatSvgNumber(viewport.toX(controlPoint2.x))} ${formatSvgNumber(viewport.toY(controlPoint2.y))} ${formatSvgNumber(viewport.toX(endPoint.x))} ${formatSvgNumber(viewport.toY(endPoint.y))}`,
     )
-    previousEnd = end
 
-    const duplicatedStart = points[index + 4]
-    index += duplicatedStart?.x === end.x && duplicatedStart.y === end.y ? 4 : 3
+    const nextPoint = points[index + 3]
+    const repeatsEndPoint =
+      nextPoint?.x === endPoint.x && nextPoint.y === endPoint.y
+    index += repeatsEndPoint ? 4 : 3
   }
 
-  return `<path ${metadata} d="${commands.join(" ")}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+  return commands.length > 1 ? commands.join(" ") : undefined
 }
 
 function renderSchematicRectangle(
