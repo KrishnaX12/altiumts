@@ -429,7 +429,7 @@ function renderSchematicBezier(
     index += duplicatedStart?.x === end.x && duplicatedStart.y === end.y ? 4 : 3
   }
 
-  return `<path ${metadata} class="altium-schematic-bezier" d="${commands.join(" ")}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+  return `<path ${metadata} d="${commands.join(" ")}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
 }
 
 function renderSchematicRectangle(

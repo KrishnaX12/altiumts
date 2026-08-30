@@ -54,6 +54,6 @@ test("renders real-board active-low names and Bezier curves", async () => {
     .getOwnedRecords(fuse)
     .find((record) => record.recordKind === "5")
   expect(bezier?.getNumber("LOCATIONCOUNT")).toBe(9)
-  expect(svg).toContain('<path data-record="5" class="altium-schematic-bezier"')
+  expect(svg).toContain('<path data-record="5"')
   await expect(svg).toMatchSvgSnapshot(import.meta.path)
 })

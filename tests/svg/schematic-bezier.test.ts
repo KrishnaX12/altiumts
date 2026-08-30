@@ -9,9 +9,7 @@ test("renders chained schematic Beziers with shared or repeated endpoints", () =
     "|RECORD=5|LOCATIONCOUNT=9|X1=80|Y1=20|X2=90|Y2=30|X3=100|Y3=30|X4=110|Y4=20|X5=110|Y5=20|X6=120|Y6=10|X7=130|Y7=10|X8=140|Y8=20|X9=140|Y9=20",
   ].join("\n")
   const svg = serializeAltiumSheetToSvg(parseAltiumAscii(source))
-  const paths = svg.match(
-    /<path data-record="5" class="altium-schematic-bezier"[^>]+>/gu,
-  )
+  const paths = svg.match(/<path data-record="5"[^>]+>/gu)
 
   expect(paths).toHaveLength(2)
   expect(paths?.[0]?.match(/\bC\b/gu)).toHaveLength(2)
