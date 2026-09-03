@@ -187,7 +187,7 @@ function renderSchematicRecord(
     return `<${tag} ${metadata} points="${pointsToSvg(points, viewport)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(strokeWidth)}"/>`
   }
 
-  if (kind === "13" || kind === "35") {
+  if (kind === "13" || kind === "37") {
     const location = getSchematicLocationIfPresent(record)
     const corner = getSchematicCornerIfPresent(record)
     if (!location || !corner) return undefined
