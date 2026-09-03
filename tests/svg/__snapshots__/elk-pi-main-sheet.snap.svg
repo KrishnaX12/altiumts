@@ -526,6 +526,11 @@
     <polyline data-record="27" points="177,431 202,431" fill="none" stroke="#000080" stroke-width="1"/>
     <polyline data-record="27" points="177,421 202,421" fill="none" stroke="#000080" stroke-width="1"/>
     <polyline data-record="27" points="912,286 927,286" fill="none" stroke="#000080" stroke-width="1"/>
+    <polyline data-record="26" points="312,541 222,541" fill="none" stroke="#000080" stroke-width="2"/>
+    <polyline data-record="26" points="312,596 222,596" fill="none" stroke="#000080" stroke-width="2"/>
+    <polyline data-record="26" points="922,411 942,411" fill="none" stroke="#000080" stroke-width="2"/>
+    <polyline data-record="26" points="922,421 942,421" fill="none" stroke="#000080" stroke-width="2"/>
+    <polyline data-record="26" points="892,346 892,141 1032,141 1032,226" fill="none" stroke="#000080" stroke-width="2"/>
     <circle data-record="29" cx="727" cy="206" r="1.8" fill="#800000"/>
     <circle data-record="29" cx="727" cy="196" r="1.8" fill="#800000"/>
     <circle data-record="29" cx="727" cy="186" r="1.8" fill="#800000"/>

@@ -44,6 +44,7 @@ import {
 import {
   AltiumSchArcRecord,
   AltiumSchBezierRecord,
+  AltiumSchBusEntryRecord,
   AltiumSchBusRecord,
   AltiumSchComponentRecord,
   AltiumSchDesignatorRecord,
@@ -109,6 +110,7 @@ export const recordConstructors = new Map<string, AltiumRecordConstructor>([
   ["25", AltiumSchNetLabelRecord],
   ["26", AltiumSchBusRecord],
   ["27", AltiumSchWireRecord],
+  ["35", AltiumSchBusEntryRecord],
   ["28", AltiumSchTextFrameRecord],
   ["29", AltiumSchJunctionRecord],
   ["30", AltiumSchImageRecord],

@@ -11,7 +11,7 @@ test("renders the binary Elk Pi main schematic sheet", async () => {
 
   expect(svg).toContain('class="altium-sheet"')
   expect(document.getRecordsByKind("26")).toHaveLength(5)
-  expect(svg).not.toContain('data-record="26"')
+  expect(svg.match(/data-record="26"/g)).toHaveLength(5)
   expect(svg).toContain('data-record="27"')
   expect(
     document.records.some((record) => record.getDecoded("Text") === "-65°C"),

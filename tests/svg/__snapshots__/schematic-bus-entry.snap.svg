@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="667" viewBox="0 0 180 120" role="img" aria-label="Schematic bus entry" class="altium-sheet" data-renderer="altiumts">
+  <title>Schematic bus entry</title>
+  <rect width="100%" height="100%" fill="#000000"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <defs><clipPath id="altium-sheet-paper"><rect x="0" y="0" width="180" height="120"/></clipPath></defs>
+    <g data-sheet-content="true" clip-path="url(#altium-sheet-paper)">
+    <polyline data-record="26" points="100,100 100,20" fill="none" stroke="#000080" stroke-width="2"/>
+    <polyline data-record="27" points="30,60 90,60" fill="none" stroke="#800000" stroke-width="1"/>
+    <line data-record="35" x1="90" y1="60" x2="100" y2="50" stroke="#800000" stroke-width="1"/>
+    </g>
+  </g>
+</svg>
