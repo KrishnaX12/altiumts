@@ -2,7 +2,7 @@ import { expect, test } from "bun:test"
 import { parseAltiumSchDoc, serializeAltiumSheetToSvg } from "../../lib"
 import { readReferenceBytes } from "./read-reference"
 
-test("shows the missing Elk Pi schematic buses and bus entries", async () => {
+test("renders Elk Pi schematic buses and bus entries", async () => {
   const source = await readReferenceBytes("elk-pi-main.SchDoc")
   const document = parseAltiumSchDoc(source)
   const midiBusSvg = serializeAltiumSheetToSvg(document, {
@@ -18,10 +18,10 @@ test("shows the missing Elk Pi schematic buses and bus entries", async () => {
 
   expect(document.getRecordsByKind("26")).toHaveLength(5)
   expect(document.getRecordsByKind("37")).toHaveLength(20)
-  expect(midiBusSvg).not.toContain('data-record="26"')
-  expect(midiBusSvg).not.toContain('data-record="37"')
-  expect(addressBusSvg).not.toContain('data-record="26"')
-  expect(addressBusSvg).not.toContain('data-record="37"')
+  expect(midiBusSvg).toContain('data-record="26"')
+  expect(midiBusSvg).toContain('data-record="37"')
+  expect(addressBusSvg).toContain('data-record="26"')
+  expect(addressBusSvg).toContain('data-record="37"')
   await expect(midiBusSvg).toMatchSvgSnapshot(import.meta.path, "midi")
   await expect(addressBusSvg).toMatchSvgSnapshot(import.meta.path, "address")
 })
