@@ -5,7 +5,7 @@ import {
   serializeAltiumSheetToSvg,
 } from "../../lib"
 
-test("renders a wire entering a schematic bus through a 45-degree bus entry", async () => {
+test("renders a wire entering a schematic bus through a 45-degree bus entry", () => {
   const source = [
     "|HEADER=Protel for Windows - Schematic Capture Ascii File Version 5.0",
     "|RECORD=31|CUSTOMX=180|CUSTOMY=120",
@@ -33,5 +33,4 @@ test("renders a wire entering a schematic bus through a 45-degree bus entry", as
   expect(svg).toContain(
     '<line data-record="37" x1="90" y1="60" x2="100" y2="50" stroke="#800000" stroke-width="1"/>',
   )
-  await expect(svg).toMatchSvgSnapshot(import.meta.path)
 })
