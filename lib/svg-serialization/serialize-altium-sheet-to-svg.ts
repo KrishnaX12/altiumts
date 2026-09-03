@@ -14,6 +14,7 @@ import {
 } from "./altium-values"
 import { getSchematicFont } from "./get-schematic-font"
 import { getSchematicSheetSize } from "./get-schematic-sheet-size"
+import { renderAltiumNegatedText } from "./render-altium-negated-text"
 import { renderSchematicPinEdgeSymbols } from "./render-schematic-pin-edge-symbols"
 import {
   renderSchematicSheetEntry,
@@ -290,7 +291,7 @@ function renderSchematicRecord(
         : ioType === 2
           ? `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width - pointDepth)} L ${formatSvgNumber(x + width)} ${formatSvgNumber(y)} L ${formatSvgNumber(x + width - pointDepth)} ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
           : `M ${formatSvgNumber(x)} ${formatSvgNumber(y - halfHeight)} H ${formatSvgNumber(x + width)} V ${formatSvgNumber(y + halfHeight)} H ${formatSvgNumber(x)} Z`
-    return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${escapeXml(name)}</text></g>`
+    return `<g ${metadata}><path d="${path}" fill="${fillColor}" stroke="${color}" stroke-width="1"/><text x="${formatSvgNumber(x + width / 2)}" y="${formatSvgNumber(y)}" text-anchor="middle" dominant-baseline="central" fill="${textColor}" ${font.attributes}>${renderAltiumNegatedText(name)}</text></g>`
   }
 
   if (
@@ -328,7 +329,9 @@ function renderSchematicRecord(
       sheetRecord: context.sheetRecord,
     })
     const positioning = getSchematicTextPositioning(record)
-    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${escapeXml(text)}</text>`
+    const renderedText =
+      kind === "25" ? renderAltiumNegatedText(text) : escapeXml(text)
+    return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${renderedText}</text>`
   }
 
   if (kind === "28") {
@@ -433,6 +436,7 @@ function renderSchematicPinText(params: {
   clockwiseRotationDegrees: number
   svgPosition: SvgPoint
   text: string
+  useAltiumNegation?: boolean
 }): string {
   const {
     anchor,
@@ -442,10 +446,14 @@ function renderSchematicPinText(params: {
     clockwiseRotationDegrees,
     svgPosition,
     text,
+    useAltiumNegation,
   } = params
   if (!text) return ""
 
-  return `<text x="0" y="0" fill="${color}" ${fontAttributes} text-anchor="${anchor}" dominant-baseline="${dominantBaseline}" transform="translate(${formatSvgNumber(svgPosition.x)} ${formatSvgNumber(svgPosition.y)}) rotate(${formatSvgNumber(clockwiseRotationDegrees)})">${escapeXml(text)}</text>`
+  const renderedText = useAltiumNegation
+    ? renderAltiumNegatedText(text)
+    : escapeXml(text)
+  return `<text x="0" y="0" fill="${color}" ${fontAttributes} text-anchor="${anchor}" dominant-baseline="${dominantBaseline}" transform="translate(${formatSvgNumber(svgPosition.x)} ${formatSvgNumber(svgPosition.y)}) rotate(${formatSvgNumber(clockwiseRotationDegrees)})">${renderedText}</text>`
 }
 
 function renderSchematicPin(
@@ -541,6 +549,7 @@ function renderSchematicPin(
         clockwiseRotationDegrees,
         svgPosition: namePosition,
         text: name,
+        useAltiumNegation: true,
       })
     : ""
 
@@ -609,7 +618,7 @@ function renderSchematicPowerPort(
   const vertical = direction.y !== 0
   const textAnchor = vertical ? "middle" : direction.x > 0 ? "start" : "end"
   const baseline = vertical ? (direction.y > 0 ? "hanging" : "auto") : "central"
-  return `<g ${metadata}>${symbol}<text x="${formatSvgNumber(label.x)}" y="${formatSvgNumber(label.y)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${color}" ${font.attributes}>${escapeXml(text)}</text></g>`
+  return `<g ${metadata}>${symbol}<text x="${formatSvgNumber(label.x)}" y="${formatSvgNumber(label.y)}" text-anchor="${textAnchor}" dominant-baseline="${baseline}" fill="${color}" ${font.attributes}>${renderAltiumNegatedText(text)}</text></g>`
 }
 
 function renderSchematicSheetBorder(
