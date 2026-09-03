@@ -13,6 +13,7 @@ import {
   getSchematicIndexedPoints,
 } from "./altium-values"
 import { getSchematicFont } from "./get-schematic-font"
+import { getSchematicSheetSize } from "./get-schematic-sheet-size"
 import { renderAltiumNegatedText } from "./render-altium-negated-text"
 import { renderSchematicPinEdgeSymbols } from "./render-schematic-pin-edge-symbols"
 import {
@@ -63,14 +64,7 @@ export function serializeAltiumSheetToSvg(
   const sheetRecord = records.find(
     (record): record is AltiumSchSheetRecord => record.recordKind === "31",
   )
-  const sheetWidth = Math.max(
-    Number(sheetRecord?.getCaseInsensitive("CUSTOMX") ?? 1000),
-    1,
-  )
-  const sheetHeight = Math.max(
-    Number(sheetRecord?.getCaseInsensitive("CUSTOMY") ?? 800),
-    1,
-  )
+  const [sheetWidth, sheetHeight] = getSchematicSheetSize(sheetRecord)
   const paperBounds: SvgBounds = {
     minX: 0,
     minY: 0,
