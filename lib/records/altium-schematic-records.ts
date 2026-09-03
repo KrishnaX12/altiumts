@@ -119,6 +119,9 @@ export class AltiumSchNetLabelRecord extends AltiumSchematicRecord {
 export class AltiumSchBusRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-bus-record"
 }
+export class AltiumSchBusEntryRecord extends AltiumSchematicRecord {
+  override readonly type = "schematic-bus-entry-record"
+}
 export class AltiumSchWireRecord extends AltiumSchematicRecord {
   override readonly type = "schematic-wire-record"
 }

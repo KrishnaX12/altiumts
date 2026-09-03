@@ -175,7 +175,7 @@ function renderSchematicRecord(
     return `<path ${metadata} d="${path}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
 
-  if (kind === "6" || kind === "27" || kind === "7") {
+  if (kind === "6" || kind === "26" || kind === "27" || kind === "7") {
     const points = getSchematicIndexedPoints(record)
     if (points.length < 2) return undefined
     const polygon = kind === "7"
@@ -184,10 +184,11 @@ function renderSchematicRecord(
       polygon && record.getBoolean("ISSOLID") === true
         ? altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "none")
         : "none"
-    return `<${tag} ${metadata} points="${pointsToSvg(points, viewport)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
+    const strokeWidth = kind === "26" ? Math.max(lineWidth, 2) : lineWidth
+    return `<${tag} ${metadata} points="${pointsToSvg(points, viewport)}" fill="${fill}" stroke="${color}" stroke-width="${formatSvgNumber(strokeWidth)}"/>`
   }
 
-  if (kind === "13") {
+  if (kind === "13" || kind === "37") {
     const location = getSchematicLocationIfPresent(record)
     const corner = getSchematicCornerIfPresent(record)
     if (!location || !corner) return undefined
