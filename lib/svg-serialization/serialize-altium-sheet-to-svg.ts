@@ -12,6 +12,7 @@ import {
   getSchematicCoordinate,
   getSchematicIndexedPoints,
 } from "./altium-values"
+import { approximateAltiumArc } from "./approximate-altium-arc"
 import { getSchematicFont } from "./get-schematic-font"
 import { getSchematicSheetSize } from "./get-schematic-sheet-size"
 import { renderAltiumNegatedText } from "./render-altium-negated-text"
@@ -44,7 +45,6 @@ interface SchematicPinRenderContext {
   sheetRecord: AltiumSchSheetRecord | undefined
   viewport: SvgViewport
 }
-
 export function serializeAltiumSheetToSvg(
   source: AltiumPcbDoc | AltiumSchDoc | AltiumLine[],
   options: AltiumSheetSvgOptions = {},
@@ -217,9 +217,16 @@ function renderSchematicRecord(
   if (kind === "11" || kind === "12") {
     const center = getSchematicLocation(record)
     const radius = getSchematicCoordinate(record, "RADIUS", 1)
-    const startAngle = Number(record.getCaseInsensitive("STARTANGLE") ?? 0)
-    const endAngle = Number(record.getCaseInsensitive("ENDANGLE") ?? 360)
-    const points = approximateSchematicArc(center, radius, startAngle, endAngle)
+    const startAngleDegrees = Number(
+      record.getCaseInsensitive("STARTANGLE") ?? 0,
+    )
+    const endAngleDegrees = Number(record.getCaseInsensitive("ENDANGLE") ?? 360)
+    const points = approximateAltiumArc({
+      center,
+      radius,
+      startAngleDegrees,
+      endAngleDegrees,
+    })
     return `<polyline ${metadata} points="${pointsToSvg(points, viewport)}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(lineWidth)}"/>`
   }
 
@@ -1001,22 +1008,4 @@ function getSchematicCornerIfPresent(
     x: getSchematicCoordinate(record, "CORNER.X"),
     y: getSchematicCoordinate(record, "CORNER.Y"),
   }
-}
-
-function approximateSchematicArc(
-  center: SvgPoint,
-  radius: number,
-  startAngle: number,
-  endAngle: number,
-): SvgPoint[] {
-  const sweep = endAngle - startAngle || 360
-  const segments = Math.max(8, Math.ceil(Math.abs(sweep) / 7.5))
-  return Array.from({ length: segments + 1 }, (_, index) => {
-    const angle = startAngle + (sweep * index) / segments
-    const radians = (angle * Math.PI) / 180
-    return {
-      x: center.x + Math.cos(radians) * radius,
-      y: center.y + Math.sin(radians) * radius,
-    }
-  })
 }

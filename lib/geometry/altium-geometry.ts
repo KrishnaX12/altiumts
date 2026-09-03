@@ -39,6 +39,13 @@ export function normalizeAltiumAngle(angle: number): number {
   return Object.is(normalized, -0) ? 0 : normalized
 }
 
+export function getCcwSweepDegrees(
+  startAngleDegrees: number,
+  endAngleDegrees: number,
+): number {
+  return normalizeAltiumAngle(endAngleDegrees - startAngleDegrees) || 360
+}
+
 export function altiumPointsEqual(
   left: AltiumPoint,
   right: AltiumPoint,
