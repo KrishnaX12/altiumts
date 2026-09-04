@@ -25,6 +25,13 @@ type NestedZipBundleSpec = {
 
 const references: DirectReferenceSpec[] = [
   {
+    filename: "altium-dsp-fpga-power.SchDoc",
+    sha256: "a0e51aeb708bcb7d8f444073a16e5edf9e8aee63ce28329122942ca27150373f",
+    source:
+      "AmirhosseinR/Altium_DSP_FPGA@61e66e61a6b7fbcfbc370a0b756b2958f38ad493 (MIT)",
+    url: "https://raw.githubusercontent.com/AmirhosseinR/Altium_DSP_FPGA/61e66e61a6b7fbcfbc370a0b756b2958f38ad493/power.SchDoc",
+  },
+  {
     filename: "stm32-st-link-v2.SchDoc",
     sha256: "e571d8b66e23d73ebc7ecac53d17c116194c6117f534947d420fef87c6cd50c2",
     source:

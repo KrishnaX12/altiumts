@@ -2,6 +2,10 @@
 
 Run `bun run download-references` to download:
 
+- `altium-dsp-fpga-power.SchDoc` from the MIT-licensed
+  [`AmirhosseinR/Altium_DSP_FPGA`](https://github.com/AmirhosseinR/Altium_DSP_FPGA)
+  open-source hardware repository, pinned to commit
+  `61e66e61a6b7fbcfbc370a0b756b2958f38ad493`.
 - `stm32-st-link-v2.SchDoc` from the GPL-3.0-licensed
   [`yasir-shahzad/STM32-ST-Link-V2.0-Programmer`](https://github.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer)
   open-source hardware repository, pinned to commit
