@@ -1,7 +1,7 @@
 import { expect, test } from "bun:test"
 import { parseAltiumAscii, serializeAltiumSheetToSvg } from "../../lib"
 
-test("renders opaque schematic component graphics behind pins", () => {
+test("renders transparent component fills behind foreground graphics", () => {
   const source = [
     "|RECORD=31|CUSTOMX=140|CUSTOMY=100",
     "|RECORD=1|LOCATION.X=70|LOCATION.Y=50",
@@ -10,7 +10,7 @@ test("renders opaque schematic component graphics behind pins", () => {
     "|RECORD=7|OWNERINDEX=1|LOCATIONCOUNT=3|X1=40|Y1=30|X2=100|Y2=30|X3=70|Y3=70|ISSOLID=T|AREACOLOR=16777136",
     "|RECORD=8|OWNERINDEX=1|LOCATION.X=70|LOCATION.Y=50|RADIUS=30|SECONDARYRADIUS=20|ISSOLID=T|AREACOLOR=16777136",
     "|RECORD=10|OWNERINDEX=1|LOCATION.X=40|LOCATION.Y=30|CORNER.X=100|CORNER.Y=70|ISSOLID=T|AREACOLOR=16777136",
-    "|RECORD=14|OWNERINDEX=1|LOCATION.X=40|LOCATION.Y=30|CORNER.X=100|CORNER.Y=70|ISSOLID=T|AREACOLOR=16777136",
+    "|RECORD=14|OWNERINDEX=1|LOCATION.X=40|LOCATION.Y=30|CORNER.X=100|CORNER.Y=70|ISSOLID=T|AREACOLOR=16777136|TRANSPARENT=T",
     "|RECORD=34|OWNERINDEX=1|LOCATION.X=40|LOCATION.Y=75|TEXT=U1",
   ].join("\n")
 
@@ -32,11 +32,14 @@ test("renders opaque schematic component graphics behind pins", () => {
     expect(pinIndex).toBeGreaterThan(bodyIndex)
   }
   expect(lineIndex).toBeGreaterThan(pinIndex)
+  expect(svg.indexOf('<rect data-record="14"')).toBeLessThan(
+    svg.indexOf('<polygon data-record="7"'),
+  )
   expect(designatorIndex).toBeGreaterThan(lineIndex)
   expect(svg).toContain(">INPUT</text>")
 })
 
-test("preserves transparent component graphic order", () => {
+test("preserves unfilled component graphic order", () => {
   const source = [
     "|RECORD=31|CUSTOMX=140|CUSTOMY=100",
     "|RECORD=1|LOCATION.X=70|LOCATION.Y=50",
