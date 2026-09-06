@@ -819,19 +819,31 @@ function getSchematicRecordsInPaintOrder(
     )
     if (firstPinIndex < 0) continue
 
-    const lateOpaqueGraphics = componentRecords
+    const lateFilledGraphics = componentRecords
       .slice(firstPinIndex + 1)
-      .filter(isOpaqueSchematicGraphic)
-    if (lateOpaqueGraphics.length === 0) continue
+      .filter(isFilledSchematicGraphic)
+    if (lateFilledGraphics.length === 0) continue
 
-    const lateOpaqueGraphicSet = new Set(lateOpaqueGraphics)
+    const backgroundGraphics = lateFilledGraphics.filter(
+      (record) => record.getBoolean("TRANSPARENT") === true,
+    )
+    const foregroundGraphics = lateFilledGraphics.filter(
+      (record) => record.getBoolean("TRANSPARENT") !== true,
+    )
+
+    const lateFilledGraphicSet = new Set(lateFilledGraphics)
     const reorderedComponentRecords = componentRecords.filter(
-      (record) => !lateOpaqueGraphicSet.has(record),
+      (record) => !lateFilledGraphicSet.has(record),
     )
     const insertionIndex = reorderedComponentRecords.findIndex(
       (record) => record.recordKind === "2",
     )
-    reorderedComponentRecords.splice(insertionIndex, 0, ...lateOpaqueGraphics)
+    reorderedComponentRecords.splice(
+      insertionIndex,
+      0,
+      ...backgroundGraphics,
+      ...foregroundGraphics,
+    )
 
     for (const [indexOffset, recordIndex] of indexes.entries()) {
       const record = reorderedComponentRecords[indexOffset]
@@ -870,7 +882,7 @@ function getParentSchematicRecord(
     : context.records[ownerIndex]
 }
 
-function isOpaqueSchematicGraphic(record: AltiumRecord): boolean {
+function isFilledSchematicGraphic(record: AltiumRecord): boolean {
   if (record.recordKind === "7") {
     return (
       record.getBoolean("ISSOLID") === true &&
