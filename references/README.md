@@ -9,7 +9,7 @@ Run `bun run download-references` to download:
 - `dsp5509-ciii.PcbDoc` from the same MIT-licensed
   [`AmirhosseinR/Altium_DSP_FPGA`](https://github.com/AmirhosseinR/Altium_DSP_FPGA)
   repository and commit.
-- `stm32-st-link-v2.SchDoc` from the GPL-3.0-licensed
+- `stm32-st-link-v2.PcbDoc` and `stm32-st-link-v2.SchDoc` from the GPL-3.0-licensed
   [`yasir-shahzad/STM32-ST-Link-V2.0-Programmer`](https://github.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer)
   open-source hardware repository, pinned to commit
   `3284ac4fbd9a3f8471844db3c2b368fff2c33ca9`.

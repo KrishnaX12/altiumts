@@ -46,6 +46,13 @@ const references: DirectReferenceSpec[] = [
     url: "https://raw.githubusercontent.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer/3284ac4fbd9a3f8471844db3c2b368fff2c33ca9/hardware/ST_LINK_V2-1.SchDoc",
   },
   {
+    filename: "stm32-st-link-v2.PcbDoc",
+    sha256: "b8c8cf965461f522091e3a046414de7ffe6c06097657cb9a8cb11db2aa923df2",
+    source:
+      "yasir-shahzad/STM32-ST-Link-V2.0-Programmer@3284ac4fbd9a3f8471844db3c2b368fff2c33ca9 (GPL-3.0)",
+    url: "https://raw.githubusercontent.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer/3284ac4fbd9a3f8471844db3c2b368fff2c33ca9/hardware/ST_LINK_V2-1.PcbDoc",
+  },
+  {
     filename: "simplefocmini-2024-04-26.PcbDoc",
     sha256: "8328cebe97ba8623fb2b707490e3473c6f7dc13fb0502b596b0e40c7e1613d24",
     source:
