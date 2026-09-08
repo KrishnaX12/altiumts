@@ -19,9 +19,7 @@ export function getPcbDocumentBounds(document: AltiumPcbDocument): SvgBounds {
   if (outlineBounds) {
     return document.records.reduce(
       (bounds, record) =>
-        record.recordKind === "Dimension"
-          ? (mergeBounds(bounds, getPcbRecordBounds(record)) ?? bounds)
-          : bounds,
+        mergeBounds(bounds, getPcbRecordBounds(record)) ?? bounds,
       outlineBounds,
     )
   }
