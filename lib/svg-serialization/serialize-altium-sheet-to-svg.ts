@@ -376,7 +376,7 @@ function renderSchematicRecord(
     return `<text ${metadata} x="0" y="0" fill="${color}" ${font.attributes} text-anchor="${positioning.anchor}" dominant-baseline="${positioning.baseline}" transform="translate(${formatSvgNumber(x)} ${formatSvgNumber(y)}) rotate(${formatSvgNumber(positioning.rotation)})">${renderedText}</text>`
   }
 
-  if (kind === "28") {
+  if (kind === "28" || kind === "209") {
     return renderSchematicTextFrame(
       record,
       viewport,
@@ -412,17 +412,6 @@ function renderSchematicRecord(
       }
     }
     return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="#f1f5f9" stroke="#64748b"/><path d="M ${formatSvgNumber(left)} ${formatSvgNumber(top)} l ${formatSvgNumber(width)} ${formatSvgNumber(height)} M ${formatSvgNumber(left + width)} ${formatSvgNumber(top)} l ${formatSvgNumber(-width)} ${formatSvgNumber(height)}" stroke="#94a3b8"/></g>`
-  }
-
-  if (kind === "209") {
-    const rectangle = getSchematicRectangle(record)
-    if (!rectangle) return undefined
-    const left = viewport.toX(rectangle.minX)
-    const top = viewport.toY(rectangle.maxY)
-    const width = rectangle.maxX - rectangle.minX
-    const height = rectangle.maxY - rectangle.minY
-    const text = (record.getDecoded("TEXT") ?? "").slice(0, 140)
-    return `<g ${metadata}><rect x="${formatSvgNumber(left)}" y="${formatSvgNumber(top)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" fill="${altiumColorToCss(record.getCaseInsensitive("AREACOLOR"), "#fff7ed")}" stroke="${color}"/><text x="${formatSvgNumber(left + 6)}" y="${formatSvgNumber(top + 14)}" fill="${color}" font-family="Arial, sans-serif" font-size="9">${escapeXml(text)}</text></g>`
   }
 
   return undefined
