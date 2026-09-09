@@ -53,6 +53,12 @@ const references: DirectReferenceSpec[] = [
     url: "https://raw.githubusercontent.com/yasir-shahzad/STM32-ST-Link-V2.0-Programmer/3284ac4fbd9a3f8471844db3c2b368fff2c33ca9/hardware/ST_LINK_V2-1.PcbDoc",
   },
   {
+    filename: "c17-main.PcbDoc",
+    sha256: "439e050d3bb35f3f335cd3e115ba91cf643eca3ae326a85c3034e4b22cbcac03",
+    source: "phonght32/altium@85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28 (MIT)",
+    url: "https://raw.githubusercontent.com/phonght32/altium/85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28/C17/C17_MAIN.PcbDoc",
+  },
+  {
     filename: "simplefocmini-2024-04-26.PcbDoc",
     sha256: "8328cebe97ba8623fb2b707490e3473c6f7dc13fb0502b596b0e40c7e1613d24",
     source:
