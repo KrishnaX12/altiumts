@@ -680,6 +680,7 @@ function renderSchematicPowerPort(
   if (!text || !showNetName) return `<g ${metadata}>${symbol}</g>`
 
   const font = getSchematicFont({
+    inheritSystemFont: false,
     record,
     sheetRecord,
   })
