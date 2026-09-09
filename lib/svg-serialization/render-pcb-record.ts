@@ -7,11 +7,12 @@ import {
   getPcbVertexPoints,
   parsePcbMeasurement,
 } from "./altium-values"
+import { approximateAltiumArc } from "./approximate-altium-arc"
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
 import { renderPcbDimension } from "./render-pcb-dimension"
-import type { AltiumPcbSvgOptions, SvgPoint, SvgViewport } from "./svg-types"
+import type { AltiumPcbSvgOptions, SvgViewport } from "./svg-types"
 import {
   escapeXml,
   formatSvgNumber,
@@ -54,7 +55,12 @@ export function renderPcbRecord({
     const radius = getPcbMeasurement(record, "RADIUS")
     const startAngle = Number(record.getCaseInsensitive("STARTANGLE") ?? 0)
     const endAngle = Number(record.getCaseInsensitive("ENDANGLE") ?? 360)
-    const points = approximateArc(center, radius, startAngle, endAngle)
+    const points = approximateAltiumArc({
+      center,
+      radius,
+      startAngleDegrees: startAngle,
+      endAngleDegrees: endAngle,
+    })
     const width = Math.max(getPcbMeasurement(record, "WIDTH", 4), 0.5)
     return `<polyline ${metadata} points="${pointsToSvg(points, viewport)}" fill="none" stroke="${color}" stroke-width="${formatSvgNumber(width)}"/>`
   }
@@ -299,26 +305,4 @@ function renderVia(
       ? `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
       : ""
   return `<g ${metadata}><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/>${hole}</g>`
-}
-
-function approximateArc(
-  center: SvgPoint,
-  radius: number,
-  startAngle: number,
-  endAngle: number,
-): SvgPoint[] {
-  const sweep = endAngle - startAngle || 360
-  const segments = Math.max(8, Math.ceil(Math.abs(sweep) / 7.5))
-  const points: SvgPoint[] = []
-
-  for (let index = 0; index <= segments; index++) {
-    const angle = startAngle + (sweep * index) / segments
-    const radians = (angle * Math.PI) / 180
-    points.push({
-      x: center.x + Math.cos(radians) * radius,
-      y: center.y + Math.sin(radians) * radius,
-    })
-  }
-
-  return points
 }
