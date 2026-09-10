@@ -59,6 +59,12 @@ const references: DirectReferenceSpec[] = [
     url: "https://raw.githubusercontent.com/phonght32/altium/85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28/C17/C17_MAIN.PcbDoc",
   },
   {
+    filename: "led-matrix-sheet.SchDoc",
+    sha256: "345ab3190c5f94ebde4368f3a36b66179511cf3c19c0480de4d5e973a2a61f8a",
+    source: "phonght32/altium@85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28 (MIT)",
+    url: "https://raw.githubusercontent.com/phonght32/altium/85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28/LED_MATRIX/Led_matrix_Altium/Sheet1.SchDoc",
+  },
+  {
     filename: "simplefocmini-2024-04-26.PcbDoc",
     sha256: "8328cebe97ba8623fb2b707490e3473c6f7dc13fb0502b596b0e40c7e1613d24",
     source:
