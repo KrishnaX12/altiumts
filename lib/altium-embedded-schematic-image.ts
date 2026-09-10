@@ -420,7 +420,7 @@ export function encodeWindowsBitmapAsPng(bitmap: Uint8Array): Uint8Array {
     width > 16_384 ||
     height > 16_384 ||
     planes !== 1 ||
-    (bitsPerPixel !== 24 && bitsPerPixel !== 32) ||
+    (bitsPerPixel !== 8 && bitsPerPixel !== 24 && bitsPerPixel !== 32) ||
     compression !== 0
   ) {
     throw new AltiumCorruptContainerError(
@@ -429,7 +429,7 @@ export function encodeWindowsBitmapAsPng(bitmap: Uint8Array): Uint8Array {
   }
 
   const bytesPerPixel = bitsPerPixel / 8
-  const sourceRowLength = Math.ceil((width * bytesPerPixel) / 4) * 4
+  const sourceRowLength = Math.ceil((width * bitsPerPixel) / 32) * 4
   const sourceLength = sourceRowLength * height
   if (
     !Number.isSafeInteger(sourceLength) ||
@@ -439,6 +439,25 @@ export function encodeWindowsBitmapAsPng(bitmap: Uint8Array): Uint8Array {
     throw new AltiumCorruptContainerError(
       "Embedded schematic bitmap pixel payload is truncated",
     )
+  }
+
+  let palette: Uint8Array | undefined
+  if (bitsPerPixel === 8) {
+    const colorsUsed = view.getUint32(46, true)
+    const paletteEntryCount = colorsUsed === 0 ? 256 : colorsUsed
+    const paletteOffset = 14 + dibHeaderSize
+    const paletteLength = paletteEntryCount * 4
+    if (
+      paletteEntryCount > 256 ||
+      !Number.isSafeInteger(paletteLength) ||
+      paletteOffset + paletteLength > pixelOffset ||
+      paletteOffset + paletteLength > bitmap.byteLength
+    ) {
+      throw new AltiumCorruptContainerError(
+        "Embedded schematic bitmap palette is truncated",
+      )
+    }
+    palette = bitmap.subarray(paletteOffset, paletteOffset + paletteLength)
   }
 
   const pngRowLength = 1 + width * 4
@@ -452,11 +471,25 @@ export function encodeWindowsBitmapAsPng(bitmap: Uint8Array): Uint8Array {
     for (let x = 0; x < width; x++) {
       const source = sourceRow + x * bytesPerPixel
       const target = targetRow + 1 + x * 4
-      pixels[target] = bitmap[source + 2] ?? 0
-      pixels[target + 1] = bitmap[source + 1] ?? 0
-      pixels[target + 2] = bitmap[source] ?? 0
-      pixels[target + 3] =
-        bitsPerPixel === 32 ? (bitmap[source + 3] ?? 255) : 255
+      if (palette) {
+        const paletteIndex = bitmap[source] ?? 0
+        const paletteEntry = paletteIndex * 4
+        if (paletteEntry + 3 >= palette.byteLength) {
+          throw new AltiumCorruptContainerError(
+            "Embedded schematic bitmap pixel references a missing palette entry",
+          )
+        }
+        pixels[target] = palette[paletteEntry + 2] ?? 0
+        pixels[target + 1] = palette[paletteEntry + 1] ?? 0
+        pixels[target + 2] = palette[paletteEntry] ?? 0
+        pixels[target + 3] = 255
+      } else {
+        pixels[target] = bitmap[source + 2] ?? 0
+        pixels[target + 1] = bitmap[source + 1] ?? 0
+        pixels[target + 2] = bitmap[source] ?? 0
+        pixels[target + 3] =
+          bitsPerPixel === 32 ? (bitmap[source + 3] ?? 255) : 255
+      }
     }
   }
 
