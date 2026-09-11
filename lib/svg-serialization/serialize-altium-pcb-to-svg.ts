@@ -1,6 +1,8 @@
 import type { AltiumPcbDocument } from "../altium-pcb-document"
+import { decodeAltiumWideString } from "../decode-altium-wide-string"
 import { getPcbRegionSemanticKind } from "../pcb-contours"
 import {
+  getPcbRecordComponent,
   getPcbRecordComponentIndex,
   getPcbRecordNetIndex,
   getPcbRecordPolygonIndex,
@@ -46,7 +48,14 @@ export function serializeAltiumPcbToSvg(
   const outline = getPcbBoardOutline(document)
   const boardCutouts =
     options.showBoardCutouts === false ? [] : document.boardGeometry.cutouts
-  const componentLookup = createComponentLookup(document)
+  const componentDesignatorTextLookup = createComponentTextLookup(
+    document,
+    "DESIGNATOR",
+  )
+  const componentCommentTextLookup = createComponentTextLookup(
+    document,
+    "COMMENT",
+  )
   const polygonIndexesWithRegionRecords = new Set(
     document.records.flatMap((record) => {
       if (
@@ -90,7 +99,7 @@ export function serializeAltiumPcbToSvg(
       .filter(
         (record) =>
           options.showHidden === true ||
-          isVisibleComponentText(record, componentLookup),
+          isVisibleComponentText(document, record),
       )
       .filter((record) => {
         if (!options.viewBox) return true
@@ -111,6 +120,12 @@ export function serializeAltiumPcbToSvg(
         !polygonIndexesWithRegionRecords.has(polygonIndex))
     const rendered = renderPcbRecord({
       record,
+      text: resolveComponentText(
+        document,
+        record,
+        componentDesignatorTextLookup,
+        componentCommentTextLookup,
+      ),
       shouldFillPolygon,
       svgOptions: {
         showHoles: true,
@@ -132,6 +147,68 @@ export function serializeAltiumPcbToSvg(
     title: options.title ?? `Altium PCB${layerTitle}`,
     viewport,
   })
+}
+
+function resolveComponentText(
+  document: AltiumPcbDocument,
+  record: AltiumRecord,
+  componentDesignatorTextLookup: ReadonlyMap<number, string>,
+  componentCommentTextLookup: ReadonlyMap<number, string>,
+): string | undefined {
+  if (record.recordKind !== "Text") return undefined
+  const text = getPcbText(record)
+  const specialString = text.toLowerCase()
+  if (specialString !== ".designator" && specialString !== ".comment") {
+    return undefined
+  }
+  const componentIndex = record.getNumber("COMPONENT")
+  const component = getPcbRecordComponent(document, record)
+  // Resolve SVG text from placed records or raw board fields. The component
+  // accessor retains SOURCECOMMENT compatibility for API callers.
+  const value =
+    specialString === ".designator"
+      ? ((componentIndex === undefined
+          ? undefined
+          : componentDesignatorTextLookup.get(componentIndex)) ??
+        component?.getDecoded("SOURCEDESIGNATOR") ??
+        component?.getDecoded("DESIGNATOR"))
+      : ((componentIndex === undefined
+          ? undefined
+          : componentCommentTextLookup.get(componentIndex)) ??
+        component?.getDecoded("COMMENT"))
+  return value ?? ""
+}
+
+function createComponentTextLookup(
+  document: AltiumPcbDocument,
+  kind: "COMMENT" | "DESIGNATOR",
+): ReadonlyMap<number, string> {
+  const lookup = new Map<number, string>()
+
+  for (const record of document.records) {
+    if (record.recordKind !== "Text" || record.getBoolean(kind) !== true) {
+      continue
+    }
+    const componentIndex = record.getNumber("COMPONENT")
+    const text = getPcbText(record)
+    if (
+      componentIndex !== undefined &&
+      getPcbRecordComponent(document, record) &&
+      !lookup.has(componentIndex)
+    ) {
+      lookup.set(componentIndex, text)
+    }
+  }
+
+  return lookup
+}
+
+function getPcbText(record: AltiumRecord): string {
+  return (
+    decodeAltiumWideString(record.getDecoded("WIDESTRING")) ||
+    record.getDecoded("TEXT") ||
+    ""
+  )
 }
 
 function recordAppliesToReferences(
@@ -159,29 +236,15 @@ function recordAppliesToReferences(
   return true
 }
 
-function createComponentLookup(
-  document: AltiumPcbDocument,
-): ReadonlyMap<number, AltiumRecord> {
-  const lookup = new Map<number, AltiumRecord>()
-  const components = document.getRecordsByKind("Component")
-
-  for (const [index, component] of components.entries()) {
-    lookup.set(index, component)
-    const id = component.getNumber("ID")
-    if (id !== undefined) lookup.set(id, component)
-  }
-  return lookup
-}
-
 function isVisibleComponentText(
+  document: AltiumPcbDocument,
   record: AltiumRecord,
-  componentLookup: ReadonlyMap<number, AltiumRecord>,
 ): boolean {
   if (record.recordKind !== "Text") return true
   const componentIndex = record.getNumber("COMPONENT")
   if (componentIndex === undefined || componentIndex === 0xffff) return true
 
-  const component = componentLookup.get(componentIndex)
+  const component = getPcbRecordComponent(document, record)
   if (!component) return true
   if (
     record.getBoolean("DESIGNATOR") === true &&
