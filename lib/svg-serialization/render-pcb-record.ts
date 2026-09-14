@@ -10,6 +10,7 @@ import {
 import { approximateAltiumArc } from "./approximate-altium-arc"
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
+import { isPcbSolderMaskLayer } from "./pcb-solder-mask"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
 import { renderPcbDimension } from "./render-pcb-dimension"
 import type { AltiumPcbSvgOptions, SvgViewport } from "./svg-types"
@@ -193,6 +194,8 @@ function renderPad(
   metadata: string,
   color: string,
 ): string {
+  const isSolderMask = isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))
+  const outline = isSolderMask ? "" : ' stroke="#111827" stroke-width="1"'
   const geometry = getPcbPadGeometry(record, options.layers)
   const x = viewport.toX(geometry.x)
   const y = viewport.toY(geometry.y)
@@ -203,7 +206,7 @@ function renderPad(
   let body: string
   if (geometry.shape === "ROUND" || geometry.shape === "CIRCLE") {
     if (Math.abs(geometry.width - geometry.height) < 0.0001) {
-      body = `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(geometry.width / 2)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+      body = `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(geometry.width / 2)}" fill="${color}"${outline}/>`
     } else {
       const radius = Math.min(geometry.width, geometry.height) / 2
       body = renderRoundedRect(
@@ -213,6 +216,7 @@ function renderPad(
         geometry.height,
         radius,
         color,
+        outline,
       )
     }
   } else if (
@@ -226,15 +230,23 @@ function renderPad(
       geometry.height,
       geometry.cornerRadius || Math.min(geometry.width, geometry.height) * 0.18,
       color,
+      outline,
     )
   } else if (geometry.shape === "OCTAGONAL" || geometry.shape === "OCTAGON") {
-    body = renderOctagonalPad(x, y, geometry.width, geometry.height, color)
+    body = renderOctagonalPad(
+      x,
+      y,
+      geometry.width,
+      geometry.height,
+      color,
+      outline,
+    )
   } else {
-    body = `<rect x="${formatSvgNumber(x - geometry.width / 2)}" y="${formatSvgNumber(y - geometry.height / 2)}" width="${formatSvgNumber(geometry.width)}" height="${formatSvgNumber(geometry.height)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+    body = `<rect x="${formatSvgNumber(x - geometry.width / 2)}" y="${formatSvgNumber(y - geometry.height / 2)}" width="${formatSvgNumber(geometry.width)}" height="${formatSvgNumber(geometry.height)}" fill="${color}"${outline}/>`
   }
 
   const hole =
-    options.showHoles !== false && geometry.holeSize > 0
+    !isSolderMask && options.showHoles !== false && geometry.holeSize > 0
       ? renderPadHole(geometry, x, y)
       : ""
   const padName = record.getDecoded("NAME")
@@ -243,7 +255,10 @@ function renderPad(
   const modeMetadata = padMode
     ? ` data-pad-stack-mode="${escapeXml(padMode)}"`
     : ""
-  return `<g ${metadata}${nameMetadata} data-pad-shape="${escapeXml(geometry.shape)}" data-pad-stack-layer="${geometry.layerOrdinal}"${modeMetadata} data-plated="${geometry.plated}"${transform}>${body}${hole}</g>`
+  const maskMetadata = isSolderMask
+    ? ' data-solder-mask-opening="true" fill-opacity="0.6"'
+    : ""
+  return `<g ${metadata}${maskMetadata}${nameMetadata} data-pad-shape="${escapeXml(geometry.shape)}" data-pad-stack-layer="${geometry.layerOrdinal}"${modeMetadata} data-plated="${geometry.plated}"${transform}>${body}${hole}</g>`
 }
 
 function renderRoundedRect(
@@ -253,8 +268,9 @@ function renderRoundedRect(
   height: number,
   radius: number,
   color: string,
+  outline: string,
 ): string {
-  return `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" ry="${formatSvgNumber(radius)}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+  return `<rect x="${formatSvgNumber(x - width / 2)}" y="${formatSvgNumber(y - height / 2)}" width="${formatSvgNumber(width)}" height="${formatSvgNumber(height)}" rx="${formatSvgNumber(radius)}" ry="${formatSvgNumber(radius)}" fill="${color}"${outline}/>`
 }
 
 function renderOctagonalPad(
@@ -263,6 +279,7 @@ function renderOctagonalPad(
   width: number,
   height: number,
   color: string,
+  outline: string,
 ): string {
   const halfWidth = width / 2
   const halfHeight = height / 2
@@ -277,7 +294,7 @@ function renderOctagonalPad(
     `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y + halfHeight - chamfer)}`,
     `${formatSvgNumber(x - halfWidth)},${formatSvgNumber(y - halfHeight + chamfer)}`,
   ].join(" ")
-  return `<polygon points="${points}" fill="${color}" stroke="#111827" stroke-width="1"/>`
+  return `<polygon points="${points}" fill="${color}"${outline}/>`
 }
 
 function renderPadHole(
@@ -317,6 +334,10 @@ function renderVia(
     parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
     parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
     20
+  if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) {
+    const color = getPcbLayerColor(record.getCaseInsensitive("LAYER"))
+    return `<g ${metadata} data-solder-mask-opening="true"><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="${color}" fill-opacity="0.6"/></g>`
+  }
   const holeSize = getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
   const hole =
     options.showHoles !== false

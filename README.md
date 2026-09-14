@@ -212,6 +212,13 @@ Single-layer PCB renders select the corresponding pad-stack geometry. Round,
 rectangular, rounded-rectangle, octagonal, and obround pads are rendered
 directly, along with round, square, and slotted holes.
 
+Explicitly selecting `TOPSOLDER` or `BOTTOMSOLDER` also renders pad and via
+mask openings, using the corresponding outer pad stack, expansion, and tenting
+settings. Manual expansion and enabled `SolderMaskExpansion` rules scoped to
+`All`, `IsPad`, or `IsVia` are supported in priority order. Other rule queries
+are not evaluated; the stored expansion is used when no supported rule matches.
+Fully contracted openings are omitted, while explicit mask primitives remain.
+
 ## API
 
 - `parseAltiumPcbDoc(source, options?)` parses and validates an ASCII

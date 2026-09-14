@@ -175,8 +175,9 @@ function getRequestedPadLayerOrdinal(
     requestedLayers?.length === 1
       ? normalizeLayerName(requestedLayers[0] ?? "")
       : normalizeLayerName(record.getCaseInsensitive("LAYER") ?? "")
-  if (requestedLayer === "BOTTOM") return 31
-  if (requestedLayer === "TOP") return 0
+  if (requestedLayer === "BOTTOM" || requestedLayer === "BOTTOMSOLDER")
+    return 31
+  if (requestedLayer === "TOP" || requestedLayer === "TOPSOLDER") return 0
 
   const innerMatch = /^(?:MIDLAYER|MID|INTERNALPLANE)(\d+)$/u.exec(
     requestedLayer,

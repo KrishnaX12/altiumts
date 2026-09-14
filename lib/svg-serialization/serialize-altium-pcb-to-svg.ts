@@ -18,6 +18,7 @@ import {
   PCB_BOARD_OUTLINE_COLOR,
   recordAppliesToLayers,
 } from "./pcb-layer"
+import { getPcbSolderMaskRecords } from "./pcb-solder-mask"
 import { renderPcbRecord } from "./render-pcb-record"
 import { sortPcbRecordsForPainting } from "./sort-pcb-records-for-painting"
 import type {
@@ -93,7 +94,10 @@ export function serializeAltiumPcbToSvg(
     currentLayer: options.currentLayer,
     document,
     layerDrawingOrder: options.layerDrawingOrder,
-    records: document.records
+    records: [
+      ...document.records,
+      ...getPcbSolderMaskRecords(document, options.layers),
+    ]
       .filter((record) => recordAppliesToLayers(record, options.layers))
       .filter((record) => recordAppliesToReferences(document, record, options))
       .filter(
