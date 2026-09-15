@@ -27,6 +27,18 @@ export function hasPcbSolderMaskOpenings(
   return !iteratePcbSolderMaskRecords(document, [layer]).next().done
 }
 
+export function recordReachesPcbSolderMaskLayer(
+  record: AltiumRecord,
+  layer: string,
+): boolean {
+  if (record.recordKind !== "Pad" && record.recordKind !== "Via") return false
+  if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) return false
+  const normalizedLayer = normalizeLayerName(layer)
+  if (normalizedLayer === "TOPSOLDER") return reachesSide(record, "TOP")
+  if (normalizedLayer === "BOTTOMSOLDER") return reachesSide(record, "BOTTOM")
+  return false
+}
+
 function* iteratePcbSolderMaskRecords(
   document: AltiumPcbDocument,
   requestedLayers: string[] | undefined,
@@ -44,11 +56,9 @@ function* iteratePcbSolderMaskRecords(
     .toSorted((a, b) => (a.priority ?? Infinity) - (b.priority ?? Infinity))
 
   for (const record of document.records) {
-    if (record.recordKind !== "Pad" && record.recordKind !== "Via") continue
-    if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) continue
     for (const layer of layers) {
       const side = layer === "TOPSOLDER" ? "TOP" : "BOTTOM"
-      if (!reachesSide(record, side)) continue
+      if (!recordReachesPcbSolderMaskLayer(record, layer)) continue
       if (
         (record.getBoolean(`TENTED${side}`) ??
           record.getBoolean(`TENTING${side}`)) === true

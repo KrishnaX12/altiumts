@@ -10,7 +10,10 @@ import {
 import { approximateAltiumArc } from "./approximate-altium-arc"
 import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
 import { getPcbPadGeometry } from "./pcb-pad-geometry"
-import { isPcbSolderMaskLayer } from "./pcb-solder-mask"
+import {
+  isPcbSolderMaskLayer,
+  recordReachesPcbSolderMaskLayer,
+} from "./pcb-solder-mask"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
 import { renderPcbDimension } from "./render-pcb-dimension"
 import type { AltiumPcbSvgOptions, SvgViewport } from "./svg-types"
@@ -167,6 +170,43 @@ export function renderPcbRecord({
     const x = viewport.toX(getPcbMeasurement(record, "X"))
     const y = viewport.toY(getPcbMeasurement(record, "Y"))
     return `<path ${metadata} d="M ${formatSvgNumber(x - 8)} ${formatSvgNumber(y)} H ${formatSvgNumber(x + 8)} M ${formatSvgNumber(x)} ${formatSvgNumber(y - 8)} V ${formatSvgNumber(y + 8)}" fill="none" stroke="#f472b6" stroke-width="2"/>`
+  }
+
+  return undefined
+}
+
+export function renderPcbDrillHole({
+  record,
+  requestedLayers,
+  viewport,
+}: {
+  record: AltiumRecord
+  requestedLayers: string[] | undefined
+  viewport: SvgViewport
+}): string | undefined {
+  const solderMaskLayer = requestedLayers?.find((layer) =>
+    recordReachesPcbSolderMaskLayer(record, layer),
+  )
+  if (!solderMaskLayer) return undefined
+
+  if (record.recordKind === "Pad") {
+    const geometry = getPcbPadGeometry(record, [solderMaskLayer])
+    if (geometry.holeSize <= 0) return undefined
+    const x = viewport.toX(geometry.x)
+    const y = viewport.toY(geometry.y)
+    const transform =
+      geometry.rotation === 0
+        ? ""
+        : ` transform="rotate(${formatSvgNumber(-geometry.rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
+    return `<g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"${transform}>${renderPadHole(geometry, x, y)}</g>`
+  }
+
+  if (record.recordKind === "Via") {
+    const x = viewport.toX(getPcbMeasurement(record, "X"))
+    const y = viewport.toY(getPcbMeasurement(record, "Y"))
+    const holeSize = getViaHoleSize(record)
+    if (holeSize <= 0) return undefined
+    return `<g data-record="ViaHole" data-source-record="Via" data-layer="VIAHOLES">${renderViaHole(x, y, holeSize, ' data-hole-shape="ROUND"')}</g>`
   }
 
   return undefined
@@ -330,18 +370,36 @@ function renderVia(
 ): string {
   const x = viewport.toX(getPcbMeasurement(record, "X"))
   const y = viewport.toY(getPcbMeasurement(record, "Y"))
-  const diameter =
-    parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
-    parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
-    20
+  const diameter = getViaDiameter(record)
   if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) {
     const color = getPcbLayerColor(record.getCaseInsensitive("LAYER"))
     return `<g ${metadata} data-solder-mask-opening="true"><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="${color}" fill-opacity="0.6"/></g>`
   }
-  const holeSize = getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
-  const hole =
-    options.showHoles !== false
-      ? `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
-      : ""
+  const holeSize = getViaHoleSize(record, diameter)
+  const hole = options.showHoles !== false ? renderViaHole(x, y, holeSize) : ""
   return `<g ${metadata}><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/>${hole}</g>`
+}
+
+function getViaDiameter(record: AltiumRecord): number {
+  return (
+    parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
+    20
+  )
+}
+
+function getViaHoleSize(
+  record: AltiumRecord,
+  diameter = getViaDiameter(record),
+): number {
+  return getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
+}
+
+function renderViaHole(
+  x: number,
+  y: number,
+  holeSize: number,
+  metadata = "",
+): string {
+  return `<circle${metadata} cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
 }

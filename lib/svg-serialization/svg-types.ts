@@ -51,6 +51,11 @@ export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
   netIndices?: number[]
   showBoardCutouts?: boolean
   showBoardOutline?: boolean
+  /**
+   * Draw source pad and via drill geometry above selected solder-mask layers.
+   * This is a visual overlay and does not alter the underlying layer artwork.
+   */
+  showDrillHoleOverlay?: boolean
   viewBox?: AltiumPcbViewBox
 }
 
