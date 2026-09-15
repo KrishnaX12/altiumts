@@ -11,6 +11,8 @@ import {
   serializeAltiumPcbToSvg,
   serializeAltiumSheetToSvg,
 } from "../../lib"
+import { normalizeLayerName } from "../../lib/svg-serialization/pcb-layer"
+import { hasPcbSolderMaskOpenings } from "../../lib/svg-serialization/pcb-solder-mask"
 import type {
   AltiumProjectManifest,
   BrowserProjectFile,
@@ -393,6 +395,12 @@ function getDocumentLayerNames(document: AltiumPcbDocument): string[] {
     const layer = record.getCaseInsensitive("LAYER")?.trim()
     if (!layer || layer.toUpperCase() === "UNKNOWN") continue
     layerCounts.set(layer, (layerCounts.get(layer) ?? 0) + 1)
+  }
+  const hasTopSolderLayer = [...layerCounts.keys()].some(
+    (layer) => normalizeLayerName(layer) === "TOPSOLDER",
+  )
+  if (!hasTopSolderLayer && hasPcbSolderMaskOpenings(document, "TOPSOLDER")) {
+    layerCounts.set("TOPSOLDER", 1)
   }
   return [...layerCounts.keys()]
     .sort(

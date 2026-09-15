@@ -17,10 +17,24 @@ export function getPcbSolderMaskRecords(
   document: AltiumPcbDocument,
   requestedLayers: string[] | undefined,
 ): AltiumRecord[] {
+  return [...iteratePcbSolderMaskRecords(document, requestedLayers)]
+}
+
+export function hasPcbSolderMaskOpenings(
+  document: AltiumPcbDocument,
+  layer: string,
+): boolean {
+  return !iteratePcbSolderMaskRecords(document, [layer]).next().done
+}
+
+function* iteratePcbSolderMaskRecords(
+  document: AltiumPcbDocument,
+  requestedLayers: string[] | undefined,
+): Generator<AltiumRecord> {
   const layers = [...new Set(requestedLayers?.map(normalizeLayerName))].filter(
     isPcbSolderMaskLayer,
   )
-  if (layers.length === 0) return []
+  if (layers.length === 0) return
   const rules = document.rules
     .filter(
       (rule) =>
@@ -28,7 +42,6 @@ export function getPcbSolderMaskRecords(
         rule.enabled !== false,
     )
     .toSorted((a, b) => (a.priority ?? Infinity) - (b.priority ?? Infinity))
-  const openings: AltiumRecord[] = []
 
   for (const record of document.records) {
     if (record.recordKind !== "Pad" && record.recordKind !== "Via") continue
@@ -93,10 +106,9 @@ export function getPcbSolderMaskRecords(
         const fieldContent = record.getCaseInsensitive(key)
         if (fieldContent !== undefined) opening.set(key, fieldContent)
       }
-      openings.push(opening)
+      yield opening
     }
   }
-  return openings
 }
 
 function reachesSide(record: AltiumRecord, side: string): boolean {
