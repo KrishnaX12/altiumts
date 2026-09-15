@@ -19,8 +19,11 @@ import {
   PCB_BOARD_OUTLINE_COLOR,
   recordAppliesToLayers,
 } from "./pcb-layer"
-import { getPcbSolderMaskRecords } from "./pcb-solder-mask"
-import { renderPcbRecord } from "./render-pcb-record"
+import {
+  getPcbSolderMaskRecords,
+  getPcbSolderMaskSourceRecords,
+} from "./pcb-solder-mask"
+import { renderPcbDrillHole, renderPcbRecord } from "./render-pcb-record"
 import { sortPcbRecordsForPainting } from "./sort-pcb-records-for-painting"
 import type {
   AltiumPcbSvgOptions,
@@ -108,11 +111,7 @@ export function serializeAltiumPcbToSvg(
           options.showHidden === true ||
           isVisibleComponentText(document, record),
       )
-      .filter((record) => {
-        if (!options.viewBox) return true
-        const recordBounds = getPcbRecordBounds(record, options.layers)
-        return !recordBounds || boundsIntersect(recordBounds, bounds)
-      }),
+      .filter((record) => recordIntersectsViewBox(record, options, bounds)),
   })
 
   for (const record of records) {
@@ -144,6 +143,28 @@ export function serializeAltiumPcbToSvg(
     if (rendered) content.push(rendered)
   }
 
+  if (options.showDrillHoleOverlay === true) {
+    const drillHoleSources = getPcbSolderMaskSourceRecords(
+      document,
+      options.layers,
+    )
+    const drillHoles = drillHoleSources.flatMap((record) => {
+      if (!recordAppliesToReferences(document, record, options)) return []
+      if (!recordIntersectsViewBox(record, options, bounds)) return []
+      const rendered = renderPcbDrillHole({
+        record,
+        requestedLayers: options.layers,
+        viewport,
+      })
+      return rendered ? [rendered] : []
+    })
+    if (drillHoles.length > 0) {
+      content.push(
+        `<g data-overlay="drill-holes">\n${drillHoles.map((hole) => `      ${hole}`).join("\n")}\n    </g>`,
+      )
+    }
+  }
+
   const layerTitle = options.layers?.length
     ? ` — ${options.layers.join(", ")}`
     : ""
@@ -154,6 +175,16 @@ export function serializeAltiumPcbToSvg(
     title: options.title ?? `Altium PCB${layerTitle}`,
     viewport,
   })
+}
+
+function recordIntersectsViewBox(
+  record: AltiumRecord,
+  options: AltiumPcbSvgOptions,
+  bounds: SvgBounds,
+): boolean {
+  if (!options.viewBox) return true
+  const recordBounds = getPcbRecordBounds(record, options.layers)
+  return !recordBounds || boundsIntersect(recordBounds, bounds)
 }
 
 function resolveComponentText(

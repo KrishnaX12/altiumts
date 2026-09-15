@@ -138,3 +138,53 @@ test("preserves rounded pad corners on each side without duplicating explicit ma
   expect(bottom).toContain('width="44" height="64" rx="7" ry="7"')
   expect(bottom).not.toContain('data-record="Via"')
 })
+
+test("optionally overlays source drill geometry without changing mask artwork", () => {
+  const document = parseAltiumPcbDoc(
+    [
+      "|RECORD=Board",
+      "|RECORD=Pad|NAME=round|LAYER=MULTILAYER|X=40mil|Y=50mil|XSIZE=30mil|YSIZE=30mil|SHAPE=ROUND|HOLESIZE=10mil",
+      "|RECORD=Pad|NAME=slot|LAYER=TOP|X=80mil|Y=50mil|XSIZE=30mil|YSIZE=40mil|SHAPE=RECTANGLE|ROTATION=45|HOLESIZE=8mil|HOLESHAPE=SLOT|SLOTLENGTH=20mil|SLOTROTATION=90",
+      "|RECORD=Pad|NAME=bottom|LAYER=BOTTOM|X=120mil|Y=50mil|XSIZE=30mil|YSIZE=30mil|SHAPE=ROUND|HOLESIZE=10mil",
+      "|RECORD=Via|X=160mil|Y=50mil|DIAMETER=20mil|HOLESIZE=8mil|STARTLAYER=TOP|ENDLAYER=BOTTOM|TENTEDTOP=TRUE",
+      "|RECORD=Via|X=175mil|Y=50mil|DIAMETER=20mil|HOLESIZE=8mil|STARTLAYER=TOP|ENDLAYER=BOTTOM",
+      "|RECORD=Via|X=190mil|Y=50mil|DIAMETER=20mil|HOLESIZE=8mil|STARTLAYER=MID1|ENDLAYER=MID2",
+    ].join("\n"),
+  )
+  const source = document.getString()
+  const pureMask = serializeAltiumPcbLayerToSvg(document, "TOPSOLDER", options)
+  const viewerMask = serializeAltiumPcbLayerToSvg(document, "TOPSOLDER", {
+    ...options,
+    showDrillHoleOverlay: true,
+  })
+  const bottomViewerMask = serializeAltiumPcbLayerToSvg(
+    document,
+    "BOTTOMSOLDER",
+    {
+      ...options,
+      showDrillHoleOverlay: true,
+    },
+  )
+  const copper = serializeAltiumPcbLayerToSvg(document, "TOP", {
+    ...options,
+    showDrillHoleOverlay: true,
+  })
+
+  expect(pureMask).not.toContain('data-overlay="drill-holes"')
+  expect(pureMask).not.toContain("data-hole-shape=")
+  expect(viewerMask).toContain('data-overlay="drill-holes"')
+  expect(
+    viewerMask.match(/data-record="Via" data-layer="TOPSOLDER"/g),
+  ).toHaveLength(1)
+  expect(viewerMask.match(/data-record="PadHole"/g)).toHaveLength(2)
+  expect(viewerMask.match(/data-record="ViaHole"/g)).toHaveLength(1)
+  expect(viewerMask).toContain('data-hole-shape="ROUND"')
+  expect(viewerMask).toContain('data-hole-shape="SLOT"')
+  expect(viewerMask.indexOf('data-solder-mask-opening="true"')).toBeLessThan(
+    viewerMask.indexOf('data-overlay="drill-holes"'),
+  )
+  expect(bottomViewerMask.match(/data-record="PadHole"/g)).toHaveLength(2)
+  expect(bottomViewerMask.match(/data-record="ViaHole"/g)).toHaveLength(2)
+  expect(copper).not.toContain('data-overlay="drill-holes"')
+  expect(document.getString()).toBe(source)
+})

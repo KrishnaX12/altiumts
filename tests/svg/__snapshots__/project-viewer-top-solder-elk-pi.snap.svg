@@ -986,5 +986,318 @@
     <g data-record="Via" data-layer="TOPSOLDER" data-solder-mask-opening="true"><circle cx="2660.1159" cy="2632.1955" r="17.7796" fill="#4ade80" fill-opacity="0.6"/></g>
     <g data-record="Via" data-layer="TOPSOLDER" data-solder-mask-opening="true"><circle cx="2037.2548" cy="2425.2651" r="17.7796" fill="#4ade80" fill-opacity="0.6"/></g>
     <g data-record="Via" data-layer="TOPSOLDER" data-solder-mask-opening="true"><circle cx="3084.2438" cy="1740.3206" r="17.7796" fill="#4ade80" fill-opacity="0.6"/></g>
+    <g data-overlay="drill-holes">
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3521.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3521.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3421.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3421.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3321.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3321.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3221.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3221.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3121.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3121.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3021.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="3021.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2921.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2921.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2821.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2821.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2721.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2721.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2621.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2621.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2521.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2521.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2421.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2421.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2321.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2321.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2221.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2221.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2121.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2121.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2021.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="2021.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1921.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="1921.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1821.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="1821.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1721.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="1721.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1621.3562 2947.2752)"><circle data-hole-shape="ROUND" cx="1621.3562" cy="2947.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3521.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3521.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3421.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3421.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3321.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3321.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3221.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3221.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3121.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3121.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3021.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="3021.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2921.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2921.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2821.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2821.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2721.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2721.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2621.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2621.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2521.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2521.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2421.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2421.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2321.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2321.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2221.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2221.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2121.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2121.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2021.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="2021.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1921.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="1921.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1821.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="1821.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1721.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="1721.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1621.3562 3047.2752)"><circle data-hole-shape="ROUND" cx="1621.3562" cy="3047.2752" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4105.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4105.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4205.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4205.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4005.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4005.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3805.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3905.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3805.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3905.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3705.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3705.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3505.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3405.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3305.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3505.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3405.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3305.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3605.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3605.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4305.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4305.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4505.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4505.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4405.5293" cy="360.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="4405.5293" cy="260.2668" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2071.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2071.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2071.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2071.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1971.7779 260.2662)"><circle data-hole-shape="ROUND" cx="1971.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1971.7779 360.2662)"><circle data-hole-shape="ROUND" cx="1971.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2171.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2171.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2171.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2171.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2371.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2371.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2271.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2271.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2371.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2371.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2271.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2271.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2471.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2471.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2471.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2471.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2671.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2671.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2771.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2771.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2871.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2871.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2671.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2671.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2771.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2771.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2871.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2871.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2571.7779 260.2662)"><circle data-hole-shape="ROUND" cx="2571.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2571.7779 360.2662)"><circle data-hole-shape="ROUND" cx="2571.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1871.7779 260.2662)"><circle data-hole-shape="ROUND" cx="1871.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1871.7779 360.2662)"><circle data-hole-shape="ROUND" cx="1871.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1671.7779 360.2662)"><circle data-hole-shape="ROUND" cx="1671.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1671.7779 260.2662)"><circle data-hole-shape="ROUND" cx="1671.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1771.7779 260.2662)"><circle data-hole-shape="ROUND" cx="1771.7779" cy="260.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1771.7779 360.2662)"><circle data-hole-shape="ROUND" cx="1771.7779" cy="360.2662" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2658.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2658.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2558.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2558.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2458.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2458.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2358.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2358.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2258.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2258.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2158.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2158.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2058.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="2058.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1958.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1958.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1858.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1858.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1758.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1758.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1658.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1658.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1558.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1558.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1458.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1458.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1358.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1358.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1258.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1258.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1158.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1158.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1058.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="1058.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 958.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="958.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 858.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="858.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 758.9538 3688.5991)"><circle data-hole-shape="ROUND" cx="758.9538" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2658.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2658.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2558.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2558.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2458.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2458.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2358.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2358.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2258.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2258.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2158.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2158.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 2058.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="2058.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1958.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1958.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1858.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1858.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1758.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1758.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1658.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1658.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1558.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1558.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1458.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1458.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1358.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1358.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1258.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1258.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1158.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1158.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 1058.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="1058.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 958.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="958.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 858.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="858.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 758.9538 3788.5991)"><circle data-hole-shape="ROUND" cx="758.9538" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4977.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4977.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4877.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4877.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4777.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4777.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4677.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4677.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4577.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4577.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4477.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4477.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4377.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4377.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4277.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4277.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4177.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4177.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4077.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="4077.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3977.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3977.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3877.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3877.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3777.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3777.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3677.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3677.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3577.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3577.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3477.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3477.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3377.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3377.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3277.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3277.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3177.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3177.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3077.8523 3688.5991)"><circle data-hole-shape="ROUND" cx="3077.8523" cy="3688.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4977.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4977.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4877.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4877.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4777.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4777.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4677.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4677.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4577.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4577.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4477.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4477.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4377.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4377.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4277.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4277.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4177.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4177.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 4077.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="4077.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3977.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3977.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3877.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3877.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3777.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3777.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3677.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3677.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3577.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3577.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3477.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3477.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3377.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3377.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3277.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3277.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3177.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3177.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-180 3077.8523 3788.5991)"><circle data-hole-shape="ROUND" cx="3077.8523" cy="3788.5991" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3470.1271" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3525.2451" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3497.6861" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3580.3631" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3607.9221" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3552.8041" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3718.1581" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3773.2761" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3745.7171" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3663.0401" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3690.5991" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3635.4811" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3828.3664" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3855.9254" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="3800.8074" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="211.424" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="266.542" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="238.983" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="321.66" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="349.219" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="294.101" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="459.455" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="514.573" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="487.014" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="404.337" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="431.896" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="376.778" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="569.6633" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="597.2223" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5238.8763" cy="542.1043" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="208.6011" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="263.7191" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="236.1601" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="318.8371" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="346.3961" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="291.2781" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="456.6321" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="511.7501" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="484.1911" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="401.5141" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="429.0731" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="373.9551" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="566.8404" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="594.3994" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="539.2814" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3799.1239" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3854.2419" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3826.6829" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3633.7976" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3688.9156" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3661.3566" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3744.0336" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3771.5926" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3716.4746" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3551.1206" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3606.2386" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3578.6796" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3496.0026" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3523.5616" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="498.7188" cy="3468.4436" r="9.8425" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 5144.3881 3488.4827)"><circle data-hole-shape="ROUND" cx="5144.3881" cy="3488.4827" r="17.7166" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 5144.3881 3388.4827)"><circle data-hole-shape="ROUND" cx="5144.3881" cy="3388.4827" r="17.7166" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 4703.3814 2256.2225)"><circle data-hole-shape="ROUND" cx="4703.3814" cy="2256.2225" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4581.3722 2256.4881)"><circle data-hole-shape="ROUND" cx="4581.3722" cy="2256.4881" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 5120.7656 3192.354)"><circle data-hole-shape="ROUND" cx="5120.7656" cy="3192.354" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4353.05 3042.7471)"><circle data-hole-shape="ROUND" cx="4353.05" cy="3042.7471" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4540.3358 3425.6217)"><circle data-hole-shape="ROUND" cx="4540.3358" cy="3425.6217" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="961.4672" cy="248.295" r="21.6536" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="567.7664" cy="248.295" r="21.6536" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="922.0971" cy="641.9958" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="843.357" cy="641.9958" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="764.6168" cy="641.9958" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="685.8766" cy="641.9958" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="607.1365" cy="641.9958" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 5157.1829 3042.4681)"><circle data-hole-shape="ROUND" cx="5157.1829" cy="3042.4681" r="15" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3095.4865" cy="276.2779" r="15" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 580.4117 3173.6526)"><circle data-hole-shape="ROUND" cx="580.4117" cy="3173.6526" r="15" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="2870.766" cy="3754.6244" r="15" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="349.1125" cy="403.2467" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5388.4831" cy="403.1734" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="349.1125" cy="3660.8578" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="5388.4831" cy="3660.7116" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4703.3814 2371.4881)"><circle data-hole-shape="ROUND" cx="4703.3814" cy="2371.4881" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1423.0886 276.0157)"><rect data-hole-shape="SLOT" x="1393.5611" y="262.2362" width="59.0551" height="27.5591" rx="13.7796" ry="13.7796" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1127.813 276.0157)"><rect data-hole-shape="SLOT" x="1098.2855" y="262.2362" width="59.0551" height="27.5591" rx="13.7796" ry="13.7796" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1275.4508 279.9527)"><circle data-hole-shape="ROUND" cx="1275.4508" cy="279.9527" r="21.6536" fill="#111827" stroke="#f8fafc" stroke-width="1.5"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1275.4508 516.1731)"><circle data-hole-shape="ROUND" cx="1275.4508" cy="516.1731" r="21.6536" fill="#111827" stroke="#f8fafc" stroke-width="1.5"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3715.2548" cy="1067.3543" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="1431.7888" cy="1067.3543" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="3715.2548" cy="2996.4881" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="1431.7888" cy="2996.4881" r="54.1339" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 4957.3798 276.0154)"><circle data-hole-shape="ROUND" cx="4957.3798" cy="276.0154" r="33.4646" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 5162.1042 583.102)"><circle data-hole-shape="ROUND" cx="5162.1042" cy="583.102" r="33.4646" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 5055.805 527.9839)"><circle data-hole-shape="ROUND" cx="5055.805" cy="527.9839" r="33.4646" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 4799.8995 709.0863)"><circle data-hole-shape="ROUND" cx="4799.8995" cy="709.0863" r="33.4646" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 4780.2144 409.8737)"><circle data-hole-shape="ROUND" cx="4780.2144" cy="409.8737" r="33.4646" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 2150.8837 2674.6375)"><circle data-hole-shape="ROUND" cx="2150.8837" cy="2674.6375" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 2050.8837 2686.4485)"><circle data-hole-shape="ROUND" cx="2050.8837" cy="2686.4485" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1950.8837 2674.6375)"><circle data-hole-shape="ROUND" cx="1950.8837" cy="2674.6375" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1850.8837 2686.4485)"><circle data-hole-shape="ROUND" cx="1850.8837" cy="2686.4485" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1750.8837 2674.6375)"><circle data-hole-shape="ROUND" cx="1750.8837" cy="2674.6375" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1650.8837 2686.4485)"><circle data-hole-shape="ROUND" cx="1650.8837" cy="2686.4485" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4819.5839 2256.2235)"><circle data-hole-shape="ROUND" cx="4819.5839" cy="2256.2235" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 3325.2544 1676.4886)"><circle data-hole-shape="ROUND" cx="3325.2544" cy="1676.4886" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 2270.3723 2487.9679)"><circle data-hole-shape="ROUND" cx="2270.3723" cy="2487.9679" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 4819.5841 2371.4881)"><circle data-hole-shape="ROUND" cx="4819.5841" cy="2371.4881" r="19.6851" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3767.449 2648.0249)"><circle data-hole-shape="ROUND" cx="3767.449" cy="2648.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3767.449 2548.0249)"><circle data-hole-shape="ROUND" cx="3767.449" cy="2548.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3767.449 2448.0249)"><circle data-hole-shape="ROUND" cx="3767.449" cy="2448.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3667.449 2648.0249)"><circle data-hole-shape="ROUND" cx="3667.449" cy="2648.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3667.449 2548.0249)"><circle data-hole-shape="ROUND" cx="3667.449" cy="2548.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3667.449 2448.0249)"><circle data-hole-shape="ROUND" cx="3667.449" cy="2448.0249" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3765.2543 2131.0551)"><circle data-hole-shape="ROUND" cx="3765.2543" cy="2131.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3765.2543 2031.0551)"><circle data-hole-shape="ROUND" cx="3765.2543" cy="2031.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3765.2543 1931.0551)"><circle data-hole-shape="ROUND" cx="3765.2543" cy="1931.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3665.2543 2131.0551)"><circle data-hole-shape="ROUND" cx="3665.2543" cy="2131.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3665.2543 2031.0551)"><circle data-hole-shape="ROUND" cx="3665.2543" cy="2031.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3665.2543 1931.0551)"><circle data-hole-shape="ROUND" cx="3665.2543" cy="1931.0551" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1381.7878 2218.9008)"><circle data-hole-shape="ROUND" cx="1381.7878" cy="2218.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1381.7878 2318.9008)"><circle data-hole-shape="ROUND" cx="1381.7878" cy="2318.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1381.7878 2418.9008)"><circle data-hole-shape="ROUND" cx="1381.7878" cy="2418.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1481.7878 2218.9008)"><circle data-hole-shape="ROUND" cx="1481.7878" cy="2218.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1481.7878 2318.9008)"><circle data-hole-shape="ROUND" cx="1481.7878" cy="2318.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1481.7878 2418.9008)"><circle data-hole-shape="ROUND" cx="1481.7878" cy="2418.9008" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1481.7898 1884.1219)"><circle data-hole-shape="ROUND" cx="1481.7898" cy="1884.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1481.7898 1784.1219)"><circle data-hole-shape="ROUND" cx="1481.7898" cy="1784.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1481.7898 1684.1219)"><circle data-hole-shape="ROUND" cx="1481.7898" cy="1684.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1381.7898 1884.1219)"><circle data-hole-shape="ROUND" cx="1381.7898" cy="1884.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1381.7898 1784.1219)"><circle data-hole-shape="ROUND" cx="1381.7898" cy="1784.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 1381.7898 1684.1219)"><circle data-hole-shape="ROUND" cx="1381.7898" cy="1684.1219" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3764.6633 1649.6373)"><circle data-hole-shape="ROUND" cx="3764.6633" cy="1649.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3764.6633 1549.6373)"><circle data-hole-shape="ROUND" cx="3764.6633" cy="1549.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3764.6633 1449.6373)"><circle data-hole-shape="ROUND" cx="3764.6633" cy="1449.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3664.6633 1649.6373)"><circle data-hole-shape="ROUND" cx="3664.6633" cy="1649.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3664.6633 1549.6373)"><circle data-hole-shape="ROUND" cx="3664.6633" cy="1549.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-90 3664.6633 1449.6373)"><circle data-hole-shape="ROUND" cx="3664.6633" cy="1449.6373" r="20.0788" fill="#111827"/></g>
+      <g data-record="ViaHole" data-source-record="Via" data-layer="VIAHOLES"><circle data-hole-shape="ROUND" cx="2660.1159" cy="2632.1955" r="5.9055" fill="#111827"/></g>
+      <g data-record="ViaHole" data-source-record="Via" data-layer="VIAHOLES"><circle data-hole-shape="ROUND" cx="2037.2548" cy="2425.2651" r="5.9055" fill="#111827"/></g>
+      <g data-record="ViaHole" data-source-record="Via" data-layer="VIAHOLES"><circle data-hole-shape="ROUND" cx="3084.2438" cy="1740.3206" r="5.9055" fill="#111827"/></g>
+    </g>
   </g>
 </svg>
