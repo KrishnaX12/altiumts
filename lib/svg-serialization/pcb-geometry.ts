@@ -41,6 +41,15 @@ export function getPcbDocumentBounds(document: AltiumPcbDocument): SvgBounds {
   return bounds ?? { minX: 0, minY: 0, maxX: 1000, maxY: 800 }
 }
 
+export function getPcbContentBounds(document: AltiumPcbDocument): SvgBounds {
+  let bounds = boundsFromPoints(getPcbBoardOutline(document))
+  for (const record of document.records) {
+    bounds = mergeBounds(bounds, getPcbRecordBounds(record))
+  }
+
+  return bounds ?? { minX: 0, minY: 0, maxX: 1000, maxY: 800 }
+}
+
 function isBoardMountedOverlayTrack({
   boardBounds,
   document,

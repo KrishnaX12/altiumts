@@ -10,6 +10,7 @@ import {
 import type { AltiumRecord } from "../records/altium-record"
 import {
   getPcbBoardOutline,
+  getPcbContentBounds,
   getPcbDocumentBounds,
   getPcbRecordBounds,
 } from "./pcb-geometry"
@@ -40,7 +41,9 @@ export function serializeAltiumPcbToSvg(
 ): string {
   const bounds = options.viewBox
     ? pcbViewBoxToBounds(options.viewBox)
-    : getPcbDocumentBounds(document)
+    : options.fitToContent
+      ? getPcbContentBounds(document)
+      : getPcbDocumentBounds(document)
   const viewport = createSvgViewport(bounds, {
     ...options,
     margin: options.margin ?? (options.viewBox ? 0 : undefined),

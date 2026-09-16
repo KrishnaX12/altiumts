@@ -38,6 +38,11 @@ export interface AltiumPcbViewBox {
 export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
   componentIndices?: number[]
   /**
+   * Fit the viewport to every rendered primitive, including records parked
+   * outside the board outline. Defaults to fitting the physical board.
+   */
+  fitToContent?: boolean
+  /**
    * Active PCB layer. Altium draws this at its Current Layer priority; static
    * SVG rendering defaults to Top Layer.
    */
