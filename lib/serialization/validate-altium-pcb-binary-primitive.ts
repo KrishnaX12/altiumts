@@ -4,6 +4,7 @@ import {
   getAltiumRecordFieldNames,
   getAltiumRecordFields,
   parseAltiumBoolean,
+  parseAltiumFiniteNumber,
 } from "./altium-binary-record-encoding"
 import { getAltiumPcbLayerId } from "./altium-pcb-binary-layers"
 
@@ -204,6 +205,26 @@ function validateSupportedPrimitiveFieldText(
   }
   if (recordKind === "Pad") {
     getAltiumPadShapeId(fields.get("SHAPE"))
+    for (let ordinal = 0; ordinal < 32; ordinal++) {
+      const alternateShape = fields
+        .get(`LAYER${ordinal}ALTSHAPE`)
+        ?.toUpperCase()
+      if (
+        alternateShape !== undefined &&
+        alternateShape !== "DEFAULT" &&
+        alternateShape !== "ROUND" &&
+        alternateShape !== "RECTANGLE" &&
+        alternateShape !== "OCTAGONAL" &&
+        alternateShape !== "ROUNDRECT"
+      ) {
+        throw new AltiumSerializationError(
+          `Unsupported Altium alternate pad shape: ${JSON.stringify(alternateShape)}`,
+        )
+      }
+      if (fields.has(`LAYER${ordinal}CORNERRADIUS`)) {
+        parseAltiumFiniteNumber(fields.get(`LAYER${ordinal}CORNERRADIUS`))
+      }
+    }
     const holeShape = fields.get("HOLESHAPE")?.toUpperCase()
     if (
       holeShape !== undefined &&
@@ -241,6 +262,12 @@ function isSupportedPrimitiveFieldName(
   recordKind: SupportedAltiumPcbPrimitiveKind,
 ): boolean {
   if (SUPPORTED_PRIMITIVE_FIELDS[recordKind].has(fieldName)) return true
+  if (
+    recordKind === "Pad" &&
+    /^LAYER(?:[0-9]|[12][0-9]|3[01])(?:ALTSHAPE|CORNERRADIUS)$/u.test(fieldName)
+  ) {
+    return true
+  }
   if (recordKind !== "Region" && recordKind !== "ComponentBody") return false
   return (
     /^(?:KIND|VX|VY|CX|CY|R|SA|EA)\d+$/u.test(fieldName) ||

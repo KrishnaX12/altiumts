@@ -247,17 +247,52 @@ function getPrimitiveFlags(fields: AltiumRecordFields): number {
 
 function serializeAltiumPadStack(fields: AltiumRecordFields): Uint8Array {
   const holeShape = fields.get("HOLESHAPE")?.toUpperCase()
-  if (holeShape !== "SLOT" && holeShape !== "SQUARE") {
+  const hasAlternatePadShape = Array.from({ length: 32 }, (_, ordinal) =>
+    fields.has(`LAYER${ordinal}ALTSHAPE`),
+  ).some(Boolean)
+  const hasCornerRadius = Array.from({ length: 32 }, (_, ordinal) =>
+    fields.has(`LAYER${ordinal}CORNERRADIUS`),
+  ).some(Boolean)
+  if (
+    holeShape !== "SLOT" &&
+    holeShape !== "SQUARE" &&
+    !hasAlternatePadShape &&
+    !hasCornerRadius
+  ) {
     return new Uint8Array()
   }
   const output = new Uint8Array(596)
   const view = new DataView(output.buffer)
-  view.setUint8(262, holeShape === "SLOT" ? 2 : 1)
+  view.setUint8(262, holeShape === "SLOT" ? 2 : holeShape === "SQUARE" ? 1 : 0)
   view.setInt32(263, parseAltiumInternalUnits(fields.get("HOLEWIDTH")), true)
   view.setFloat64(
     267,
     parseAltiumFiniteNumber(fields.get("HOLEROTATION")),
     true,
   )
+  for (let ordinal = 0; ordinal < 32; ordinal++) {
+    const alternateShape = fields.get(`LAYER${ordinal}ALTSHAPE`)?.toUpperCase()
+    const alternateShapeId =
+      alternateShape === "ROUND"
+        ? 1
+        : alternateShape === "RECTANGLE"
+          ? 2
+          : alternateShape === "OCTAGONAL"
+            ? 3
+            : alternateShape === "ROUNDRECT"
+              ? 9
+              : 0
+    const cornerRadius = Math.min(
+      255,
+      Math.max(
+        0,
+        Math.round(
+          parseAltiumFiniteNumber(fields.get(`LAYER${ordinal}CORNERRADIUS`)),
+        ),
+      ),
+    )
+    view.setUint8(532 + ordinal, alternateShapeId)
+    view.setUint8(564 + ordinal, cornerRadius)
+  }
   return output
 }
