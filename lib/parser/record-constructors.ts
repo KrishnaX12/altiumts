@@ -41,6 +41,7 @@ import {
   AltiumDxpRuleRecord,
   AltiumRuleRecord,
 } from "../records/altium-rule-record"
+import { AltiumSchMapDefinerRecord } from "../records/altium-sch-map-definer-record"
 import { AltiumSchObjectDefinitionRecord } from "../records/altium-sch-object-definition-record"
 import {
   AltiumSchArcRecord,
@@ -125,6 +126,7 @@ export const recordConstructors = new Map<string, AltiumRecordConstructor>([
   ["44", AltiumSchImplementationListRecord],
   ["45", AltiumSchImplementationRecord],
   ["46", AltiumSchImplementationMapRecord],
+  ["47", AltiumSchMapDefinerRecord],
   ["48", AltiumSchImplementationParameterRecord],
   ["129", AltiumSchObjectDefinitionRecord],
   ["209", AltiumSchNoteRecord],
