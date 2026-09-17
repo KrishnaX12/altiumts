@@ -396,11 +396,16 @@ function getDocumentLayerNames(document: AltiumPcbDocument): string[] {
     if (!layer || layer.toUpperCase() === "UNKNOWN") continue
     layerCounts.set(layer, (layerCounts.get(layer) ?? 0) + 1)
   }
-  const hasTopSolderLayer = [...layerCounts.keys()].some(
-    (layer) => normalizeLayerName(layer) === "TOPSOLDER",
+  const normalizedLayerNames = new Set(
+    [...layerCounts.keys()].map(normalizeLayerName),
   )
-  if (!hasTopSolderLayer && hasPcbSolderMaskOpenings(document, "TOPSOLDER")) {
-    layerCounts.set("TOPSOLDER", 1)
+  for (const solderMaskLayer of ["TOPSOLDER", "BOTTOMSOLDER"]) {
+    if (
+      !normalizedLayerNames.has(solderMaskLayer) &&
+      hasPcbSolderMaskOpenings(document, solderMaskLayer)
+    ) {
+      layerCounts.set(solderMaskLayer, 1)
+    }
   }
   return [...layerCounts.keys()]
     .sort(
