@@ -6,29 +6,11 @@ import {
 import { readReferenceBytes } from "./read-reference"
 
 const topSolderCases = [
-  {
-    filename: "elk-pi.PcbDoc",
-    renderedPadHoles: 308,
-    renderedPads: 980,
-    renderedViaHoles: 3,
-    renderedVias: 3,
-  },
-  {
-    filename: "stm32-st-link-v2.PcbDoc",
-    renderedPadHoles: 10,
-    renderedPads: 75,
-    renderedViaHoles: 0,
-    renderedVias: 0,
-  },
+  { filename: "elk-pi.PcbDoc", renderedPads: 980, renderedVias: 3 },
+  { filename: "stm32-st-link-v2.PcbDoc", renderedPads: 75, renderedVias: 0 },
 ] as const
 
-for (const {
-  filename,
-  renderedPadHoles,
-  renderedPads,
-  renderedViaHoles,
-  renderedVias,
-} of topSolderCases) {
+for (const { filename, renderedPads, renderedVias } of topSolderCases) {
   test(`offers and renders the top solder-mask view for ${filename}`, async () => {
     const source = await readReferenceBytes(filename)
     const state = parseBrowserProjectFiles([
@@ -56,13 +38,7 @@ for (const {
     expect(
       svg.match(/data-record="Via" data-layer="TOPSOLDER"/g) ?? [],
     ).toHaveLength(renderedVias)
-    expect(svg).toContain('data-overlay="drill-holes"')
-    expect(svg.match(/data-record="PadHole"/g) ?? []).toHaveLength(
-      renderedPadHoles,
-    )
-    expect(svg.match(/data-record="ViaHole"/g) ?? []).toHaveLength(
-      renderedViaHoles,
-    )
+    expect(svg).not.toContain("data-hole-shape")
     await expect(svg).toMatchSvgSnapshot(
       import.meta.path,
       filename.replace(/\.PcbDoc$/iu, ""),

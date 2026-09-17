@@ -17,22 +17,7 @@ export function getPcbSolderMaskRecords(
   document: AltiumPcbDocument,
   requestedLayers: string[] | undefined,
 ): AltiumRecord[] {
-  return [...iteratePcbSolderMaskRecords(document, requestedLayers)].map(
-    ({ opening }) => opening,
-  )
-}
-
-export function getPcbSolderMaskSourceRecords(
-  document: AltiumPcbDocument,
-  requestedLayers: string[] | undefined,
-): AltiumRecord[] {
-  return [
-    ...new Set(
-      [...iteratePcbSolderMaskRecords(document, requestedLayers)].map(
-        ({ source }) => source,
-      ),
-    ),
-  ]
+  return [...iteratePcbSolderMaskRecords(document, requestedLayers)]
 }
 
 export function hasPcbSolderMaskOpenings(
@@ -42,22 +27,10 @@ export function hasPcbSolderMaskOpenings(
   return !iteratePcbSolderMaskRecords(document, [layer]).next().done
 }
 
-function recordReachesPcbSolderMaskLayer(
-  record: AltiumRecord,
-  layer: string,
-): boolean {
-  if (record.recordKind !== "Pad" && record.recordKind !== "Via") return false
-  if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) return false
-  const normalizedLayer = normalizeLayerName(layer)
-  if (normalizedLayer === "TOPSOLDER") return reachesSide(record, "TOP")
-  if (normalizedLayer === "BOTTOMSOLDER") return reachesSide(record, "BOTTOM")
-  return false
-}
-
 function* iteratePcbSolderMaskRecords(
   document: AltiumPcbDocument,
   requestedLayers: string[] | undefined,
-): Generator<{ opening: AltiumRecord; source: AltiumRecord }> {
+): Generator<AltiumRecord> {
   const layers = [...new Set(requestedLayers?.map(normalizeLayerName))].filter(
     isPcbSolderMaskLayer,
   )
@@ -71,9 +44,11 @@ function* iteratePcbSolderMaskRecords(
     .toSorted((a, b) => (a.priority ?? Infinity) - (b.priority ?? Infinity))
 
   for (const record of document.records) {
+    if (record.recordKind !== "Pad" && record.recordKind !== "Via") continue
+    if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) continue
     for (const layer of layers) {
       const side = layer === "TOPSOLDER" ? "TOP" : "BOTTOM"
-      if (!recordReachesPcbSolderMaskLayer(record, layer)) continue
+      if (!reachesSide(record, side)) continue
       if (
         (record.getBoolean(`TENTED${side}`) ??
           record.getBoolean(`TENTING${side}`)) === true
@@ -131,7 +106,7 @@ function* iteratePcbSolderMaskRecords(
         const fieldContent = record.getCaseInsensitive(key)
         if (fieldContent !== undefined) opening.set(key, fieldContent)
       }
-      yield { opening, source: record }
+      yield opening
     }
   }
 }

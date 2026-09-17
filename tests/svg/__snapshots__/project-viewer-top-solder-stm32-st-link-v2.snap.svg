@@ -78,17 +78,5 @@
     <g data-record="Pad" data-layer="TOPSOLDER" data-solder-mask-opening="true" fill-opacity="0.6" data-pad-name="3" data-pad-shape="RECTANGLE" data-pad-stack-layer="0" data-plated="true"><rect x="1745.7512" y="230.2616" width="106.4252" height="55.2441" fill="#4ade80"/></g>
     <g data-record="Pad" data-layer="TOPSOLDER" data-solder-mask-opening="true" fill-opacity="0.6" data-pad-name="9" data-pad-shape="RECTANGLE" data-pad-stack-layer="0" data-plated="true"><rect x="1745.7512" y="530.2616" width="106.4252" height="55.2441" fill="#4ade80"/></g>
     <g data-record="Pad" data-layer="TOPSOLDER" data-solder-mask-opening="true" fill-opacity="0.6" data-pad-name="5" data-pad-shape="RECTANGLE" data-pad-stack-layer="0" data-plated="true"><rect x="1745.7512" y="330.2616" width="106.4252" height="55.2441" fill="#4ade80"/></g>
-    <g data-overlay="drill-holes">
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 769.422 270.6092)"><circle data-hole-shape="ROUND" cx="769.422" cy="270.6092" r="23.622" fill="#111827" stroke="#f8fafc" stroke-width="1.5"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 769.422 447.7692)"><circle data-hole-shape="ROUND" cx="769.422" cy="447.7692" r="23.622" fill="#111827" stroke="#f8fafc" stroke-width="1.5"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 769.425 134.7802)"><rect data-hole-shape="SLOT" x="716.275" y="111.1582" width="106.3" height="47.244" rx="23.622" ry="23.622" fill="#111827" transform="rotate(-90 769.425 134.7802)"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 769.425 583.5982)"><rect data-hole-shape="SLOT" x="716.275" y="559.9762" width="106.3" height="47.244" rx="23.622" ry="23.622" fill="#111827" transform="rotate(-90 769.425 583.5982)"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1483.3571 264.0818)"><circle data-hole-shape="ROUND" cx="1483.3571" cy="264.0818" r="14" fill="#111827"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES" transform="rotate(-270 1483.3571 464.0818)"><circle data-hole-shape="ROUND" cx="1483.3571" cy="464.0818" r="14" fill="#111827"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="910.763" cy="629.3625" r="13.7796" fill="#111827"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="1055.0189" cy="629.3625" r="13.7796" fill="#111827"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="1006.9336" cy="629.3625" r="13.7796" fill="#111827"/></g>
-      <g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"><circle data-hole-shape="ROUND" cx="958.8483" cy="629.3625" r="13.7796" fill="#111827"/></g>
-    </g>
   </g>
 </svg>

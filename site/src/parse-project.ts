@@ -12,10 +12,7 @@ import {
   serializeAltiumSheetToSvg,
 } from "../../lib"
 import { normalizeLayerName } from "../../lib/svg-serialization/pcb-layer"
-import {
-  hasPcbSolderMaskOpenings,
-  isPcbSolderMaskLayer,
-} from "../../lib/svg-serialization/pcb-solder-mask"
+import { hasPcbSolderMaskOpenings } from "../../lib/svg-serialization/pcb-solder-mask"
 import type {
   AltiumProjectManifest,
   BrowserProjectFile,
@@ -187,7 +184,6 @@ export function renderProjectDocument(
   if (view.layer) {
     return serializeAltiumPcbLayerToSvg(entry.document, view.layer, {
       height: 1000,
-      showDrillHoleOverlay: isPcbSolderMaskLayer(view.layer),
       title,
       width: 1600,
     })

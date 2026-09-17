@@ -172,38 +172,6 @@ export function renderPcbRecord({
   return undefined
 }
 
-export function renderPcbDrillHole({
-  record,
-  requestedLayers,
-  viewport,
-}: {
-  record: AltiumRecord
-  requestedLayers: string[] | undefined
-  viewport: SvgViewport
-}): string | undefined {
-  if (record.recordKind === "Pad") {
-    const geometry = getPcbPadGeometry(record, requestedLayers)
-    if (geometry.holeSize <= 0) return undefined
-    const x = viewport.toX(geometry.x)
-    const y = viewport.toY(geometry.y)
-    const transform =
-      geometry.rotation === 0
-        ? ""
-        : ` transform="rotate(${formatSvgNumber(-geometry.rotation)} ${formatSvgNumber(x)} ${formatSvgNumber(y)})"`
-    return `<g data-record="PadHole" data-source-record="Pad" data-layer="PADHOLES"${transform}>${renderPadHole(geometry, x, y)}</g>`
-  }
-
-  if (record.recordKind === "Via") {
-    const x = viewport.toX(getPcbMeasurement(record, "X"))
-    const y = viewport.toY(getPcbMeasurement(record, "Y"))
-    const holeSize = getViaHoleSize(record)
-    if (holeSize <= 0) return undefined
-    return `<g data-record="ViaHole" data-source-record="Via" data-layer="VIAHOLES">${renderViaHole(x, y, holeSize, ' data-hole-shape="ROUND"')}</g>`
-  }
-
-  return undefined
-}
-
 function trimPcbTextLineEnds(text: string): string {
   // Match the previous /[ \t]+$/gm behavior exactly. trimEnd() would also
   // remove other Unicode whitespace that can be meaningful in PCB text.
@@ -362,36 +330,18 @@ function renderVia(
 ): string {
   const x = viewport.toX(getPcbMeasurement(record, "X"))
   const y = viewport.toY(getPcbMeasurement(record, "Y"))
-  const diameter = getViaDiameter(record)
+  const diameter =
+    parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
+    parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
+    20
   if (isPcbSolderMaskLayer(record.getCaseInsensitive("LAYER"))) {
     const color = getPcbLayerColor(record.getCaseInsensitive("LAYER"))
     return `<g ${metadata} data-solder-mask-opening="true"><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="${color}" fill-opacity="0.6"/></g>`
   }
-  const holeSize = getViaHoleSize(record, diameter)
-  const hole = options.showHoles !== false ? renderViaHole(x, y, holeSize) : ""
+  const holeSize = getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
+  const hole =
+    options.showHoles !== false
+      ? `<circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
+      : ""
   return `<g ${metadata}><circle cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(diameter / 2)}" fill="#22c55e" stroke="#d1fae5" stroke-width="1.5"/>${hole}</g>`
-}
-
-function getViaDiameter(record: AltiumRecord): number {
-  return (
-    parsePcbMeasurement(record.getCaseInsensitive("DIAMETER")) ??
-    parsePcbMeasurement(record.getCaseInsensitive("TOPLAYERSIZE")) ??
-    20
-  )
-}
-
-function getViaHoleSize(
-  record: AltiumRecord,
-  diameter = getViaDiameter(record),
-): number {
-  return getPcbMeasurement(record, "HOLESIZE", diameter * 0.45)
-}
-
-function renderViaHole(
-  x: number,
-  y: number,
-  holeSize: number,
-  metadata = "",
-): string {
-  return `<circle${metadata} cx="${formatSvgNumber(x)}" cy="${formatSvgNumber(y)}" r="${formatSvgNumber(holeSize / 2)}" fill="#111827"/>`
 }
