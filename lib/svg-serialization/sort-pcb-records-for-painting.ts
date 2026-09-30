@@ -24,17 +24,20 @@ export function sortPcbRecordsForPainting({
   currentLayer,
   document,
   layerDrawingOrder,
+  viewSide,
   records,
 }: {
   currentLayer?: string
   document: AltiumPcbDocument
   layerDrawingOrder?: readonly string[]
+  viewSide?: "top" | "bottom"
   records: AltiumRecord[]
 }): AltiumRecord[] {
   const layerGroups = getPcbLayerDrawingOrder({
     currentLayer,
     document,
     layerDrawingOrder,
+    viewSide,
   })
   const layerPaintPriorities = getLayerPaintPriorities(layerGroups)
 

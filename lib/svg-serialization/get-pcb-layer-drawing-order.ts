@@ -43,13 +43,15 @@ const MECHANICAL_LAYER_NAMES = [
  * defaults that active layer to Top Layer unless the caller supplies another.
  */
 export function getPcbLayerDrawingOrder({
-  currentLayer = "TOP",
+  currentLayer,
   document,
   layerDrawingOrder,
+  viewSide,
 }: {
   currentLayer?: string
   document: AltiumPcbDocument
   layerDrawingOrder?: readonly string[]
+  viewSide?: "top" | "bottom"
 }): PcbLayerGroup[] {
   if (layerDrawingOrder) {
     const configuredLayerGroups = layerDrawingOrder.map((layerName) => [
@@ -62,14 +64,17 @@ export function getPcbLayerDrawingOrder({
   const signalLayerGroup = [...SIGNAL_LAYER_NAMES]
   const internalPlaneLayerGroup = [...INTERNAL_PLANE_LAYER_NAMES]
   const mechanicalLayerGroup = [...MECHANICAL_LAYER_NAMES]
+  const frontOverlay = viewSide === "bottom" ? "BOTTOMOVERLAY" : "TOPOVERLAY"
+  const backOverlay = viewSide === "bottom" ? "TOPOVERLAY" : "BOTTOMOVERLAY"
   const layerGroups = [
     ...cloneLayerGroups(SYSTEM_OVERLAY_LAYER_GROUPS),
     ["MULTILAYER"],
-    ["TOPOVERLAY"],
-    ["BOTTOMOVERLAY"],
+    [frontOverlay],
+    ...(viewSide ? [] : [[backOverlay]]),
     ["CONNECTIONS"],
-    [currentLayer],
+    [currentLayer ?? (viewSide === "bottom" ? "BOTTOM" : "TOP")],
     signalLayerGroup,
+    ...(viewSide ? [[backOverlay]] : []),
     ["TOPPASTE"],
     ["BOTTOMPASTE"],
     ["TOPSOLDER"],

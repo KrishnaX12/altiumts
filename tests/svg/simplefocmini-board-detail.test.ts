@@ -7,6 +7,7 @@ test("renders the populated SimpleFOC Mini board area", async () => {
   const document = parseAltiumPcbDoc(source)
   const svg = serializeAltiumPcbToSvg(document, {
     title: "SimpleFOC Mini populated board detail",
+    viewSide: "top",
     viewBox: {
       x: 1550,
       y: 1800,
@@ -18,5 +19,10 @@ test("renders the populated SimpleFOC Mini board area", async () => {
   expect(svg).toContain('viewBox="0 0 1100 950"')
   expect(svg).toContain('data-layer="TOP"')
   expect(svg).toContain('data-layer="BOTTOM"')
+  const bottomOverlayIndex = svg.indexOf('data-layer="BOTTOMOVERLAY"')
+  expect(bottomOverlayIndex).toBeGreaterThan(-1)
+  expect(bottomOverlayIndex).toBeLessThan(
+    svg.indexOf('data-record="Pad" data-layer="TOP"'),
+  )
   await expect(svg).toMatchSvgSnapshot(import.meta.path)
 })
