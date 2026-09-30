@@ -52,6 +52,8 @@ export interface AltiumPcbSvgOptions extends AltiumSvgRenderOptions {
    * drawing order; the first layer renders on top.
    */
   layerDrawingOrder?: string[]
+  /** Paint the opposite overlay behind copper in a flat side view; does not mirror coordinates. */
+  viewSide?: "top" | "bottom"
   layers?: string[]
   netIndices?: number[]
   showBoardCutouts?: boolean

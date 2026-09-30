@@ -104,6 +104,7 @@ export function serializeAltiumPcbToSvg(
     currentLayer: options.currentLayer,
     document,
     layerDrawingOrder: options.layerDrawingOrder,
+    viewSide: options.viewSide,
     records: [
       ...document.records,
       ...getPcbSolderMaskRecords(document, options.layers),

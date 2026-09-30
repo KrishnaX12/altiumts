@@ -77,3 +77,24 @@ test("renders PCB layers in Altium's default drawing order", async () => {
   )
   await expect(svg).toMatchSvgSnapshot(import.meta.path)
 })
+
+test("paints the opposite overlay behind copper in side views", () => {
+  const document = parseAltiumPcbDoc(source)
+  const topView = serializeAltiumPcbToSvg(document, { viewSide: "top" })
+  const bottomView = serializeAltiumPcbToSvg(document, {
+    viewSide: "bottom",
+  })
+
+  expect(getSvgLayerIndex(topView, "BOTTOMOVERLAY")).toBeLessThan(
+    getSvgLayerIndex(topView, "TOP"),
+  )
+  expect(getSvgLayerIndex(topView, "TOP")).toBeLessThan(
+    getSvgLayerIndex(topView, "TOPOVERLAY"),
+  )
+  expect(getSvgLayerIndex(bottomView, "TOPOVERLAY")).toBeLessThan(
+    getSvgLayerIndex(bottomView, "BOTTOM"),
+  )
+  expect(getSvgLayerIndex(bottomView, "BOTTOM")).toBeLessThan(
+    getSvgLayerIndex(bottomView, "BOTTOMOVERLAY"),
+  )
+})
