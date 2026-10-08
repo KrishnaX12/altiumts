@@ -1,5 +1,6 @@
 {
-  "title": "LoRaBug v4 MECHANICAL27",
+  "title": "LoRaBug v4: Altium Mechanical 27 / AltiumTS Mechanical 16",
+  "converterLabel": "AltiumTS — actual Mechanical 16 (wrong destination)",
   "image": "lorabug-mechanical27.jpg",
   "mimeType": "image/jpeg",
   "width": 1265,
@@ -31,7 +32,7 @@
       "width": 1280,
       "height": 720
     },
-    "note": "Captured 2026-10-09 with this mechanical layer selected using Only. Original screenshot bytes are 1265 by 712 pixels; crop maps CSS viewport coordinates to screenshot coordinates. Altium placement-room fills remain visible and are outside this layer-assignment reproduction."
+    "note": "Captured 2026-10-09 with Mechanical 27 selected using Only. Original screenshot bytes are 1265 by 712 pixels; crop maps CSS viewport coordinates to screenshot coordinates. The AltiumTS panel intentionally selects Mechanical 16, where the parser currently puts these extended-layer records. The different layer selections are labeled explicitly. Altium placement-room fills remain visible and are outside this layer-assignment reproduction."
   },
   "canvasBounds": {
     "x": 0,
