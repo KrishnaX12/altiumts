@@ -112,32 +112,11 @@
     "reason": ""
   },
   {
-    "name": "lorabug-extended-mechanical-layers-mechanical17",
-    "test": "lorabug-extended-mechanical-layers-mechanical17.test.ts",
+    "name": "lorabug-extended-mechanical-layers",
+    "test": "lorabug-extended-mechanical-layers.test.ts",
     "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
-    "status": "captured",
-    "reason": ""
-  },
-  {
-    "name": "lorabug-extended-mechanical-layers-mechanical18",
-    "test": "lorabug-extended-mechanical-layers-mechanical18.test.ts",
-    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
-    "status": "captured",
-    "reason": ""
-  },
-  {
-    "name": "lorabug-extended-mechanical-layers-mechanical19",
-    "test": "lorabug-extended-mechanical-layers-mechanical19.test.ts",
-    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
-    "status": "captured",
-    "reason": ""
-  },
-  {
-    "name": "lorabug-extended-mechanical-layers-mechanical27",
-    "test": "lorabug-extended-mechanical-layers-mechanical27.test.ts",
-    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
-    "status": "captured",
-    "reason": ""
+    "status": "awaiting-reference",
+    "reason": "Plain renderer baseline requested in the format of PR #165; intentionally not wrapped in a real-Altium comparison."
   },
   {
     "name": "novena-edp-adapter-aux-net",

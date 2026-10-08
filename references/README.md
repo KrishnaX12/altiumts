@@ -20,7 +20,7 @@ Run `bun run download-references` to download:
 - `lorabug-v4.PcbDoc` (`PCBFireflyCaseV4.PcbDoc`) from the MIT-licensed
   [`OpenChirp/LoRaBug`](https://github.com/OpenChirp/LoRaBug) repository,
   pinned to commit `a6c35323bd2f560d3068d2bbe08ab8e84bf242f0`.
-  Its mechanical-layer comparisons reproduce extended binary layer IDs being
+  Its mechanical-layer snapshot reproduces extended binary layer IDs being
   decoded as Mechanical 16 instead of Mechanical 17, 18, 19, and 27.
 - `c17-main.PcbDoc` and `led-matrix-sheet.SchDoc` from the MIT-licensed
   [`phonght32/altium`](https://github.com/phonght32/altium) open-source hardware
