@@ -66,6 +66,12 @@ const references: DirectReferenceSpec[] = [
     url: "https://raw.githubusercontent.com/iot-lorawan/CH582_PCB_SCH/b65bce802295c6c40413c5bc3ea54682820619c1/PCB_ch582_2022-06-16.pcbdoc",
   },
   {
+    filename: "lorabug-v4.PcbDoc",
+    sha256: "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
+    source: "OpenChirp/LoRaBug@a6c35323bd2f560d3068d2bbe08ab8e84bf242f0 (MIT)",
+    url: "https://raw.githubusercontent.com/OpenChirp/LoRaBug/a6c35323bd2f560d3068d2bbe08ab8e84bf242f0/PCBFireflyCaseV4.PcbDoc",
+  },
+  {
     filename: "c17-main.PcbDoc",
     sha256: "439e050d3bb35f3f335cd3e115ba91cf643eca3ae326a85c3034e4b22cbcac03",
     source: "phonght32/altium@85e2bfc3aac1daaa4eb8dc7be4f0649d12b2fc28 (MIT)",

@@ -112,6 +112,34 @@
     "reason": ""
   },
   {
+    "name": "lorabug-extended-mechanical-layers-mechanical17",
+    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
+    "status": "captured",
+    "reason": ""
+  },
+  {
+    "name": "lorabug-extended-mechanical-layers-mechanical18",
+    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
+    "status": "captured",
+    "reason": ""
+  },
+  {
+    "name": "lorabug-extended-mechanical-layers-mechanical19",
+    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
+    "status": "captured",
+    "reason": ""
+  },
+  {
+    "name": "lorabug-extended-mechanical-layers-mechanical27",
+    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
+    "status": "captured",
+    "reason": ""
+  },
+  {
     "name": "novena-edp-adapter-aux-net",
     "test": "novena-edp-adapter-aux-net.test.ts",
     "sourceSha256": "17896fdfeaac33a84ac3063db063d0a4d211c127c997632c8000837c0ce6fc12",

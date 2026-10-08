@@ -17,6 +17,11 @@ Run `bun run download-references` to download:
   [`iot-lorawan/CH582_PCB_SCH`](https://github.com/iot-lorawan/CH582_PCB_SCH)
   open-source hardware repository, pinned to commit
   `b65bce802295c6c40413c5bc3ea54682820619c1`.
+- `lorabug-v4.PcbDoc` (`PCBFireflyCaseV4.PcbDoc`) from the MIT-licensed
+  [`OpenChirp/LoRaBug`](https://github.com/OpenChirp/LoRaBug) repository,
+  pinned to commit `a6c35323bd2f560d3068d2bbe08ab8e84bf242f0`.
+  Its mechanical-layer comparisons reproduce extended binary layer IDs being
+  decoded as Mechanical 16 instead of Mechanical 17, 18, 19, and 27.
 - `c17-main.PcbDoc` and `led-matrix-sheet.SchDoc` from the MIT-licensed
   [`phonght32/altium`](https://github.com/phonght32/altium) open-source hardware
   repository, pinned to commit
