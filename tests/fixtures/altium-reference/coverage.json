@@ -113,28 +113,28 @@
   },
   {
     "name": "lorabug-extended-mechanical-layers-mechanical17",
-    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "test": "lorabug-extended-mechanical-layers-mechanical17.test.ts",
     "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
     "status": "captured",
     "reason": ""
   },
   {
     "name": "lorabug-extended-mechanical-layers-mechanical18",
-    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "test": "lorabug-extended-mechanical-layers-mechanical18.test.ts",
     "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
     "status": "captured",
     "reason": ""
   },
   {
     "name": "lorabug-extended-mechanical-layers-mechanical19",
-    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "test": "lorabug-extended-mechanical-layers-mechanical19.test.ts",
     "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
     "status": "captured",
     "reason": ""
   },
   {
     "name": "lorabug-extended-mechanical-layers-mechanical27",
-    "test": "lorabug-extended-mechanical-layers.test.ts",
+    "test": "lorabug-extended-mechanical-layers-mechanical27.test.ts",
     "sourceSha256": "49950f70c90ae0ba14695cb9dbb60264604e719b30c06f0068046eae7f0533f6",
     "status": "captured",
     "reason": ""
