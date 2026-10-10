@@ -1,5 +1,10 @@
 import { expect, test } from "bun:test"
-import { parseAltiumBinaryPcbDoc, serializeAltiumPcbToSvg } from "../../lib"
+import {
+  AltiumTextRecord,
+  parseAltiumBinaryPcbDoc,
+  serializeAltiumPcbToSvg,
+} from "../../lib"
+import { getPcbRecordComponent } from "../../lib/pcb-reference-resolution"
 import {
   getPcbDocumentBounds,
   getPcbRecordBounds,
@@ -11,9 +16,14 @@ import {
 } from "../../lib/svg-serialization/svg-utils"
 import { readReferenceBytes } from "./read-reference"
 
-test("reproduces BW0253 keepout fill rendered as copper on the full board", async () => {
+test("renders the BW0253 full board with resolved component designators", async () => {
   const source = await readReferenceBytes("bw0253.PcbDoc")
   const document = parseAltiumBinaryPcbDoc(source)
+  const quotedDesignators = document.texts.filter(
+    (record): record is AltiumTextRecord =>
+      record instanceof AltiumTextRecord && record.text === "'.Designator'",
+  )
+  expect(quotedDesignators).toHaveLength(49)
   const keepoutFills = document.records.filter(
     (record) =>
       record.recordKind === "Fill" && record.getBoolean("KEEPOUT") === true,
@@ -43,5 +53,20 @@ test("reproduces BW0253 keepout fill rendered as copper on the full board", asyn
       height: viewport.height,
     },
   })
+  expect(svg).not.toContain("&apos;.Designator&apos;")
+  for (const layer of ["MECHANICAL2", "MECHANICAL3"]) {
+    const layerSvg = serializeAltiumPcbToSvg(document, { layers: [layer] })
+    const layerDesignators = quotedDesignators.filter(
+      (record) => record.layer === layer,
+    )
+    expect(layerSvg).not.toContain("&apos;.Designator&apos;")
+    expect(layerSvg.match(/<text\b/g)).toHaveLength(layerDesignators.length)
+    for (const record of layerDesignators) {
+      const component = getPcbRecordComponent(document, record)
+      expect(component?.designator).toBeDefined()
+      expect(layerSvg).toContain(`>${component?.designator}</text>`)
+    }
+  }
+  expect(document.getBytes()).toEqual(source)
   await expect(svg).toMatchSvgSnapshot(import.meta.path)
 }, 20_000)
