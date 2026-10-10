@@ -10,10 +10,19 @@ import {
   getPcbVertexPoints,
   parsePcbMeasurement,
 } from "./altium-values"
-import { getPcbLayerColor, PCB_BOARD_FILL_COLOR } from "./pcb-layer"
+import {
+  getPcbLayerColor,
+  PCB_BOARD_FILL_COLOR,
+  PCB_KEEPOUT_STROKE_WIDTH_MILS,
+} from "./pcb-layer"
 import { isPcbSolderMaskLayer } from "./pcb-solder-mask"
 import { getPcbTextPositioning } from "./pcb-text-positioning"
 import { renderPcbDimension } from "./render-pcb-dimension"
+import {
+  isKeepoutFill,
+  PCB_KEEPOUT_FILL_PATTERN_ID,
+  renderPcbKeepoutFillPattern,
+} from "./render-pcb-keepout-fill-pattern"
 import type { AltiumPcbSvgOptions, SvgViewport } from "./svg-types"
 import {
   escapeXml,
@@ -26,12 +35,14 @@ const COPPER_FILL_OPACITY = 0.32
 
 export function renderPcbRecord({
   record,
+  hasSharedKeepoutFillPattern = false,
   text,
   shouldFillPolygon,
   svgOptions,
   viewport,
 }: {
   record: AltiumRecord
+  hasSharedKeepoutFillPattern?: boolean
   text?: string
   shouldFillPolygon: boolean
   svgOptions: AltiumPcbSvgOptions
@@ -134,7 +145,15 @@ export function renderPcbRecord({
       rotation === 0
         ? ""
         : ` transform="rotate(${formatSvgNumber(-rotation)} ${formatSvgNumber(centerX)} ${formatSvgNumber(centerY)})"`
-    return `<rect ${metadata} data-keepout="${record.getBoolean("KEEPOUT") === true}" x="${formatSvgNumber(Math.min(x1, x2))}" y="${formatSvgNumber(Math.min(y1, y2))}" width="${formatSvgNumber(Math.abs(x2 - x1))}" height="${formatSvgNumber(Math.abs(y2 - y1))}" fill="${color}" fill-opacity="0.6"${transform}/>`
+    const isKeepout = isKeepoutFill(record)
+    const keepoutFillPattern =
+      isKeepout && !hasSharedKeepoutFillPattern
+        ? renderPcbKeepoutFillPattern()
+        : ""
+    const fillAndStrokeAttributes = isKeepout
+      ? `fill="url(#${PCB_KEEPOUT_FILL_PATTERN_ID})" stroke="${getPcbLayerColor("KEEPOUT")}" stroke-width="${PCB_KEEPOUT_STROKE_WIDTH_MILS}"`
+      : `fill="${color}" fill-opacity="0.6"`
+    return `${keepoutFillPattern}<rect ${metadata} data-keepout="${isKeepout}" x="${formatSvgNumber(Math.min(x1, x2))}" y="${formatSvgNumber(Math.min(y1, y2))}" width="${formatSvgNumber(Math.abs(x2 - x1))}" height="${formatSvgNumber(Math.abs(y2 - y1))}" ${fillAndStrokeAttributes}${transform}/>`
   }
 
   if (kind === "Text" && svgOptions.showText !== false) {
